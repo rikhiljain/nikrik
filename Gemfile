@@ -7,6 +7,8 @@ gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "simple_form", ">= 2.0.3"
 gem "bootstrap-sass", ">= 2.1.0.0"
+gem "jquery-rails", ">= 2.1.4"
+gem "jquery-ui-rails", ">=2.0.2"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -25,8 +27,6 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-#gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
