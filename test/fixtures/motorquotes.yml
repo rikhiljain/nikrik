@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type_of_policy: MyString
+  previous_policy_exp_date: 2012-12-03
+  year_of_manufacture: 2012-12-03
+  car_make: MyString
+  care_model: MyString
+
+two:
+  type_of_policy: MyString
+  previous_policy_exp_date: 2012-12-03
+  year_of_manufacture: 2012-12-03
+  car_make: MyString
+  care_model: MyString

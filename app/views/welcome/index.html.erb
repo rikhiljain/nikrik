@@ -5,7 +5,14 @@
         <li><a href="#tabs-3">Home Insurance</a></li>
     </ul>
     <div id="tabs-1">
-        <p>fill this</p>
+		<%= simple_form_for @motorquote do |f| %>
+		  <%= f.input :new_policy, :label => 'a' %>
+		  <%= f.input :previous_policy_exp_date, :label => 'a' %>
+		  <%= f.input :year_of_manufacture, :label => 'a' %>
+		  <%= f.input :car_make, :label => 'a' %>
+		  <%= f.input :car_model, :label => 'a' %>
+		  <%= f.button :submit, :label => 'a' %>
+		<% end %>		
     </div>
     <div id="tabs-2">
         <p>Coming very soon.</p>
