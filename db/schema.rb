@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120418171112) do
+ActiveRecord::Schema.define(:version => 20121128193602) do
+
+  create_table "idv_charts", :force => true do |t|
+    t.string   "maker"
+    t.string   "model"
+    t.integer  "seats"
+    t.integer  "cubic"
+    t.string   "fuel"
+    t.integer  "age60_72"
+    t.integer  "age72_84"
+    t.integer  "age84_96"
+    t.integer  "age96"
+    t.integer  "age_0_6"
+    t.integer  "age_12_24"
+    t.integer  "age_24_36"
+    t.integer  "age_36_48"
+    t.integer  "age_48_60"
+    t.integer  "age_6_12"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
