@@ -8,5 +8,7 @@ class Motorquote < ActiveRecord::Base
   column :car_model, :string
   column :previous_policy_exp_date, :date
   column :new_policy, :boolean
-  column :year_of_manufacture, :string
+  column :year_of_manufacture, :date
+  
+  
 end

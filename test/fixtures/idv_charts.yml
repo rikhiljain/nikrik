@@ -1,9 +1,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  maker: 
+  maker: MyString
   model: MyString
+  subtype: MyString
+  seats: MyString
+  cubic: 1
+  fuel: MyString
+  age_0_6: 1
+  age_6_12: 1
+  age_12_24: 1
+  age_24_36: 1
+  age_36_48: 1
+  age_48_60: 1
+  age_60_72: 1
+  age_72_84: 1
+  age_84_96: 1
+  age_96: 1
 
 two:
-  maker: 
+  maker: MyString
   model: MyString
+  subtype: MyString
+  seats: MyString
+  cubic: 1
+  fuel: MyString
+  age_0_6: 1
+  age_6_12: 1
+  age_12_24: 1
+  age_24_36: 1
+  age_36_48: 1
+  age_48_60: 1
+  age_60_72: 1
+  age_72_84: 1
+  age_84_96: 1
+  age_96: 1

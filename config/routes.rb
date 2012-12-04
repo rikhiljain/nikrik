@@ -1,5 +1,14 @@
 Nikrik::Application.routes.draw do
 
+  resources :my_names
+
+
+  resources :idv_charts
+
+
+  resources :users
+  resources :motorquotes
+
   get "welcome/index"
 
   authenticated :user do
@@ -7,6 +16,4 @@ Nikrik::Application.routes.draw do
   end
   root :to => "welcome#index"
   devise_for :users
-  resources :users
-  resources :motorquotes
 end

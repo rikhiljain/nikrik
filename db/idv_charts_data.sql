@@ -1,57 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.4.5
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Dec 02, 2012 at 02:53 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `test`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `idv_charts`
---
-
-CREATE TABLE IF NOT EXISTS `idv_charts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `maker` varchar(50) NOT NULL,
-  `model` varchar(50) NOT NULL,
-  `subtype` varchar(50) NOT NULL,
-  `cubic` int(11) NOT NULL,
-  `seats` int(11) NOT NULL,
-  `fuel` varchar(1) NOT NULL,
-  `age_0_6` int(11) NOT NULL,
-  `age_6_12` int(11) NOT NULL,
-  `age_12_24` int(11) NOT NULL,
-  `age_24_36` int(11) NOT NULL,
-  `age_36_48` int(11) NOT NULL,
-  `age_48_60` int(11) NOT NULL,
-  `age_60_72` int(11) NOT NULL,
-  `age_72_84` int(11) NOT NULL,
-  `age_84_96` int(11) NOT NULL,
-  `age_96` int(11) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=armscii8 AUTO_INCREMENT=1439 ;
-
---
--- Dumping data for table `idv_charts`
---
-
 INSERT INTO `idv_charts` (`id`, `maker`, `model`, `subtype`, `cubic`, `seats`, `fuel`, `age_0_6`, `age_6_12`, `age_12_24`, `age_24_36`, `age_36_48`, `age_48_60`, `age_60_72`, `age_72_84`, `age_84_96`, `age_96`, `updated_at`) VALUES
 (1, 'AUDI', 'A4', '1.8 MULTITRONIC', 1781, 5, 'P', 2580200, 2193170, 2064160, 1806140, 1548120, 1290100, 1225595, 1161090, 1096585, 1032080, '2012-04-06 18:29:09'),
 (2, 'AUDI ', 'A4', '1.8 TFSI', 1781, 5, 'P', 2785846, 2367970, 2228677, 1950093, 1671508, 1392923, 1323277, 1253631, 1183985, 1114339, '2012-04-06 18:29:09'),
@@ -1495,7 +1441,3 @@ INSERT INTO `idv_charts` (`id`, `maker`, `model`, `subtype`, `cubic`, `seats`, `
 (1436, 'VOLKSWAGEN', 'VENTO', '1.6 HIGHLINE MANUAL TRANSMISS', 1598, 5, 'P', 821083, 697921, 656867, 574759, 492650, 410542, 390015, 369488, 348961, 328434, '2012-04-06 18:29:14'),
 (1437, 'VOLKSWAGEN', 'VENTO', '1.6 TRENDLINE MANUAL TRANSMI', 1598, 5, 'D', 796661, 677162, 637329, 557663, 477997, 398331, 378414, 358498, 338581, 318665, '2012-04-06 18:29:14'),
 (1438, 'VOLKSWAGEN', 'VENTO', '1.6 TRENDLINE MANUAL TRANSMI', 0, 5, 'P', 696978, 592432, 557583, 487885, 418187, 348489, 331065, 313641, 296216, 278792, '2012-04-06 18:29:14');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

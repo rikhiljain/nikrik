@@ -10,6 +10,7 @@ gem "bootstrap-sass", ">= 2.1.0.0"
 gem "jquery-rails", ">= 2.1.4"
 gem "jquery-ui-rails", ">=2.0.2"
 gem "nifty-generators", :group => :development
+gem "columnize", ">=0.3.6"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

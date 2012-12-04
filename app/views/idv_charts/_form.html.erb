@@ -1,0 +1,43 @@
+<%= simple_form_for(@idv_chart) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <%= f.input :maker %>
+
+    <%= f.input :model %>
+
+    <%= f.input :subtype %>
+
+    <%= f.input :seats %>
+
+    <%= f.input :cubic %>
+
+    <%= f.input :fuel %>
+
+    <%= f.input :age_0_6 %>
+
+    <%= f.input :age_6_12 %>
+
+    <%= f.input :age_12_24 %>
+
+    <%= f.input :age_24_36 %>
+
+    <%= f.input :age_36_48 %>
+
+    <%= f.input :age_48_60 %>
+
+    <%= f.input :age_60_72 %>
+
+    <%= f.input :age_72_84 %>
+
+    <%= f.input :age_84_96 %>
+
+    <%= f.input :age_96 %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

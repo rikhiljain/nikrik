@@ -6,12 +6,14 @@
     </ul>
     <div id="tabs-1">
 		<%= simple_form_for @motorquote do |f| %>
-		  <%= f.input :new_policy, :label => 'a' %>
-		  <%= f.input :previous_policy_exp_date, :label => 'a' %>
-		  <%= f.input :year_of_manufacture, :label => 'a' %>
-		  <%= f.input :car_make, :label => 'a' %>
-		  <%= f.input :car_model, :label => 'a' %>
-		  <%= f.button :submit, :label => 'a' %>
+		  <%= f.input :new_policy, :label => 'Type of Policy' %>
+		  <%= f.input :previous_policy_exp_date, :label => 'Previous Policy Expiry Date', :as => :date, :start_year => Date.today.year - 1, :end_year => Date.today.year,
+		   :start_month => 'January', :start_day => 1, :order => [:day, :month, :year] %>
+		  <%= f.input :year_of_manufacture, :label => 'Year of Manufacture', :as => :date, :start_year => Date.today.year - 10, :end_year => Date.today.year,
+		   :start_month => 'January', :discard_day => true, :order => [:month, :year] %>
+		  <%= f.input :car_make, :label => 'Car Make' %>
+		  <%= f.input :car_model, :label => 'Car Model' %>
+		  <%= f.button :submit, :inline_label => 'Get A Quote' %>
 		<% end %>		
     </div>
     <div id="tabs-2">
