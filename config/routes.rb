@@ -1,15 +1,13 @@
 Nikrik::Application.routes.draw do
 
+  get "welcome/index"
+  get "idv_charts/distinctMakers"
+  
   resources :my_names
-
-
   resources :idv_charts
-
-
   resources :users
   resources :motorquotes
 
-  get "welcome/index"
 
   authenticated :user do
     root :to => 'home#index'
