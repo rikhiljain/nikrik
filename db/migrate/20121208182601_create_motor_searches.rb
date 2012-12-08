@@ -13,7 +13,7 @@ class CreateMotorSearches < ActiveRecord::Migration
       t.boolean :cng_kit
       t.integer :cng_kit_value
       t.integer :passenger_coverage_amt
-      t.ineger :voluntary_excess
+      t.integer :voluntary_excess
       t.boolean :has_anti_theft
       t.boolean :aai_member
 

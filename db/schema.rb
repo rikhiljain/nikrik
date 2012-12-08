@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204160000) do
+ActiveRecord::Schema.define(:version => 20121208190103) do
+
+  create_table "companies", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "idv_charts", :force => true do |t|
     t.string   "maker"
@@ -32,6 +38,34 @@ ActiveRecord::Schema.define(:version => 20121204160000) do
     t.integer  "age_96"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "motor_discounts", :force => true do |t|
+    t.integer  "idv_chart_id"
+    t.integer  "company_id"
+    t.float    "amount"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "motor_searches", :force => true do |t|
+    t.boolean  "new_policy"
+    t.date     "policy_exp_date"
+    t.date     "year_of_manufacture"
+    t.integer  "idv_chart_id"
+    t.string   "register_city"
+    t.boolean  "transfer_ncb"
+    t.integer  "ncb"
+    t.integer  "elec_acc"
+    t.integer  "non_elec_acc"
+    t.boolean  "cng_kit"
+    t.integer  "cng_kit_value"
+    t.integer  "passenger_coverage_amt"
+    t.integer  "voluntary_excess"
+    t.boolean  "has_anti_theft"
+    t.boolean  "aai_member"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -59,6 +93,8 @@ ActiveRecord::Schema.define(:version => 20121204160000) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
+    t.string   "mobile"
+    t.string   "address"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

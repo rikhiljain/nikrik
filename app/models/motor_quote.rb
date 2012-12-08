@@ -1,0 +1,3 @@
+class MotorQuote
+  
+end
