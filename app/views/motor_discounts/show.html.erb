@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Idv chart:</b>
+  <%= @motor_discount.idv_chart_id %>
+</p>
+
+<p>
+  <b>Company:</b>
+  <%= @motor_discount.company_id %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @motor_discount.amount %>
+</p>
+
+
+<%= link_to 'Edit', edit_motor_discount_path(@motor_discount) %> |
+<%= link_to 'Back', motor_discounts_path %>

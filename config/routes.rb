@@ -1,5 +1,11 @@
 Nikrik::Application.routes.draw do
 
+  resources :motor_discounts
+
+
+  resources :motor_searches
+
+
   get "welcome/index"
   get "idv_charts/distinctMakers"
   

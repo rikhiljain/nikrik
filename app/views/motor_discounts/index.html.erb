@@ -1,0 +1,27 @@
+<h1>Listing motor_discounts</h1>
+
+<table>
+  <tr>
+    <th>Idv chart</th>
+    <th>Company</th>
+    <th>Amount</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @motor_discounts.each do |motor_discount| %>
+  <tr>
+    <td><%= motor_discount.idv_chart_id %></td>
+    <td><%= motor_discount.company_id %></td>
+    <td><%= motor_discount.amount %></td>
+    <td><%= link_to 'Show', motor_discount %></td>
+    <td><%= link_to 'Edit', edit_motor_discount_path(motor_discount) %></td>
+    <td><%= link_to 'Destroy', motor_discount, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Motor discount', new_motor_discount_path %>

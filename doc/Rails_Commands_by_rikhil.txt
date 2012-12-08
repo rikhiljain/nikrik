@@ -1,0 +1,7 @@
+rails g scaffold motorSearch new_policy:boolean policy_exp_date:date year_of_manufacture:date idv_chart_id:integer register_city:string transfer_ncb:boolean ncb:integer elec_acc:integer non_elec_acc:integer cng_kit:boolean cng_kit_value:integer passenger_coverage_amt:integer voluntary_excess:ineger has_anti_theft:boolean aai_member:boolean
+
+rails g scaffold motorDiscount idv_chart_id:integer company_id:interger amount:float
+
+rails g model company  name:string
+
+rails generate migration add_mobile_to_users mobile:string

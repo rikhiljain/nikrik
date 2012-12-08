@@ -1,0 +1,51 @@
+<h1>Listing motor_searches</h1>
+
+<table>
+  <tr>
+    <th>New policy</th>
+    <th>Policy exp date</th>
+    <th>Year of manufacture</th>
+    <th>Idv chart</th>
+    <th>Register city</th>
+    <th>Transfer ncb</th>
+    <th>Ncb</th>
+    <th>Elec acc</th>
+    <th>Non elec acc</th>
+    <th>Cng kit</th>
+    <th>Cng kit value</th>
+    <th>Passenger coverage amt</th>
+    <th>Voluntary excess</th>
+    <th>Has anti theft</th>
+    <th>Aai member</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @motor_searches.each do |motor_search| %>
+  <tr>
+    <td><%= motor_search.new_policy %></td>
+    <td><%= motor_search.policy_exp_date %></td>
+    <td><%= motor_search.year_of_manufacture %></td>
+    <td><%= motor_search.idv_chart_id %></td>
+    <td><%= motor_search.register_city %></td>
+    <td><%= motor_search.transfer_ncb %></td>
+    <td><%= motor_search.ncb %></td>
+    <td><%= motor_search.elec_acc %></td>
+    <td><%= motor_search.non_elec_acc %></td>
+    <td><%= motor_search.cng_kit %></td>
+    <td><%= motor_search.cng_kit_value %></td>
+    <td><%= motor_search.passenger_coverage_amt %></td>
+    <td><%= motor_search.voluntary_excess %></td>
+    <td><%= motor_search.has_anti_theft %></td>
+    <td><%= motor_search.aai_member %></td>
+    <td><%= link_to 'Show', motor_search %></td>
+    <td><%= link_to 'Edit', edit_motor_search_path(motor_search) %></td>
+    <td><%= link_to 'Destroy', motor_search, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Motor search', new_motor_search_path %>

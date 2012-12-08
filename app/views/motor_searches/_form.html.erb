@@ -1,0 +1,25 @@
+<%= simple_form_for(@motor_search) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :new_policy %>
+    <%= f.input :policy_exp_date %>
+    <%= f.input :year_of_manufacture %>
+    <%= f.input :idv_chart_id %>
+    <%= f.input :register_city %>
+    <%= f.input :transfer_ncb %>
+    <%= f.input :ncb %>
+    <%= f.input :elec_acc %>
+    <%= f.input :non_elec_acc %>
+    <%= f.input :cng_kit %>
+    <%= f.input :cng_kit_value %>
+    <%= f.input :passenger_coverage_amt %>
+    <%= f.input :voluntary_excess %>
+    <%= f.input :has_anti_theft %>
+    <%= f.input :aai_member %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
