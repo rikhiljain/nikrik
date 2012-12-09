@@ -15,6 +15,16 @@
   <%= @motor_discount.amount %>
 </p>
 
+<p>
+  <b>Rto code:</b>
+  <%= @motor_discount.rto_code %>
+</p>
+
+<p>
+  <b>Rto sub code:</b>
+  <%= @motor_discount.rto_sub_code %>
+</p>
+
 
 <%= link_to 'Edit', edit_motor_discount_path(@motor_discount) %> |
 <%= link_to 'Back', motor_discounts_path %>

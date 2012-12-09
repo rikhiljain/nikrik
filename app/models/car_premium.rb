@@ -4,13 +4,13 @@ class CarPremium < Premium
  ratingZoneB = { 0 => { 0 => 3.039, 1 => 3.191,  2 =>3.343} ,
                  1 => { 0 => 3.191, 1 => 3.351, 2 =>3.51},
                 2 => { 0 => 3.267, 1 => 3.43, 2 =>3.594},
-                4 => { 0 => 670, 1 => 800, 2 =>2500}}
+                4 => { 0 => 784, 1 => 925, 2 =>2853}}
 
  #matrix[Age][Cubic] for zone-A car rating and matrix[4] use for third party
  ratingZoneA = { 0 => { 0 => 3.127, 1 => 3.283,  2 =>3.44} ,
                  1 => { 0 => 3.283, 1 => 3.447, 2 =>3.612},
                  2 => { 0 => 3.362, 1 => 3.529, 2 =>3.698},
-                 4 => { 0 => 670, 1 => 800, 2 =>2500}}
+                 4 => { 0 => 784, 1 => 925, 2 =>2853}}
 
   def initialize( motorSearch)
       @input = motorSearch
@@ -25,6 +25,48 @@ class CarPremium < Premium
         basic_od
   end
 
+  def self.anti_theft_discount(base_od)
+    discount = base_od * 0.025
+    if discount > 500
+      discount = 500
+    end
+  end
+
+ def  additional_coverage(net_od)
+   extra_charge = 0.0
+   #for Factory fitted CNG
+   if @input.cng_type == ''
+      extra_charge = net_od * 0.05
+   else
+      extra_charge = @input.cng_value * 0.05
+   end
+
+   extra_charge +=  (@input.elec_acc + @inout.non_elec_acc) * 0.04
+ end
+
+   def ncb_amount(final_od)
+     if @input.has_claim
+       return 0
+     end
+     new_ncb = 0
+     case @inout.ncb
+       when 0
+        new_ncb = 20
+       when 20
+         new_ncb =25
+       when 25
+         new_ncb = 35
+       when 35
+         new_ncb = 45
+       when 45
+         new_ncb = 50
+       when 50
+         new_ncb = 50
+       when 65
+         new_ncb = 65
+     end
+      return (final_od * new_ncb)/100
+   end
 
 
   def self.tp_premium
@@ -124,7 +166,13 @@ class CarPremium < Premium
     total_pa = per_person_pa * @idv_chart.seats
   end
 
-
+  def self.cng_tp
+   if @input.cng_type != ''
+     return 60
+   else
+     return 0
+   end
+  end
 
 
 end

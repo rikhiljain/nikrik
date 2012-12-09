@@ -2,34 +2,34 @@
 
 one:
   new_policy: false
-  policy_exp_date: 2012-12-08
-  year_of_manufacture: 2012-12-08
+  policy_exp_date: 2012-12-10
+  year_of_manufacture: 2012-12-10
   idv_chart_id: 1
+  register_type: MyString
   register_city: MyString
-  transfer_ncb: false
+  has_claim: false
   ncb: 1
   elec_acc: 1
   non_elec_acc: 1
-  cng_kit: false
-  cng_kit_value: 1
+  cng_type: MyString
+  cng_value: 1
   passenger_coverage_amt: 1
-  voluntary_excess: 
   has_anti_theft: false
-  aai_member: false
+  is_aai_member: false
 
 two:
   new_policy: false
-  policy_exp_date: 2012-12-08
-  year_of_manufacture: 2012-12-08
+  policy_exp_date: 2012-12-10
+  year_of_manufacture: 2012-12-10
   idv_chart_id: 1
+  register_type: MyString
   register_city: MyString
-  transfer_ncb: false
+  has_claim: false
   ncb: 1
   elec_acc: 1
   non_elec_acc: 1
-  cng_kit: false
-  cng_kit_value: 1
+  cng_type: MyString
+  cng_value: 1
   passenger_coverage_amt: 1
-  voluntary_excess: 
   has_anti_theft: false
-  aai_member: false
+  is_aai_member: false

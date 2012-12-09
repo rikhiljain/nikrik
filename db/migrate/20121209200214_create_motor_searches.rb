@@ -5,17 +5,17 @@ class CreateMotorSearches < ActiveRecord::Migration
       t.date :policy_exp_date
       t.date :year_of_manufacture
       t.integer :idv_chart_id
+      t.string :register_type
       t.string :register_city
-      t.boolean :transfer_ncb
+      t.boolean :has_claim
       t.integer :ncb
       t.integer :elec_acc
       t.integer :non_elec_acc
-      t.boolean :cng_kit
-      t.integer :cng_kit_value
+      t.string :cng_type
+      t.integer :cng_value
       t.integer :passenger_coverage_amt
-      t.integer :voluntary_excess
       t.boolean :has_anti_theft
-      t.boolean :aai_member
+      t.boolean :is_aai_member
 
       t.timestamps
     end

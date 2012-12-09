@@ -1,5 +1,8 @@
 Nikrik::Application.routes.draw do
 
+  resources :rtos
+
+
   resources :motor_discounts
 
 

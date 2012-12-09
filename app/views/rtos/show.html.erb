@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Code:</b>
+  <%= @rto.code %>
+</p>
+
+<p>
+  <b>Sub code:</b>
+  <%= @rto.sub_code %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @rto.city %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @rto.state %>
+</p>
+
+
+<%= link_to 'Edit', edit_rto_path(@rto) %> |
+<%= link_to 'Back', rtos_path %>

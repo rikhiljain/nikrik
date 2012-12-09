@@ -18,7 +18,7 @@ class MotorDiscountsControllerTest < ActionController::TestCase
 
   test "should create motor_discount" do
     assert_difference('MotorDiscount.count') do
-      post :create, motor_discount: { amount: @motor_discount.amount, company_id: @motor_discount.company_id, idv_chart_id: @motor_discount.idv_chart_id }
+      post :create, motor_discount: { amount: @motor_discount.amount, company_id: @motor_discount.company_id, idv_chart_id: @motor_discount.idv_chart_id, rto_code: @motor_discount.rto_code, rto_sub_code: @motor_discount.rto_sub_code }
     end
 
     assert_redirected_to motor_discount_path(assigns(:motor_discount))
@@ -35,7 +35,7 @@ class MotorDiscountsControllerTest < ActionController::TestCase
   end
 
   test "should update motor_discount" do
-    put :update, id: @motor_discount, motor_discount: { amount: @motor_discount.amount, company_id: @motor_discount.company_id, idv_chart_id: @motor_discount.idv_chart_id }
+    put :update, id: @motor_discount, motor_discount: { amount: @motor_discount.amount, company_id: @motor_discount.company_id, idv_chart_id: @motor_discount.idv_chart_id, rto_code: @motor_discount.rto_code, rto_sub_code: @motor_discount.rto_sub_code }
     assert_redirected_to motor_discount_path(assigns(:motor_discount))
   end
 

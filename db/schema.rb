@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208190103) do
+ActiveRecord::Schema.define(:version => 20121209200214) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(:version => 20121208190103) do
     t.integer  "idv_chart_id"
     t.integer  "company_id"
     t.float    "amount"
+    t.string   "rto_code"
+    t.string   "rto_sub_code"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -53,17 +55,17 @@ ActiveRecord::Schema.define(:version => 20121208190103) do
     t.date     "policy_exp_date"
     t.date     "year_of_manufacture"
     t.integer  "idv_chart_id"
+    t.string   "register_type"
     t.string   "register_city"
-    t.boolean  "transfer_ncb"
+    t.boolean  "has_claim"
     t.integer  "ncb"
     t.integer  "elec_acc"
     t.integer  "non_elec_acc"
-    t.boolean  "cng_kit"
-    t.integer  "cng_kit_value"
+    t.string   "cng_type"
+    t.integer  "cng_value"
     t.integer  "passenger_coverage_amt"
-    t.integer  "voluntary_excess"
     t.boolean  "has_anti_theft"
-    t.boolean  "aai_member"
+    t.boolean  "is_aai_member"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
   end
@@ -78,6 +80,22 @@ ActiveRecord::Schema.define(:version => 20121208190103) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "rtos", :force => true do |t|
+    t.string   "code"
+    t.string   "sub_code"
+    t.string   "city"
+    t.string   "state"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "table 10", :id => false, :force => true do |t|
+    t.string "COL 1", :limit => 4
+    t.string "COL 2", :limit => 8
+    t.string "COL 3", :limit => 23
+    t.string "COL 4", :limit => 1
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

@@ -2,10 +2,14 @@
 
 one:
   idv_chart_id: 1
-  company_id: 
+  company_id: 1
   amount: 1.5
+  rto_code: MyString
+  rto_sub_code: MyString
 
 two:
   idv_chart_id: 1
-  company_id: 
+  company_id: 1
   amount: 1.5
+  rto_code: MyString
+  rto_sub_code: MyString
