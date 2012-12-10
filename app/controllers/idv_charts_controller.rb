@@ -82,11 +82,17 @@ class IdvChartsController < ApplicationController
   end
   
   def distinctMakers
-	@distinct_makers = IdvChart.find_by_sql("select distinct maker from idv_charts")
+	@results = IdvChart.get_makers
+	@options = Array.new
+
+	@results.each do |val|
+		@options.push(SelectOption.new(val.maker,val.maker))
+	end
+	
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @distinct_makers}
-      format.json { render :json => @distinct_makers}
+      format.xml  { render :xml => @options}
+      format.json { render :json => @options}
 	end
   end
 end

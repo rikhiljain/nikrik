@@ -1,4 +1,7 @@
 class SelectOption
-	@optionValue
-	@optionDisplay
+
+	def initialize(optionValue, optionDisplay)
+		@optionDisplay = optionDisplay;
+		@optionValue = optionValue;
+	end
 end
