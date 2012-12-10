@@ -5,17 +5,45 @@
         <li><a href="#tabs-3">Home Insurance</a></li>
     </ul>
     <div id="tabs-1">
-		<%= simple_form_for @motorquote do |f| %>
-		  <%= f.input :new_policy, :label => 'Type of Policy' %>
-		  <%= f.input :previous_policy_exp_date, :label => 'Previous Policy Expiry Date', :as => :date, :start_year => Date.today.year - 1, :end_year => Date.today.year,
-		   :start_month => 'January', :start_day => 1, :order => [:day, :month, :year] %>
-		  <%= f.input :year_of_manufacture, :label => 'Year of Manufacture', :as => :date, :start_year => Date.today.year - 10, :end_year => Date.today.year,
-		   :start_month => 'January', :discard_day => true, :order => [:month, :year] %>
-		  <%= f.input :car_make, :label => 'Car Make' %>
-		  <%= f.input :car_model, :label => 'Car Model' %>
-		  <%= f.button :submit, :inline_label => 'Get A Quote' %>
-		<% end %>		
-    </div>
+<form action="">
+	<div id="basicDetails">
+	
+		<div id="currentInsuranceDetails">
+			Type Of Policy
+			<input type="radio" name="policyType" value="N">Buy insurance for a new car
+			<input type="radio" name="policyType" value="R">Renew existing or lapsed car policy from any insurer
+		</div>
+
+		<div id="registrationDetails">
+			City where the car is registered(RTO)
+			<input type="text">
+			<br/>
+			First Purchase or Registration Date 
+			<select id="day" name="day"></select>
+			<select id="month" name="month"></select>
+			<select id="year" name="year"></select>
+			<br/>
+			Current Registration Type
+			<input type="radio" name="registrationType" value="I">Individual
+			<input type="radio" name="registrationType" value="C">Company
+		</div>
+		
+		<div id="vehicleDetails">
+			Manufacturer
+			<select id="dynamic_slct" name="make"></select>	
+			<br/>
+			Model
+			<select name="model"></select>
+			<br/>
+			Ex-showroom Price			
+		</div>			
+		
+	</div>
+	<div id="additionalDetails">
+	</div>
+
+	
+</form>    </div>
     <div id="tabs-2">
         <p>Coming very soon.</p>
     </div>
