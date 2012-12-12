@@ -95,4 +95,19 @@ class IdvChartsController < ApplicationController
       format.json { render :json => @options}
 	end
   end
+  
+    def modelsForAManufacturer
+	@results = IdvChart.get_models(params[:manufacturer])
+	@options = Array.new
+
+	@results.each do |val|
+		@options.push(SelectOption.new(val.model+"-"+val.subtype+"-"+val.fuel+"-"+val.seats,val.model+"-"+val.subtype+"-"+val.fuel+"-"+val.seats))
+	end
+	
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @options}
+      format.json { render :json => @options}
+	end
+  end
 end

@@ -13,6 +13,10 @@ class IdvChart < ActiveRecord::Base
   def self.get_makers()
     select(:maker).uniq
   end
+  
+  def self.get_models(manufacturer)
+	where("maker = ?", manufacturer).all
+  end
 
   def self.find_by_maker(maker)
     where("maker = ?", maker).all

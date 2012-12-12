@@ -1,21 +1,47 @@
 (function($){
 	$(document).ready(function(){
-		$( "#tabs" ).tabs();
-		populateManufacturers();
-		pouplateDayForRegistrationDetails();
-		pouplateMonthForRegistrationDetails();
-		pouplateYearForRegistrationDetails();
+		$("#tabs").tabs();
+		bindAllEventHandlers();
+		populateStaticData();
+		populateDynamicData();
 	});
 })(jQuery);	
 
+function populateStaticData(){
+	pouplateDayForRegistrationDetails();
+	pouplateMonthForRegistrationDetails();
+	pouplateYearForRegistrationDetails();	
+}
+
+function populateDynamicData(){
+	populateManufacturers();
+	populateModel($("#dynamic_make option:first").val());
+}
+
 function populateManufacturers(){
 	var options;
-	$.getJSON('http://localhost:3000/idv_charts/distinctMakers.json',function(options){
+	var address = "http://localhost:3000/idv_charts/distinctMakers.json";
+	//var address = "make.json";
+	$.getJSON(address,function(options){
 		$.each(options, function(){
 			options += '<option value="' + this['optionValue'] + '">' + this['optionDisplay'] + '</option>';
 		});
-		$("#dynamic_slct").html(options);
+		$("#dynamic_make").html(options);
 	});
+}
+
+function populateModel(manufacturer){
+	//alert(manufacturer);
+	var options;
+	var address = "http://localhost:3000/idv_charts/modelsForAManufacturer.json?manufacturer="+manufacturer;
+	//var address = "make.json";
+	$.getJSON(address,function(options){
+		$.each(options, function(){
+			options += '<option value="' + this['optionValue'] + '">' + this['optionDisplay'] + '</option>';
+		});
+		$("#dynamic_model").html(options);
+	});
+	
 }
 
 function pouplateDayForRegistrationDetails(){
@@ -57,4 +83,12 @@ function pouplateYearForRegistrationDetails(){
 	$("#year").html(options);
 	
 }
+
+function bindAllEventHandlers(){
+	$("#dynamic_make").change(function(){
+		populateModel($("#dynamic_make").val());
+	})
+}
+
+
   
