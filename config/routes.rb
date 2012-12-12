@@ -1,13 +1,10 @@
 Nikrik::Application.routes.draw do
 
+  devise_for :users, path_names:{sign_in: "login", sign_out: "logout"}
+
   resources :rtos
-
-
   resources :motor_discounts
-
-
   resources :motor_searches
-
 
   get "welcome/index"
   get "idv_charts/distinctMakers"
@@ -23,5 +20,5 @@ Nikrik::Application.routes.draw do
     root :to => 'home#index'
   end
   root :to => "welcome#index"
-  devise_for :users
+
 end
