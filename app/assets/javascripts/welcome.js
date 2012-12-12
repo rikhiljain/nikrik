@@ -10,7 +10,7 @@
 
 function populateManufacturers(){
 	var options;
-	$.getJSON('make.json',function(options){
+	$.getJSON('http://localhost:3000/idv_charts/distinctMakers.json',function(options){
 		$.each(options, function(){
 			options += '<option value="' + this['optionValue'] + '">' + this['optionDisplay'] + '</option>';
 		});
