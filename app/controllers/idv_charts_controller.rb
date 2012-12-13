@@ -101,7 +101,7 @@ class IdvChartsController < ApplicationController
 	@options = Array.new
 
 	@results.each do |val|
-		@options.push(SelectOption.new(val.model+"-"+val.subtype+"-"+val.fuel+"-"+val.seats,val.model+"-"+val.subtype+"-"+val.fuel+"-"+val.seats))
+		@options.push(SelectOption.new(val.id,val.model+"-"+val.subtype))
 	end
 	
     respond_to do |format|

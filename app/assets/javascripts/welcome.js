@@ -4,6 +4,7 @@
 		bindAllEventHandlers();
 		populateStaticData();
 		populateDynamicData();
+        bindCityAutoComplete();
 	});
 })(jQuery);	
 
@@ -87,6 +88,14 @@ function bindAllEventHandlers(){
 	$("[id=basicDetails] > [id=vehicleDetails] > [id=make]").change(function(){
 		populateModel($("[id=basicDetails] > [id=vehicleDetails] > [id=make]").val());
 	})
+}
+
+function  bindCityAutoComplete()
+{
+$( "#city" ).autocomplete({
+    source: "/rtos.json",
+    minLength: 2
+});
 }
 
 
