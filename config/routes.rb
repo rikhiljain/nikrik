@@ -10,7 +10,8 @@ Nikrik::Application.routes.draw do
   get "idv_charts/distinctMakers"
   get "idv_charts/modelsForAManufacturer"
   get "idv_charts/motorValue"
-  
+  get "idv_charts/models"
+
   resources :my_names
   resources :idv_charts
   resources :users

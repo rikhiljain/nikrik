@@ -96,7 +96,7 @@ class IdvChartsController < ApplicationController
 	end
   end
   
-    def modelsForAManufacturer
+    def models
 	@results = IdvChart.get_models(params[:manufacturer])
 	@options = Array.new
 

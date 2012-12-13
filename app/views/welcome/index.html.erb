@@ -7,16 +7,16 @@
     <div id="tabs-1">
 		<form action="">
 			<div id="basicDetails">
-			
-				<div id="currentInsuranceDetails">
+				
+				<div id="currentInsuranceDetails" class="border">
 					Type Of Policy
-					<input type="radio" name="policyType" value="N">Buy insurance for a new car
-					<input type="radio" name="policyType" value="R">Renew existing or lapsed car policy from any insurer
+					<input type="radio" id="policyType" name="policyType" value="N">Buy insurance for a new car
+					<input type="radio" id="policyType" name="policyType" value="R" checked="checked">Renew existing or lapsed car policy from any insurer
 				</div>
 
-				<div id="registrationDetails">
+				<div id="registrationDetails" class="border">
 					City where the car is registered(RTO)
-					<input id="city"  type="text">
+					<input id="city" type="text">
 					<br/>
 					First Purchase or Registration Date 
 					<select id="day" name="day"></select>
@@ -24,23 +24,48 @@
 					<select id="year" name="year"></select>
 					<br/>
 					Current Registration Type
-					<input type="radio" name="registrationType" value="I">Individual
+					<input type="radio" name="registrationType" value="I" checked="checked">Individual
 					<input type="radio" name="registrationType" value="C">Company
 				</div>
 				
-				<div id="vehicleDetails">
+				<div id="vehicleDetails" class="border">
 					Manufacturer
 					<select id="make" name="make"></select>	
 					<br/>
 					Model
 					<select id="model" name="model"></select>
 					<br/>
-					Ex-showroom Price			
-				</div>			
-				
+					Ex-showroom Price<span id="price"></span>			
+				</div>	
+						
 			</div>
-			<div id="additionalDetails">
+			
+			<div id="previousPolicyDetails" class="border">
+					Previous policy type
+					<input type="radio" name="prevPolicyType" value="C" checked="checked">Comprehensive
+					<input type="radio" name="prevPolicyType" value="T">Third Party
+					<br/>
+					<input type="checkbox"> click here in case your vehicle is uninsured for more than 6 months
+					<br/>
+					Previous policy end date 
+					<select id="day" name="day"></select>
+					<select id="month" name="month"></select>
+					<select id="year" name="year"></select>
+					New Policy Start Date
+					<br/>
+					<input type="checkbox" checked="checked"> Previous policy was a full year policy
+					<br/>
+					Claims made in previos policy?
+					<input type="radio" name="claimsMade" value="Y">Yes
+					<input type="radio" name="claimsMade" value="N" checked="checked">No
+					<br/>
+					NCB % on previous policy
+					<select id="ncb" name="ncb"></select>
+					<br/>
+					<input type="checkbox" checked="checked"> No claim bonus declaration verified	
 			</div>
+
+			
 		</form>
     </div>
     <div id="tabs-2">
