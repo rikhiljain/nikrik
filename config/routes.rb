@@ -8,7 +8,7 @@ Nikrik::Application.routes.draw do
 
   get "welcome/index"
   get "idv_charts/distinctMakers"
-  get "idv_charts/modelsForAManufacturer"
+  get "idv_charts/models"
   
   resources :my_names
   resources :idv_charts
