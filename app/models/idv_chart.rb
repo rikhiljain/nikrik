@@ -22,4 +22,35 @@ class IdvChart < ActiveRecord::Base
     where("maker = ?", maker).all
   end
 
+  def self.motor_value(idv_chart_id, year_of_manufacture)
+    @idv_chart = where("id = ?", idv_chart_id).first
+
+    now = Date.today
+    age_in_months =  12 * (now.year -  year_of_manufacture.year) + now.month - year_of_manufacture.month
+
+    case age_in_months
+      when 0..6
+        @idv_chart.age_0_6
+      when 7..12
+        @idv_chart.age_6_12
+      when 13..24
+        @idv_chart.age_12_24
+      when 25..36
+        @idv_chart.age_24_36
+      when 37..48
+        @idv_chart.age_36_48
+      when 49..60
+        @idv_chart.age_48_60
+      when 61..72
+        @idv_chart.age_60_72
+      when 73..84
+        @idv_chart.age_72_84
+      when 85..96
+        @idv_chart.age_84_96
+      else
+        @idv_chart.age_96
+    end
+
+  end
+
 end

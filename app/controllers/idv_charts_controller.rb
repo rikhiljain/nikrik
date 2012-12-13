@@ -109,5 +109,16 @@ class IdvChartsController < ApplicationController
       format.xml  { render :xml => @options}
       format.json { render :json => @options}
 	end
+    end
+
+  def motorValue
+
+    mdate = DateTime.parse(params[:mdate])
+
+    value = IdvChart.motor_value(params[:id], mdate)
+    respond_to do |format|
+      format.json { render :json => value}
+    end
   end
+
 end
