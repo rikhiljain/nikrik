@@ -21,7 +21,7 @@ function bindAllEventHandlers(){
 	})
 	
 	$("[id=basicDetails] > [id=vehicleDetails] > [id=model]").bind("change",function(){
-		$("[id=basicDetails] > [id=vehicleDetails] > [id=price]").text("hi");
+		populatePrice($(this).val(),registrationDate());
 	})
 	
 }
@@ -51,6 +51,10 @@ function  bindCityAutoComplete(){
 	});
 }
 
+function registrationDate(){
+	return $("[id=previousPolicyDetails] > [id=year]").val()+"-"+$("[id=previousPolicyDetails] > [id=month]").val()+"-"+$("[id=previousPolicyDetails] > [id=day]").val();
+}
+
 function populateManufacturers(){
 	var options;
 	var address = "http://localhost:3000/idv_charts/distinctMakers.json";
@@ -75,9 +79,9 @@ function populateModel(manufacturer){
 	});	
 }
 
-function populatePrice(idvChartId){
+function populatePrice(idvChartId, mdate){
 	var options;
-	var address = "http://localhost:3000/idv_charts/{id}/showRoomPrice.json?manufacturer="+manufacturer;
+	var address = "http://localhost:3000/idv_charts/motorValue.json?id="+idvChartId+"&mdate="+mdate;
 	//var address = "model.json";
 	$.getJSON(address,function(price){
 		$("[id=basicDetails] > [id=vehicleDetails] > [id=price]").text(price);
