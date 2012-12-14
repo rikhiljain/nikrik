@@ -1,10 +1,11 @@
-<div id="tabs">
-    <ul>
-        <li><a href="#tabs-1">Motor Insurance</a></li>
-        <li><a href="#tabs-2">Health Insurance</a></li>
-        <li><a href="#tabs-3">Home Insurance</a></li>
-    </ul>
-    <div id="tabs-1">
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Motor Insurance</a></li>
+    <li><a href="#tab2" data-toggle="tab">Health Insurance</a></li>
+     <li><a href="#tab3" data-toggle="tab">Home Insurance</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
 		<form action="">
 			<div id="basicDetails">
 				
@@ -64,14 +65,13 @@
 					<br/>
 					<input type="checkbox" checked="checked"> No claim bonus declaration verified	
 			</div>
-
-			
 		</form>
     </div>
-    <div id="tabs-2">
-        <p>Coming very soon.</p>
+    <div class="tab-pane" id="tab2">
+      <p>Coming very soon.</p>
     </div>
-    <div id="tabs-3">
-        <p>Coming very soon.</p>
+        <div class="tab-pane" id="tab3">
+      <p>Coming very soon.</p>
     </div>
+  </div>
 </div>

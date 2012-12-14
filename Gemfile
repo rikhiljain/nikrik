@@ -5,10 +5,6 @@ gem 'devise', ">= 2.1.2"
 gem 'mysql2'
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
-gem "simple_form", ">= 2.0.3"
-gem "bootstrap-sass", ">= 2.1.0.0"
-gem "jquery-rails", ">= 2.1.4"
-gem "jquery-ui-rails", ">=2.0.2"
 gem "nifty-generators", :group => :development
 gem "columnize", ">=0.3.6"
 

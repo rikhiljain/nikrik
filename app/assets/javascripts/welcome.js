@@ -1,6 +1,5 @@
 (function($){
 	$(document).ready(function(){
-		$("#tabs").tabs();
 		bindAllEventHandlers();
 		populateStaticData();
 		populateDynamicData();
