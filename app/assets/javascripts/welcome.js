@@ -1,14 +1,21 @@
 (function($){
 	$(document).ready(function(){
+		cacheAllJquerySelectore();
 		bindAllEventHandlers();
 		populateStaticData();
 		populateDynamicData();
 		bindCityAutoComplete();
 		showOrHideElements();
+		fireEventsManually();
 	});
 })(jQuery);	
 
+function cacheAllJquerySelectore(){
+	//fill this
+}
+
 function bindAllEventHandlers(){
+	//this will hide/unhide the previous policy details div
 	$("[id=basicDetails] > [id=currentInsuranceDetails] [id=policyType]").bind("change",function(){
 		if($(this).val() == "N"){
 			$("[id=previousPolicyDetails]").hide();
@@ -17,26 +24,29 @@ function bindAllEventHandlers(){
 		}
 	});
 	
+	//this will change the model drop down when we change the make
 	$("[id=basicDetails] > [id=vehicleDetails] [id=make]").bind("change",function(){
 		populateModel($("[id=basicDetails] > [id=vehicleDetails] [id=make]").val());
 	});
-	
+
+	//this will update the price when we change the model
 	$("[id=basicDetails] > [id=vehicleDetails] [id=model]").bind("change",function(){
 		populatePrice($(this).val(),registrationDate());
 	});
 
+	//this will update the price when we change day, month or year of purchase date
 	$("[id=basicDetails] > [id=registrationDetails] [id=day]").bind("change",function(){
-		populatePrice($("[id=basicDetails] > [id=vehicleDetails] [id=model]").val(),registrationDate());
+		populatePrice();
 	});
-
 	$("[id=basicDetails] > [id=registrationDetails] [id=month]").bind("change",function(){
-		populatePrice($("[id=basicDetails] > [id=vehicleDetails] [id=model]").val(),registrationDate());
+		populatePrice();
 	});
-
 	$("[id=basicDetails] > [id=registrationDetails] [id=year]").bind("change",function(){
-		populatePrice($("[id=basicDetails] > [id=vehicleDetails] [id=model]").val(),registrationDate());
+		populatePrice();
 	});
 
+	//If a claim has been made in previous policy year we will not show the ncb drop down and checkbox
+	//But if a claim has not been made in previous policy year then we want to show these options
 	$("[id=previousPolicyDetails] [id=claimsMade]").bind("change",function(){
 		if($(this).val() == "Y"){
 			$("[id=previousPolicyDetails] [id=ncbDiv]").hide();
@@ -47,6 +57,7 @@ function bindAllEventHandlers(){
 		}
 	});	
 
+	//If the kit is not factory fitted, we must show the kit value drop down
 	$("[id=protectionForAccessories] [id=kit]").bind("change",function(){
 		if($(this).val() == "CNG" || $(this).val() == "LPG" ){
 			$("[id=protectionForAccessories] [id=kitPriceControlGroup]").show();
@@ -54,6 +65,17 @@ function bindAllEventHandlers(){
 		else{
 			$("[id=protectionForAccessories] [id=kitPriceControlGroup]").hide();
 		}
+	});
+
+	//Compute new policy start date
+	$("[id=previousPolicyDetails] [id=day]").bind("change",function(){
+		populateNewPolicyStartDate();
+	});
+	$("[id=previousPolicyDetails] [id=month]").bind("change",function(){
+		populateNewPolicyStartDate();
+	});
+	$("[id=previousPolicyDetails] [id=year]").bind("change",function(){
+		populateNewPolicyStartDate();
 	});
 	
 }
@@ -88,6 +110,10 @@ function showOrHideElements(){
 	$("[id=protectionForAccessories] [id=kitPriceControlGroup]").hide();
 }
 
+function fireEventsManually(){
+	//fill this
+}
+
 function registrationDate(){
 	return $("[id=basicDetails] > [id=registrationDetails] [id=year]").val()+"-"+$("[id=basicDetails] > [id=registrationDetails] [id=month]").val()+"-"+$("[id=basicDetails] > [id=registrationDetails] [id=day]").val();
 }
@@ -118,13 +144,24 @@ function populateModel(manufacturer){
 	});	
 }
 
-function populatePrice(idvChartId, mdate){
+function populatePrice(){
+	var idvChartId = $("[id=basicDetails] > [id=vehicleDetails] [id=model]").val();
+	var mdate = registrationDate();
 	var options;
 	var address = "http://localhost:3000/idv_charts/"+idvChartId+"/motorValue.json?mdate="+mdate;
 	//var address = "model.json";
 	$.getJSON(address,function(price){
 		$("[id=basicDetails] > [id=vehicleDetails] [id=price]").text(price);
 	});
+}
+
+function populateNewPolicyStartDate(){
+	var year = $("[id=previousPolicyDetails] [id=year]").val();
+	var month = $("[id=previousPolicyDetails] [id=month]").val();
+	var day = $("[id=previousPolicyDetails] [id=day]").val();
+	var d = new Date(year, month, day);
+	d.setDate(d.getDate() + 1);
+	$("[id=previousPolicyDetails] [id=newPolicyStartDate]").text(d.getDate()+"-"+ m_names[d.getMonth()]+"-"+d.getFullYear());
 }
 
 function pouplateDay(selectElement){

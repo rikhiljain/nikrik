@@ -11,3 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require_tree .
+var m_names = new Array("Null", "January", "February", "March", 
+"April", "May", "June", "July", "August", "September", 
+"October", "November", "December");
