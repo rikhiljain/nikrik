@@ -4,6 +4,7 @@
 		populateStaticData();
 		populateDynamicData();
 		bindCityAutoComplete();
+		showOrHideElements();
 	});
 })(jQuery);	
 
@@ -14,15 +15,46 @@ function bindAllEventHandlers(){
 		}else{
 			$("[id=previousPolicyDetails]").show();
 		}
-	})
+	});
 	
 	$("[id=basicDetails] > [id=vehicleDetails] [id=make]").bind("change",function(){
 		populateModel($("[id=basicDetails] > [id=vehicleDetails] [id=make]").val());
-	})
+	});
 	
 	$("[id=basicDetails] > [id=vehicleDetails] [id=model]").bind("change",function(){
 		populatePrice($(this).val(),registrationDate());
-	})
+	});
+
+	$("[id=basicDetails] > [id=registrationDetails] [id=day]").bind("change",function(){
+		populatePrice($("[id=basicDetails] > [id=vehicleDetails] [id=model]").val(),registrationDate());
+	});
+
+	$("[id=basicDetails] > [id=registrationDetails] [id=month]").bind("change",function(){
+		populatePrice($("[id=basicDetails] > [id=vehicleDetails] [id=model]").val(),registrationDate());
+	});
+
+	$("[id=basicDetails] > [id=registrationDetails] [id=year]").bind("change",function(){
+		populatePrice($("[id=basicDetails] > [id=vehicleDetails] [id=model]").val(),registrationDate());
+	});
+
+	$("[id=previousPolicyDetails] [id=claimsMade]").bind("change",function(){
+		if($(this).val() == "Y"){
+			$("[id=previousPolicyDetails] [id=ncbDiv]").hide();
+			$("[id=previousPolicyDetails] [id=noCliamBounsVerified]").hide();
+		}else{
+			$("[id=previousPolicyDetails] [id=ncbDiv]").show();
+			$("[id=previousPolicyDetails] [id=noCliamBounsVerified]").show();
+		}
+	});	
+
+	$("[id=protectionForAccessories] [id=kit]").bind("change",function(){
+		if($(this).val() == "CNG" || $(this).val() == "LPG" ){
+			$("[id=protectionForAccessories] [id=kitPriceControlGroup]").show();
+		}
+		else{
+			$("[id=protectionForAccessories] [id=kitPriceControlGroup]").hide();
+		}
+	});
 	
 }
 
@@ -36,6 +68,8 @@ function populateStaticData(){
 	pouplateYear($("[id=previousPolicyDetails] [id=year]"));	
 	
 	populateNCB($("[id=previousPolicyDetails] [id=ncb]"));
+	populateKit($("[id=protectionForAccessories] [id=kit]"));
+	populateKitPrice($("[id=protectionForAccessories] [id=kitPrice]"));
 
 }
 
@@ -50,8 +84,12 @@ function  bindCityAutoComplete(){
 	});
 }
 
+function showOrHideElements(){
+	$("[id=protectionForAccessories] [id=kitPriceControlGroup]").hide();
+}
+
 function registrationDate(){
-	return $("[id=previousPolicyDetails] [id=year]").val()+"-"+$("[id=previousPolicyDetails] [id=month]").val()+"-"+$("[id=previousPolicyDetails] [id=day]").val();
+	return $("[id=basicDetails] > [id=registrationDetails] [id=year]").val()+"-"+$("[id=basicDetails] > [id=registrationDetails] [id=month]").val()+"-"+$("[id=basicDetails] > [id=registrationDetails] [id=day]").val();
 }
 
 function populateManufacturers(){
@@ -131,9 +169,32 @@ function pouplateYear(selectElement){
 function populateNCB(selectElement){
 	var options; 
 	for (var i=20; i <= 100;i+=20) { 
-		options += '<option value="' + 20 + '">' + i + '%</option>';
+		options += '<option value="' + i + '">' + i + '%</option>';
 	 }
 	selectElement.html(options);	
+}
+
+function populateKit(selectElement){
+var options = [
+	               	{"optionValue":"FactoryFittedCNG", "optionDisplay": "Factory Fitted CNG"},
+	               	{"optionValue":"CNG", "optionDisplay": "CNG"},
+	               	{"optionValue":"FactoryFittedLPG", "optionDisplay": "Factory Fitted LPG"},
+	               	{"optionValue":"LPG", "optionDisplay": "LPG"}
+	              ];
+	$.each(options, function(){
+		options += '<option value="' + this['optionValue'] + '">' + this['optionDisplay'] + '</option>';
+	});
+
+	selectElement.html(options);	
+}
+
+function populateKitPrice(selectElement){
+	var options;
+	for (var i=10000; i <= 100000;i+=10000) { 
+		options += '<option value="' + i + '">' + i + '</option>';
+	 }
+
+	 selectElement.html(options);	
 }
 
 
