@@ -11,3 +11,6 @@ rails generate migration add_address_to_users address:string
 rake db:migrate
 
 rails g scaffold  rto  code:string sub_code:string city:string state:string
+
+
+rake routes

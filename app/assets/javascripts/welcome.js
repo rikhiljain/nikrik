@@ -41,7 +41,6 @@ function populateStaticData(){
 
 function populateDynamicData(){
 	populateManufacturers();
-	populateModel($("#dynamic_make option:first").val());
 }
 
 function  bindCityAutoComplete(){
@@ -64,6 +63,7 @@ function populateManufacturers(){
 			options += '<option value="' + this['optionValue'] + '">' + this['optionDisplay'] + '</option>';
 		});
 		$("[id=basicDetails] > [id=vehicleDetails] > [id=make]").html(options);
+		$("[id=basicDetails] > [id=vehicleDetails] > [id=make]").change();
 	});
 }
 
@@ -76,16 +76,17 @@ function populateModel(manufacturer){
 			options += '<option value="' + this['optionValue'] + '">' + this['optionDisplay'] + '</option>';
 		});
 		$("[id=basicDetails] > [id=vehicleDetails] > [id=model]").html(options);
+		$("[id=basicDetails] > [id=vehicleDetails] > [id=model]").change();
 	});	
 }
 
 function populatePrice(idvChartId, mdate){
 	var options;
-	var address = "http://localhost:3000/idv_charts/motorValue.json?id="+idvChartId+"&mdate="+mdate;
+	var address = "http://localhost:3000/idv_charts/"+idvChartId+"/motorValue.json?mdate="+mdate;
 	//var address = "model.json";
 	$.getJSON(address,function(price){
 		$("[id=basicDetails] > [id=vehicleDetails] > [id=price]").text(price);
-		});
+	});
 }
 
 function pouplateDay(selectElement){

@@ -7,6 +7,7 @@ gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "nifty-generators", :group => :development
 gem "columnize", ">=0.3.6"
+gem "simple_form", ">= 2.0.3"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
