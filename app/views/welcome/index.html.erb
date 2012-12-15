@@ -6,64 +6,169 @@
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
-		<form action="">
-			<div id="basicDetails">
-				
+		<form action="" class="form-horizontal">
+			<div id="basicDetails">				
 				<div id="currentInsuranceDetails" class="border">
-					Type Of Policy
-					<input type="radio" id="policyType" name="policyType" value="N">Buy insurance for a new car
-					<input type="radio" id="policyType" name="policyType" value="R" checked="checked">Renew existing or lapsed car policy from any insurer
+					<div class="control-group">
+						<label class="control-label" for="policyType">Type Of Policy</label>
+						<div class="controls">
+							<label class="radio inline">
+								<input type="radio" id="policyType" name="policyType" value="N">Buy insurance for a new car
+							</label>
+							<label class="radio inline">
+								<input type="radio" id="policyType" name="policyType" value="R" checked="checked">Renew existing or lapsed car policy from any insurer
+							</label>
+						</div>
+					</div>
 				</div>
-
 				<div id="registrationDetails" class="border">
-					City where the car is registered(RTO)
-					<input id="city" type="text">
-					<br/>
-					First Purchase or Registration Date 
-					<select id="day" name="day"></select>
-					<select id="month" name="month"></select>
-					<select id="year" name="year"></select>
-					<br/>
-					Current Registration Type
-					<input type="radio" name="registrationType" value="I" checked="checked">Individual
-					<input type="radio" name="registrationType" value="C">Company
-				</div>
-				
+					<div class="control-group">
+						<label class="control-label" for="city">City where the car is registered(RTO)</label>
+						<div class="controls">
+							<input id="city" type="text">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="day">First Purchase or Registration Date</label>
+						<div class="controls">
+							<select id="day" name="day"></select>
+							<select id="month" name="month"></select>
+							<select id="year" name="year"></select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="registrationType">Current Registration Type</label>
+						<div class="controls">
+							<label class="radio inline">
+								<input type="radio" id="registrationType" name="registrationType" value="I" checked="checked">Individual
+							</label>
+							<label class="radio inline">
+								<input type="radio" id="registrationType" name="registrationType" value="C">Company
+							</label>
+						</div>
+					</div>
+				</div>				
 				<div id="vehicleDetails" class="border">
-					Manufacturer
-					<select id="make" name="make"></select>	
-					<br/>
-					Model
-					<select id="model" name="model"></select>
-					<br/>
-					Ex-showroom Price  <span id="price"></span>			
-				</div>	
-						
+					<div class="control-group">
+						<label class="control-label" for="make">Manufacturer</label>
+						<div class="controls">
+							<select id="make" name="make"></select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="model">Manufacturer</label>
+						<div class="controls">
+							<select id="model" name="model"></select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="price">Ex-showroom Price</label>
+						<div class="controls">
+							<span id="price"></span>		
+						</div>
+					</div>
+				</div>						
 			</div>
 			
 			<div id="previousPolicyDetails" class="border">
-					Previous policy type
-					<input type="radio" name="prevPolicyType" value="C" checked="checked">Comprehensive
-					<input type="radio" name="prevPolicyType" value="T">Third Party
-					<br/>
-					<input type="checkbox"> click here in case your vehicle is uninsured for more than 6 months
-					<br/>
-					Previous policy end date 
-					<select id="day" name="day"></select>
-					<select id="month" name="month"></select>
-					<select id="year" name="year"></select>
-					New Policy Start Date
-					<br/>
-					<input type="checkbox" checked="checked"> Previous policy was a full year policy
-					<br/>
-					Claims made in previos policy?
-					<input type="radio" name="claimsMade" value="Y">Yes
-					<input type="radio" name="claimsMade" value="N" checked="checked">No
-					<br/>
-					NCB % on previous policy
-					<select id="ncb" name="ncb"></select>
-					<br/>
-					<input type="checkbox" checked="checked"> No claim bonus declaration verified	
+				<div class="control-group">
+					<label class="control-label" for="policyType">Previous policy type</label>
+					<div class="controls">
+						<label class="radio inline">
+							<input type="radio" id="prevPolicyType" name="prevPolicyType" value="C" checked="checked">Comprehensive
+						</label>
+						<label class="radio inline">
+							<input type="radio" id="prevPolicyType" name="prevPolicyType" value="T">Third Party
+						</label>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<input type="checkbox"> click here in case your vehicle is uninsured for more than 6 months
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="day">Previous policy end date</label>
+					<div class="controls">
+						<select id="day" name="day"></select>
+						<select id="month" name="month"></select>
+						<select id="year" name="year"></select>
+						New Policy Start Date
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<input type="checkbox" checked="checked"> Previous policy was a full year policy
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="claimsMade">Claims made in previos policy?</label>
+					<div class="controls">
+						<label class="radio inline">
+							<input type="radio" id="claimsMade" name="claimsMade" value="Y">Yes
+						</label>
+						<label class="radio inline">
+							<input type="radio" id="claimsMade" name="claimsMade" value="N" checked="checked">No
+						</label>						
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="ncb">NCB % on previous policy</label>
+					<div class="controls">
+						<select id="ncb" name="ncb"></select>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<input type="checkbox" checked="checked"> No claim bonus declaration verified
+					</div>
+				</div>						
+			</div>
+			
+			<div id="protectionForAccessories" class="border">
+				<div class="control-group">
+					<label class="control-label" for="elecAccessories">Value of electrical accessories</label>
+					<div class="controls">
+						<input id="elecAccessories" type="text">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="nonElecAccessories">Value of non-electrical accessories</label>
+					<div class="controls">
+						<input id="nonElecAccessories" type="text">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="kit">Value of LPG/CNG kit</label>
+					<div class="controls">
+						<select id="kit" name="kit"></select>
+					</div>
+				</div>
+			</div>
+			
+			<div id="additionalDiscount" class="border">
+				<div class="control-group">
+					<label class="control-label" for="antiTheft">ARAI approved anti-theft device is installed in the car</label>
+					<div class="controls">
+						<label class="radio inline">
+							<input type="radio" id="antiTheft" name="antiTheft" value="Y">Yes
+						</label>
+						<label class="radio inline">
+							<input type="radio" id="antiTheft" name="antiTheft" value="N"  checked="checked">No
+						</label>						
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="automobileAssoc">Driver is a member of Automobile Association</label>
+					<div class="controls">
+						<label class="radio inline">
+							<input type="radio" id="automobileAssoc" name="automobileAssoc" value="Y">Yes
+						</label>
+						<label class="radio inline">
+							<input type="radio" id="automobileAssoc" name="automobileAssoc" value="N" checked="checked">No
+						</label>						
+					</div>
+				</div>
 			</div>
 		</form>
     </div>

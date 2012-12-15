@@ -8,7 +8,7 @@
 })(jQuery);	
 
 function bindAllEventHandlers(){
-	$("[id=basicDetails] > [id=currentInsuranceDetails] > [id=policyType]").bind("change",function(){
+	$("[id=basicDetails] > [id=currentInsuranceDetails] [id=policyType]").bind("change",function(){
 		if($(this).val() == "N"){
 			$("[id=previousPolicyDetails]").hide();
 		}else{
@@ -16,26 +16,26 @@ function bindAllEventHandlers(){
 		}
 	})
 	
-	$("[id=basicDetails] > [id=vehicleDetails] > [id=make]").bind("change",function(){
-		populateModel($("[id=basicDetails] > [id=vehicleDetails] > [id=make]").val());
+	$("[id=basicDetails] > [id=vehicleDetails] [id=make]").bind("change",function(){
+		populateModel($("[id=basicDetails] > [id=vehicleDetails] [id=make]").val());
 	})
 	
-	$("[id=basicDetails] > [id=vehicleDetails] > [id=model]").bind("change",function(){
+	$("[id=basicDetails] > [id=vehicleDetails] [id=model]").bind("change",function(){
 		populatePrice($(this).val(),registrationDate());
 	})
 	
 }
 
 function populateStaticData(){
-	pouplateDay($("[id=basicDetails] > [id=registrationDetails] > [id=day]"));
-	pouplateMonth($("[id=basicDetails] > [id=registrationDetails] > [id=month]"));
-	pouplateYear($("[id=basicDetails] > [id=registrationDetails] > [id=year]"));
+	pouplateDay($("[id=basicDetails] > [id=registrationDetails] [id=day]"));
+	pouplateMonth($("[id=basicDetails] > [id=registrationDetails] [id=month]"));
+	pouplateYear($("[id=basicDetails] > [id=registrationDetails] [id=year]"));
 	
-	pouplateDay($("[id=previousPolicyDetails] > [id=day]"));
-	pouplateMonth($("[id=previousPolicyDetails] > [id=month]"));
-	pouplateYear($("[id=previousPolicyDetails] > [id=year]"));	
+	pouplateDay($("[id=previousPolicyDetails] [id=day]"));
+	pouplateMonth($("[id=previousPolicyDetails] [id=month]"));
+	pouplateYear($("[id=previousPolicyDetails] [id=year]"));	
 	
-	populateNCB($("[id=previousPolicyDetails] > [id=ncb]"));
+	populateNCB($("[id=previousPolicyDetails] [id=ncb]"));
 
 }
 
@@ -51,7 +51,7 @@ function  bindCityAutoComplete(){
 }
 
 function registrationDate(){
-	return $("[id=previousPolicyDetails] > [id=year]").val()+"-"+$("[id=previousPolicyDetails] > [id=month]").val()+"-"+$("[id=previousPolicyDetails] > [id=day]").val();
+	return $("[id=previousPolicyDetails] [id=year]").val()+"-"+$("[id=previousPolicyDetails] [id=month]").val()+"-"+$("[id=previousPolicyDetails] [id=day]").val();
 }
 
 function populateManufacturers(){
@@ -62,8 +62,8 @@ function populateManufacturers(){
 		$.each(options, function(){
 			options += '<option value="' + this['optionValue'] + '">' + this['optionDisplay'] + '</option>';
 		});
-		$("[id=basicDetails] > [id=vehicleDetails] > [id=make]").html(options);
-		$("[id=basicDetails] > [id=vehicleDetails] > [id=make]").change();
+		$("[id=basicDetails] > [id=vehicleDetails] [id=make]").html(options);
+		$("[id=basicDetails] > [id=vehicleDetails] [id=make]").change();
 	});
 }
 
@@ -75,8 +75,8 @@ function populateModel(manufacturer){
 		$.each(options, function(){
 			options += '<option value="' + this['optionValue'] + '">' + this['optionDisplay'] + '</option>';
 		});
-		$("[id=basicDetails] > [id=vehicleDetails] > [id=model]").html(options);
-		$("[id=basicDetails] > [id=vehicleDetails] > [id=model]").change();
+		$("[id=basicDetails] > [id=vehicleDetails] [id=model]").html(options);
+		$("[id=basicDetails] > [id=vehicleDetails] [id=model]").change();
 	});	
 }
 
@@ -85,7 +85,7 @@ function populatePrice(idvChartId, mdate){
 	var address = "http://localhost:3000/idv_charts/"+idvChartId+"/motorValue.json?mdate="+mdate;
 	//var address = "model.json";
 	$.getJSON(address,function(price){
-		$("[id=basicDetails] > [id=vehicleDetails] > [id=price]").text(price);
+		$("[id=basicDetails] > [id=vehicleDetails] [id=price]").text(price);
 	});
 }
 
