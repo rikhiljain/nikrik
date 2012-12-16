@@ -4,7 +4,7 @@ class CreateIdvCharts < ActiveRecord::Migration
       t.string :maker
       t.string :model
       t.string :subtype
-      t.string :seats
+      t.integer :seats
       t.integer :cubic
       t.string :fuel
       t.integer :age_0_6

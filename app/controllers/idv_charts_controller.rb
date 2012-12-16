@@ -83,16 +83,23 @@ class IdvChartsController < ApplicationController
   
   def distinctMakers
 	@results = IdvChart.get_makers
-	@options = Array.new
+	#@options = Array.new
 
-	@results.each do |val|
-		@options.push(SelectOption.new(val.maker,val.maker))
-	end
+	#@results.each do |val|
+	#	@options.push(SelectOption.new(val.maker,val.maker))
+  #end
+
+  options = @results.map do |result|
+    {
+        optionDisplay: result.maker,
+        optionValue: result.maker
+    }
+  end
 	
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @options}
-      format.json { render :json => @options}
+      format.xml  { render :xml => options}
+      format.json { render :json => options}
 	end
   end
   

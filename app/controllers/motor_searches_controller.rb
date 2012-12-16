@@ -1,4 +1,6 @@
 class MotorSearchesController < ApplicationController
+  wrap_parameters :search, :format => [:json, :xml]
+
   # GET /motor_searches
   # GET /motor_searches.json
   def index
@@ -79,5 +81,18 @@ class MotorSearchesController < ApplicationController
       format.html { redirect_to motor_searches_url }
       format.json { head :no_content }
     end
+  end
+
+
+  def quote
+   #valid_json_format = '{"cng_type":"LPG","cng_value":1000,"elec_acc":200,"has_anti_theft":true,"has_claim":true,"idv_chart_id":1,"is_aai_member":false,"ncb":20,"new_policy":false,"non_elec_acc":2000,"passenger_coverage_amt":100000,"policy_exp_date":"2012-12-12","register_city":"Delhi","register_type":"Company","year_of_manufacture":"2012-12-12"}'
+   new_search = MotorSearch.new(params[:search] )
+   new_search.save
+
+   premiums = CarPremium.new(new_search).total_premium
+   respond_to do |format|
+   format.json { render json: premiums }
+   end
+
   end
 end
