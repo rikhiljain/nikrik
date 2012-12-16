@@ -17,7 +17,7 @@ function cacheAllJquerySelectore(){
 function bindAllEventHandlers(){
 	//this will hide/unhide the previous policy details div
 	$("[id=basicDetails] > [id=currentInsuranceDetails] [id=policyType]").bind("change",function(){
-		if($(this).val() == "N"){
+		if($(this).val() == "true"){
 			$("[id=previousPolicyDetails]").hide();
 		}else{
 			$("[id=previousPolicyDetails]").show();
@@ -48,7 +48,7 @@ function bindAllEventHandlers(){
 	//If a claim has been made in previous policy year we will not show the ncb drop down and checkbox
 	//But if a claim has not been made in previous policy year then we want to show these options
 	$("[id=previousPolicyDetails] [id=claimsMade]").bind("change",function(){
-		if($(this).val() == "Y"){
+		if($(this).val() == "true"){
 			$("[id=previousPolicyDetails] [id=ncbDiv]").hide();
 			$("[id=previousPolicyDetails] [id=noCliamBounsVerified]").hide();
 		}else{
@@ -76,6 +76,12 @@ function bindAllEventHandlers(){
 	});
 	$("[id=previousPolicyDetails] [id=year]").bind("change",function(){
 		populateNewPolicyStartDate();
+	});
+
+	//Binding form submit event
+	$("[id=motorQuoteForm]").submit(function() {
+		createMotorQuoteRequest();
+ 		return false;
 	});
 	
 }
@@ -111,11 +117,6 @@ function showOrHideElements(){
 }
 
 function fireEventsManually(){
-	//fill this
-}
-
-function registrationDate(){
-	return $("[id=basicDetails] > [id=registrationDetails] [id=year]").val()+"-"+$("[id=basicDetails] > [id=registrationDetails] [id=month]").val()+"-"+$("[id=basicDetails] > [id=registrationDetails] [id=day]").val();
 }
 
 function populateManufacturers(){
@@ -155,6 +156,11 @@ function populatePrice(){
 	});
 }
 
+function populateRegistrationDate(){
+	var mdate = registrationDate();
+	$("[id=basicDetails] > [id=registrationDetails] [id=registrationDate]").val(mdate);
+}
+
 function populateNewPolicyStartDate(){
 	var year = $("[id=previousPolicyDetails] [id=year]").val();
 	var month = $("[id=previousPolicyDetails] [id=month]").val();
@@ -162,6 +168,11 @@ function populateNewPolicyStartDate(){
 	var d = new Date(year, month, day);
 	d.setDate(d.getDate() + 1);
 	$("[id=previousPolicyDetails] [id=newPolicyStartDate]").text(d.getDate()+"-"+ m_names[d.getMonth()]+"-"+d.getFullYear());
+}
+
+function populatePolicyExpDate(){
+	var mdate = policyExpDate();
+	$("[id=previousPolicyDetails] [id=policyExpDate]").val(mdate);
 }
 
 function pouplateDay(selectElement){
@@ -234,6 +245,42 @@ function populateKitPrice(selectElement){
 	 selectElement.html(options);	
 }
 
+function registrationDate(){
+	return $("[id=basicDetails] > [id=registrationDetails] [id=year]").val()+"-"+$("[id=basicDetails] > [id=registrationDetails] [id=month]").val()+"-"+$("[id=basicDetails] > [id=registrationDetails] [id=day]").val();
+}
 
+function policyExpDate(){
+	return $("[id=previousPolicyDetails] [id=year]").val()+"-"+$("[id=previousPolicyDetails] [id=month]").val()+"-"+$("[id=previousPolicyDetails] [id=day]").val();
+}
 
+function createMotorQuoteRequest(){
+  	populatePolicyExpDate();
+  	populateRegistrationDate();
+  	var ignoreFormFields = new Array();
+  	if($("[id=basicDetails] > [id=currentInsuranceDetails] [id=policyType]:checked").val() == "true"){
+  		ignoreFormFields["policy_exp_date"] = "dummy";
+  		ignoreFormFields["has_claim"] = "dummy";
+  		ignoreFormFields["ncb"] = "dummy";
+  	}
+  	if($("[id=previousPolicyDetails] [id=claimsMade]:checked").val() == "true"){
+  		ignoreFormFields["ncb"] = "dummy";
+  	}
+  	if($("[id=protectionForAccessories] [id=kit]").val() == "FactoryFittedLPG" || $("[id=protectionForAccessories] [id=kit]").val() == "FactoryFittedCNG"){
+  		ignoreFormFields["cng_value"] = "dummy";
+  	}
+  	var jsonString = "{";
+  	console.log($('form').serializeArray());
+  	$.map($("form").serializeArray(), function(el, i){
+  		if(el.value == "" || ignoreFormFields[el.name] == "dummy"){
+  			//ignore
+  		}
+  		else{
+  			jsonString += el.name+":"+el.value+",";
+  		}
+
+  	});
+  	jsonString = jsonString.substr(0, jsonString.length-1);
+  	jsonString += "}";
+  	console.log(jsonString);
+}
   
