@@ -81,6 +81,7 @@ function bindAllEventHandlers(){
 	//Binding form submit event
 	$("[id=motorQuoteForm]").submit(function() {
 		createMotorQuoteRequest();
+		submitMotor
  		return false;
 	});
 	
@@ -268,19 +269,21 @@ function createMotorQuoteRequest(){
   	if($("[id=protectionForAccessories] [id=kit]").val() == "FactoryFittedLPG" || $("[id=protectionForAccessories] [id=kit]").val() == "FactoryFittedCNG"){
   		ignoreFormFields["cng_value"] = "dummy";
   	}
-  	var jsonString = "{";
+  	var json = {};
   	console.log($('form').serializeArray());
   	$.map($("form").serializeArray(), function(el, i){
   		if(el.value == "" || ignoreFormFields[el.name] == "dummy"){
   			//ignore
   		}
   		else{
-  			jsonString += el.name+":"+el.value+",";
+  			json[el.name] = el.value;
   		}
 
   	});
-  	jsonString = jsonString.substr(0, jsonString.length-1);
-  	jsonString += "}";
-  	console.log(jsonString);
+  	var serializesJSON = JSON.stringify(json);
+  	  	console.log(serializesJSON);
+  	$.post("/motor_searches/quote", serializesJSON, function(data){
+  		alert(data);
+  	});
 }
   
