@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   def index
-    debugger
-    @users = User.all
+      @users = User.all
   end
 end

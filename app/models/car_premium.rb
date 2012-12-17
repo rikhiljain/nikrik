@@ -42,7 +42,7 @@ class CarPremium < Premium
 
       total_premium += calculate_service_tax(total_premium)
 
-      results.push(MotorQuote.new(company.id,total_premium,discount_amount))
+      results.push(MotorQuote.new(company.id, company.name, total_premium,discount_amount))
 
     end
 
