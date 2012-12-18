@@ -89,7 +89,7 @@ class MotorSearchesController < ApplicationController
    new_search = MotorSearch.new(params[:search] )
    new_search.save
 
-   premiums = CarPremium.new(new_search).total_premium
+   premiums = CarPremium.new(new_search).calculate_premium
    respond_to do |format|
    format.json { render json: premiums }
    end

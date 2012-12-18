@@ -4,7 +4,7 @@ class MotorDiscount < ActiveRecord::Base
 
 
   def self.get_discount(idv_chart_id,company_id)
-    where("idv_chart_id = ? and company_id = ? ",idv_chart_id,company_id)
+    where("idv_chart_id = ? and company_id = ? ",idv_chart_id,company_id).first
 
   end
 end

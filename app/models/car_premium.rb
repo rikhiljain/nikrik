@@ -1,6 +1,7 @@
 class CarPremium < Premium
 
- # matrix[Age][Cubic] for zone-B car rating and matrix[4] use for third party
+
+  # matrix[Age][Cubic] for zone-B car rating and matrix[4] use for third party
   ZONE_B_RATING = { 0 => { 0 => 3.039, 1 => 3.191,  2 =>3.343} ,
                  1 => { 0 => 3.191, 1 => 3.351, 2 =>3.51},
                 2 => { 0 => 3.267, 1 => 3.43, 2 =>3.594},
@@ -16,33 +17,26 @@ class CarPremium < Premium
       @input = motorSearch
   end
 
-  def  total_premium
-    Rails.logger.info "Calculating Total premium for = #{@input}"
+  def  calculate_premium
+
     results = Array.new
     @idv_chart = IdvChart.find(@input.idv_chart_id)
 
-    initial_od = initial_premium
-
+    base_od = m_base_premium
+    total_premium = m_total_premium(base_od, 0)
+    Rails.logger.info "Total premium = #{total_premium}"
     companies = Company.all
 
     companies.each do |company|
 
-      discount = MotorDiscount.get_discount(@idv_chart.id, company.id)
+      motor_discount = MotorDiscount.get_discount(@idv_chart.id, company.id)
 
-      discount_amount = (initial_od * ((discount.nil?)? discount.amount : 0) )/100
+      discount = (base_od * ((motor_discount.nil?)? 0: motor_discount.amount) )/100
+      Rails.logger.info "Discount= #{discount}"
 
-      base_od = initial_od - discount_amount
-
-      net_od = base_od - anti_theft_discount(base_od)
-      final_od = net_od + additional_coverage(net_od)
-
-      final_od = final_od + ncb_amount(final_od)
-
-      total_premium = final_od + tp_premium
-
-      total_premium += calculate_service_tax(total_premium)
-
-      results.push(MotorQuote.new(company.id, company.name, total_premium,discount_amount))
+      final_premium = m_total_premium(base_od, discount)
+      Rails.logger.info "Final Premium= #{final_premium}"
+      results.push(MotorQuote.new(company.id, company.name,total_premium, final_premium))
 
     end
 
@@ -51,8 +45,25 @@ class CarPremium < Premium
   end
 
 
+  def m_total_premium(base_od, discount_amount)
 
- def initial_premium
+    base_od_after_discount = base_od - discount_amount
+    Rails.logger.info "base_od_after_discount= #{base_od_after_discount}"
+    net_od = base_od_after_discount - m_anti_theft_discount(base_od_after_discount)
+    Rails.logger.info "net_od= #{net_od}"
+    final_od = net_od + m_additional_coverage(net_od)
+    Rails.logger.info "final_od= #{final_od}"
+    final_od = final_od + m_ncb_amount(final_od)
+    Rails.logger.info "final_od= #{final_od}"
+    total_premium = final_od + m_tp_premium
+
+    total_premium += calculate_service_tax(total_premium)
+
+    return total_premium
+  end
+
+
+ def m_base_premium
 
    now = Date.today
    age_in_years =  now.year - @input.year_of_manufacture.year
@@ -80,14 +91,14 @@ class CarPremium < Premium
    end
 
    if  @input.register_city == 'DL' or  @input.register_city == 'MB'
-     (ZONE_B_RATING[index_x][index_y] * motor_value)/100
+     (ZONE_B_RATING[index_x][index_y] * m_motor_value)/100
    else
-     (ZONE_A_RATING[index_x][index_y] * motor_value)/100
+     (ZONE_A_RATING[index_x][index_y] * m_motor_value)/100
    end
 
  end
 
- def motor_value
+ def m_motor_value
    now = Date.today
    age_in_months =  12 * (now.year -  @input.year_of_manufacture.year) + now.month - @input.year_of_manufacture.month
 
@@ -116,14 +127,14 @@ class CarPremium < Premium
 
  end
 
- def anti_theft_discount(base_od)
+ def m_anti_theft_discount(base_od)
     discount = base_od * 0.025
     if discount > 500
       discount = 500
     end
   end
 
- def  additional_coverage(net_od)
+ def  m_additional_coverage(net_od)
    extra_charge = 0.0
    #for Factory fitted CNG
    if @input.cng_type == ''
@@ -135,7 +146,7 @@ class CarPremium < Premium
    extra_charge +=  (@input.elec_acc + @input.non_elec_acc) * 0.04
  end
 
-   def ncb_amount(final_od)
+   def m_ncb_amount(final_od)
      if @input.has_claim
        return 0
      end
@@ -160,11 +171,11 @@ class CarPremium < Premium
    end
 
 
-  def tp_premium
-     basic_tp + owner_pa + passenger_pa  + cng_tp
+  def m_tp_premium
+     m_basic_tp + m_owner_pa + m_passenger_pa  + m_cng_tp
   end
 
-  def basic_tp
+  def m_basic_tp
     case @idv_chart.cubic
       when 0..1000
         index_y = 0
@@ -181,16 +192,16 @@ class CarPremium < Premium
     end
   end
 
-  def owner_pa
+  def m_owner_pa
     100
   end
 
-  def passenger_pa
+  def m_passenger_pa
     per_person_pa = @input.passenger_coverage_amt/2000
     total_pa = per_person_pa * @idv_chart.seats
   end
 
-  def cng_tp
+  def m_cng_tp
    if @input.cng_type != ''
      return 60
    else
