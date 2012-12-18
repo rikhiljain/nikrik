@@ -137,13 +137,14 @@ class CarPremium < Premium
  def  m_additional_coverage(net_od)
    extra_charge = 0.0
    #for Factory fitted CNG
+
    if @input.cng_type == ''
       extra_charge = net_od * 0.05
    else
-      extra_charge = @input.cng_value * 0.05
+      extra_charge = ((@input.cng_value?)?@input.cng_value : 0) * 0.05
    end
 
-   extra_charge +=  (@input.elec_acc + @input.non_elec_acc) * 0.04
+   extra_charge +=  ( ((@input.elec_acc?)?@input.elec_acc : 0) + ((@input.non_elec_acc?)?@input.non_elec_acc : 0) ) * 0.04
  end
 
    def m_ncb_amount(final_od)
@@ -151,7 +152,7 @@ class CarPremium < Premium
        return 0
      end
      new_ncb = 0
-     case @inout.ncb
+     case ((@input.ncb?)?@input.ncb : 0)
        when 0
         new_ncb = 20
        when 20
@@ -197,7 +198,7 @@ class CarPremium < Premium
   end
 
   def m_passenger_pa
-    per_person_pa = @input.passenger_coverage_amt/2000
+    per_person_pa = ((@input.passenger_coverage_amt?)?@input.passenger_coverage_amt : 0 )/2000
     total_pa = per_person_pa * @idv_chart.seats
   end
 
