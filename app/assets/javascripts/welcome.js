@@ -80,8 +80,11 @@ function bindAllEventHandlers(){
 
 	//Binding form submit event
 	$("[id=motorQuoteForm]").submit(function() {
-		createMotorQuoteRequest();
-		submitMotor
+		var serializedJSON = createMotorQuoteRequest();
+		//submitMotorQuoteRequest(serializedJSON);
+		$("[id=quoteFormAccordion] [id=link]").click();
+		$("[id=quoteResultsAccordion] [id=link]").click();
+		fillResultTable(serializedJSON);
  		return false;
 	});
 	
@@ -122,7 +125,7 @@ function fireEventsManually(){
 
 function populateManufacturers(){
 	var options;
-	var address = "http://localhost:3000/idv_charts/distinctMakers.json";
+	var address = "/idv_charts/distinctMakers.json";
 	//var address = "make.json";
 	$.getJSON(address,function(options){
 		$.each(options, function(){
@@ -135,7 +138,7 @@ function populateManufacturers(){
 
 function populateModel(manufacturer){
 	var options;
-	var address = "http://localhost:3000/idv_charts/models.json?manufacturer="+manufacturer;
+	var address = "/idv_charts/models.json?manufacturer="+manufacturer;
 	//var address = "model.json";
 	$.getJSON(address,function(options){
 		$.each(options, function(){
@@ -150,7 +153,7 @@ function populatePrice(){
 	var idvChartId = $("[id=basicDetails] > [id=vehicleDetails] [id=model]").val();
 	var mdate = registrationDate();
 	var options;
-	var address = "http://localhost:3000/idv_charts/"+idvChartId+"/motorValue.json?mdate="+mdate;
+	var address = "/idv_charts/"+idvChartId+"/motorValue.json?mdate="+mdate;
 	//var address = "model.json";
 	$.getJSON(address,function(price){
 		$("[id=basicDetails] > [id=vehicleDetails] [id=price]").text(price);
@@ -280,10 +283,59 @@ function createMotorQuoteRequest(){
   		}
 
   	});
-  	var serializesJSON = JSON.stringify(json);
-  	  	console.log(serializesJSON);
-  	$.post("/motor_searches/quote", serializesJSON, function(data){
-  		alert(data);
-  	});
+  	return JSON.stringify(json);
+}
+
+function submitMotorQuoteRequest(serializedJSON){
+	$.ajax({
+  				url: "/motor_searches/quote",
+  				type: "POST",
+				dataType: "xml/html/script/json", // expected format for response
+				contentType: "application/json", // send as JSON
+				data: serializedJSON,
+
+  				complete: function(data) {
+    				//called when complete
+    				alert(data);
+  				},
+
+  				success: function() {
+    				//called when successful
+ 				},
+
+  				error: function() {
+    				//called when there is an error
+  				},
+			})
+}
+
+function fillResultTable(serializedJSON){
+	var a = '[{"company": 1,"total_premium": 110937.63745664,"discount": 0},{"company": 2,"total_premium": 110937.63745664,"discount": 0},{"company": 3,"total_premium": 10937.63745664,"discount": 0},{"company": 4,"total_premium": 110937.63745664,"discount": 0}]';
+
+var results = JSON.parse(a);
+var e = esc;
+var html = [], h = -1;
+html[++h] = "<table id='quoteResultsTable' class='table table-bordered'>";
+html[++h] = "<tbody>";
+for(var result, i = -1; result = results[++i];){
+	html[++h] = "<tr><td>";
+	html[++h] = result.company;
+	html[++h] = "</td><td class='class2'>";
+	html[++h] = result.total_premium;
+	html[++h] = "</td><td>";
+	html[++h] = result.discount;
+	html[++h] = "</td></tr>";
+}
+html[++h] = "</tbody>";
+html[++h] = "</table>";
+$("[id=quoteResultsAccordion] [id=table]")[0].innerHTML = html.join('');
+}
+
+function esc(text){
+	var a =  text
+			.replace("&","&amp;")
+			.replace("<", "&lt;")
+			.replace(">", "&gt;");
+	return a;
 }
   
