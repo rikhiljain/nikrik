@@ -81,10 +81,10 @@ function bindAllEventHandlers(){
 	//Binding form submit event
 	$("[id=motorQuoteForm]").submit(function() {
 		var serializedJSON = createMotorQuoteRequest();
-		//submitMotorQuoteRequest(serializedJSON);
-		$("[id=quoteFormAccordion] [id=link]").click();
-		$("[id=quoteResultsAccordion] [id=link]").click();
-		fillResultTable(serializedJSON);
+		console.log(serializedJSON);
+		submitMotorQuoteRequest(serializedJSON);
+
+		//fillResultTable(serializedJSON);
  		return false;
 	});
 	
@@ -290,40 +290,53 @@ function submitMotorQuoteRequest(serializedJSON){
 	$.ajax({
   				url: "/motor_searches/quote",
   				type: "POST",
-				dataType: "xml/html/script/json", // expected format for response
+				dataType: "json", // expected format for response
 				contentType: "application/json", // send as JSON
 				data: serializedJSON,
 
   				complete: function(data) {
     				//called when complete
-    				alert(data);
   				},
 
-  				success: function() {
+  				success: function(data) {
     				//called when successful
+    				fillResultTable(data);
+    				$("[id=quoteFormAccordion] [id=link]").click();
+					$("[id=quoteResultsAccordion] [id=link]").click();
  				},
 
-  				error: function() {
+  				error: function(data, textStatus, errorThrown) {
     				//called when there is an error
+    				console.log("some error happened" + textStatus);
   				},
 			})
 }
 
-function fillResultTable(serializedJSON){
-	var a = '[{"company": 1,"total_premium": 110937.63745664,"discount": 0},{"company": 2,"total_premium": 110937.63745664,"discount": 0},{"company": 3,"total_premium": 10937.63745664,"discount": 0},{"company": 4,"total_premium": 110937.63745664,"discount": 0}]';
+function fillResultTable(data){
+	//var a = '[{"company": 1,"total_premium": 110937.63745664,"discount": 0},{"company": 2,"total_premium": 110937.63745664,"discount": 0},{"company": 3,"total_premium": 10937.63745664,"discount": 0},{"company": 4,"total_premium": 110937.63745664,"discount": 0}]';
+	//var a = '[{"company_id":1,"company_name":"ICICI","total_premium":"56,288","final_premium":"56,288","discount":"0"},{"company_id":2,"company_name":"BAJAJ","total_premium":"56,288","final_premium":"56,288","discount":"0"},{"company_id":3,"company_name":"TATA","total_premium":"56,288","final_premium":"56,288","discount":"0"},{"company_id":4,"company_name":"RELIANCE","total_premium":"56,288","final_premium":"56,288","discount":"0"}]';
 
-var results = JSON.parse(a);
+//alert(data[0].company_name);
+//var results = JSON.parse(a);
+var results = data;
+
 var e = esc;
 var html = [], h = -1;
 html[++h] = "<table id='quoteResultsTable' class='table table-bordered'>";
+html[++h] = "<th>Company Name</th>";
+html[++h] = "<th>Total Premium</th>";
+html[++h] = "<th>Discount</th>";
+html[++h] = "<th>Final Premium</th>";
 html[++h] = "<tbody>";
 for(var result, i = -1; result = results[++i];){
 	html[++h] = "<tr><td>";
-	html[++h] = result.company;
-	html[++h] = "</td><td class='class2'>";
+	html[++h] = result.company_name;
+	html[++h] = "</td><td>";
 	html[++h] = result.total_premium;
 	html[++h] = "</td><td>";
-	html[++h] = result.discount;
+	html[++h] = result.discount;	
+	html[++h] = "</td><td>";	
+	html[++h] = result.final_premium;	
 	html[++h] = "</td></tr>";
 }
 html[++h] = "</tbody>";
