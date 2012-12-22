@@ -1,6 +1,6 @@
 Nikrik::Application.routes.draw do
 
-  devise_for :users, :path => '', path_names:{sign_in: "login", sign_out: "logout"}
+  devise_for :users, path_names:{sign_in: "login", sign_out: "logout"}
 
 
 
@@ -9,9 +9,9 @@ Nikrik::Application.routes.draw do
   get "idv_charts/modelsForAManufacturer"
   get "idv_charts/:id/motorValue" => "idv_charts#motorValue"
   get "idv_charts/models"
-
+  get "home/admin"
   post "motor_searches/quote"
-
+  post "home/callus"
 
   resources :rtos
   resources :motor_discounts
