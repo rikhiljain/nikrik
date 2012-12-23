@@ -16,3 +16,11 @@ rails g scaffold  rto  code:string sub_code:string city:string state:string
 rake routes
 
 rails g scaffold motorPolicy  policy_id:integer user_id:integer company_id:integer start_date:date end_date:date premium:integer discount:integer policy_path:string
+
+
+https://github.com/hiranpeiris/therubyracer_for_windows#readme
+git status
+git add .
+git add <path-to-the-file>
+git rm <path-to-the-file>
+git checkout <path-to-file-that-needs-revert>

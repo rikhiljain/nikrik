@@ -10,9 +10,9 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery-1.8.3
+//= require jquery/jquery-1.8.3
 //= require bootstrap
-//= require jquery-ui-1.9.2.custom
+//= require jquery/jquery-ui-1.9.2.custom
 //= require welcome
 
 var m_names = new Array("Null", "January", "February", "March", 
