@@ -8,14 +8,9 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require bootstrap_and_overrides
  *= require_self
 */
-@import "bootstrap.css.scss";
-@import "bootstrap-responsive.css.scss";
-@import "bootstrap_and_overrides.css.scss";
-@import "jquery-ui-1.9.2.custom.css.scss";
-@import "welcome.css.scss";
-
 
 .content {
   background-color: #eee;

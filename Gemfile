@@ -25,6 +25,9 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'therubyracer'
+  gem 'libv8'
+  gem 'less-rails'
 end
 
 # To use ActiveModel has_secure_password
