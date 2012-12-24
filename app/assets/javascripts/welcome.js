@@ -5,8 +5,10 @@
 		populateStaticData();
 		populateDynamicData();
 		bindCityAutoComplete();
+		bindDatePickers();
 		showOrHideElements();
 		fireEventsManually();
+		bindToolTips();
 	});
 })(jQuery);	
 
@@ -67,27 +69,34 @@ function bindAllEventHandlers(){
 		}
 	});
 
-	//Compute new policy start date
-	$("[id=previousPolicyDetails] [id=day]").bind("change",function(){
-		populateNewPolicyStartDate();
-	});
-	$("[id=previousPolicyDetails] [id=month]").bind("change",function(){
-		populateNewPolicyStartDate();
-	});
-	$("[id=previousPolicyDetails] [id=year]").bind("change",function(){
-		populateNewPolicyStartDate();
-	});
+	// //Compute new policy start date
+	// $("[id=previousPolicyDetails] [id=day]").bind("change",function(){
+	// 	populateNewPolicyStartDate();
+	// });
+	// $("[id=previousPolicyDetails] [id=month]").bind("change",function(){
+	// 	populateNewPolicyStartDate();
+	// });
+	// $("[id=previousPolicyDetails] [id=year]").bind("change",function(){
+	// 	populateNewPolicyStartDate();
+	// });
+
+	$("[id=previousPolicyDetails] [id=date]").bind("change",function(){
+	 	populateNewPolicyStartDate();
+	 });
 
 	//Binding form submit event
 	$("[id=motorQuoteForm]").submit(function() {
-		var serializedJSON = createMotorQuoteRequest();
-		console.log(serializedJSON);
-		submitMotorQuoteRequest(serializedJSON);
-
-		//fillResultTable(serializedJSON);
- 		return false;
+		var isvalidate=$("[id=motorQuoteForm]").valid();
+		if(isvalidate){
+			var serializedJSON = createMotorQuoteRequest();
+			console.log(serializedJSON);
+			submitMotorQuoteRequest(serializedJSON);
+			//fillResultTable(serializedJSON);
+ 			return false;
+		}
 	});
-	
+	//Binding the form validation
+	validateForm();
 }
 
 function populateStaticData(){
@@ -95,9 +104,9 @@ function populateStaticData(){
 	pouplateMonth($("[id=basicDetails] > [id=registrationDetails] [id=month]"));
 	pouplateYear($("[id=basicDetails] > [id=registrationDetails] [id=year]"));
 	
-	pouplateDay($("[id=previousPolicyDetails] [id=day]"));
-	pouplateMonth($("[id=previousPolicyDetails] [id=month]"));
-	pouplateYear($("[id=previousPolicyDetails] [id=year]"));	
+	//pouplateDay($("[id=previousPolicyDetails] [id=day]"));
+	//pouplateMonth($("[id=previousPolicyDetails] [id=month]"));
+	//pouplateYear($("[id=previousPolicyDetails] [id=year]"));	
 	
 	populateNCB($("[id=previousPolicyDetails] [id=ncb]"));
 	populateKit($("[id=protectionForAccessories] [id=kit]"));
@@ -116,8 +125,18 @@ function  bindCityAutoComplete(){
 	});
 }
 
+function bindDatePickers(){
+	$("[id=previousPolicyDetails] [id=date]").datepicker({ appendText: "(dd-mm-yyyy)", dateFormat: "dd-mm-yy", constrainInput: "true" });
+}
+
 function showOrHideElements(){
 	$("[id=protectionForAccessories] [id=kitPriceControlGroup]").hide();
+	$("[id=previousPolicyDetails] [id=previousPolicyDetailsDiv1]").hide();
+	$("[id=previousPolicyDetails] [id=previousPolicyDetailsDiv2]").hide();
+	$("[id=basicDetails] > [id=registrationDetails] [id=day]").hide();
+	$("[id=previousPolicyDetails] [id=day]").hide();
+	$("[id=previousPolicyDetails] [id=month]").hide();
+	$("[id=previousPolicyDetails] [id=year]").hide();
 }
 
 function fireEventsManually(){
@@ -166,11 +185,13 @@ function populateRegistrationDate(){
 }
 
 function populateNewPolicyStartDate(){
-	var year = $("[id=previousPolicyDetails] [id=year]").val();
-	var month = $("[id=previousPolicyDetails] [id=month]").val();
-	var day = $("[id=previousPolicyDetails] [id=day]").val();
-	var d = new Date(year, month, day);
-	d.setDate(d.getDate() + 1);
+	var currentDate = $("[id=previousPolicyDetails] [id=date]").datepicker( "getDate" );
+	//var year = $("[id=previousPolicyDetails] [id=year]").val();
+	//var month = $("[id=previousPolicyDetails] [id=month]").val();
+	//var day = $("[id=previousPolicyDetails] [id=day]").val();
+	//var d = new Date(year, month, day);
+	var d = currentDate;
+	d.setDate(currentDate.getDate() + 1);
 	$("[id=previousPolicyDetails] [id=newPolicyStartDate]").text(d.getDate()+"-"+ m_names[d.getMonth()]+"-"+d.getFullYear());
 }
 
@@ -352,3 +373,58 @@ function esc(text){
 	return a;
 }
   
+function validateForm(){
+
+	// Validation
+	$("[id=motorQuoteForm]").validate({
+		rules:{
+			register_city:"required"
+		},
+
+		messages:{
+			register_city:"Enter your registration city"
+		},
+		errorClass: "help-inline",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass)
+		{
+			$(element).parents('.control-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass)
+		{
+			$(element).parents('.control-group').removeClass('error');
+			//$(element).parents('.control-group').addClass('success');
+		}
+	});
+}
+
+
+function bindToolTips(){
+	//alert("hi");
+	//$('[rel=tooltip]').tooltip();
+	//$("[id=basicDetails] > [id=currentInsuranceDetails] [id=policyType_icon]").data('tooltip').options.placement = 'right';
+	//$("[id=basicDetails] > [id=currentInsuranceDetails] [id=policyType_icon]").attr('data-original-title', item.value + ' selected.').tooltip('fixTitle');
+	//$("[id=basicDetails] > [id=currentInsuranceDetails] [id=policyType_icon]").tooltip('hide').attr('data-original-title', newValue).tooltip('fixTitle').tooltip('show');
+	//$("[id=basicDetails] > [id=currentInsuranceDetails] [id=policyType_icon]").tooltip("show");
+	// $("[id=basicDetails] > [id=registrationDetails] [id=city_icon]");
+	// $("[id=basicDetails] > [id=registrationDetails] [id=day_icon]")
+	// $("[id=basicDetails] > [id=registrationDetails] [id=registrationType_icon]")
+	// $("[id=basicDetails] > [id=vehicleDetails] [id=make_icon]")	
+	// $("[id=basicDetails] > [id=vehicleDetails] [id=price_icon]")	
+
+	// $("[id=previousPolicyDetails] [id=prevPolicyType_icon]")
+	// $("[id=previousPolicyDetails] [id=date_icon]")
+	// $("[id=previousPolicyDetails] [id=newPolicyStartDate_icon]")
+	// $("[id=previousPolicyDetails] [id=claimsMade_icon]")
+	// $("[id=previousPolicyDetails] [id=ncb_icon]")
+
+	// $("[id=protectionForAccessories] [id=elecAccessories_icon]")
+	// $("[id=protectionForAccessories] [id=nonElecAccessories_icon]")
+	// $("[id=protectionForAccessories] [id=kit_icon]")
+	// $("[id=protectionForAccessories] [id=kitPrice_icon]")
+
+	// $("[id=additionalDiscount] [id=antiTheft_icon]")
+	// $("[id=additionalDiscount] [id=automobileAssoc_icon]")
+
+
+}

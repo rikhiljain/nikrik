@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery/jquery-1.8.3
+//= require jquery/jquery.validate
 //= require bootstrap
 //= require jquery/jquery-ui-1.9.2.custom
 //= require welcome

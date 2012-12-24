@@ -6,4 +6,10 @@
  *= require_self
 */
 
+@import "bootstrap/variables";
+
 body { padding-top: 60px; }
+
+.largeBadge{
+	font-size: $baseFontSize * 1.2;
+}

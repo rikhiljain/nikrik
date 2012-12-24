@@ -19,7 +19,7 @@
 							<div id="basicDetails">				
 								<div id="currentInsuranceDetails" class="border">
 									<div class="control-group">
-										<label class="control-label" for="policyType">Type Of Policy</label>
+										<label class="control-label" for="policyType">Type Of Policy<i id="policyType_icon" rel="tooltip" class="icon-question-sign"></i></label>
 										<div class="controls">
 											<label class="radio inline">
 												<input type="radio" id="policyType" name="new_policy" value="true">Buy insurance for a new car
@@ -32,22 +32,22 @@
 								</div>
 								<div id="registrationDetails" class="border">
 									<div class="control-group">
-										<label class="control-label" for="city">City where the car is registered(RTO)</label>
+										<label class="control-label" for="city">City where the car is registered(RTO)<i id="city_icon" class="icon-question-sign"></i></label>
 										<div class="controls">
-											<input id="city" name="register_city" type="text">
+											<input id="city" name="register_city" type="text" class="span2" class="required">
 										</div>
 									</div>
 									<div class="control-group">
-										<label class="control-label" for="day">First Purchase or Registration Date</label>
+										<label class="control-label" for="day">First Purchase or Registration Date<i id="day_icon" class="icon-question-sign"></i></label>
 										<div class="controls">
-											<select id="day"></select>
-											<select id="month"></select>
-											<select id="year"></select>
+											<select id="day" class="span1"></select>
+											<select id="month" class="span1"></select>
+											<select id="year" class="span1"></select>
 										</div>
 										<input type="hidden" id="registrationDate" name="year_of_manufacture">
 									</div>
 									<div class="control-group">
-										<label class="control-label" for="registrationType">Current Registration Type</label>
+										<label class="control-label" for="registrationType">Current Registration Type<i id="registrationType_icon" class="icon-question-sign"></i></label>
 										<div class="controls">
 											<label class="radio inline">
 												<input type="radio" id="registrationType" name="register_type" value="Individual" checked="checked">Individual
@@ -60,29 +60,25 @@
 								</div>				
 								<div id="vehicleDetails" class="border">
 									<div class="control-group">
-										<label class="control-label" for="make">Manufacturer</label>
-										<div class="controls">
-											<select id="make"></select>
-										</div>
+										<label class="control-label" for="make">Manufacturer/Model<i id="make_icon" class="icon-question-sign"></i></label>
+										<div class="controls form-inline">
+											<select id="make" class="span2"></select>
+											<label>&nbsp;&nbsp;&nbsp;</label>
+											<select id="model" name="idv_chart_id" class="span2"></select>
+										</div> 
 									</div>
 									<div class="control-group">
-										<label class="control-label" for="model">Manufacturer</label>
+										<label class="control-label" for="price">Ex-showroom Price<i id="price_icon" class="icon-question-sign"></i></label>
 										<div class="controls">
-											<select id="model" name="idv_chart_id"></select>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label" for="price">Ex-showroom Price</label>
-										<div class="controls">
-											<span id="price" class="label label-success"></span>		
+											<span id="price" class="badge badge-success" class="span3 largeBadge"></span>		
 										</div>
 									</div>
 								</div>						
 							</div>
 							
 							<div id="previousPolicyDetails" class="border">
-								<div class="control-group">
-									<label class="control-label" for="policyType">Previous policy type</label>
+								<div id="previousPolicyDetailsDiv1" class="control-group">
+									<label class="control-label" for="policyType">Previous policy type<i id="prevPolicyType_icon" class="icon-question-sign"></i></label>
 									<div class="controls">
 										<label class="radio inline">
 											<input type="radio" id="prevPolicyType" value="Comprehensive" checked="checked">Comprehensive
@@ -92,19 +88,21 @@
 										</label>
 									</div>
 								</div>
-								<div class="control-group">
+								<div id="previousPolicyDetailsDiv2" class="control-group">
 									<div class="controls">
 										<input type="checkbox"> click here in case your vehicle is uninsured for more than 6 months
 									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label" for="day">Previous policy end date</label>
+									<label class="control-label" for="day">Previous policy end date<i id="date_icon" class="icon-question-sign"></i></label>
 									<div class="controls">
-										<select id="day"></select>
-										<select id="month"></select>
-										<select id="year"></select>
-										New Policy Start Date <span id="newPolicyStartDate" class="label label-success"></span>
-										<input type="hidden" id="policyExpDate" name="policy_exp_date">
+										<input type="text" id="date" class="span2">
+										<select id="day" class="span1"></select>
+										<select id="month" class="span1"></select>
+										<select id="year" class="span1"></select>
+										<span style="margin-left:40px">New Policy Start Date<i id="newPolicyStartDate_icon" class="icon-question-sign"></i></span>
+										<span id="newPolicyStartDate" class="badge badge-success"></span>
+										<input type="hidden" id="policyExpDate" name="policy_exp_date"/>
 									</div>
 								</div>
 								<div class="control-group">
@@ -113,7 +111,7 @@
 									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label" for="claimsMade">Claims made in previos policy?</label>
+									<label class="control-label" for="claimsMade">Claims made in previos policy?<i id="claimsMade_icon" class="icon-question-sign"></i></label>
 									<div class="controls">
 										<label class="radio inline">
 											<input type="radio" id="claimsMade" name="has_claim" value="true">Yes
@@ -124,48 +122,44 @@
 									</div>
 								</div>
 								<div id="ncbDiv" class="control-group">
-									<label class="control-label" for="ncb">NCB % on previous policy</label>
+									<label class="control-label" for="ncb">NCB % on previous policy<i id="ncb_icon" class="icon-question-sign"></i></label>
 									<div class="controls">
-										<select id="ncb" name="ncb"></select>
-									</div>
-								</div>
-								<div id="noCliamBounsVerified" class="control-group">
-									<div class="controls">
+										<select id="ncb" name="ncb" class="span1" style="margin-right:40px"></select>
 										<input name="" type="checkbox" checked="checked"> No claim bonus declaration verified
 									</div>
-								</div>						
+								</div>			
 							</div>
 							
 							<div id="protectionForAccessories" class="border">
 								<div class="control-group">
-									<label class="control-label" for="elecAccessories">Value of electrical accessories</label>
+									<label class="control-label" for="elecAccessories">Value of electrical accessories<i id="elecAccessories_icon" class="icon-question-sign"></i></label>
 									<div class="controls">
-										<input id="elecAccessories" name="elec_acc" type="text">
+										<input id="elecAccessories" name="elec_acc" type="text" class="span2">
 									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label" for="nonElecAccessories">Value of non-electrical accessories</label>
+									<label class="control-label" for="nonElecAccessories">Value of non-electrical accessories<i id="nonElecAccessories_icon" class="icon-question-sign"></i></label>
 									<div class="controls">
-										<input id="nonElecAccessories" name="non_elec_acc" type="text">
+										<input id="nonElecAccessories" name="non_elec_acc" type="text" class="span2">
 									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label" for="kit">Value of LPG/CNG kit</label>
+									<label class="control-label" for="kit">Value of LPG/CNG kit<i id="kit_icon" class="icon-question-sign"></i></label>
 									<div class="controls">
-										<select id="kit" name="cng_type"></select>
+										<select id="kit" name="cng_type" class="span2"></select>
 									</div>
 								</div>
 								<div id="kitPriceControlGroup" class="control-group">
-									<label class="control-label" for="kitPrice">Value of LPG/CNG kit</label>
+									<label class="control-label" for="kitPrice">Value of LPG/CNG kit<i id="kitPrice_icon" class="icon-question-sign"></i></label>
 									<div class="controls">
-										<select id="kitPrice" name="cng_value"></select>
+										<select id="kitPrice" name="cng_value" class="span2"></select>
 									</div>
 								</div>				
 							</div>
 							
 							<div id="additionalDiscount" class="border">
 								<div class="control-group">
-									<label class="control-label" for="antiTheft">ARAI approved anti-theft device is installed in the car</label>
+									<label class="control-label" for="antiTheft">ARAI approved anti-theft device is installed in the car<i id="antiTheft_icon" class="icon-question-sign"></i></label>
 									<div class="controls">
 										<label class="radio inline">
 											<input type="radio" id="antiTheft" name="has_anti_theft" value="true">Yes
@@ -176,7 +170,7 @@
 									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label" for="automobileAssoc">Driver is a member of Automobile Association</label>
+									<label class="control-label" for="automobileAssoc">Driver is a member of Automobile Association<i id="automobileAssoc_icon" class="icon-question-sign"></i></label>
 									<div class="controls">
 										<label class="radio inline">
 											<input type="radio" id="automobileAssoc" name="is_aai_member" value="true">Yes
