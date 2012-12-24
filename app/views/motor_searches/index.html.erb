@@ -1,6 +1,6 @@
-<h1>Listing motor_searches</h1>
+<h2>Listing Motor Searches</h2>
 
-<table>
+<table class="admin-table">
   <tr>
     <th>New policy</th>
     <th>Policy exp date</th>
@@ -17,7 +17,6 @@
     <th>Passenger coverage amt</th>
     <th>Has anti theft</th>
     <th>Is aai member</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -41,7 +40,6 @@
     <td><%= motor_search.is_aai_member %></td>
     <td><%= link_to 'Show', motor_search %></td>
     <td><%= link_to 'Edit', edit_motor_search_path(motor_search) %></td>
-    <td><%= link_to 'Destroy', motor_search, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
