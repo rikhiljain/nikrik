@@ -9,5 +9,15 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
   attr_accessible :mobile, :address, :name, :email, :password, :password_confirmation, :remember_me
+
+
+  def self.search(term)
+  if(term.nil?)
+    term = ""
+  end
+  term = "%#{term}%"
+
+  where("name like ? or mobile like ? or email like ?",term,term,term)
+  end
   
 end

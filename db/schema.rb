@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209200214) do
+ActiveRecord::Schema.define(:version => 20121223073645) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20121209200214) do
     t.string   "maker"
     t.string   "model"
     t.string   "subtype"
-    t.string   "seats"
+    t.integer  "seats"
     t.integer  "cubic"
     t.string   "fuel"
     t.integer  "age_0_6"
@@ -48,6 +48,19 @@ ActiveRecord::Schema.define(:version => 20121209200214) do
     t.string   "rto_sub_code"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "motor_policies", :force => true do |t|
+    t.integer  "policy_id"
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "premium"
+    t.integer  "discount"
+    t.string   "policy_path"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "motor_searches", :force => true do |t|

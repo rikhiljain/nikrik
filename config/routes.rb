@@ -1,5 +1,8 @@
 Nikrik::Application.routes.draw do
 
+  resources :motor_policies
+
+
   devise_for :users, path_names:{sign_in: "login", sign_out: "logout"}
 
 
@@ -12,6 +15,7 @@ Nikrik::Application.routes.draw do
   get "home/admin"
   post "motor_searches/quote"
   post "home/callus"
+  get "motor_policies/download/:id"  => "motor_policies#download"
 
   resources :rtos
   resources :motor_discounts

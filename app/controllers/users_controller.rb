@@ -3,11 +3,12 @@ class UsersController < ApplicationController
 
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
-    @users = User.all
+    @users = User.search(params[:user_search])
   end
 
   def show
     @user = User.find(params[:id])
+    @motor_policies = MotorPolicy.where("user_id=?", @user.id)
   end
   
   def update

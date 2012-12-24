@@ -1,0 +1,31 @@
+<fieldset style="width:800px">
+<legend>Motor Policies List</legend>
+
+<table class="admin-table">
+  <tr>
+    <th>Policy</th>
+    <th>User</th>
+    <th>Company</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Premium</th>
+    <th>Discount</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @motor_policies.each do |motor_policy| %>
+      <tr>
+        <td><%= motor_policy.policy_id %></td>
+        <td><%= motor_policy.user.name %></td>
+        <td><%= motor_policy.company.name %></td>
+        <td><%= motor_policy.start_date %></td>
+        <td><%= motor_policy.end_date %></td>
+        <td><%= motor_policy.premium %></td>
+        <td><%= motor_policy.discount %></td>
+        <td><%= link_to 'Show', motor_policy %></td>
+        <td><%= link_to 'Edit', edit_motor_policy_path(motor_policy) %></td>
+      </tr>
+  <% end %>
+</table>
+</fieldset>
