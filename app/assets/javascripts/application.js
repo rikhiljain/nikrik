@@ -14,7 +14,12 @@
 //= require jquery/jquery.validate
 //= require bootstrap
 //= require jquery/jquery-ui-1.9.2.custom
-//= require welcome
+//= require welcome/jquery-selectors
+//= require welcome/static-data
+//= require welcome/dynamic-data
+//= require welcome/tooltips
+//= require welcome/quote-request
+//= require welcome/welcome
 
 var m_names = new Array("Null", "January", "February", "March", 
 "April", "May", "June", "July", "August", "September", 

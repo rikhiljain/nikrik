@@ -1,0 +1,3 @@
+function cacheAllJquerySelectore(){
+	//fill this
+}
