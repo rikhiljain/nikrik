@@ -4,8 +4,7 @@ class CreateMotorDiscounts < ActiveRecord::Migration
       t.integer :idv_chart_id
       t.integer :company_id
       t.float :amount
-      t.string :rto_code
-      t.string :rto_sub_code
+      t.integer :rto_id
 
       t.timestamps
     end

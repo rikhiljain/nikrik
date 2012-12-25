@@ -1,6 +1,6 @@
-<h1>Listing idv charts</h1>
+<h2>Listing idv charts</h2>
 
-<table>
+<table class="admin-table">
   <tr>
     <th>Maker</th>
     <th>Model</th>
@@ -8,7 +8,6 @@
     <th>Seats</th>
     <th>Cubic</th>
     <th>Fuel</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -23,7 +22,6 @@
     <td><%= idv_chart.fuel %></td>
     <td><%= link_to 'Show', idv_chart %></td>
     <td><%= link_to 'Edit', edit_idv_chart_path(idv_chart) %></td>
-    <td><%= link_to 'Destroy', idv_chart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

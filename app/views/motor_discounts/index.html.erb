@@ -1,12 +1,11 @@
-<h1>Listing motor_discounts</h1>
+<h2>Listing Motor Discounts</h2>
 
-<table>
+<table class="admin-table">
   <tr>
     <th>Idv chart</th>
     <th>Company</th>
     <th>Amount</th>
-    <th>Rto code</th>
-    <th>Rto sub code</th>
+    <th>Rto </th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,11 +13,10 @@
 
 <% @motor_discounts.each do |motor_discount| %>
   <tr>
-    <td><%= motor_discount.idv_chart_id %></td>
-    <td><%= motor_discount.company_id %></td>
+    <td><%= motor_discount.idv_chart.maker + " - " + motor_discount.idv_chart.model + " - "+ motor_discount.idv_chart.subtype %></td>
+    <td><%= motor_discount.company.name %></td>
     <td><%= motor_discount.amount %></td>
-    <td><%= motor_discount.rto_code %></td>
-    <td><%= motor_discount.rto_sub_code %></td>
+    <td><%= motor_discount.rto.city + " (" + motor_discount.rto.state + ")" %></td>
     <td><%= link_to 'Show', motor_discount %></td>
     <td><%= link_to 'Edit', edit_motor_discount_path(motor_discount) %></td>
     <td><%= link_to 'Destroy', motor_discount, method: :delete, data: { confirm: 'Are you sure?' } %></td>

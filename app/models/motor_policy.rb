@@ -8,6 +8,20 @@ class MotorPolicy < ActiveRecord::Base
   validates :discount, :presence => true
   validates :company_id, :presence => true
   validates :user_id, :presence => true
+  validates :discount,:premium, :numericality => true
+  validate :start_date_cannot_be_in_the_future, :end_date_cannot_be_in_the_past
+
+  def start_date_cannot_be_in_the_future
+    if !start_date.blank? and start_date > Date.today
+      errors.add(:start_date, "can't be in the future")
+    end
+  end
+
+  def end_date_cannot_be_in_the_past
+    if !end_date.blank? and end_date <= Date.today
+      errors.add(:end_date, "can't be in the past")
+    end
+  end
 
   def self.to_hash(motor_policy)
     hash = { :company_id => motor_policy.company_id,
