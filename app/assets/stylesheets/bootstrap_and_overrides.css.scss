@@ -16,10 +16,6 @@ body {
 	padding-top: 60px;
  }
 
-.iSLargeBadge{
-	font-size: $baseFontSize * 1.2;
-}
-
 legend{
 	margin: 0px;
 	border: 0px;
@@ -29,13 +25,6 @@ legend{
 	width: 200px;
 }
 
-.isHeader{
-	background-color: #036; 
-	border-bottom-color: #3C78B5;
-	border-bottom-width: 3px;
-	border-bottom-style: solid;
-}
-
 a:hover {
 	text-decoration: underline;
 }
@@ -43,10 +32,3 @@ a:hover {
 a:link, a:visited, a:active {
 	text-decoration: none;
 }
-
-.iSWhiteBackGround{
-	background-color: white;
-}
-
-
-
