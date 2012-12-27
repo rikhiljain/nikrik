@@ -1,0 +1,12 @@
+//
+// Responsive: Tablet to desktop
+// --------------------------------------------------
+
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+  .span9Pos{
+    margin-left: $gridColumnWidth768 * 9 + $gridGutterWidth768 * 8 + 50px;
+  }
+
+}

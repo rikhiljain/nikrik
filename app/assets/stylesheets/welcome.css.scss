@@ -2,17 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.hidden {
-display: none;
-}
-
-.border{
+.iSBorder{
 	border: 1px solid orange;
 	margin-top: 15px;
 	margin-bottom: 15px;
 	
 }
 
-.noBorder{
+.iSNoBorder{
 	border: none;
 }

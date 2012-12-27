@@ -1,0 +1,12 @@
+//
+// Responsive: Landscape phone to desktop/tablet
+// --------------------------------------------------
+
+
+@media (max-width: 767px) {
+
+  .span9Pos{
+    margin-left: $gridColumnWidth * 9 + $gridGutterWidth * 8 + 50px;
+  }
+
+}

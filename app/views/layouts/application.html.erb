@@ -10,7 +10,7 @@
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <header class="navbar navbar-fixed-top">
+    <header class="navbar navbar-fixed-top iSHeader">
       <nav class="navbar-inner">
         <div class="container">
           <%= render 'layouts/navigation' %>
@@ -19,20 +19,28 @@
     </header>
     <div id="main" role="main">
       <div class="container">
-        <div class="content">
+        <div class="iSWhiteBackGround content">
            <div class="row">
-            <div class="span9">
+            <div class="span2">
+              <%= render "shared/left_nav" %>
+            </div>
+            <div class="span7">
               <%= render 'layouts/messages' %>
               <%= yield %>
             </div>
-            <div class="span3">
+            <div class="span3 affix span9Pos">
               <%= render "shared/ad_banner" %>
             </div>
           </div>
-          <footer>
-          </footer>
         </div>
       </div> <!--! end of .container -->
     </div> <!--! end of #main -->
+    <footer class="navbar navbar-fixed-bottom">
+      <nav class="navbar-inner">
+        <div class="container">
+           <%= render 'layouts/footer' %>
+        </div>
+      </nav>
+    </footer>
   </body>
 </html>
