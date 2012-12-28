@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids, :as => :admin
   attr_accessible :mobile, :address, :name, :email, :password, :password_confirmation, :remember_me
 
+   validates :name,:mobile, :presence => true
 
   def self.search(term)
   if(term.nil?)

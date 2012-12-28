@@ -35,21 +35,27 @@ class MotorPoliciesController < ApplicationController
   # GET /motor_policies/1/edit
   def edit
     @motor_policy = MotorPolicy.find(params[:id])
+    @user =  @motor_policy.user
+    @motor_policies = MotorPolicy.where("user_id=?", @motor_policy.user_id)
+    @is_edit = true
+    render :template => "/admin_users/show"
   end
 
   # POST /motor_policies
   # POST /motor_policies.json
   def create
     @motor_policy = MotorPolicy.new(params[:motor_policy])
-
+     @is_edit = false
     upload
 
     respond_to do |format|
       if @motor_policy.save
-        format.html { redirect_to @motor_policy, notice: 'Motor policy was successfully created.' }
+        format.html { redirect_to "/admin_users/#{@motor_policy.user_id}" , notice: 'Motor policy was successfully created.' }
         format.json { render json: @motor_policy, status: :created, location: @motor_policy }
       else
-        format.html { render action: "new" }
+        @user =  @motor_policy.user
+        @motor_policies = MotorPolicy.where("user_id=?", @motor_policy.user_id)
+        format.html { render :template => "/admin_users/show" }
         format.json { render json: @motor_policy.errors, status: :unprocessable_entity }
       end
     end
@@ -71,14 +77,15 @@ class MotorPoliciesController < ApplicationController
         file.write(uploaded_io.read)
       end
     end
-    Rails.logger.info("Motor Policy attributes = #{new_motor_policy.attributes}")
     respond_to do |format|
       if @motor_policy.update_attributes(MotorPolicy.to_hash(new_motor_policy))
-        format.html { redirect_to @motor_policy, notice: 'Motor policy was successfully updated.' }
+        format.html { redirect_to "/admin_users/#{@motor_policy.user_id}" , notice: 'Motor policy was successfully created.' }
         format.json { head :no_content }
       else
-
-        format.html { render action: "edit" }
+        @user =  @motor_policy.user
+        @is_edit = true
+        @motor_policies = MotorPolicy.where("user_id=?", @motor_policy.user_id)
+        format.html { render :template => "/admin_users/show" }
         format.json { render json: @motor_policy.errors, status: :unprocessable_entity }
       end
     end

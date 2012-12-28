@@ -1,0 +1,44 @@
+<h3>Users</h3>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Mobile</th>
+      <th>Address</th>
+      <th>Register Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to user.name, {:controller => "admin_users", :action => "show", :id => user.id }  %></td>
+          <td><%= user.email %></td>
+          <td><%= user.mobile %></td>
+          <td><%= user.address %></td>
+          <td><%= user.created_at.to_date %></td>
+          <td><%= user.roles.first.name.titleize unless user.roles.first.nil? %></td>
+          <td>
+            <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini" type="button">Change role</a>
+            <div id="role-options-<%= user.id %>" class="modal" style="display: none;">
+              <%= simple_form_for user, :url => admin_users_path(user), :html => {:method => :put, :class => 'form-horizontal' } do |f| %>
+                <div class="modal-header">
+                  <a class="close" data-dismiss="modal">&#215;</a>
+                  <h3>Change Role</h3>
+                </div>
+                <div class="modal-body">
+                  <%= f.input :role_ids, :collection => Role.all, :as => :radio_buttons, :label_method => lambda {|t| t.name.titleize}, :label => false, :item_wrapper_class => 'inline' %>
+                </div>
+                <div class="modal-footer">
+                  <%= f.submit "Change Role", :class => "btn" %>
+                  <a class="btn" data-dismiss="modal" href="#">Close</a>
+                </div>
+              <% end %>
+            </div>
+          </td>
+          <td><%= link_to("Delete user", admin_users_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %></td>     
+        </tr>
+    <% end %>
+    </tbody>
+  </table>

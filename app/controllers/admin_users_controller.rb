@@ -1,25 +1,34 @@
-class UsersController < ApplicationController
+class AdminUsersController < ApplicationController
   before_filter :authenticate_user!
 
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @users = User.search(params[:user_search])
+    @user_search = params[:user_search]
+    @user = User.new
+
   end
 
   def show
     @user = User.find(params[:id])
     @motor_policies = MotorPolicy.where("user_id=?", @user.id)
+    @motor_policy = MotorPolicy.new
+    @motor_policy.user_id = @user.id
+
   end
 
   def create
-    @user = User.new(params[:user])
 
-     if @user.save
-        @users = User.search(params[:user_search])
-        redirect_to @user, notice: 'Motor policy was successfully created.' 
-      else
-        render action: "new" 
-      end
+    @user = User.new(params[:user])
+    @user.password = 'test123'
+    @user.password_confirmation = 'test123'
+    @users = User.search(params[:user_search])
+     
+    if @user.save
+       redirect_to admin_users_path, notice: 'User was successfully created.' 
+    else
+         render action: 'index'
+     end
   end
   
   def update
