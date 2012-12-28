@@ -3,6 +3,7 @@
 <p>Email: <%= @user.email if @user.email %></p>
 <p>Mobile: <%= @user.mobile if @user.mobile %></p>
 <p>Address: <%= @user.address if @user.address %></p>
+<p>Role: <%= @user.roles.first.name.titleize unless @user.roles.first.nil? %></p>
 
 <%= render 'motor_policies/list' %>
 

@@ -1,10 +1,14 @@
 <div>
-<form method="get" action="/users">
+<form method="get" action="/users" class="form-horizontal" >
  <input type="text" name="user_search" value="" />
- <input type="submit" name="search" value="Search" />
+ <input type="submit" name="search" value="User Search" />
 </form>
 </div>
 
 <%= render 'list' %>
-<br />
-<%= link_to 'New User', new_user_path %>
+<div >
+	 <a data-toggle="modal" href="#add-user" class="btn" >Add User</a>
+	 <% @user = User.new %>
+     <%= render 'form' %>
+
+</div>

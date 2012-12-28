@@ -1,15 +1,20 @@
-<%= simple_form_for(@user) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name, :required => true   %>
-    <%= f.input :email %>
-    <%= f.input :mobile %>
-    <%= f.input :address, :as => :text %>
-
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+<div id="add-user" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <%= simple_form_for @user,  :html => {:method => :post, :class => 'form-horizontal' } do |f| %>
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&#215;</a>
+      <h3>Add User</h3>
+    </div>
+    <div class="modal-body">
+     <div class="form-inputs">
+          <%= f.input :name, :required => true   %>
+          <%= f.input :email, :required => true %>
+          <%= f.input :mobile, :required => true %>
+          <%= f.input :address, :as => :text , :input_html => { :cols => 20, :rows => 5 }%>
+    </div>
+    </div>
+    <div class="modal-footer">
+      <%= f.submit "Add User", :class => "btn" %>
+      <a class="btn" data-dismiss="modal" href="#">Close</a>
+    </div>
+  <% end %>
+</div>

@@ -31,15 +31,15 @@ class UsersController < ApplicationController
       redirect_to users_path, :notice => "Can't delete yourself."
     end
   end
-end
 
 
-# GET /motor_policies/new
-# GET /motor_policies/new.json
+
 def new
+  
   @user = User.new
   respond_to do |format|
     format.html # new.html.erb
     format.json { render json: @user }
   end
+end
 end
