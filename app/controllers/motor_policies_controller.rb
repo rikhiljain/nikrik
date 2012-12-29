@@ -72,6 +72,7 @@ class MotorPoliciesController < ApplicationController
       file_name =   new_motor_policy.policy_id.to_s + "_" +  new_motor_policy.user_id.to_s  + File.extname(uploaded_io.original_filename)
 
       file_upload_path = Rails.root.join('uploads', 'motor', new_motor_policy.start_date.year.to_s, new_motor_policy.start_date.month.to_s, @motor_policy.company.name, file_name )
+      FileUtils.mkdir_p(File.dirname(file_upload_path))
       new_motor_policy.policy_path =  file_upload_path.to_s
       File.open(file_upload_path, 'wb') do |file|
         file.write(uploaded_io.read)
@@ -105,9 +106,21 @@ class MotorPoliciesController < ApplicationController
 
   def download
     motor_policy = MotorPolicy.find(params[:id])
-    File.open(motor_policy.policy_path, 'rb') do |f|
-      send_data( f.read, :filename => "#{motor_policy.policy_id}.pdf", :type => "application/pdf")
+
+    begin
+      file_ext = File.extname(motor_policy.policy_path)
+
+      File.open(motor_policy.policy_path, 'rb') do |f|
+        send_data( f.read, :filename => "#{motor_policy.policy_id}.#{file_ext}", :type => "application/#{file_ext}")
+      end
+    
+    rescue Exception => e
+     Rails.logger.error "OH NO: #{e}"
+     send_data( "Error Occure while Downloading File", :filename => "system_error.text", :type => "application/text")
+    ensure
+     # f.close unless f.nil?
     end
+
   end
 
   def upload
@@ -117,6 +130,9 @@ class MotorPoliciesController < ApplicationController
       file_name =   @motor_policy.policy_id.to_s + "_" +  @motor_policy.user_id.to_s  + File.extname(uploaded_io.original_filename)
 
       file_upload_path = Rails.root.join('uploads', 'motor', @motor_policy.start_date.year.to_s, @motor_policy.start_date.month.to_s,@motor_policy.company.name, file_name )
+
+      FileUtils.mkdir_p(File.dirname(file_upload_path))
+      
       @motor_policy.policy_path =  file_upload_path.to_s
       File.open(file_upload_path, 'wb') do |file|
         file.write(uploaded_io.read)

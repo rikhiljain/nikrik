@@ -8,7 +8,6 @@
     <th>State</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @rtos.each do |rto| %>
@@ -17,7 +16,6 @@
     <td><%= rto.sub_code %></td>
     <td><%= rto.city %></td>
     <td><%= rto.state %></td>
-    <td><%= link_to 'Show', rto %></td>
     <td><%= link_to 'Edit', edit_rto_path(rto) %></td>
     <td><%= link_to 'Destroy', rto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
@@ -26,4 +24,4 @@
 
 <br />
 
-<%= link_to 'New Rto', new_rto_path %>
+<%= link_to 'New RTO', new_rto_path, :class => "btn" %>
