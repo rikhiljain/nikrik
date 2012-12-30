@@ -14,8 +14,8 @@ function createMotorQuoteRequest(){
   		ignoreFormFields["cng_value"] = "dummy";
   	}
   	var json = {};
-  	console.log($('form').serializeArray());
-  	$.map($("form").serializeArray(), function(el, i){
+  	console.log($("[id=motorQuoteForm]").serializeArray());
+  	$.map($("[id=motorQuoteForm]").serializeArray(), function(el, i){
   		if(el.value == "" || ignoreFormFields[el.name] == "dummy"){
   			//ignore
   		}
@@ -43,7 +43,7 @@ function submitMotorQuoteRequest(serializedJSON){
     				//called when successful
     				fillResultTable(data);
     				$("[id=quoteFormAccordion] [id=link]").click();
-					$("[id=quoteResultsAccordion] [id=link]").click();
+					  $("[id=quoteResultsAccordion] [id=link]").click();
  				},
 
   				error: function(data, textStatus, errorThrown) {
@@ -53,7 +53,7 @@ function submitMotorQuoteRequest(serializedJSON){
 			})
 }
 
-function validateForm(){
+function validateMotorQuoteForm(){
 
   // Validation
   $("[id=motorQuoteForm]").validate({
@@ -77,3 +77,5 @@ function validateForm(){
     }
   });
 }
+
+

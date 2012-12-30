@@ -4,7 +4,7 @@
 
 @import "bootstrap/bootstrap";
 @import "bootstrap/responsive";
-@import "jquery";
+@import "jquery/jquery-ui-1.9.2.custom";
 @import "_override_responsive-767px-max";
 @import "_override_responsive-768px-979px";
 @import "_override_responsive-1200px-min";
@@ -14,22 +14,6 @@ body {
 	padding-top: 60px;
  }
 
-legend{
-	margin: 0px;
-	border: 0px;
-	font-weight: bold;
-	font-size: $baseFontSize;	
-	text-align: center;
-	width: 200px;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-a:link, a:visited, a:active {
-	text-decoration: none;
-}
 
 .navbar .nav {
   position: relative;
@@ -86,11 +70,16 @@ a:link, a:visited, a:active {
     color: white;
     @include ie7-inline-block();
     //text-shadow: 0 1px 0 $white;
+    cursor: hand; 
+    cursor: pointer;
     > .divider {
       padding: 0 5px;
       color: white;
     }
   }
+    > a {
+      color: white;
+    }
   .active {
     color: white;
     font-size: $baseFontSize * 1.5;

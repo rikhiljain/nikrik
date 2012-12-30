@@ -13,6 +13,61 @@
 })(jQuery);	
 
 function bindAllEventHandlers(){
+
+	bindMotorQuoteFormEvents();
+	bindMotorQuoteBuyFormEvents();
+	bindAccordionEvents();
+	bindBreadcrumbEvents();
+
+	$("[id=protectionForAccessories] > fieldset > legend > input").bind("click", function(){
+		$("[id=protectionForAccessories1]").toggle();
+	});
+
+	$("[id=additionalDiscount] > fieldset > legend > input").bind("click", function(){
+		$("[id=additionalDiscount1]").toggle();
+	});
+
+}
+
+
+
+function  bindCityAutoComplete(){
+	$( "#city" ).autocomplete({
+		source: "/rtos.json",
+		minLength: 2
+	});
+}
+
+function bindDatePickers(){
+	//$("[id=previousPolicyDetails] [id=date]").datepicker({ appendText: "(dd-mm-yyyy)", dateFormat: "dd-mm-yy", constrainInput: "true" });
+	$("[id=previousPolicyDetails] [id=date]").datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true" });
+}
+
+function showOrHideElements(){
+	$("[id=protectionForAccessories] [id=kitPriceControlGroup]").hide();
+	$("[id=previousPolicyDetails] [id=previousPolicyDetailsDiv1]").hide();
+	$("[id=previousPolicyDetails] [id=previousPolicyDetailsDiv2]").hide();
+	$("[id=basicDetails] > [id=registrationDetails] [id=day]").hide();
+	$("[id=previousPolicyDetails] [id=day]").hide();
+	$("[id=previousPolicyDetails] [id=month]").hide();
+	$("[id=previousPolicyDetails] [id=year]").hide();
+	$("[id=protectionForAccessories1]").hide();
+	$("[id=additionalDiscount1]").hide();
+}
+
+function fireEventsManually(){
+}
+
+
+function esc(text){
+	var a =  text
+			.replace("&","&amp;")
+			.replace("<", "&lt;")
+			.replace(">", "&gt;");
+	return a;
+}
+
+function bindMotorQuoteFormEvents(){
 	//this will hide/unhide the previous policy details div
 	$("[id=basicDetails] > [id=currentInsuranceDetails] [id=policyType]").bind("change",function(){
 		if($(this).val() == "true"){
@@ -80,6 +135,9 @@ function bindAllEventHandlers(){
 	 	populateNewPolicyStartDate();
 	 });
 
+	//Binding the form validation
+	validateMotorQuoteForm();
+
 	//Binding form submit event
 	$("[id=motorQuoteForm]").submit(function() {
 		var isvalidate=$("[id=motorQuoteForm]").valid();
@@ -91,48 +149,70 @@ function bindAllEventHandlers(){
  			return false;
 		}
 	});
+
+	$("[id=motorQuoteFormResetLink]").bind("click",function(e){
+		$("[id=motorQuoteForm]").each (function(){
+  			this.reset();
+		});
+	});
+}
+
+function bindMotorQuoteBuyFormEvents(){
 	//Binding the form validation
-	validateForm();
+	validateMotorQuoteBuyForm();
+
+	//Binding form submit event
+	$("[id=motorQuoteBuyForm]").submit(function() {
+		var isvalidate=$("[id=motorQuoteBuyForm]").valid();
+		if(isvalidate){
+			var serializedJSON = createMotorQuoteBuyRequest();
+			console.log(serializedJSON);
+			submitMotorQuoteBuyRequest(serializedJSON);
+			//fillResultTable(serializedJSON);
+ 			return false;
+		}
+	});
+}
+
+function bindAccordionEvents(){
 	//Binding the accordion
 	$(".accordion").on('shown hidden', function(e){
 		if(e.type == "shown"){
-			console.log($(e.target).siblings(".accordion-heading").find("a").text());
+			var text = $(e.target).siblings(".accordion-heading").find("a").text();
+			if(text == "Motor Quote Form"){
+				$(".breadcrumb > li:nth-child(1)").addClass("active");
+				$(".breadcrumb > li:nth-child(2)").removeClass("active");
+				$(".breadcrumb > li:nth-child(3)").removeClass("active");
+			}
+			else if(text == "Results"){
+				$(".breadcrumb > li:nth-child(1)").removeClass("active");
+				$(".breadcrumb > li:nth-child(2)").addClass("active");
+				$(".breadcrumb > li:nth-child(3)").removeClass("active");
+			}
+			else if(text == "Insured Contact Details"){
+				$(".breadcrumb > li:nth-child(1)").removeClass("active");
+				$(".breadcrumb > li:nth-child(2)").removeClass("active");
+				$(".breadcrumb > li:nth-child(3)").addClass("active");
+			}
 		}
     	$(e.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-arrow-down icon-arrow-up');
 	});
 }
 
-
-
-function  bindCityAutoComplete(){
-	$( "#city" ).autocomplete({
-		source: "/rtos.json",
-		minLength: 2
+function bindBreadcrumbEvents(){
+	$(".breadcrumb > li").bind("click", function(e){
+		if($(e.target).hasClass("active")){
+			return;
+		}
+		var text = $(e.target).text();
+		if(text == "Enter details and Review"){
+			$("[id=quoteResultsBuyAccordion] [id=link]").click();
+		}
+		else if(text == "Results/"){
+			$("[id=quoteResultsAccordion] [id=link]").click();
+		}
+		else if(text == "Calculate Premium/"){
+			$("[id=quoteFormAccordion] [id=link]").click();
+		}
 	});
-}
-
-function bindDatePickers(){
-	$("[id=previousPolicyDetails] [id=date]").datepicker({ appendText: "(dd-mm-yyyy)", dateFormat: "dd-mm-yy", constrainInput: "true" });
-}
-
-function showOrHideElements(){
-	$("[id=protectionForAccessories] [id=kitPriceControlGroup]").hide();
-	$("[id=previousPolicyDetails] [id=previousPolicyDetailsDiv1]").hide();
-	$("[id=previousPolicyDetails] [id=previousPolicyDetailsDiv2]").hide();
-	$("[id=basicDetails] > [id=registrationDetails] [id=day]").hide();
-	$("[id=previousPolicyDetails] [id=day]").hide();
-	$("[id=previousPolicyDetails] [id=month]").hide();
-	$("[id=previousPolicyDetails] [id=year]").hide();
-}
-
-function fireEventsManually(){
-}
-
-
-function esc(text){
-	var a =  text
-			.replace("&","&amp;")
-			.replace("<", "&lt;")
-			.replace(">", "&gt;");
-	return a;
 }

@@ -20,6 +20,7 @@
 //= require welcome/tooltips
 //= require welcome/quote-request
 //= require welcome/quote-results
+//= require welcome/quote-buy
 //= require welcome/welcome
 
 var m_names = new Array("Null", "January", "February", "March", 

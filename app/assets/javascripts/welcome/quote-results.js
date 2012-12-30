@@ -1,5 +1,6 @@
 
 var motorquotes;
+var selectedMotorQuote;
 
 function fillResultTable(data){
 	//var a = '[{"company": 1,"total_premium": 110937.63745664,"discount": 0},{"company": 2,"total_premium": 110937.63745664,"discount": 0},{"company": 3,"total_premium": 10937.63745664,"discount": 0},{"company": 4,"total_premium": 110937.63745664,"discount": 0}]';
@@ -15,8 +16,8 @@ html[++h] = "<table id='quoteResultsTable' class='table table-bordered'>";
 html[++h] = "<th>Company Name</th>";
 html[++h] = "<th>Total Premium</th>";
 html[++h] = "<th>Discount</th>";
-html[++h] = "<th></th>";
 html[++h] = "<th>Final Premium</th>";
+html[++h] = "<th></th>";
 html[++h] = "<tbody>";
 for(var result, i = -1; result = results[++i];){
 	html[++h] = "<tr><td>";
@@ -26,13 +27,16 @@ for(var result, i = -1; result = results[++i];){
 	html[++h] = "</td><td>";
 	html[++h] = result.discount;	
 	html[++h] = "</td><td>";
-	html[++h] = "<a href='#' onclick='fillPremiumBreakupTable(" 
-	html[++h] = result.company_id + ");' >Premium Break-up</a></td><td>";	
 	html[++h] = result.final_premium;	
+	html[++h] = "<br><a class='_iSHandCursor' onclick='fillPremiumBreakupTable(";
+	html[++h] = result.company_id + ");' >Premium Break-up</a>";
+	html[++h] = "</td><td>";
+	html[++h] = "<a class='_iSHandCursor' onclick='openMotorQuoteBuyForm("+result.company_id+");'>Buy</a>";
 	html[++h] = "</td></tr>";
 }
 html[++h] = "</tbody>";
 html[++h] = "</table>";
+html[++h] = "<button id='motorQuoteResultsRecomputeLink' class='btn btn-link' type='button' onclick='recomputeMotorQuoteForm()c'>Recompute</button>";
 $("[id=quoteResultsAccordion] [id=table]")[0].innerHTML = html.join('');
 }
 
@@ -144,4 +148,11 @@ function fillPremiumBreakupTable(id){
 	$('#motor_breakup_model').modal();
 
 	return false;
+}
+
+function recomputeMotorQuoteForm(){
+		$("[id=motorQuoteForm]").each (function(){
+  			this.reset();
+		});
+		$("[id=quoteFormAccordion] [id=link]").click();
 }

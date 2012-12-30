@@ -6,16 +6,21 @@
 
 $grayBgColor:	rgba(128, 128, 128, 0.1);	
 
-.iSBorder{
+._iSBorder{
 	border: 1px solid orange;
 }
 
-.iSNoBorder{
+._iSNoBorder{
 	border: none;
 }
 
-.iSLargeBadge{
+._iSLargeBadge{
 	font-size: $baseFontSize * 1.2;
+}
+
+._iSHandCursor{
+	cursor: hand; 
+    cursor: pointer;
 }
 
 #callUsForm{
@@ -26,6 +31,20 @@ $grayBgColor:	rgba(128, 128, 128, 0.1);
 	border-radius: 8px 8px 8px 8px;
 }
 
-.accordion-inner{
-	background-color: $grayBgColor;
+
+legend{
+	margin: 0px;
+	border: 0px;
+	font-weight: bold;
+	font-size: $baseFontSize;	
+	text-align: center;
+	width: 200px;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:link, a:visited, a:active {
+	text-decoration: none;
 }

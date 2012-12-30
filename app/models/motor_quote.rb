@@ -4,7 +4,7 @@ class MotorQuote
   attr_accessor :company_id,:company_name, :total_premium, :discount , :final_premium ,:idv_value, 
   				:base_od, :elec_acc,:non_elec_acc,:bi_fuel_od,:anti_theft_dis,:ncb_dis,
                 :base_tp,:bi_fuel_tp,:owner_pa,:passenger_pa,:pad_driver,
-                :service_tax, :final_od,:final_tp
+                :service_tax, :final_od,:final_tp, :motor_search_id, :user_id
 
   def initialize
   end

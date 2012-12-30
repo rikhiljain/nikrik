@@ -1,0 +1,195 @@
+						<button id="motorQuoteFormResetLink" class="btn btn-link" type="button">Reset the form</button>
+						<form id="motorQuoteForm" action="" class="form-horizontal">
+							<div id="basicDetails">				
+								<div id="currentInsuranceDetails">
+									<fieldset  class="_iSBorder">
+										<legend>Current Insurance Details</legend>
+										<div class="control-group">
+											<label class="control-label" for="policyType">Type Of Policy<!--<i id="policyType_icon" rel="tooltip" class="icon-question-sign"></i>--></label>
+											<div class="controls">
+												<label class="radio">
+													<input type="radio" id="policyType" name="new_policy" value="true">Buy insurance for a new car
+												</label>
+												<label class="radio">
+													<input type="radio" id="policyType" name="new_policy" value="false" checked="checked">Renew existing or lapsed car policy from any insurer
+												</label>
+											</div>
+										</div>
+									</fieldset>
+								</div>
+								<div id="registrationDetails">
+									<fieldset  class="_iSBorder">
+										<legend>Registration Details</legend>
+										<div class="control-group">
+											<label class="control-label" for="city">City where the car is registered(RTO)<i id="city_icon" class="icon-question-sign"></i></label>
+											<div class="controls">
+												<input id="city" name="register_city" type="text" class="span2" class="required">
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="day">First Purchase or Registration Date<i id="day_icon" class="icon-question-sign"></i></label>
+											<div class="controls">
+												<select id="day" class="span1"></select>
+												<select id="month" class="span1"></select>
+												<select id="year" class="span1"></select>
+											</div>
+											<input type="hidden" id="registrationDate" name="year_of_manufacture">
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="registrationType">Current Registration Type<i id="registrationType_icon" class="icon-question-sign"></i></label>
+											<div class="controls">
+												<label class="radio inline">
+													<input type="radio" id="registrationType" name="register_type" value="Individual" checked="checked">Individual
+												</label>
+												<label class="radio inline">
+													<input type="radio" id="registrationType" name="register_type" value="Company">Company
+												</label>
+											</div>
+										</div>
+									</fieldset>
+								</div>				
+								<div id="vehicleDetails">
+									<fieldset  class="_iSBorder">
+										<legend>Vehicle Details</legend>
+										<div class="control-group">
+											<label class="control-label" for="make">Manufacturer/Model<i id="make_icon" class="icon-question-sign"></i></label>
+											<div class="controls form-inline">
+												<select id="make" class="span2"></select>
+												<label>&nbsp;&nbsp;&nbsp;</label>
+												<select id="model" name="idv_chart_id" class="span2"></select>
+											</div> 
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="price">Ex-showroom Price<i id="price_icon" class="icon-question-sign"></i></label>
+											<div class="controls">
+												<span id="price" class="badge badge-success" class="span3 _iSLargeBadge"></span>		
+											</div>
+										</div>
+									</fieldset>
+								</div>						
+							</div>
+							
+							<div id="previousPolicyDetails">
+								<fieldset  class="_iSBorder">
+									<legend>Previous Policy Details</legend>
+									<div id="previousPolicyDetailsDiv1" class="control-group">
+										<label class="control-label" for="policyType">Previous policy type<i id="prevPolicyType_icon" class="icon-question-sign"></i></label>
+										<div class="controls">
+											<label class="radio inline">
+												<input type="radio" id="prevPolicyType" value="Comprehensive" checked="checked">Comprehensive
+											</label>
+											<label class="radio inline">
+												<input type="radio" id="prevPolicyType" value="Third Party">Third Party
+											</label>
+										</div>
+									</div>
+									<div id="previousPolicyDetailsDiv2" class="control-group">
+										<div class="controls">
+											<input type="checkbox"> click here in case your vehicle is uninsured for more than 6 months
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label" for="day">Previous policy end date<!--<i id="date_icon" class="icon-question-sign"></i>--></label>
+										<div class="controls">
+											<input type="text" id="date" class="span2" placeholder="dd-mm-yyyy">
+											<select id="day" class="span1"></select>
+											<select id="month" class="span1"></select>
+											<select id="year" class="span1"></select>
+											<span style="margin-left:10px">New Policy Start Date<!--<i id="newPolicyStartDate_icon" class="icon-question-sign"></i>--></span>
+											<span id="newPolicyStartDate" class="label"></span>
+											<input type="hidden" id="policyExpDate" name="policy_exp_date"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<div class="controls">
+											<input type="checkbox" checked="checked"> Previous policy was a full year policy
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label" for="claimsMade">Claims made in previos policy?<!--<i id="claimsMade_icon" class="icon-question-sign"></i>--></label>
+										<div class="controls">
+											<label class="radio inline">
+												<input type="radio" id="claimsMade" name="has_claim" value="true">Yes
+											</label>
+											<label class="radio inline">
+												<input type="radio" id="claimsMade" name="has_claim" value="false" checked="checked">No
+											</label>						
+										</div>
+									</div>
+									<div id="ncbDiv" class="control-group">
+										<label class="control-label" for="ncb">NCB % on previous policy<i id="ncb_icon" class="icon-question-sign"></i></label>
+										<div class="controls">
+											<select id="ncb" name="ncb" class="span1" style="margin-right:40px"></select>
+											<input name="" type="checkbox" checked="checked"> No claim bonus declaration verified
+										</div>
+									</div>	
+								</fieldset>		
+							</div>
+							
+							<div id="protectionForAccessories">
+								<fieldset  class="_iSBorder">
+									<legend><input type="checkbox">&nbsp;&nbsp;Get Protection for Accessories</input></legend>
+									<div id="protectionForAccessories1">
+										<div class="control-group">
+											<label class="control-label" for="elecAccessories">Value of electrical accessories<i id="elecAccessories_icon" class="icon-question-sign"></i></label>
+											<div class="controls">
+												<input id="elecAccessories" name="elec_acc" type="text" class="span2">
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="nonElecAccessories">Value of non-electrical accessories<i id="nonElecAccessories_icon" class="icon-question-sign"></i></label>
+											<div class="controls">
+												<input id="nonElecAccessories" name="non_elec_acc" type="text" class="span2">
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="kit">Value of LPG/CNG kit<i id="kit_icon" class="icon-question-sign"></i></label>
+											<div class="controls">
+												<select id="kit" name="cng_type" class="span2"></select>
+											</div>
+										</div>
+										<div id="kitPriceControlGroup" class="control-group">
+											<label class="control-label" for="kitPrice">Value of LPG/CNG kit<i id="kitPrice_icon" class="icon-question-sign"></i></label>
+											<div class="controls">
+												<select id="kitPrice" name="cng_value" class="span2"></select>
+											</div>
+										</div>
+									</div>
+								</fieldset>					
+							</div>
+							
+							<div id="additionalDiscount">
+								<fieldset  class="_iSBorder">
+									<legend><input type="checkbox">&nbsp;&nbsp;Get Additional Discount</input></legend>
+									<div id="additionalDiscount1">
+											<div class="control-group">
+											<label class="control-label" for="antiTheft">ARAI approved anti-theft device is installed in the car<i id="antiTheft_icon" class="icon-question-sign"></i></label>
+											<div class="controls">
+												<label class="radio inline">
+													<input type="radio" id="antiTheft" name="has_anti_theft" value="true">Yes
+												</label>
+												<label class="radio inline">
+													<input type="radio" id="antiTheft" name="has_anti_theft" value="false"  checked="checked">No
+												</label>						
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="automobileAssoc">Driver is a member of Automobile Association<i id="automobileAssoc_icon" class="icon-question-sign"></i></label>
+											<div class="controls">
+												<label class="radio inline">
+													<input type="radio" id="automobileAssoc" name="is_aai_member" value="true">Yes
+												</label>
+												<label class="radio inline">
+													<input type="radio" id="automobileAssoc" name="is_aai_member" value="false" checked="checked">No
+												</label>						
+											</div>
+										</div>	
+									</div>
+							</fieldset>	
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<button type="submit" class="btn">Calculate Premium</button>
+								</div>
+							</div>
+						</form>

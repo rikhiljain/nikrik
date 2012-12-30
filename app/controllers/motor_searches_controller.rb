@@ -90,9 +90,41 @@ class MotorSearchesController < ApplicationController
    new_search.save
 
    premiums = CarPremium.new(new_search).calculate_premium
+
+   premiums.each do |premium|    
+    premium.motor_search_id = new_search.id
+    Rails.logger.info "Final Premium= #{user_signed_in?}"
+    Rails.logger.info "Final Premium= #{current_user}"
+    if (user_signed_in? && (current_user.has_role? :user) )
+          premium.user_id = current_user.id
+    end
+   end
+
    respond_to do |format|
    format.json { render json: premiums }
    end
+  end
+
+  def buy
+
+    existing_motor_search = MotorSearch.find(params[:id])
+    existing_motor_search.company_name = params[:company_name]
+    existing_motor_search.total_premium = params[:total_premium]
+    existing_motor_search.discount = params[:discount]
+    existing_motor_search.final_premium = params[:final_premium]
+    if (user_signed_in? && (current_user.has_role? :user) )
+      existing_motor_search.email_id = params[:email_id]
+      existing_motor_search.mobile_number = params[:mobile_number]
+      existing_motor_search.address = params[:address]     
+    else
+      existing_motor_search.email_id = params[:email_id]
+      existing_motor_search.mobile_number = params[:mobile_number]
+      existing_motor_search.address = params[:address]
+    end
+    existing_motor_search.save
+
+    render :json => existing_motor_search
 
   end
+  
 end

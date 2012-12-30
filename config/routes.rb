@@ -14,6 +14,7 @@ Nikrik::Application.routes.draw do
   get "idv_charts/models"
   get "home/admin"
   post "motor_searches/quote"
+  post "motor_searches/buy"
   post "home/callus"
   get "motor_policies/download/:id"  => "motor_policies#download"
 
