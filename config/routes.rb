@@ -23,13 +23,9 @@ Nikrik::Application.routes.draw do
   resources :motor_searches
   resources :my_names
   resources :idv_charts
-  resources :users
+  resources :admin_users
   resources :motorquotes
 
-
-  authenticated :user do
-    root :to => 'home#index'
-  end
   root :to => "welcome#index"
 
 end

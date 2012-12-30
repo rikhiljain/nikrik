@@ -1,8 +1,8 @@
-<div id="add-policy" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <%= simple_form_for @motor_policy, :html => {:method => :post, :class => 'form-horizontal' } do |f| %>
+<div id="edit-policy" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <%= simple_form_for @motor_policy, :html => {:method => :put, :class => 'form-horizontal' } do |f| %>
     <div class="modal-header">
       <a class="close" data-dismiss="modal">&#215;</a>
-      <h3>Add Policy</h3>
+      <h3>Edit Policy</h3>
     </div>
     <div class="modal-body">
       <div class="form-inputs">
@@ -24,13 +24,13 @@
   </div>
     </div>
     <div class="modal-footer">
-      <%= f.submit "Add Policy", :class => "btn" %>
+      <%= f.submit "Edit Policy", :class => "btn" %>
       <a class="btn" data-dismiss="modal" href="#">Close</a>
     </div>
   <% end %>
 </div>
-<% if ( (@motor_policy.errors.size > 0 ) &&  (@is_edit == false) )%>
+<% if ( (@motor_policy.errors.size > 0 &&  (@is_edit == true) ) ||  (@is_edit == true) )%>
 <script type="text/javascript"> 
- $("#add-policy").modal('show'); 
+ $("#edit-policy").modal('show'); 
  </script>  
 <% end %>

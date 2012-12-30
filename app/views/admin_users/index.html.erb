@@ -1,0 +1,14 @@
+<div>
+<form method="get" action="/admin_users" class="form-horizontal" >
+ <input type="text" name="user_search" value="" />
+ <input type="submit" name="search" value="User Search" />
+</form>
+</div>
+
+<%= render 'list' %>
+<div >
+	 <a data-toggle="modal" href="#add-user" class="btn" >Add User</a>
+	 
+	 <%= render 'form' %>
+	 
+</div>

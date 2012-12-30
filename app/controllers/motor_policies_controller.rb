@@ -35,21 +35,27 @@ class MotorPoliciesController < ApplicationController
   # GET /motor_policies/1/edit
   def edit
     @motor_policy = MotorPolicy.find(params[:id])
+    @user =  @motor_policy.user
+    @motor_policies = MotorPolicy.where("user_id=?", @motor_policy.user_id)
+    @is_edit = true
+    render :template => "/admin_users/show"
   end
 
   # POST /motor_policies
   # POST /motor_policies.json
   def create
     @motor_policy = MotorPolicy.new(params[:motor_policy])
-
+     @is_edit = false
     upload
 
     respond_to do |format|
       if @motor_policy.save
-        format.html { redirect_to @motor_policy, notice: 'Motor policy was successfully created.' }
+        format.html { redirect_to "/admin_users/#{@motor_policy.user_id}" , notice: 'Motor policy was successfully created.' }
         format.json { render json: @motor_policy, status: :created, location: @motor_policy }
       else
-        format.html { render action: "new" }
+        @user =  @motor_policy.user
+        @motor_policies = MotorPolicy.where("user_id=?", @motor_policy.user_id)
+        format.html { render :template => "/admin_users/show" }
         format.json { render json: @motor_policy.errors, status: :unprocessable_entity }
       end
     end
@@ -66,19 +72,21 @@ class MotorPoliciesController < ApplicationController
       file_name =   new_motor_policy.policy_id.to_s + "_" +  new_motor_policy.user_id.to_s  + File.extname(uploaded_io.original_filename)
 
       file_upload_path = Rails.root.join('uploads', 'motor', new_motor_policy.start_date.year.to_s, new_motor_policy.start_date.month.to_s, @motor_policy.company.name, file_name )
+      FileUtils.mkdir_p(File.dirname(file_upload_path))
       new_motor_policy.policy_path =  file_upload_path.to_s
       File.open(file_upload_path, 'wb') do |file|
         file.write(uploaded_io.read)
       end
     end
-    Rails.logger.info("Motor Policy attributes = #{new_motor_policy.attributes}")
     respond_to do |format|
       if @motor_policy.update_attributes(MotorPolicy.to_hash(new_motor_policy))
-        format.html { redirect_to @motor_policy, notice: 'Motor policy was successfully updated.' }
+        format.html { redirect_to "/admin_users/#{@motor_policy.user_id}" , notice: 'Motor policy was successfully created.' }
         format.json { head :no_content }
       else
-
-        format.html { render action: "edit" }
+        @user =  @motor_policy.user
+        @is_edit = true
+        @motor_policies = MotorPolicy.where("user_id=?", @motor_policy.user_id)
+        format.html { render :template => "/admin_users/show" }
         format.json { render json: @motor_policy.errors, status: :unprocessable_entity }
       end
     end
@@ -98,9 +106,21 @@ class MotorPoliciesController < ApplicationController
 
   def download
     motor_policy = MotorPolicy.find(params[:id])
-    File.open(motor_policy.policy_path, 'rb') do |f|
-      send_data( f.read, :filename => "#{motor_policy.policy_id}.pdf", :type => "application/pdf")
+
+    begin
+      file_ext = File.extname(motor_policy.policy_path)
+
+      File.open(motor_policy.policy_path, 'rb') do |f|
+        send_data( f.read, :filename => "#{motor_policy.policy_id}.#{file_ext}", :type => "application/#{file_ext}")
+      end
+    
+    rescue Exception => e
+     Rails.logger.error "OH NO: #{e}"
+     send_data( "Error Occure while Downloading File", :filename => "system_error.text", :type => "application/text")
+    ensure
+     # f.close unless f.nil?
     end
+
   end
 
   def upload
@@ -110,6 +130,9 @@ class MotorPoliciesController < ApplicationController
       file_name =   @motor_policy.policy_id.to_s + "_" +  @motor_policy.user_id.to_s  + File.extname(uploaded_io.original_filename)
 
       file_upload_path = Rails.root.join('uploads', 'motor', @motor_policy.start_date.year.to_s, @motor_policy.start_date.month.to_s,@motor_policy.company.name, file_name )
+
+      FileUtils.mkdir_p(File.dirname(file_upload_path))
+      
       @motor_policy.policy_path =  file_upload_path.to_s
       File.open(file_upload_path, 'wb') do |file|
         file.write(uploaded_io.read)
