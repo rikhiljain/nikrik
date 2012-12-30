@@ -86,3 +86,20 @@ body {
 	font-weight: bold;
   }
 }
+
+.accordion-inner{
+  background-color: $grayBgColor;
+}
+
+.accordion .accordion-heading{
+  background-color: rgba(255, 71, 0, 0.89);
+  border-radius: 8px 8px 8px 8px;
+  > a {
+    color:white;
+    font-weight: bold;
+  }
+}
+
+#motorQuoteForm > div {
+  margin-bottom: 10px;
+}

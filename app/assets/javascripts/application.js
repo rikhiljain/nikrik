@@ -12,8 +12,8 @@
 //
 //= require jquery/jquery-1.8.3
 //= require jquery/jquery.validate
-//= require bootstrap
 //= require jquery/jquery-ui-1.9.2.custom
+//= require bootstrap
 //= require welcome/jquery-selectors
 //= require welcome/static-data
 //= require welcome/dynamic-data

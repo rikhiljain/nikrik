@@ -21,9 +21,8 @@
       <div class="container">
         <div class="content">
            <div class="row">
-            <% if (!user_signed_in? || (current_user.has_role? :user) ) %>
-               <div class="span2">
-                
+            <% if (!user_signed_in?) %>
+               <div class="span2">                
                </div>
                 <div class="span7">
                   <%= render 'layouts/messages' %>
@@ -32,14 +31,27 @@
                 <div class="span3 affix span9Pos">
                   <%= render "shared/ad_banner" %>
                 </div>
-             <%else %>
-               <div class="span2">
-                <%= render "shared/admin_left_nav" %>
-               </div>
-                <div class="span10">
-                  <%= render 'layouts/messages' %>
-                  <%= yield %>
-                </div>
+             <% else %>
+              <% if (current_user.has_role? :user) %>
+                  <div class="span2">
+                      <%= current_user %>
+                  </div>
+                  <div class="span7">
+                    <%= render 'layouts/messages' %>
+                    <%= yield %>
+                  </div>
+                 <div class="span3 affix span9Pos">
+                    <%= render "shared/ad_banner" %>
+                </div>                 
+              <% else %>
+                   <div class="span2">
+                      <%= render "shared/admin_left_nav" %>
+                  </div>
+                  <div class="span10">
+                    <%= render 'layouts/messages' %>
+                    <%= yield %>
+                  </div>
+              <% end %>
              <% end %>
           </div>
         </div>

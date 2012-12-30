@@ -4,8 +4,8 @@
 		bindAllEventHandlers();
 		populateStaticData();
 		populateDynamicData();
-		bindCityAutoComplete();
-		bindDatePickers();
+		//bindCityAutoComplete();
+		//bindDatePickers();
 		showOrHideElements();
 		fireEventsManually();
 		bindToolTips();
