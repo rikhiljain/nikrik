@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS `idv_charts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `maker` varchar(20) DEFAULT NULL,
+  `model` varchar(20) DEFAULT NULL,
+  `subtype` varchar(20) DEFAULT NULL,
+  `seats` smallint(6) DEFAULT NULL,
+  `cubic` smallint(6) DEFAULT NULL,
+  `fuel` char(1) DEFAULT NULL,
+  `age_0_6` int(11) DEFAULT NULL,
+  `age_6_12` int(11) DEFAULT NULL,
+  `age_12_24` int(11) DEFAULT NULL,
+  `age_24_36` int(11) DEFAULT NULL,
+  `age_36_48` int(11) DEFAULT NULL,
+  `age_48_60` int(11) DEFAULT NULL,
+  `age_60_72` int(11) DEFAULT NULL,
+  `age_72_84` int(11) DEFAULT NULL,
+  `age_84_96` int(11) DEFAULT NULL,
+  `age_96` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
