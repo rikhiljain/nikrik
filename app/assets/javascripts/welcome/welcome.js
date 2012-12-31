@@ -4,8 +4,8 @@
 		bindAllEventHandlers();
 		populateStaticData();
 		populateDynamicData();
-		//bindCityAutoComplete();
-		//bindDatePickers();
+		bindCityAutoComplete();
+		bindDatePickers();
 		showOrHideElements();
 		fireEventsManually();
 		bindToolTips();
@@ -27,20 +27,28 @@ function bindAllEventHandlers(){
 		$("[id=additionalDiscount1]").toggle();
 	});
 
+	$("[id=additionalCovers] > fieldset > legend > input").bind("click", function(){
+		$("[id=additionalCovers1]").toggle();
+	});
+
 }
 
 
 
 function  bindCityAutoComplete(){
-	$( "#city" ).autocomplete({
+	$( "#registerCity" ).autocomplete({
 		source: "/rtos.json",
-		minLength: 2
+		minLength: 2,
+		select: function( event, ui ) {
+				$("[id=registrationDetails] [id=rtoId]").val(ui.item.id);
+            }
 	});
 }
 
 function bindDatePickers(){
 	//$("[id=previousPolicyDetails] [id=date]").datepicker({ appendText: "(dd-mm-yyyy)", dateFormat: "dd-mm-yy", constrainInput: "true" });
 	$("[id=previousPolicyDetails] [id=date]").datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true" });
+	$("[id=registrationDetails] [id=registerDate]").datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true" });
 }
 
 function showOrHideElements(){
@@ -48,11 +56,14 @@ function showOrHideElements(){
 	$("[id=previousPolicyDetails] [id=previousPolicyDetailsDiv1]").hide();
 	$("[id=previousPolicyDetails] [id=previousPolicyDetailsDiv2]").hide();
 	$("[id=basicDetails] > [id=registrationDetails] [id=day]").hide();
+	$("[id=basicDetails] > [id=registrationDetails] [id=month]").hide();
+	$("[id=basicDetails] > [id=registrationDetails] [id=year]").hide();
 	$("[id=previousPolicyDetails] [id=day]").hide();
 	$("[id=previousPolicyDetails] [id=month]").hide();
 	$("[id=previousPolicyDetails] [id=year]").hide();
 	$("[id=protectionForAccessories1]").hide();
 	$("[id=additionalDiscount1]").hide();
+	$("[id=additionalCovers1]").hide();
 }
 
 function fireEventsManually(){

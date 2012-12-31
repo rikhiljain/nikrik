@@ -25,27 +25,24 @@ class CarPremium < Premium
     idv_value = m_motor_value
     base_od = m_base_premium(idv_value)
 
-    total_premium = m_total_premium(MotorQuote.new, base_od, 0)
-    Rails.logger.info "Total premium = #{total_premium}"
+    #total_premium = m_total_premium(MotorQuote.new, base_od, 0)
+    Rails.logger.info "Base OD = #{base_od}"
     companies = Company.all
 
     companies.each do |company|
       motor_quote = MotorQuote.new
-      motor_quote.base_od = base_od
       motor_quote.idv_value = idv_value
-      motor_quote.total_premium = total_premium
       motor_quote.company_id = company.id
       motor_quote.company_name = company.name
 
-      motor_discount = MotorDiscount.get_discount(@idv_chart.id, company.id)
+      motor_discount = MotorDiscount.get_discount(@idv_chart.id, company.id,@input.rto_id)
 
       discount = (base_od * ((motor_discount.nil?)? 0: motor_discount.amount) )/100
       Rails.logger.info "Discount= #{discount}"
 
       final_premium = m_total_premium(motor_quote, base_od, discount)
    
-      motor_quote.discount =  motor_quote.total_premium - motor_quote.final_premium
-
+ 
       MotorQuote.format_fields(motor_quote)
       Rails.logger.info "Final Premium= #{final_premium}"
       results.push( motor_quote )
@@ -60,19 +57,26 @@ class CarPremium < Premium
   def m_total_premium(motor_quote, base_od, discount_amount)
 
       base_od_after_discount = base_od - discount_amount
-      motor_quote.anti_theft_dis = m_anti_theft_discount(base_od_after_discount)
 
-      net_od = base_od_after_discount - motor_quote.anti_theft_dis
-
+      motor_quote.base_od = base_od_after_discount
+      
       motor_quote.elec_acc = m_elec_acc
       motor_quote.non_elec_acc = m_non_elec_acc
-      motor_quote.bi_fuel_od = m_bi_fuel_od(net_od)
+      motor_quote.bi_fuel_od = m_bi_fuel_od(base_od_after_discount)
 
-      final_od = net_od + motor_quote.elec_acc  + motor_quote.non_elec_acc + motor_quote.bi_fuel_od 
+      net_od = base_od_after_discount + motor_quote.elec_acc  + motor_quote.non_elec_acc + motor_quote.bi_fuel_od 
+      motor_quote.net_od = net_od
 
-      motor_quote.ncb_dis = m_ncb_amount(final_od)
+      motor_quote.anti_theft_dis = m_anti_theft_discount(net_od)
+      net_od = net_od - motor_quote.anti_theft_dis
 
-      final_od = final_od - motor_quote.ncb_dis
+      motor_quote.aai_dis = m_aai_discount(net_od)
+      net_od = net_od - motor_quote.aai_dis
+
+      motor_quote.ncb_dis = m_ncb_amount(net_od)
+
+      motor_quote.net_dis = motor_quote.anti_theft_dis + motor_quote.aai_dis + motor_quote.ncb_dis
+      final_od = net_od - motor_quote.ncb_dis
 
       motor_quote.final_od = final_od
 
@@ -88,6 +92,7 @@ class CarPremium < Premium
       motor_quote.final_tp = final_tp
 
       total_premium = final_od + final_tp
+      motor_quote.total_premium = total_premium
 
       motor_quote.service_tax = calculate_service_tax(total_premium)
       motor_quote.final_premium = total_premium + motor_quote.service_tax
@@ -99,9 +104,9 @@ class CarPremium < Premium
  def m_base_premium(idv_value)
 
    now = Date.today
-   age_in_years =  now.year - @input.year_of_manufacture.year
+   age_in_years =  now.year - @input.register_date.year
    #Need to check boundary condition
-   if  now.year.month < @input.year_of_manufacture.month
+   if  now.year.month < @input.register_date.month
      age_in_years -= 1
    end
 
@@ -123,17 +128,17 @@ class CarPremium < Premium
        index_y = 2
    end
 
-   if  @input.register_city == 'DL' or  @input.register_city == 'MB'
-     (ZONE_B_RATING[index_x][index_y] * idv_value)/100
-   else
+   if  @input.rto_id == 1 or  @input.rto_id == 2
      (ZONE_A_RATING[index_x][index_y] * idv_value)/100
+   else
+     (ZONE_B_RATING[index_x][index_y] * idv_value)/100
    end
 
  end
 
  def m_motor_value
    now = Date.today
-   age_in_months =  12 * (now.year -  @input.year_of_manufacture.year) + now.month - @input.year_of_manufacture.month
+   age_in_months =  12 * (now.year -  @input.register_date.year) + now.month - @input.register_date.month
 
    case age_in_months
      when 0..6
@@ -161,22 +166,38 @@ class CarPremium < Premium
  end
 
  def m_anti_theft_discount(base_od)
-    discount = base_od * 0.025
-    if discount > 500
-      discount = 500
+    discount = 0
+    if @input.has_anti_theft
+      discount = base_od * 0.025
+      if discount > 500
+        discount = 500
+      end
     end
+    return discount
+  end
+
+  def m_aai_discount(base_od)
+    discount = 0
+    if @input.has_anti_theft
+      discount = base_od * 0.025
+      if discount > 200
+        discount = 200
+      end
+    end
+    return discount;
   end
 
  def  m_bi_fuel_od(net_od)
-   extra_charge = 0.0
-
-   #for Factory fitted CNG
-   if @input.cng_type == ''
-      extra_charge = net_od * 0.05
-   else
-      extra_charge = ((@input.cng_value?)?@input.cng_value : 0) * 0.05
+   extra_charge = 0
+   if @input.cng_type != '' 
+     #for Factory fitted CNG
+     if @input.cng_type == 'FF_CNG' || @input.cng_type == 'FF_LPG'
+        extra_charge = net_od * 0.05
+     else
+        extra_charge = ((@input.cng_value?)?@input.cng_value : 0) * 0.04
+     end
    end
-
+   return extra_charge
  end
 
  def m_elec_acc
@@ -223,15 +244,20 @@ class CarPremium < Premium
         index_y = 2
     end
 
-    if  @input.register_city == 'DL' or  @input.register_city == 'MB'
-      ZONE_B_RATING[4][index_y]
-    else
+    #Metro cities are in Zone A
+    if  @input.rto_id == 1 or  @input.rto_id == 2
       ZONE_A_RATING[4][index_y]
+    else
+      ZONE_B_RATING[4][index_y]
     end
   end
 
   def m_owner_pa
-    100
+    if @input.register_type == 'I'
+      100
+    else
+      0
+    end
   end
 
   def m_passenger_pa

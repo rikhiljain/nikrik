@@ -30,7 +30,7 @@ function populateModel(manufacturer){
 
 function populatePrice(){
 	var idvChartId = $("[id=basicDetails] > [id=vehicleDetails] [id=model]").val();
-	var mdate = registrationDate();
+	var mdate = $("[id=basicDetails] > [id=vehicleDetails] [id=year_of_manufacture]").val();
 	var options;
 	var address = "/idv_charts/"+idvChartId+"/motorValue.json?mdate="+mdate;
 	//var address = "model.json";

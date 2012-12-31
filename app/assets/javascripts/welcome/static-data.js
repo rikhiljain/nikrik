@@ -1,7 +1,8 @@
 function populateStaticData(){
-	pouplateDay($("[id=basicDetails] > [id=registrationDetails] [id=day]"));
-	pouplateMonth($("[id=basicDetails] > [id=registrationDetails] [id=month]"));
-	pouplateYear($("[id=basicDetails] > [id=registrationDetails] [id=year]"));
+	//pouplateDay($("[id=basicDetails] > [id=registrationDetails] [id=day]"));
+	//pouplateMonth($("[id=basicDetails] > [id=registrationDetails] [id=month]"));
+	//pouplateYear($("[id=basicDetails] > [id=registrationDetails] [id=year]"));
+	pouplateManufactureYear($("[id=vehicleDetails] [id=year_of_manufacture]"));
 	
 	//pouplateDay($("[id=previousPolicyDetails] [id=day]"));
 	//pouplateMonth($("[id=previousPolicyDetails] [id=month]"));
@@ -10,6 +11,7 @@ function populateStaticData(){
 	populateNCB($("[id=previousPolicyDetails] [id=ncb]"));
 	populateKit($("[id=protectionForAccessories] [id=kit]"));
 	populateKitPrice($("[id=protectionForAccessories] [id=kitPrice]"));
+	pouplatePACoverage($("[id=additionalCovers] [id=coverage_amt]"));
 
 }
 
@@ -52,19 +54,47 @@ function pouplateYear(selectElement){
 	selectElement.html(options);	
 }
 
-function populateNCB(selectElement){
-	var options; 
-	for (var i=20; i <= 100;i+=20) { 
-		options += '<option value="' + i + '">' + i + '%</option>';
+function pouplateManufactureYear(selectElement){
+	var options = '<option value="">Select Year</option>'; 
+	var year = new Date().getFullYear();
+	var index=0;
+
+	while(index < 11){ 
+		options += '<option value="' + year + '">' + year + '</option>';
+		index++;
+		year--;
 	 }
 	selectElement.html(options);	
 }
 
+function populateNCB(selectElement){
+	var options; 
+	
+	options += '<option value="0">0%</option>';
+	options += '<option value="20">20%</option>';
+	options += '<option value="25">25%</option>';
+	options += '<option value="35">35%</option>';
+	options += '<option value="45">45%</option>';
+	options += '<option value="50">50%</option>';
+
+	selectElement.html(options);	
+}
+
+function pouplatePACoverage(selectElement){
+	var options; 
+	for (var i=0; i <= 200000; i=i + 10000) { 
+		options += '<option value="' + i + '">' + i + '</option>';
+	 }
+	selectElement.html(options);	
+}
+
+
 function populateKit(selectElement){
 var options = [
-	               	{"optionValue":"FactoryFittedCNG", "optionDisplay": "Factory Fitted CNG"},
+					{"optionValue":"", "optionDisplay": "Select"},
+	               	{"optionValue":"FF_CNG", "optionDisplay": "Factory Fitted CNG"},
 	               	{"optionValue":"CNG", "optionDisplay": "CNG"},
-	               	{"optionValue":"FactoryFittedLPG", "optionDisplay": "Factory Fitted LPG"},
+	               	{"optionValue":"FF_LPG", "optionDisplay": "Factory Fitted LPG"},
 	               	{"optionValue":"LPG", "optionDisplay": "LPG"}
 	              ];
 	$.each(options, function(){

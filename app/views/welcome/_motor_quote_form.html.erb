@@ -23,26 +23,24 @@
 										<div class="control-group">
 											<label class="control-label" for="city">City where the car is registered(RTO)<i id="city_icon" class="icon-question-sign"></i></label>
 											<div class="controls">
-												<input id="city" name="register_city" type="text" class="span2" class="required">
+												<input id="registerCity" name="register_city" type="text" class="span2" class="required">
+												<input type="hidden" id="rtoId" name="rto_id">
 											</div>
 										</div>
 										<div class="control-group">
-											<label class="control-label" for="day">First Purchase or Registration Date<i id="day_icon" class="icon-question-sign"></i></label>
+											<label class="control-label" for="registerDate">First Purchase or Registration Date<i id="day_icon" class="icon-question-sign"></i></label>
 											<div class="controls">
-												<select id="day" class="span1"></select>
-												<select id="month" class="span1"></select>
-												<select id="year" class="span1"></select>
-											</div>
-											<input type="hidden" id="registrationDate" name="year_of_manufacture">
+												<input type="text" id="registerDate" name="register_date" class="span2" placeholder="dd-mm-yyyy">
+											</div>		
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="registrationType">Current Registration Type<i id="registrationType_icon" class="icon-question-sign"></i></label>
 											<div class="controls">
 												<label class="radio inline">
-													<input type="radio" id="registrationType" name="register_type" value="Individual" checked="checked">Individual
+													<input type="radio" id="registrationType" name="register_type" value="I" checked="checked">Individual
 												</label>
 												<label class="radio inline">
-													<input type="radio" id="registrationType" name="register_type" value="Company">Company
+													<input type="radio" id="registrationType" name="register_type" value="C">Company
 												</label>
 											</div>
 										</div>
@@ -58,6 +56,12 @@
 												<label>&nbsp;&nbsp;&nbsp;</label>
 												<select id="model" name="idv_chart_id" class="span2"></select>
 											</div> 
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="year_of_manufacture">Year Of Manufacture<i id="year_of_manufacture_icon" class="icon-question-sign"></i></label>
+											<div class="controls">	
+												<select id="year_of_manufacture" name="year_of_manufacture" class="span2"></select>
+											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="price">Ex-showroom Price<i id="price_icon" class="icon-question-sign"></i></label>
@@ -124,6 +128,32 @@
 										</div>
 									</div>	
 								</fieldset>		
+							</div>
+
+							<div id="additionalCovers">
+								<fieldset  class="_iSBorder">
+									<legend><input type="checkbox">&nbsp;&nbsp;Need Additional Covers</input></legend>
+									<div id="additionalCovers1">
+										<div class="control-group">
+											<label class="control-label" for="kit">PA for Unnamed Passenger (Rs)<i id="pa_coverage_icon" class="icon-question-sign"></i></label>
+											<div class="controls">
+												<select id="coverage_amt" name="passenger_coverage_amt" class="span2"></select>
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="kit">Zero depreciation cover<i id="full_cover_icon" class="icon-question-sign"></i></label>
+											<div class="controls">
+												<label class="radio inline">
+													<input type="radio" id="has_full_cover" name="has_full_cover" value="true">Yes
+												</label>
+												<label class="radio inline">
+													<input type="radio" id="has_full_cover" name="has_full_cover" value="false"  checked="checked">No
+												</label>	
+											</div>
+										</div>
+										
+									</div>
+								</fieldset>					
 							</div>
 							
 							<div id="protectionForAccessories">

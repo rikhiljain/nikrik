@@ -7,8 +7,7 @@ class MotorDiscount < ActiveRecord::Base
   validates :amount, :company_id, :idv_chart_id, :presence => true
   validates :amount, :numericality => true
 
-  def self.get_discount(idv_chart_id,company_id)
-    where("idv_chart_id = ? and company_id = ? ",idv_chart_id,company_id).first
-
+  def self.get_discount(idv_chart_id,company_id,rto_id)
+    where("idv_chart_id = ? and company_id = ? and rto_id in (0,?)",idv_chart_id,company_id,rto_id).order("rto_id desc").first
   end
 end

@@ -15,19 +15,15 @@ var html = [], h = -1;
 html[++h] = "<table id='quoteResultsTable' class='table table-bordered'>";
 html[++h] = "<th>Company Name</th>";
 html[++h] = "<th>Total Premium</th>";
-html[++h] = "<th>Discount</th>";
-html[++h] = "<th>Final Premium</th>";
+html[++h] = "<th>Details</th>";
 html[++h] = "<th></th>";
 html[++h] = "<tbody>";
 for(var result, i = -1; result = results[++i];){
 	html[++h] = "<tr><td>";
 	html[++h] = result.company_name;
 	html[++h] = "</td><td>";
-	html[++h] = result.total_premium;
+	html[++h] = result.final_premium;
 	html[++h] = "</td><td>";
-	html[++h] = result.discount;	
-	html[++h] = "</td><td>";
-	html[++h] = result.final_premium;	
 	html[++h] = "<br><a class='_iSHandCursor' onclick='fillPremiumBreakupTable(";
 	html[++h] = result.company_id + ");' >Premium Break-up</a>";
 	html[++h] = "</td><td>";
@@ -51,17 +47,17 @@ function fillPremiumBreakupTable(id){
 		}
 	}
 	var html = [], h = -1;
-	html[++h] = "<div>Insured declared Value (IDV) = "
+	html[++h] = "<div><strong>Insured declared Value (IDV) = "
 	html[++h] = motorquote.idv_value
-	html[++h] = "</div>"
+	html[++h] = "</strong></div>"
 	html[++h] = "<table class='table table-bordered table-striped'>";
 	html[++h] = "<tbody>";
-	html[++h] = "<tr><td colspan='2'>Own Damage</td>";
+	html[++h] = "<tr style='background-color:#ffc40d;font-weight:bold;' ><td colspan='2'>Own Damage</td>";
 	html[++h] = "<td colspan='2'>Liability</td></tr>";
 
 	html[++h] = "<tr><td>Basic Premium</td><td>";
 	html[++h] = motorquote.base_od;
-	html[++h] = "</td><td>basic Premium</td><td>";
+	html[++h] = "</td><td>Basic Premium</td><td>";
 	html[++h] =	motorquote.base_tp;
 	html[++h] = "</td></tr><tr><td>Bi-fuel Kit premium</td><td>";
 	html[++h] = motorquote.bi_fuel_od;	
@@ -90,9 +86,9 @@ function fillPremiumBreakupTable(id){
 	html[++h] = "0";	
 	html[++h] = "</td></tr>";
 
-	html[++h] = "<tr><td>Sub Total</td><td>";
-	html[++h] = motorquote.final_od;
-	html[++h] = "</td><td>Total</td><td>";
+	html[++h] = "<tr style='font-weight:bold;'><td>Sub Total (A)</td><td>";
+	html[++h] = motorquote.net_od;
+	html[++h] = "</td><td>Total (B)</td><td>";
 	html[++h] =	motorquote.final_tp;
 	html[++h] = "</td></tr>";
 
@@ -101,44 +97,33 @@ function fillPremiumBreakupTable(id){
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
 	html[++h] = "<tr><td>Automobile Membership Discount</td><td>";
-	html[++h] = "0";
+	html[++h] = motorquote.aai_dis;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
 	html[++h] = "<tr><td>Deduct 0% for NCB</td><td>";
 	html[++h] = motorquote.ncb_dis;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
-	html[++h] = "<tr><td>Total Discount</td><td>";
-	html[++h] = motorquote.anti_theft_dis ;
+	html[++h] = "<tr style='font-weight:bold;'><td>Total Discount (C)</td><td>";
+	html[++h] = motorquote.net_dis ;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
-	html[++h] = "<tr><td>Total Own Damage Premium</td><td>";
-	html[++h] = "0";
+	html[++h] = "<tr style='font-weight:bold;' ><td>Total Own Damage Premium (D = A - C)</td><td>";
+	html[++h] = motorquote.final_od;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
 
-	html[++h] = "<tr><td>Package Premium</td><td>";
+	html[++h] = "<tr style='font-weight:bold;' ><td>Total Premium (E = D + B)</td><td>";
 	html[++h] = motorquote.total_premium ;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
-	html[++h] = "<tr><td>Special Discount:</td><td>";
-	html[++h] = motorquote.discount ;
-	html[++h] = "</td><td colspan='2'></td></tr>";
-
-	html[++h] = "<tr><td>Total Premium:</td><td>";
-	html[++h] = "0";
-	html[++h] = "</td><td colspan='2'></td></tr>";
-
-	html[++h] = "<tr><td>Service Tax</td><td>";
+	html[++h] = "<tr><td>Service Tax (F)</td><td>";
 	html[++h] = motorquote.service_tax;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
-	html[++h] = "<tr><td>Total Premium Payable</td><td>";
+	html[++h] = "<tr style='font-weight:bold;' ><td>Total Premium Payable (E+F)</td><td>";
 	html[++h] = motorquote.final_premium;
 	html[++h] = "</td><td colspan='2'></td></tr>";
-
-
-	
 
 	html[++h] = "</tbody>";
 	html[++h] = "</table>";

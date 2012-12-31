@@ -120,7 +120,9 @@ class IdvChartsController < ApplicationController
 
   def motorValue
 
-    mdate = DateTime.parse(params[:mdate])
+    #mdate = DateTime.parse(params[:mdate])
+    mdate = Date.today
+    #mdate.year = params[:mdate]
 
     value = IdvChart.motor_value(params[:id], mdate)
     respond_to do |format|

@@ -5,7 +5,7 @@ class RtosController < ApplicationController
     @rtos = Rto.order(:city).where("city like ?", "%#{params[:term]}%")
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @rtos.map(&:city) }
+      format.json { render json: @rtos.map { |rto| {:id => rto.id, :value => rto.city + " (" + rto.state + ")" } } }
     end
   end
 
