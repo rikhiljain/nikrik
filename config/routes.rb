@@ -3,7 +3,7 @@ Nikrik::Application.routes.draw do
   resources :motor_policies
 
 
-  devise_for :users, path_names:{sign_in: "login", sign_out: "logout"}
+  devise_for :users,  :path => '', path_names:{sign_in: "login", sign_out: "logout"}
 
 
 
