@@ -1,14 +1,14 @@
 (function($){
 	$(document).ready(function(){
-		cacheAllJquerySelectore();
-		bindAllEventHandlers();
-		populateStaticData();
-		populateDynamicData();
-		bindCityAutoComplete();
-		bindDatePickers();
-		showOrHideElements();
-		fireEventsManually();
-		bindToolTips();
+		cacheAllJquerySelectore(); //jquery-selector.js
+		jqueryFormValidations(); //jquery-form-validations.js
+		populateStaticData(); //static-data.js
+		bindToolTips(); //tooltips.js
+		bindDatePickers(); //this file [the main file will have all the binding code]
+		bindCityAutoComplete(); //this file
+		bindAllEventHandlers(); //this file
+		populateDynamicData(); //dynamic-data.js
+		postInitialization(); //post-initialization.js
 	});
 })(jQuery);	
 
@@ -39,6 +39,9 @@ function  bindCityAutoComplete(){
 	$( "#registerCity" ).autocomplete({
 		source: "/rtos.json",
 		minLength: 2,
+		search: function(event, ui){
+			$("[id=registrationDetails] [id=rtoId]").val("");
+		},
 		select: function( event, ui ) {
 				$("[id=registrationDetails] [id=rtoId]").val(ui.item.id);
             }
@@ -46,28 +49,18 @@ function  bindCityAutoComplete(){
 }
 
 function bindDatePickers(){
-	//$("[id=previousPolicyDetails] [id=date]").datepicker({ appendText: "(dd-mm-yyyy)", dateFormat: "dd-mm-yy", constrainInput: "true" });
-	$("[id=previousPolicyDetails] [id=date]").datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true" });
-	$("[id=registrationDetails] [id=registerDate]").datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true" });
+	var policyEndDate = new Date();	
+	policyEndDate.setDate(policyEndDate.getDate()+7);
+	$("[id=previousPolicyDetails] [id=date]").datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true", changeMonth: "true", changeYear: "true", defaultDate: policyEndDate });
+	//$("[id=previousPolicyDetails] [id=date]").val(policyEndDate.getDate()+"-"+policyEndDate.getMonth()+1+"-"+policyEndDate.getFullYear());
+
+	var registrationDate = new Date();	
+	registrationDate.setYear(registrationDate.getFullYear()-5);
+	$("[id=registrationDetails] [id=registerDate]").datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true", changeMonth: "true", changeYear: "true",defaultDate: registrationDate });
+	//$("[id=registrationDetails] [id=registerDate]").val(registrationDate.getDate()+"-"+registrationDate.getMonth()+1+"-"+registrationDate.getFullYear());
 }
 
-function showOrHideElements(){
-	$("[id=protectionForAccessories] [id=kitPriceControlGroup]").hide();
-	$("[id=previousPolicyDetails] [id=previousPolicyDetailsDiv1]").hide();
-	$("[id=previousPolicyDetails] [id=previousPolicyDetailsDiv2]").hide();
-	$("[id=basicDetails] > [id=registrationDetails] [id=day]").hide();
-	$("[id=basicDetails] > [id=registrationDetails] [id=month]").hide();
-	$("[id=basicDetails] > [id=registrationDetails] [id=year]").hide();
-	$("[id=previousPolicyDetails] [id=day]").hide();
-	$("[id=previousPolicyDetails] [id=month]").hide();
-	$("[id=previousPolicyDetails] [id=year]").hide();
-	$("[id=protectionForAccessories1]").hide();
-	$("[id=additionalDiscount1]").hide();
-	$("[id=additionalCovers1]").hide();
-}
 
-function fireEventsManually(){
-}
 
 
 function esc(text){
@@ -95,17 +88,11 @@ function bindMotorQuoteFormEvents(){
 
 	//this will update the price when we change the model
 	$("[id=basicDetails] > [id=vehicleDetails] [id=model]").bind("change",function(){
-		populatePrice($(this).val(),registrationDate());
+		populatePrice($(this).val());
 	});
 
 	//this will update the price when we change day, month or year of purchase date
-	$("[id=basicDetails] > [id=registrationDetails] [id=day]").bind("change",function(){
-		populatePrice();
-	});
-	$("[id=basicDetails] > [id=registrationDetails] [id=month]").bind("change",function(){
-		populatePrice();
-	});
-	$("[id=basicDetails] > [id=registrationDetails] [id=year]").bind("change",function(){
+	$("[id=basicDetails] > [id=registrationDetails] [id=registerDate]").bind("change",function(){
 		populatePrice();
 	});
 
@@ -131,16 +118,6 @@ function bindMotorQuoteFormEvents(){
 		}
 	});
 
-	// //Compute new policy start date
-	// $("[id=previousPolicyDetails] [id=day]").bind("change",function(){
-	// 	populateNewPolicyStartDate();
-	// });
-	// $("[id=previousPolicyDetails] [id=month]").bind("change",function(){
-	// 	populateNewPolicyStartDate();
-	// });
-	// $("[id=previousPolicyDetails] [id=year]").bind("change",function(){
-	// 	populateNewPolicyStartDate();
-	// });
 
 	$("[id=previousPolicyDetails] [id=date]").bind("change",function(){
 	 	populateNewPolicyStartDate();
@@ -148,18 +125,6 @@ function bindMotorQuoteFormEvents(){
 
 	//Binding the form validation
 	validateMotorQuoteForm();
-
-	//Binding form submit event
-	$("[id=motorQuoteForm]").submit(function() {
-		var isvalidate=$("[id=motorQuoteForm]").valid();
-		if(isvalidate){
-			var serializedJSON = createMotorQuoteRequest();
-			console.log(serializedJSON);
-			submitMotorQuoteRequest(serializedJSON);
-			//fillResultTable(serializedJSON);
- 			return false;
-		}
-	});
 
 	$("[id=motorQuoteFormResetLink]").bind("click",function(e){
 		$("[id=motorQuoteForm]").each (function(){

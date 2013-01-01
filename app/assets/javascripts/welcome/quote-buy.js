@@ -54,9 +54,9 @@ function validateMotorQuoteBuyForm(){
   // Validation
   $("[id=motorQuoteBuyForm]").validate({
     rules:{
-      mobile_number:"required",
-      email_id:"required",
-      address:"required"
+      mobile_number: {required:"true", phoneIndia:"true"},
+      email_id: {required:"true", email:"true"},
+      address: {required:"true"}
     },
 
     messages:{

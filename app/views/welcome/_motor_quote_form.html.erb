@@ -1,3 +1,5 @@
+						<div id="motorQuoteFormErrorDiv">
+						</div>
 						<button id="motorQuoteFormResetLink" class="btn btn-link" type="button">Reset the form</button>
 						<form id="motorQuoteForm" action="" class="form-horizontal">
 							<div id="basicDetails">				
@@ -52,7 +54,7 @@
 										<div class="control-group">
 											<label class="control-label" for="make">Manufacturer/Model<i id="make_icon" class="icon-question-sign"></i></label>
 											<div class="controls form-inline">
-												<select id="make" class="span2"></select>
+												<select id="make" name="make" class="span2"></select>
 												<label>&nbsp;&nbsp;&nbsp;</label>
 												<select id="model" name="idv_chart_id" class="span2"></select>
 											</div> 
@@ -95,13 +97,9 @@
 									<div class="control-group">
 										<label class="control-label" for="day">Previous policy end date<!--<i id="date_icon" class="icon-question-sign"></i>--></label>
 										<div class="controls">
-											<input type="text" id="date" class="span2" placeholder="dd-mm-yyyy">
-											<select id="day" class="span1"></select>
-											<select id="month" class="span1"></select>
-											<select id="year" class="span1"></select>
+											<input type="text" id="date" name="policy_exp_date" class="span2" placeholder="dd-mm-yyyy">
 											<span style="margin-left:10px">New Policy Start Date<!--<i id="newPolicyStartDate_icon" class="icon-question-sign"></i>--></span>
 											<span id="newPolicyStartDate" class="label"></span>
-											<input type="hidden" id="policyExpDate" name="policy_exp_date"/>
 										</div>
 									</div>
 									<div class="control-group">

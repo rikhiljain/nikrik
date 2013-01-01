@@ -1,13 +1,5 @@
 function populateStaticData(){
-	//pouplateDay($("[id=basicDetails] > [id=registrationDetails] [id=day]"));
-	//pouplateMonth($("[id=basicDetails] > [id=registrationDetails] [id=month]"));
-	//pouplateYear($("[id=basicDetails] > [id=registrationDetails] [id=year]"));
-	pouplateManufactureYear($("[id=vehicleDetails] [id=year_of_manufacture]"));
-	
-	//pouplateDay($("[id=previousPolicyDetails] [id=day]"));
-	//pouplateMonth($("[id=previousPolicyDetails] [id=month]"));
-	//pouplateYear($("[id=previousPolicyDetails] [id=year]"));	
-	
+	pouplateManufactureYear($("[id=vehicleDetails] [id=year_of_manufacture]"));	
 	populateNCB($("[id=previousPolicyDetails] [id=ncb]"));
 	populateKit($("[id=protectionForAccessories] [id=kit]"));
 	populateKitPrice($("[id=protectionForAccessories] [id=kitPrice]"));
