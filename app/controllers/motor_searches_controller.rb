@@ -83,6 +83,12 @@ class MotorSearchesController < ApplicationController
     end
   end
 
+  def currentUser
+    respond_to do |format|
+      format.json { render json: current_user }
+    end
+  end
+
 
   def quote
    #valid_json_format = '{"cng_type":"LPG","cng_value":1000,"elec_acc":200,"has_anti_theft":true,"has_claim":true,"idv_chart_id":1,"is_aai_member":false,"ncb":20,"new_policy":false,"non_elec_acc":2000,"passenger_coverage_amt":100000,"policy_exp_date":"2012-12-12","register_city":"Delhi","register_type":"Company","year_of_manufacture":"2012-12-12"}'
@@ -109,18 +115,11 @@ class MotorSearchesController < ApplicationController
 
     existing_motor_search = MotorSearch.find(params[:id])
     existing_motor_search.company_name = params[:company_name]
-    existing_motor_search.total_premium = params[:total_premium]
-    existing_motor_search.discount = params[:discount]
     existing_motor_search.final_premium = params[:final_premium]
-    if (user_signed_in? && (current_user.has_role? :user) )
-      existing_motor_search.email_id = params[:email_id]
-      existing_motor_search.mobile_number = params[:mobile_number]
-      existing_motor_search.address = params[:address]     
-    else
-      existing_motor_search.email_id = params[:email_id]
-      existing_motor_search.mobile_number = params[:mobile_number]
-      existing_motor_search.address = params[:address]
-    end
+    existing_motor_search.email_id = params[:email_id]
+    existing_motor_search.mobile_number = params[:mobile_number]
+    existing_motor_search.address = params[:address]     
+
     existing_motor_search.save
 
     render :json => existing_motor_search

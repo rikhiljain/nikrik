@@ -1,6 +1,5 @@
 function openMotorQuoteBuyForm(id){
-	//alert(motorquotes[0].company_name);
-	//var motorquote ;
+	$("[id=motorQuoteBuyFormNotificationDiv] a").click();
 	for(var result, i = -1; result = motorquotes[++i];){
 		if (result.company_id == id)
 		{
@@ -9,20 +8,18 @@ function openMotorQuoteBuyForm(id){
 		}
 	}
 
-	if(selectedMotorQuote.user_id != null){
-		var json = {};
-		json["id"] = selectedMotorQuote.motor_search_id;
-		json["company_name"] = selectedMotorQuote.company_name;
-		json["total_premium"] = selectedMotorQuote.total_premium;
-		json["discount"] = selectedMotorQuote.discount;
-		json["final_premium"] = selectedMotorQuote.final_premium;
-		submitMotorQuoteBuyRequest(JSON.stringify(json));
-	}else{
-		$("[id=quoteResultsBuyAccordion] [id=link]").click();
+	if(user != null){
+    prefillMotorQuoteBuyForm(user);
 	}
+	$("[id=quoteResultsBuyAccordion] [id=link]").click();
   return false;
 }
 
+function prefillMotorQuoteBuyForm(user){
+  $("[id=motorQuoteBuyForm] [id=mobileNumber]").val(user.mobile);
+  $("[id=motorQuoteBuyForm] [id=emailAddress]").val(user.email);
+  $("[id=motorQuoteBuyForm] [id=address]").val(user.address);
+}
 
 function submitMotorQuoteBuyRequest(serializedJSON){
 	$.ajax({
@@ -38,8 +35,7 @@ function submitMotorQuoteBuyRequest(serializedJSON){
 
   				success: function() {
     				//called when successful
-    				//alert("wow it is working");
-    				$('#motorQuoteBuyFormModal').modal()
+            buildNotificationsForMotorQuoteBuyForm();
  				},
 
   				error: function(textStatus, errorThrown) {
@@ -49,16 +45,19 @@ function submitMotorQuoteBuyRequest(serializedJSON){
 			})
 }
 
-function validateMotorQuoteBuyForm(){
+function buildNotificationsForMotorQuoteBuyForm(){
+  var message = "A very sincere thanks for your interest. We will contact you very shortly. You should also receive one email with the quote details.";
+  $("[id=motorQuoteBuyFormNotificationDiv]").append("<div class='alert alert-success'>"+message+"<a class='close' data-dismiss='alert'>&#215;</a></div>");
+}
 
+function validateMotorQuoteBuyForm(){
   // Validation
   $("[id=motorQuoteBuyForm]").validate({
     rules:{
-      mobile_number: {required:"true", phoneIndia:"true"},
-      email_id: {required:"true", email:"true"},
-      address: {required:"true"}
+      mobile_number: {required:true, phoneIndia:true},
+      email_id: {required:true, email:true},
+      address: {required:true}
     },
-
     messages:{
       mobile_number:"Enter a valid mobile number",
       email_id:"Enter a valid email address",
@@ -74,6 +73,16 @@ function validateMotorQuoteBuyForm(){
     {
       $(element).parents('.control-group').removeClass('error');
       //$(element).parents('.control-group').addClass('success');
+    },
+    invalidHandler: function (form, validator){
+      console.log("invalid");
+    },
+    submitHandler: function(form){
+        $("[id=motorQuoteBuyFormNotificationDiv] a").click();
+        var serializedJSON = createMotorQuoteBuyRequest();
+        console.log(serializedJSON);
+        submitMotorQuoteBuyRequest(serializedJSON);
+        return false;
     }
   });
 }
@@ -92,8 +101,6 @@ function createMotorQuoteBuyRequest(){
 
     json["company_name"] = selectedMotorQuote.company_name;
     json["id"] = selectedMotorQuote.motor_search_id;
-    json["total_premium"] = selectedMotorQuote.total_premium;
-    json["discount"] = selectedMotorQuote.discount;
     json["final_premium"] = selectedMotorQuote.final_premium;
 
     return JSON.stringify(json);

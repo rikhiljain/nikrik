@@ -15,6 +15,7 @@ Nikrik::Application.routes.draw do
   get "home/admin"
   post "motor_searches/quote"
   post "motor_searches/buy"
+  get  "motor_searches/currentUser" => "motor_searches#currentUser"
   post "home/callus"
   get "motor_policies/download/:id"  => "motor_policies#download"
 

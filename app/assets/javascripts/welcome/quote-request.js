@@ -89,14 +89,14 @@ function validateMotorQuoteForm(){
     onclick: function(element, event) {
     },
     invalidHandler: function (form, validator){
-      $("[id=motorQuoteFormErrorDiv] a").click();
-      $("[id=motorQuoteFormErrorDiv]").append("<div class='alert alert-error'>You missed "+validator.numberOfInvalids()+" fields. They have been highlighted below.<a class='close' data-dismiss='alert'>&#215;</a></div>");
+      $("[id=motorQuoteFormNotificationDiv] a").click();
+      $("[id=motorQuoteFormNotificationDiv]").append("<div class='alert alert-error'>You missed "+validator.numberOfInvalids()+" fields. They have been highlighted below.<a class='close' data-dismiss='alert'>&#215;</a></div>");
     },
     submitHandler: function(form){
+      $("[id=motorQuoteFormNotificationDiv] a").click();
       var serializedJSON = createMotorQuoteRequest();
       console.log(serializedJSON);
       submitMotorQuoteRequest(serializedJSON);
-      $("[id=motorQuoteFormErrorDiv] a").click();
       return false;
     }
   });

@@ -1,5 +1,9 @@
 (function($){
 	$(document).ready(function(){
+		var user;
+		var motorquotes;
+		var selectedMotorQuote;
+		loadData();
 		cacheAllJquerySelectore(); //jquery-selector.js
 		jqueryFormValidations(); //jquery-form-validations.js
 		populateStaticData(); //static-data.js
@@ -11,6 +15,13 @@
 		postInitialization(); //post-initialization.js
 	});
 })(jQuery);	
+
+function loadData(){
+	var address = "/motor_searches/currentUser.json";
+	$.getJSON(address,function(currentUser){
+		user = currentUser;
+	});
+}
 
 function bindAllEventHandlers(){
 
@@ -136,18 +147,6 @@ function bindMotorQuoteFormEvents(){
 function bindMotorQuoteBuyFormEvents(){
 	//Binding the form validation
 	validateMotorQuoteBuyForm();
-
-	//Binding form submit event
-	$("[id=motorQuoteBuyForm]").submit(function() {
-		var isvalidate=$("[id=motorQuoteBuyForm]").valid();
-		if(isvalidate){
-			var serializedJSON = createMotorQuoteBuyRequest();
-			console.log(serializedJSON);
-			submitMotorQuoteBuyRequest(serializedJSON);
-			//fillResultTable(serializedJSON);
- 			return false;
-		}
-	});
 }
 
 function bindAccordionEvents(){
