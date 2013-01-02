@@ -153,18 +153,18 @@ function bindAccordionEvents(){
 	//Binding the accordion
 	$(".accordion").on('shown hidden', function(e){
 		if(e.type == "shown"){
-			var text = $(e.target).siblings(".accordion-heading").find("a").text();
-			if(text == "Motor Quote Form"){
+			var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
+			if(index == 1){ //"Motor Quote Form"
 				$(".breadcrumb > li:nth-child(1)").addClass("active");
 				$(".breadcrumb > li:nth-child(2)").removeClass("active");
 				$(".breadcrumb > li:nth-child(3)").removeClass("active");
 			}
-			else if(text == "Results"){
+			else if(index == 2){ //"Results"
 				$(".breadcrumb > li:nth-child(1)").removeClass("active");
 				$(".breadcrumb > li:nth-child(2)").addClass("active");
 				$(".breadcrumb > li:nth-child(3)").removeClass("active");
 			}
-			else if(text == "Insured Contact Details"){
+			else if(index == 3){//"Insured Contact Details"
 				$(".breadcrumb > li:nth-child(1)").removeClass("active");
 				$(".breadcrumb > li:nth-child(2)").removeClass("active");
 				$(".breadcrumb > li:nth-child(3)").addClass("active");
@@ -179,15 +179,15 @@ function bindBreadcrumbEvents(){
 		if($(e.target).hasClass("active")){
 			return;
 		}
-		var text = $(e.target).text();
-		if(text == "Enter details and Review"){
-			$("[id=quoteResultsBuyAccordion] [id=link]").click();
+		var index = $(".breadcrumb li").index($(e.target)) + 1;
+		if(index == 3){//"Enter details and Review"
+			$(".accordion-group:nth-child(3) [id=link]").click();
 		}
-		else if(text == "Results/"){
-			$("[id=quoteResultsAccordion] [id=link]").click();
+		else if(index == 2){//"Results/"
+			$(".accordion-group:nth-child(2) [id=link]").click();
 		}
-		else if(text == "Calculate Premium/"){
-			$("[id=quoteFormAccordion] [id=link]").click();
+		else if(index == 1){//"Calculate Premium/"
+			$(".accordion-group:nth-child(1) [id=link]").click();
 		}
 	});
 }

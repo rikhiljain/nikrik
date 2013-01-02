@@ -75,7 +75,7 @@ function validateMotorQuoteBuyForm(){
       //$(element).parents('.control-group').addClass('success');
     },
     invalidHandler: function (form, validator){
-      console.log("invalid");
+      $("[id=motorQuoteBuyFormNotificationDiv] a").click();
     },
     submitHandler: function(form){
         $("[id=motorQuoteBuyFormNotificationDiv] a").click();
