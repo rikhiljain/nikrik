@@ -132,8 +132,8 @@ function fillPremiumBreakupTable(id){
 }
 
 function recomputeMotorQuoteForm(){
-		$("[id=motorQuoteForm]").each (function(){
+		$motorQuoteForm.each (function(){
   			this.reset();
 		});
-		$("[id=quoteFormAccordion] [id=link]").click();
+		$quoteFormAccordionLink.click();
 }

@@ -1,10 +1,9 @@
 function populateStaticData(){
 	pouplateManufactureYear($("[id=vehicleDetails] [id=year_of_manufacture]"));	
-	populateNCB($("[id=previousPolicyDetails] [id=ncb]"));
-	populateKit($("[id=protectionForAccessories] [id=kit]"));
-	populateKitPrice($("[id=protectionForAccessories] [id=kitPrice]"));
-	pouplatePACoverage($("[id=additionalCovers] [id=coverage_amt]"));
-
+	populateNCB($ncb);
+	populateKit($kit);
+	populateKitPrice($kitPrice);
+	pouplatePACoverage($coverageAmt);
 }
 
 function pouplateDay(selectElement){

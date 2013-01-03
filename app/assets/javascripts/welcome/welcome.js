@@ -3,8 +3,52 @@
 		var user;
 		var motorquotes;
 		var selectedMotorQuote;
-		loadData();
-		cacheAllJquerySelectore(); //jquery-selector.js
+
+		$quoteFormAccordionLink = $("[id=quoteFormAccordion] [id=link]");
+		$quoteResultsAccordionLink = $("[id=quoteResultsAccordion] [id=link]");
+		$quoteResultsBuyAccordionLink = $("[id=quoteResultsBuyAccordion] [id=link]");
+
+		$motorQuoteForm = $("[id=motorQuoteForm]");
+		$motorQuoteFormNotificationDiv = $("[id=motorQuoteFormNotificationDiv]");
+		$motorQuoteFormNotificationDivCloseLink = $("[id=motorQuoteFormNotificationDiv] a");
+
+		$policyType = $("[id=basicDetails] > [id=currentInsuranceDetails] [id=policyType]");
+		$previousPolicyDetails = $("[id=previousPolicyDetails]");
+		$make = $("[id=basicDetails] > [id=vehicleDetails] [id=make]");
+		$model = $("[id=basicDetails] > [id=vehicleDetails] [id=model]");
+		$registerDate = $("[id=basicDetails] > [id=registrationDetails] [id=registerDate]");
+		$price = $("[id=basicDetails] > [id=vehicleDetails] [id=price]");
+
+		$policyExpDate = $("[id=previousPolicyDetails] [id=date]");
+		$newPolicyStartDate = $("[id=previousPolicyDetails] [id=newPolicyStartDate]");
+
+		$legendProtectionForAccessories = $("[id=protectionForAccessories] > fieldset > legend > input");
+		$legendAdditionalDiscount = $("[id=additionalDiscount] > fieldset > legend > input");
+		$legendAdditionalCovers = $("[id=additionalCovers] > fieldset > legend > input");
+
+		$rtoId = $("[id=basicDetails] > [id=registrationDetails] [id=rtoId]");
+
+		$claimsMade = $("[id=previousPolicyDetails] [id=claimsMade]");
+		$ncbDiv = $("[id=previousPolicyDetails] [id=ncbDiv]");
+		$ncb = $("[id=previousPolicyDetails] [id=ncb]");
+		$noCliamBounsVerified = $("[id=previousPolicyDetails] [id=noCliamBounsVerified]");
+
+		$kit = $("[id=protectionForAccessories] [id=kit]");
+		$kitPrice = $("[id=protectionForAccessories] [id=kitPrice]");
+		$kitPriceControlGroup = $("[id=protectionForAccessories] [id=kitPriceControlGroup]");
+
+		$coverageAmt = $("[id=additionalCovers] [id=coverage_amt]");
+
+
+		$motorQuoteBuyForm = $("[id=motorQuoteBuyForm]");
+		$motorQuoteBuyFormNotificationDiv = $("[id=motorQuoteBuyFormNotificationDiv]");
+		$motorQuoteBuyFormNotificationDivCloseLink = $("[id=motorQuoteBuyFormNotificationDiv] a");
+
+		$mobileNumber = $("[id=motorQuoteBuyForm] [id=mobileNumber]");
+		$emailAddress = $("[id=motorQuoteBuyForm] [id=emailAddress]");
+		$address = $("[id=motorQuoteBuyForm] [id=address]");
+
+				cacheAllJquerySelectore(); //jquery-selector.js
 		jqueryFormValidations(); //jquery-form-validations.js
 		populateStaticData(); //static-data.js
 		bindToolTips(); //tooltips.js
@@ -16,13 +60,6 @@
 	});
 })(jQuery);	
 
-function loadData(){
-	var address = "/motor_searches/currentUser.json";
-	$.getJSON(address,function(currentUser){
-		user = currentUser;
-	});
-}
-
 function bindAllEventHandlers(){
 
 	bindMotorQuoteFormEvents();
@@ -30,15 +67,15 @@ function bindAllEventHandlers(){
 	bindAccordionEvents();
 	bindBreadcrumbEvents();
 
-	$("[id=protectionForAccessories] > fieldset > legend > input").bind("click", function(){
+	$legendProtectionForAccessories.bind("click", function(){
 		$("[id=protectionForAccessories1]").toggle();
 	});
 
-	$("[id=additionalDiscount] > fieldset > legend > input").bind("click", function(){
+	$legendAdditionalDiscount.bind("click", function(){
 		$("[id=additionalDiscount1]").toggle();
 	});
 
-	$("[id=additionalCovers] > fieldset > legend > input").bind("click", function(){
+	$legendAdditionalCovers.bind("click", function(){
 		$("[id=additionalCovers1]").toggle();
 	});
 
@@ -51,10 +88,10 @@ function  bindCityAutoComplete(){
 		source: "/rtos.json",
 		minLength: 2,
 		search: function(event, ui){
-			$("[id=registrationDetails] [id=rtoId]").val("");
+			$rtoId.val("");
 		},
 		select: function( event, ui ) {
-				$("[id=registrationDetails] [id=rtoId]").val(ui.item.id);
+				$rtoId.val(ui.item.id);
             }
 	});
 }
@@ -62,12 +99,12 @@ function  bindCityAutoComplete(){
 function bindDatePickers(){
 	var policyEndDate = new Date();	
 	policyEndDate.setDate(policyEndDate.getDate()+7);
-	$("[id=previousPolicyDetails] [id=date]").datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true", changeMonth: "true", changeYear: "true", defaultDate: policyEndDate });
+	$policyExpDate.datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true", changeMonth: "true", changeYear: "true", defaultDate: policyEndDate });
 	//$("[id=previousPolicyDetails] [id=date]").val(policyEndDate.getDate()+"-"+policyEndDate.getMonth()+1+"-"+policyEndDate.getFullYear());
 
 	var registrationDate = new Date();	
 	registrationDate.setYear(registrationDate.getFullYear()-5);
-	$("[id=registrationDetails] [id=registerDate]").datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true", changeMonth: "true", changeYear: "true",defaultDate: registrationDate });
+	$registerDate.datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true", changeMonth: "true", changeYear: "true",defaultDate: registrationDate });
 	//$("[id=registrationDetails] [id=registerDate]").val(registrationDate.getDate()+"-"+registrationDate.getMonth()+1+"-"+registrationDate.getFullYear());
 }
 
@@ -84,53 +121,53 @@ function esc(text){
 
 function bindMotorQuoteFormEvents(){
 	//this will hide/unhide the previous policy details div
-	$("[id=basicDetails] > [id=currentInsuranceDetails] [id=policyType]").bind("change",function(){
+	$policyType.bind("change",function(){
 		if($(this).val() == "true"){
-			$("[id=previousPolicyDetails]").hide();
+			$previousPolicyDetails.hide();
 		}else{
-			$("[id=previousPolicyDetails]").show();
+			$previousPolicyDetails.show();
 		}
 	});
 	
 	//this will change the model drop down when we change the make
-	$("[id=basicDetails] > [id=vehicleDetails] [id=make]").bind("change",function(){
-		populateModel($("[id=basicDetails] > [id=vehicleDetails] [id=make]").val());
+	$make.bind("change",function(){
+		populateModel($make.val());
 	});
 
 	//this will update the price when we change the model
-	$("[id=basicDetails] > [id=vehicleDetails] [id=model]").bind("change",function(){
+	$model.bind("change",function(){
 		populatePrice($(this).val());
 	});
 
 	//this will update the price when we change day, month or year of purchase date
-	$("[id=basicDetails] > [id=registrationDetails] [id=registerDate]").bind("change",function(){
+	$registerDate.bind("change",function(){
 		populatePrice();
 	});
 
 	//If a claim has been made in previous policy year we will not show the ncb drop down and checkbox
 	//But if a claim has not been made in previous policy year then we want to show these options
-	$("[id=previousPolicyDetails] [id=claimsMade]").bind("change",function(){
+	$claimsMade.bind("change",function(){
 		if($(this).val() == "true"){
-			$("[id=previousPolicyDetails] [id=ncbDiv]").hide();
-			$("[id=previousPolicyDetails] [id=noCliamBounsVerified]").hide();
+			$ncbDiv.hide();
+			$noCliamBounsVerified.hide();
 		}else{
-			$("[id=previousPolicyDetails] [id=ncbDiv]").show();
-			$("[id=previousPolicyDetails] [id=noCliamBounsVerified]").show();
+			$ncbDiv.show();
+			$noCliamBounsVerified.show();
 		}
 	});	
 
 	//If the kit is not factory fitted, we must show the kit value drop down
-	$("[id=protectionForAccessories] [id=kit]").bind("change",function(){
+	$kit.bind("change",function(){
 		if($(this).val() == "CNG" || $(this).val() == "LPG" ){
-			$("[id=protectionForAccessories] [id=kitPriceControlGroup]").show();
+			$kitPriceControlGroup.show();
 		}
 		else{
-			$("[id=protectionForAccessories] [id=kitPriceControlGroup]").hide();
+			$kitPriceControlGroup.hide();
 		}
 	});
 
 
-	$("[id=previousPolicyDetails] [id=date]").bind("change",function(){
+	$policyExpDate.bind("change",function(){
 	 	populateNewPolicyStartDate();
 	 });
 

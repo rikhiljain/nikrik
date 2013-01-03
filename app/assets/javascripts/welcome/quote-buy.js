@@ -11,14 +11,14 @@ function openMotorQuoteBuyForm(id){
 	if(user != null){
     prefillMotorQuoteBuyForm(user);
 	}
-	$("[id=quoteResultsBuyAccordion] [id=link]").click();
+	$quoteResultsBuyAccordionLink.click();
   return false;
 }
 
 function prefillMotorQuoteBuyForm(user){
-  $("[id=motorQuoteBuyForm] [id=mobileNumber]").val(user.mobile);
-  $("[id=motorQuoteBuyForm] [id=emailAddress]").val(user.email);
-  $("[id=motorQuoteBuyForm] [id=address]").val(user.address);
+  $mobileNumber.val(user.mobile);
+  $emailAddress.val(user.email);
+  $address.val(user.address);
 }
 
 function submitMotorQuoteBuyRequest(serializedJSON){
@@ -47,12 +47,12 @@ function submitMotorQuoteBuyRequest(serializedJSON){
 
 function buildNotificationsForMotorQuoteBuyForm(){
   var message = "A very sincere thanks for your interest. We will contact you very shortly. You should also receive one email with the quote details.";
-  $("[id=motorQuoteBuyFormNotificationDiv]").append("<div class='alert alert-success'>"+message+"<a class='close' data-dismiss='alert'>&#215;</a></div>");
+  $motorQuoteBuyFormNotificationDiv.append("<div class='alert alert-success'>"+message+"<a class='close' data-dismiss='alert'>&#215;</a></div>");
 }
 
 function validateMotorQuoteBuyForm(){
   // Validation
-  $("[id=motorQuoteBuyForm]").validate({
+  $motorQuoteBuyForm.validate({
     rules:{
       mobile_number: {required:true, phoneIndia:true},
       email_id: {required:true, email:true},
@@ -75,10 +75,10 @@ function validateMotorQuoteBuyForm(){
       //$(element).parents('.control-group').addClass('success');
     },
     invalidHandler: function (form, validator){
-      $("[id=motorQuoteBuyFormNotificationDiv] a").click();
+      $motorQuoteBuyFormNotificationDivCloseLink.click();
     },
     submitHandler: function(form){
-        $("[id=motorQuoteBuyFormNotificationDiv] a").click();
+        $motorQuoteBuyFormNotificationDivCloseLink.click();
         var serializedJSON = createMotorQuoteBuyRequest();
         console.log(serializedJSON);
         submitMotorQuoteBuyRequest(serializedJSON);
@@ -89,7 +89,7 @@ function validateMotorQuoteBuyForm(){
 
 function createMotorQuoteBuyRequest(){
     var json = {};
-    $.map($("[id=motorQuoteBuyForm]").serializeArray(), function(el, i){
+    $.map($motorQuoteBuyForm.serializeArray(), function(el, i){
       if(el.value == ""){
         //ignore
       }

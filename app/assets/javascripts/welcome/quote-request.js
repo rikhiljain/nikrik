@@ -8,7 +8,7 @@ function createMotorQuoteRequest(){
   	if($("[id=previousPolicyDetails] [id=claimsMade]:checked").val() == "true"){
   		ignoreFormFields["ncb"] = "dummy";
   	}
-  	if($("[id=protectionForAccessories] [id=kit]").val() != "LPG" || $("[id=protectionForAccessories] [id=kit]").val() != "CNG"){
+  	if($kit.val() != "LPG" || $kit.val() != "CNG"){
   		ignoreFormFields["cng_value"] = "dummy";
   	}
   	var json = {};
@@ -40,8 +40,8 @@ function submitMotorQuoteRequest(serializedJSON){
   				success: function(data) {
     				//called when successful
     				fillResultTable(data);
-    				$("[id=quoteFormAccordion] [id=link]").click();
-					  $("[id=quoteResultsAccordion] [id=link]").click();
+    				$quoteFormAccordionLink.click();
+					  $quoteResultsAccordionLink.click();
  				},
 
   				error: function(data, textStatus, errorThrown) {
@@ -54,7 +54,7 @@ function submitMotorQuoteRequest(serializedJSON){
 function validateMotorQuoteForm(){
   //$.validator.setDefaults({focusCleanup: "true", invalidHandler: motorQuoteFormInvalidHandler});
   // Validation
-  $("[id=motorQuoteForm]").validate({
+  $motorQuoteForm.validate({
     rules:{
       register_city:"register_city_val",
       register_date:"required",
@@ -89,11 +89,11 @@ function validateMotorQuoteForm(){
     onclick: function(element, event) {
     },
     invalidHandler: function (form, validator){
-      $("[id=motorQuoteFormNotificationDiv] a").click();
-      $("[id=motorQuoteFormNotificationDiv]").append("<div class='alert alert-error'>You missed "+validator.numberOfInvalids()+" fields. They have been highlighted below.<a class='close' data-dismiss='alert'>&#215;</a></div>");
+      $motorQuoteFormNotificationDivCloseLink.click();
+      $motorQuoteFormNotificationDiv.append("<div class='alert alert-error'>You missed "+validator.numberOfInvalids()+" fields. They have been highlighted below.<a class='close' data-dismiss='alert'>&#215;</a></div>");
     },
     submitHandler: function(form){
-      $("[id=motorQuoteFormNotificationDiv] a").click();
+      $motorQuoteFormNotificationDivCloseLink.click();
       var serializedJSON = createMotorQuoteRequest();
       console.log(serializedJSON);
       submitMotorQuoteRequest(serializedJSON);

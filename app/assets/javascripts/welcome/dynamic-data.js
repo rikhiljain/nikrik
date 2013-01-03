@@ -1,5 +1,6 @@
 function populateDynamicData(){
 	populateManufacturers();
+	loadCurrentUser();
 }
 
 function populateManufacturers(){
@@ -10,8 +11,8 @@ function populateManufacturers(){
 		$.each(options, function(){
 			selOptions += '<option value="' + this['optionValue'] + '">' + this['optionDisplay'] + '</option>';
 		});
-		$("[id=basicDetails] > [id=vehicleDetails] [id=make]").html(selOptions);
-		$("[id=basicDetails] > [id=vehicleDetails] [id=make]").change();
+		$make.html(selOptions);
+		$make.change();
 	});
 }
 
@@ -23,32 +24,39 @@ function populateModel(manufacturer){
 		$.each(options, function(){
 			selOptions += '<option value="' + this['optionValue'] + '">' + this['optionDisplay'] + '</option>';
 		});
-		$("[id=basicDetails] > [id=vehicleDetails] [id=model]").html(selOptions);
+		$model.html(selOptions);
 		//$("[id=basicDetails] > [id=vehicleDetails] [id=model]").change();
 	});	
 }
 
 function populatePrice(){
-	var mdate = $("[id=basicDetails] > [id=registrationDetails] [id=registerDate]").val();
+	var mdate = $registerDate.val();
 	if(mdate == ""){
 		return;
 	}
 	console.log(mdate);
-	var idvChartId = $("[id=basicDetails] > [id=vehicleDetails] [id=model]").val();
+	var idvChartId = $model.val();
 	var options;
 	var address = "/idv_charts/"+idvChartId+"/motorValue.json?mdate="+mdate;
 	//var address = "model.json";
 	$.getJSON(address,function(price){
-		$("[id=basicDetails] > [id=vehicleDetails] [id=price]").text(price);
+		$price.text(price);
 	});
 }
 
 
 function populateNewPolicyStartDate(){
-	var currentDate = $("[id=previousPolicyDetails] [id=date]").datepicker( "getDate" );
+	var currentDate = $policyExpDate.datepicker( "getDate" );
 	var d = currentDate;
 	d.setDate(currentDate.getDate() + 1);
 	console.log(d.getMonth());
-	$("[id=previousPolicyDetails] [id=newPolicyStartDate]").text(d.getDate()+"-"+ m_names[d.getMonth()]+"-"+d.getFullYear());
+	$newPolicyStartDate.text(d.getDate()+"-"+ m_names[d.getMonth()]+"-"+d.getFullYear());
+}
+
+function loadCurrentUser(){
+	var address = "/motor_searches/currentUser.json";
+	$.getJSON(address,function(currentUser){
+		user = currentUser;
+	});
 }
 

@@ -4,7 +4,7 @@ function jqueryFormValidations(){
 
 function cusomValidationMethods(){
 		$.validator.addMethod("register_city_val", function() {
-	    if ($("[id=basicDetails] > [id=registrationDetails] [id=rtoId]").val() == ""){
+	    if ($rtoId.val() == ""){
 	    	return false;
 	    } 
    		else{
@@ -17,7 +17,7 @@ function cusomValidationMethods(){
 			return true;
 		}
 		else{
-			if ($("[id=previousPolicyDetails] [id=date]").val() == ""){
+			if ($policyExpDate.val() == ""){
 	    		return false;
 	    	} 
    			else{
