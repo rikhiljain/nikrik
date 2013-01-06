@@ -16,7 +16,8 @@ module Nikrik
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += Dir["#{config.root}/app/models/**/"]
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -58,5 +59,18 @@ module Nikrik
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Use the memory store - this store has no options
+    config.cache_store = :memory_store
+
+    # Use the file store with a custom storage path (if the directory doesn’t already exist it will be created)
+    #config.cache_store = :file_store, '/my_cache_path'
+
+    # Use the memcached store with default options (localhost, TCP port 11211)
+    #config.cache_store = :mem_cache_store
+
+    # Use the memcached store with an options hash
+    #config.cache_store = :mem_cache_store, 'localhost', '192.168.1.1:1001', { :namespace => 'test' }
+
   end
 end

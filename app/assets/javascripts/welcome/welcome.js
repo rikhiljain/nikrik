@@ -48,7 +48,7 @@
 		$emailAddress = $("[id=motorQuoteBuyForm] [id=emailAddress]");
 		$address = $("[id=motorQuoteBuyForm] [id=address]");
 
-				cacheAllJquerySelectore(); //jquery-selector.js
+		cacheAllJquerySelectore(); //jquery-selector.js
 		jqueryFormValidations(); //jquery-form-validations.js
 		populateStaticData(); //static-data.js
 		bindToolTips(); //tooltips.js
@@ -85,7 +85,7 @@ function bindAllEventHandlers(){
 
 function  bindCityAutoComplete(){
 	$( "#registerCity" ).autocomplete({
-		source: "/rtos.json",
+		source: "motor/rtos.json",
 		minLength: 2,
 		search: function(event, ui){
 			$rtoId.val("");

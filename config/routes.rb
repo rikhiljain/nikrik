@@ -1,31 +1,32 @@
 Nikrik::Application.routes.draw do
 
-  resources :motor_policies
-
-
   devise_for :users,  :path => '', path_names:{sign_in: "login", sign_out: "logout"}
 
 
-
   get "welcome/index"
-  get "idv_charts/distinctMakers"
-  get "idv_charts/modelsForAManufacturer"
-  get "idv_charts/:id/motorValue" => "idv_charts#motorValue"
-  get "idv_charts/models"
   get "home/admin"
-  post "motor_searches/quote"
-  post "motor_searches/buy"
-  get  "motor_searches/currentUser" => "motor_searches#currentUser"
   post "home/callus"
-  get "motor_policies/download/:id"  => "motor_policies#download"
 
-  resources :rtos
-  resources :motor_discounts
-  resources :motor_searches
-  resources :my_names
-  resources :idv_charts
+  get "motor/idv_charts/distinctMakers" => "motor/idv_charts#distinctMakers"
+  get "motor/idv_charts/modelsForAManufacturer" => "motor/idv_charts#modelsForAManufacturer"
+  get "motor/idv_charts/:id/motorValue" => "motor/idv_charts#motorValue"
+  get "motor/idv_charts/models" => "motor/idv_charts#models"
+  get  "motor/searches/currentUser" => "motor/searches#currentUser"
+  get "motor/policies/download/:id"  => "motor/policies#download"
+  post "motor/searches/quote" => "motor/searches#quote"
+  post "motor/searches/buy" => "motor/searches#buy"
+
+
+  namespace :motor do
+    resources :policies
+    resources :rtos
+    resources :discounts
+    resources :searches
+    resources :quotes
+    resources :idv_charts
+  end
+
   resources :admin_users
-  resources :motorquotes
 
   root :to => "welcome#index"
 

@@ -27,7 +27,7 @@ function createMotorQuoteRequest(){
 
 function submitMotorQuoteRequest(serializedJSON){
 	$.ajax({
-  				url: "/motor_searches/quote",
+  				url: "motor/searches/quote",
   				type: "POST",
 				dataType: "json", // expected format for response
 				contentType: "application/json", // send as JSON

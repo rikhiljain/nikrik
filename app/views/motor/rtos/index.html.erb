@@ -1,0 +1,27 @@
+<h2>Listing RTOs</h2>
+
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Code</th>
+    <th>Sub code</th>
+    <th>City</th>
+    <th>State</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @rtos.each do |rto| %>
+  <tr>
+    <td><%= rto.code %></td>
+    <td><%= rto.sub_code %></td>
+    <td><%= rto.city %></td>
+    <td><%= rto.state %></td>
+    <td><%= link_to 'Edit',  edit_motor_rto_path(rto) %></td>
+    <td><%= link_to 'Destroy', rto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New RTO',  new_motor_rto_path, :class => "btn" %>

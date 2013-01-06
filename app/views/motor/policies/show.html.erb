@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Policy:</b>
+  <%= @motor_policy.policy_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @motor_policy.user_id %>
+</p>
+
+<p>
+  <b>Company:</b>
+  <%= @motor_policy.company_id %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @motor_policy.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @motor_policy.end_date %>
+</p>
+
+<p>
+  <b>Premium:</b>
+  <%= @motor_policy.premium %>
+</p>
+
+<p>
+  <b>Discount:</b>
+  <%= @motor_policy.discount %>
+</p>
+
+<p>
+  <b>Policy path:</b>
+  <%= @motor_policy.policy_path %>
+</p>
+
+
+<%= link_to 'Edit', edit_motor_policy_path(@motor_policy) %> |
+<%= link_to 'Back', motor_policies_path %>

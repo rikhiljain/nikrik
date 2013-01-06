@@ -5,7 +5,7 @@ function populateDynamicData(){
 
 function populateManufacturers(){
 	var selOptions = '<option value="">Select Manufacturer</option>'; 
-	var address = "/idv_charts/distinctMakers.json";
+	var address = "/motor/idv_charts/distinctMakers.json";
 	//var address = "make.json";
 	$.getJSON(address,function(options){
 		$.each(options, function(){
@@ -18,7 +18,7 @@ function populateManufacturers(){
 
 function populateModel(manufacturer){
 	var selOptions = '<option value="">Select Model</option>';;
-	var address = "/idv_charts/models.json?manufacturer="+manufacturer;
+	var address = "/motor/idv_charts/models.json?manufacturer="+manufacturer;
 	//var address = "model.json";
 	$.getJSON(address,function(options){
 		$.each(options, function(){
@@ -31,13 +31,12 @@ function populateModel(manufacturer){
 
 function populatePrice(){
 	var mdate = $registerDate.val();
-	if(mdate == ""){
+	if(mdate == "" || $model.val() == "" || $make.val() == ""){
 		return;
 	}
-	console.log(mdate);
 	var idvChartId = $model.val();
 	var options;
-	var address = "/idv_charts/"+idvChartId+"/motorValue.json?mdate="+mdate;
+	var address = "/motor/idv_charts/"+idvChartId+"/motorValue.json?mdate="+mdate;
 	//var address = "model.json";
 	$.getJSON(address,function(price){
 		$price.text(price);
@@ -54,7 +53,7 @@ function populateNewPolicyStartDate(){
 }
 
 function loadCurrentUser(){
-	var address = "/motor_searches/currentUser.json";
+	var address = "/motor/searches/currentUser.json";
 	$.getJSON(address,function(currentUser){
 		user = currentUser;
 	});

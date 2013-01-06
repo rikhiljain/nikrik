@@ -1,0 +1,49 @@
+<h2>Listing Motor Searches</h2>
+
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>New policy</th>
+    <th>Policy exp date</th>
+    <th>Year of manufacture</th>
+    <th>Idv chart</th>
+    <th>Register type</th>
+    <th>Register city id</th>
+    <th>Has claim</th>
+    <th>Ncb</th>
+    <th>Elec acc</th>
+    <th>Non elec acc</th>
+    <th>Cng type</th>
+    <th>Cng value</th>
+    <th>Passenger coverage amt</th>
+    <th>Has anti theft</th>
+    <th>Is aai member</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @motor_searches.each do |motor_search| %>
+  <tr>
+    <td><%= motor_search.new_policy %></td>
+    <td><%= motor_search.policy_exp_date %></td>
+    <td><%= motor_search.year_of_manufacture %></td>
+    <td><%= motor_search.idv_chart_id %></td>
+    <td><%= motor_search.register_type %></td>
+    <td><%= motor_search.rto_id %></td>
+    <td><%= motor_search.has_claim %></td>
+    <td><%= motor_search.ncb %></td>
+    <td><%= motor_search.elec_acc %></td>
+    <td><%= motor_search.non_elec_acc %></td>
+    <td><%= motor_search.cng_type %></td>
+    <td><%= motor_search.cng_value %></td>
+    <td><%= motor_search.passenger_coverage_amt %></td>
+    <td><%= motor_search.has_anti_theft %></td>
+    <td><%= motor_search.is_aai_member %></td>
+    <td><%= link_to 'Show', motor_search %></td>
+    <td><%= link_to 'Edit', edit_motor_search_path(motor_search) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Motor search', new_motor_search_path %>

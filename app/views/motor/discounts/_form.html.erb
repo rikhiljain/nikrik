@@ -1,0 +1,14 @@
+<%= simple_form_for(@motor_discount) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :idv_chart, :collection => Motor::IdvChart.select(" id, concat(maker , ' - ', model, ' - ', subtype) as label" ), :label_method => :label, :value_method => :id, :required => true , :autofocus => true %>
+    <%= f.association :company, :label_method => :name, :value_method => :id,  :prompt => "Select Company", :required => true %>
+    <%= f.input :amount, :required => true %>
+    <%= f.association :rto ,:collection => Motor::Rto.select(" id, concat(city , ' - ', state) as label" ), :label_method => :label, :value_method => :id,  :prompt => "Select RTO" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<h2>Listing idv charts</h2>
+
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Maker</th>
+    <th>Model</th>
+    <th>Subtype</th>
+    <th>Seats</th>
+    <th>Cubic</th>
+    <th>Fuel</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @idv_charts.each do |idv_chart| %>
+  <tr>
+    <td><%= idv_chart.maker %></td>
+    <td><%= idv_chart.model %></td>
+    <td><%= idv_chart.subtype %></td>
+    <td><%= idv_chart.seats %></td>
+    <td><%= idv_chart.cubic %></td>
+    <td><%= idv_chart.fuel %></td>
+    <td><%= link_to 'Show', idv_chart %></td>
+    <td><%= link_to 'Edit', edit_motor_idv_chart_path(idv_chart) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Idv chart', new_motor_idv_chart_path %>
