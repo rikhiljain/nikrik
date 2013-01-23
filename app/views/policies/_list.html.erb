@@ -1,5 +1,5 @@
 <fieldset style="width:800px">
-<legend>Motor Policies List</legend>
+<legend>Policies List</legend>
 
 <table class="table table-bordered table-striped">
   <tr>
@@ -14,15 +14,15 @@
     <th></th>
   </tr>
 
-  <% @motor_policies.each do |motor_policy| %>
+  <% @policies.each do |policy| %>
       <tr>
-        <td><%= motor_policy.policy_id %></td>
-        <td><%= motor_policy.user.name %></td>
-        <td><%= motor_policy.company.name %></td>
-        <td><%= motor_policy.start_date %></td>
-        <td><%= motor_policy.end_date %></td>
-        <td><%= motor_policy.premium %></td>
-        <td><%= motor_policy.discount %></td>
+        <td><%= policy.policy_id %></td>
+        <td><%= policy.user.name %></td>
+        <td><%= policy.company.name %></td>
+        <td><%= policy.start_date %></td>
+        <td><%= policy.end_date %></td>
+        <td><%= policy.premium %></td>
+        <td><%= policy.discount %></td>
         <td><%= link_to 'Show', motor_policy %></td>
         <td><%= link_to 'Edit', edit_motor_policy_path(motor_policy) %></td>
       </tr>

@@ -54,8 +54,5 @@ def new
   end
 end
 
-def policies
-  @motor_policies = MotorPolicy.where("user_id=?", params[:id])
-end
 
 end

@@ -1,7 +1,6 @@
 class AdminUsersController < ApplicationController
-  before_filter :authenticate_admin!
-
-  def index
+ 
+ def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @users = User.search(params[:user_search])
     @user_search = params[:user_search]

@@ -1,4 +1,4 @@
 <ul class="nav nav-list bs-docs-sidenav affix">
   <li><%= link_to 'Edit Profile', edit_user_registration_path  %></li>
-  <li><%= link_to 'My Policies', {:controller => "users", :action => "policies", :id => current_user.id } %></li>
+  <li><%= link_to 'My Policies', {:controller => "share/policies", :action => "policies", :id => current_user.id } %></li>
 </ul>

@@ -140,8 +140,12 @@ class Share::PoliciesController < ApplicationController
 
   end
 
-  def user_policies
-    @motor_policies = MotorPolicy.where("user_id=?", params[:id])
+  def policies
+    @policies = Share::Policy.where("user_id=?", params[:id])
+    respond_to do |format|
+      format.html { render :template => "/policies/_list" }
+    end
+
   end
 
 
