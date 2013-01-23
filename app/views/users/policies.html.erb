@@ -1,0 +1,29 @@
+<fieldset >
+<legend>My Policies</legend>
+
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Policy</th>
+    <th>User</th>
+    <th>Company</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Premium</th>
+    <th>Discount</th>
+    <th></th>
+  </tr>
+
+  <% @motor_policies.each do |motor_policy| %>
+      <tr>
+        <td><%= motor_policy.policy_id %></td>
+        <td><%= motor_policy.user.name %></td>
+        <td><%= motor_policy.company.name %></td>
+        <td><%= motor_policy.start_date %></td>
+        <td><%= motor_policy.end_date %></td>
+        <td><%= motor_policy.premium %></td>
+        <td><%= motor_policy.discount %></td>
+        <td><%= link_to 'Download policy',  {:controller => "motor_policies", :action => "download", :id => @motor_policy.id } %></td>
+      </tr>
+  <% end %>
+</table>
+</fieldset>

@@ -34,7 +34,7 @@
              <% else %>
               <% if (current_user.has_role? :user) %>
                   <div class="span2">
-                      <%= current_user %>
+                        <%= render "shared/user_left_nav" %>
                   </div>
                   <div class="span7">
                     <%= render 'layouts/messages' %>

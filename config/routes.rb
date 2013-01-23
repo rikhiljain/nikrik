@@ -12,11 +12,13 @@ Nikrik::Application.routes.draw do
   get "motor/idv_charts/:id/motorValue" => "motor/idv_charts#motorValue"
   get "motor/idv_charts/models" => "motor/idv_charts#models"
   get  "motor/searches/currentUser" => "motor/searches#currentUser"
-  get "motor/policies/download/:id"  => "motor/policies#download"
   post "motor/searches/quote" => "motor/searches#quote"
   post "motor/searches/buy" => "motor/searches#buy"
+  
+  get "users/policies/:id"  =>    "users#policies"
 
-
+  get "share/policies/download/:id"  => "share/policies#download"
+ 
   namespace :motor do
     resources :policies
     resources :rtos
@@ -24,6 +26,10 @@ Nikrik::Application.routes.draw do
     resources :searches
     resources :quotes
     resources :idv_charts
+  end
+
+  namespace :share do
+    resources :policies
   end
 
   resources :admin_users

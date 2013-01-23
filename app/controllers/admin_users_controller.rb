@@ -1,5 +1,5 @@
 class AdminUsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_admin!
 
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'

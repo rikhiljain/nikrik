@@ -9,7 +9,7 @@ development:
   reconnect: false
   database: nikrik
   username: root
-  password: 
+  password: Asterik1
   host: localhost
   pool: 5
 

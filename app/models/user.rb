@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  after_create :default_role
+
   rolify
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -13,7 +15,8 @@ class User < ActiveRecord::Base
 
   attr_accessor :login
 
-  validates :name,:mobile, :presence => true
+  validates_uniqueness_of :mobile
+  validates_presence_of :mobile, :name
 
   def self.search(term)
   if(term.nil?)
@@ -35,6 +38,16 @@ class User < ActiveRecord::Base
 
   def update_tracked_fields!(request)
     super(request) unless self.has_role? :admin
+  end
+
+private
+  
+  def default_role
+    debugger
+    unless self.roles.size > 0
+      self.roles << Role.where(:name => 'user').first
+    end
+    debugger
   end
 
 end
