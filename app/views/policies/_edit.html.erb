@@ -1,5 +1,5 @@
 <div id="edit-policy" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <%= simple_form_for @motor_policy, :html => {:method => :put, :class => 'form-horizontal' } do |f| %>
+  <%= simple_form_for @policy, :html => {:method => :put, :class => 'form-horizontal' } do |f| %>
     <div class="modal-header">
       <a class="close" data-dismiss="modal">&#215;</a>
       <h3>Edit Policy</h3>
@@ -18,8 +18,8 @@
         <%= f.input :discount , :required => true %>
         <%= f.label :policy_path %>
         <%= f.file_field :policy_path %>
-        <% unless  @motor_policy.policy_path.nil?%>
-            <%= link_to 'Download policy',  {:controller => "motor_policies", :action => "download", :id => @motor_policy.id } %>
+        <% unless  @policy.policy_path.nil?%>
+            <%= link_to 'Download policy',  {:controller => "policies", :action => "download", :id => @policy.id } %>
          <% end %>
   </div>
     </div>
@@ -29,7 +29,7 @@
     </div>
   <% end %>
 </div>
-<% if ( (@motor_policy.errors.size > 0 &&  (@is_edit == true) ) ||  (@is_edit == true) )%>
+<% if ( (@policy.errors.size > 0 &&  (@is_edit == true) ) ||  (@is_edit == true) )%>
 <script type="text/javascript"> 
  $("#edit-policy").modal('show'); 
  </script>  

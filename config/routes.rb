@@ -24,15 +24,20 @@ Nikrik::Application.routes.draw do
     resources :searches
     resources :quotes
     resources :idv_charts
+    get "policies/download/:id"  => "policies#download"
   end
 
   scope :module => "share" do
     resources :policies
+     get "policies/display/:id"  =>    "policies#display"
      get "policies/policies/:id"  =>    "policies#policies"
      get "policies/download/:id"  => "policies#download"
   end
 
-  resources :admin_users
+  resources :admin_users do
+    resources :policies, :shallow=>true       
+  end
+
 
   root :to => "welcome#index"
 

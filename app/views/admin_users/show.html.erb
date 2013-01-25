@@ -5,8 +5,8 @@
 <p>Address: <%= @user.address if @user.address %></p>
 <p>Role: <%= @user.roles.first.name.titleize unless @user.roles.first.nil? %></p>
 
-<%= render 'motor_policies/list' %>
+<%= render 'policies/list' %>
 
 <a data-toggle="modal" href="#add-policy" class="btn" >Add Policy</a>
-<%= render 'motor_policies/form' %>
-<%= render 'motor_policies/edit' %>
+<%= render 'policies/form' %>
+<%= render 'policies/edit' %>
