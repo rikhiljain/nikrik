@@ -1,7 +1,7 @@
-class Share::PoliciesController < ApplicationController
+class PoliciesController < ApplicationController
   
   def index
-    @policies = Share::Policy.all
+    @policies = Policy.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,7 +10,7 @@ class Share::PoliciesController < ApplicationController
   end
 
   def show
-    @policy = Share::Policy.find(params[:id])
+    @policy = Policy.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,7 +21,7 @@ class Share::PoliciesController < ApplicationController
   # GET /motor_policies/new
   # GET /motor_policies/new.json
   def new
-    @policy = Share::Policy.new
+    @policy = Policy.new
     @policy.user_id = params[:user_id]
     respond_to do |format|
       format.html # new.html.erb
@@ -31,9 +31,9 @@ class Share::PoliciesController < ApplicationController
 
   # GET /motor_policies/1/edit
   def edit
-    @policy = Share::Policy.find(params[:id])
+    @policy = Policy.find(params[:id])
     @user =  @policy.user
-    @policies = Share::Policy.where("user_id=?", @policy.user_id)
+    @policies = Policy.where("user_id=?", @policy.user_id)
     @is_edit = true
     render :template => "/admin_users/show"
   end
@@ -41,7 +41,7 @@ class Share::PoliciesController < ApplicationController
   # POST /motor_policies
   # POST /motor_policies.json
   def create
-    @policy = Share::Policy.new(params[:motor_policy])
+    @policy = Policy.new(params[:policy])
      @is_edit = false
     upload
 
@@ -51,7 +51,7 @@ class Share::PoliciesController < ApplicationController
         format.json { render json: @policy, status: :created, location: @policy }
       else
         @user =  @policy.user
-        @policies = Motor::Policy.where("user_id=?", @policy.user_id)
+        @policies = Policy.where("user_id=?", @policy.user_id)
         format.html { render :template => "/admin_users/show" }
         format.json { render json: @policy.errors, status: :unprocessable_entity }
       end
@@ -61,9 +61,9 @@ class Share::PoliciesController < ApplicationController
   # PUT /motor_policies/1
   # PUT /motor_policies/1.json
   def update
-    @policy = Share::Policy.find(params[:id])
-    new_policy = Share::Policy.new(params[:motor_policy])
-    uploaded_io = params[:motor_policy][:policy_path]
+    @policy = Policy.find(params[:id])
+    new_policy = Policy.new(params[:policy])
+    uploaded_io = params[:policy][:policy_path]
     unless uploaded_io.nil?
 
       file_name =   new_policy.policy_id.to_s + "_" +  new_policy.user_id.to_s  + File.extname(uploaded_io.original_filename)
@@ -76,13 +76,13 @@ class Share::PoliciesController < ApplicationController
       end
     end
     respond_to do |format|
-      if @policy.update_attributes(Share::Policy.to_hash(new_policy))
+      if @policy.update_attributes(Policy.to_hash(new_policy))
         format.html { redirect_to "/admin_users/#{@policy.user_id}" , notice: 'Motor policy was successfully created.' }
         format.json { head :no_content }
       else
         @user =  @policy.user
         @is_edit = true
-        @policies = Share::Policy.where("user_id=?", @policy.user_id)
+        @policies = Policy.where("user_id=?", @policy.user_id)
         format.html { render :template => "/admin_users/show" }
         format.json { render json: @policy.errors, status: :unprocessable_entity }
       end
@@ -92,7 +92,7 @@ class Share::PoliciesController < ApplicationController
   # DELETE /motor_policies/1
   # DELETE /motor_policies/1.json
   def destroy
-    @policy = Share::Policy.find(params[:id])
+    @policy = Policy.find(params[:id])
     @policy.destroy
 
     respond_to do |format|
@@ -102,7 +102,7 @@ class Share::PoliciesController < ApplicationController
   end
 
   def download
-    policy = Share::Policy.find(params[:id])
+    policy = Policy.find(params[:id])
 
     begin
       file_ext = File.extname(policy.policy_path)
@@ -121,7 +121,7 @@ class Share::PoliciesController < ApplicationController
   end
 
   def upload
-    uploaded_io = params[:motor_policy][:policy_path]
+    uploaded_io = params[:policy][:policy_path]
     unless uploaded_io.nil?
 
       file_name =   @policy.policy_id.to_s + "_" +  @policy.user_id.to_s  + File.extname(uploaded_io.original_filename)
@@ -139,7 +139,7 @@ class Share::PoliciesController < ApplicationController
   end
 
   def policies
-    @policies = Share::Policy.where("user_id=?", params[:id])
+    @policies = Policy.where("user_id=?", params[:id])
     respond_to do |format|
       format.html { render :template => "/policies/user_list" }
     end

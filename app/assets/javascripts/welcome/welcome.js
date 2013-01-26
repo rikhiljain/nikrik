@@ -85,7 +85,7 @@ function bindAllEventHandlers(){
 
 function  bindCityAutoComplete(){
 	$( "#registerCity" ).autocomplete({
-		source: "motor/rtos.json",
+		source: "/motor/rtos.json",
 		minLength: 2,
 		search: function(event, ui){
 			$rtoId.val("");

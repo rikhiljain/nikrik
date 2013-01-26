@@ -2,7 +2,7 @@ class Motor::Discount < ActiveRecord::Base
   
   set_table_name "motor_discounts"
   attr_accessible :amount, :company_id, :idv_chart_id, :rto_id
-  belongs_to :company,  :class_name => 'Share::Company'
+  belongs_to :company,  :class_name => 'Company'
 
   belongs_to :idv_chart
   belongs_to :rto, :class_name => 'Motor::Rto' 

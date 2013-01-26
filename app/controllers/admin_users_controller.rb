@@ -10,8 +10,8 @@ class AdminUsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @policies = Share::Policy.where("user_id=?", @user.id)
-    @policy = Share::Policy.new
+    @policies = Policy.where("user_id=?", @user.id)
+    @policy = Policy.new
     @policy.user_id = @user.id
 
   end

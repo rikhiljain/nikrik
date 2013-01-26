@@ -15,27 +15,23 @@ Nikrik::Application.routes.draw do
   post "motor/searches/quote" => "motor/searches#quote"
   post "motor/searches/buy" => "motor/searches#buy"
   
-  #get "share/policies/:id"  =>    "share#policies"
-  #get "share/policies/download/:id"  => "share/policies#download"
- 
+  
   namespace :motor do
     resources :rtos
     resources :discounts
     resources :searches
     resources :quotes
     resources :idv_charts
-    get "policies/download/:id"  => "policies#download"
   end
+  
+  resources :policies
 
-  scope :module => "share" do
-    resources :policies
-     get "policies/display/:id"  =>    "policies#display"
-     get "policies/policies/:id"  =>    "policies#policies"
-     get "policies/download/:id"  => "policies#download"
-  end
-
+  get "policies/display/:id"  =>    "policies#display"
+  get "policies/policies/:id"  =>    "policies#policies"
+  get "policies/download/:id"  => "policies#download"
+ 
   resources :admin_users do
-    resources :policies, :shallow=>true       
+    resources :policies, :shallow=>true      
   end
 
 

@@ -23,7 +23,7 @@ function prefillMotorQuoteBuyForm(user){
 
 function submitMotorQuoteBuyRequest(serializedJSON){
 	$.ajax({
-  				url: "motor/searches/buy",
+  				url: "/motor/searches/buy",
   				type: "POST",
 				dataType: "json", // expected format for response
 				contentType: "application/json", // send as JSON

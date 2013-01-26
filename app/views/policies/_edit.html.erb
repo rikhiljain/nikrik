@@ -8,6 +8,7 @@
       <div class="form-inputs">
          <%= f.error_notification %>
         <%= f.input :policy_id, :required => true , :autofocus => true %>
+        <%= f.input :policy_type ,:required => true, :prompt => "Select Type", :collection => [ "MOTOR", "HEALTH", "TRAVEL"] %>
         <%= f.association :user,  :label_method =>  :name, :value_method => :id, :prompt => "Select User", :required => true %>
         <%= f.association  :company,  :label_method => :name, :value_method => :id,  :prompt => "Select Company", :required => true  %>
         <%= f.input :start_date, :as => :date, :start_year => Date.today.year - 1,
