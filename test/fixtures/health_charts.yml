@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  coverage: 1
+  age_start: 1
+  age_end: 1
+  premium: 1
+
+two:
+  coverage: 1
+  age_start: 1
+  age_end: 1
+  premium: 1

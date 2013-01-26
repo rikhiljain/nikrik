@@ -1,0 +1,43 @@
+<form id="healthQuoteForm" action="" class="form-horizontal">
+
+<div class="control-group">
+	<label class="control-label" for="policyFor">Choose Policy For<i id="policyFor_icon" class="icon-question-sign"></i></label>
+	<div class="controls">
+		<label class="radio">
+			<input type="radio" id="policyFor" name="policy_for" value="1">Self
+		</label>
+		<label class="radio">
+			<input type="radio" id="policyFor" name="policy_for" value="2" >Parents
+		</label>
+		<label class="radio">
+			<input type="radio" id="policyFor" name="policy_for" value="3" checked="checked" >Self Plus Spouse Plus Childrens
+		</label>
+		<label class="radio">
+			<input type="radio" id="policyFor" name="policy_for" value="4" >Self Plus Childrens
+		</label>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="adult_age">Age of Elder Spouse<i id="adult_age_icon" class="icon-question-sign"></i></label>
+	<div class="controls form-inline">
+		<select id="adult_age" name="adult_age" class="span2"></select>
+	</div> 
+</div>
+<div class="control-group" id="no_of_childs_grp" >
+	<label class="control-label" for="no_of_childs">No of Children (6 to 20 yrs)<i id="no_of_childs_icon" class="icon-question-sign"></i></label>
+	<div class="controls form-inline">
+		<select id="no_of_childs" name="no_of_childs" class="span2"></select>
+	</div> 
+</div>
+<div class="control-group">
+	<label class="control-label" for="heath_cover">Insurance Amount<i id="heath_cover_icon" class="icon-question-sign"></i></label>
+	<div class="controls form-inline">
+		<select id="heath_cover" name="heath_cover" class="span2"></select>
+	</div> 
+</div>
+<div class="control-group">
+	<div class="controls">
+		<button type="submit" class="btn">Calculate Premium</button>
+	</div>
+</div>
+</form/>
