@@ -165,6 +165,9 @@ function submitHealthQuoteRequest(serializedJSON){
 
           success: function(data) {
             //called when successful
+            fillHealthResultTable(data);
+            $healthFormAccordionLink.click();
+            $healthResultsAccordionLink.click();
        },
 
           error: function(data, textStatus, errorThrown) {

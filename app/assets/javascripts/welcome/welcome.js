@@ -55,6 +55,10 @@
 		$noOfChildsGrp = $("[id=healthQuoteForm] [id=no_of_childs_grp]");
 		$healthQuoteForm = $("[id=healthQuoteForm]");
 
+		$healthFormAccordionLink = $("[id=healthFormAccordion] [id=link]");
+		$healthResultsAccordionLink = $("[id=healthResultsAccordion] [id=link]");
+		//$healthResultsBuyAccordionLink = $("[id=quoteResultsBuyAccordion] [id=link]");
+
 		cacheAllJquerySelectore(); //jquery-selector.js
 		jqueryFormValidations(); //jquery-form-validations.js
 		populateStaticData(); //static-data.js
