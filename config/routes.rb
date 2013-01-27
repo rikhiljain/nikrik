@@ -15,6 +15,7 @@ Nikrik::Application.routes.draw do
   post "motor/searches/quote" => "motor/searches#quote"
   post "motor/searches/buy" => "motor/searches#buy"
   
+  post "health/searches/quote" => "health/searches#quote"
   
   namespace :motor do
     resources :rtos

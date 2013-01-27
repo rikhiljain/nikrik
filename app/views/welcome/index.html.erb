@@ -1,8 +1,8 @@
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <ul class="nav nav-tabs">
     <li class="active"><a href="#tab1" data-toggle="tab">Motor Insurance</a></li>
-    <li><a href="#tab2" data-toggle="tab">Health Insurance</a></li>
-     <li><a href="#tab3" data-toggle="tab">Home Insurance</a></li>
+    <li><a href="#health" data-toggle="tab">Health Insurance</a></li>
+     <li><a href="#travel" data-toggle="tab">Home Insurance</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
@@ -52,10 +52,34 @@
 		<%= render 'motor/forms/premium_breakup' %>
 
     </div>
-    <div class="tab-pane" id="tab2">
-      <p>Coming very soon.</p>
+    <div class="tab-pane" id="health">
+      <div class="accordion" id="health1">
+
+        <div id="quoteFormAccordion" class="accordion-group">
+          <div class="accordion-heading">
+            <a id="link" class="accordion-toggle" data-toggle="collapse" data-parent="#health1" href="#collapseOne"><i class="icon-arrow-up"></i>Calculate Premium</a>
+          </div>
+          <div id="collapseOne" class="accordion-body collapse in">
+              <div class="accordion-inner">
+                <%= render "health/forms/quote_form" %>
+              </div>
+          </div>
+        </div>
+
+        <div id="healthResultsAccordion" class="accordion-group">
+          <div class="accordion-heading">
+              <a id="link" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo"><i class="icon-arrow-down"></i>Results</a>
+          </div>
+          <div id="collapseTwo" class="accordion-body collapse">
+              <div id="table"class="accordion-inner">
+                Looks like you did not fill in the form...
+              </div>
+          </div>
+        </div>
+
+      </div>
     </div>
-        <div class="tab-pane" id="tab3">
+    <div class="tab-pane" id="travel">
       <p>Coming very soon.</p>
     </div>
   </div>

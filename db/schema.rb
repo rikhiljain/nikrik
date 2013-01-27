@@ -11,11 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130123173906) do
+ActiveRecord::Schema.define(:version => 20130126163833) do
 
   create_table "companies", :force => true do |t|
     t.string   "name",       :limit => 20
     t.datetime "created_at",               :null => false
+  end
+
+  create_table "health_charts", :force => true do |t|
+    t.integer  "coverage"
+    t.integer  "age_start"
+    t.integer  "age_end"
+    t.integer  "premium"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "health_searches", :force => true do |t|
+    t.integer  "no_of_childs",              :null => false
+    t.integer  "adult_age",                 :null => false
+    t.integer  "heath_cover",               :null => false
+    t.integer  "policy_for",   :limit => 2, :null => false
+    t.datetime "created_at",                :null => false
   end
 
   create_table "idv_charts", :force => true do |t|
@@ -50,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20130123173906) do
 
   create_table "motor_policies", :force => true do |t|
     t.integer  "policy_id"
+    t.string   "policy_type", :limit => 20, :null => false
     t.integer  "user_id"
     t.integer  "company_id",  :limit => 2
     t.date     "start_date"
@@ -57,8 +75,8 @@ ActiveRecord::Schema.define(:version => 20130123173906) do
     t.integer  "premium"
     t.integer  "discount"
     t.string   "policy_path"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "motor_searches", :force => true do |t|

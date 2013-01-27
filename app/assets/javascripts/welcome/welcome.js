@@ -48,6 +48,13 @@
 		$emailAddress = $("[id=motorQuoteBuyForm] [id=emailAddress]");
 		$address = $("[id=motorQuoteBuyForm] [id=address]");
 
+		$noOfChilds = $("[id=healthQuoteForm] [id=no_of_childs]");
+		$healthCover = $("[id=healthQuoteForm] [id=heath_cover]");
+		$healthAge = $("[id=healthQuoteForm] [id=adult_age]");
+		$healthPolicyFor = $("[id=healthQuoteForm] [id=policyFor]");
+		$noOfChildsGrp = $("[id=healthQuoteForm] [id=no_of_childs_grp]");
+		$healthQuoteForm = $("[id=healthQuoteForm]");
+
 		cacheAllJquerySelectore(); //jquery-selector.js
 		jqueryFormValidations(); //jquery-form-validations.js
 		populateStaticData(); //static-data.js
@@ -66,6 +73,7 @@ function bindAllEventHandlers(){
 	bindMotorQuoteBuyFormEvents();
 	bindAccordionEvents();
 	bindBreadcrumbEvents();
+	bindHealthQuoteFormEvents();
 
 	$legendProtectionForAccessories.bind("click", function(){
 		$("[id=protectionForAccessories1]").toggle();
@@ -118,6 +126,21 @@ function esc(text){
 			.replace(">", "&gt;");
 	return a;
 }
+
+function bindHealthQuoteFormEvents(){
+
+	$healthPolicyFor.bind("change",function(){
+		if($(this).val() == "1" || $(this).val() == "2" ){
+			$noOfChildsGrp.hide();
+		}else{
+			$noOfChildsGrp.show();
+		}
+	});
+
+	//Binding the form validation
+	validateHealthQuoteForm();
+}
+
 
 function bindMotorQuoteFormEvents(){
 	//this will hide/unhide the previous policy details div
