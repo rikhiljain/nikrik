@@ -16,7 +16,13 @@ Nikrik::Application.routes.draw do
   post "motor/searches/buy" => "motor/searches#buy"
   
   post "health/searches/quote" => "health/searches#quote"
-  
+
+  post "loyalty/referance" => "loyalty#create_referance"
+  get  "loyalty/referance/:id" => "loyalty#referance"
+
+  get "loyalty/rewards/:id" => "loyalty#rewards"
+  post "loyalty/purchase" => "loyalty#purchase"
+
   namespace :motor do
     resources :rtos
     resources :discounts

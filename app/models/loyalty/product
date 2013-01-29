@@ -1,0 +1,7 @@
+class Loyalty::Product < ActiveRecord::Base
+	
+	self.table_name = "products"
+  attr_accessible :name, :details, :points
+
+
+end

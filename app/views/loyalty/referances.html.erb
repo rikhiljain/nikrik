@@ -1,0 +1,25 @@
+<fieldset >
+<legend>My Referances</legend>
+
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Referance Id</th>
+    <th>Name</th>
+    <th>Mobile Number</th>
+    <th>Description</th>
+    <th>Staus</th>
+    <th>Date</th>
+ </tr>
+
+  <% @referances.each do |referance| %>
+      <tr>
+        <td><%= referance.id %></td>
+        <td><%= referance.ref_name %></td>
+        <td><%= referance.ref_mobile %></td>
+        <td><%= referance.ref_desc %></td>
+        <td><%= referance.status %></td>
+        <td><%= referance.created_at %></td>
+      </tr>
+  <% end %>
+</table>
+</fieldset>
