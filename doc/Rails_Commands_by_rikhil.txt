@@ -1,3 +1,4 @@
+--------------------------------------------------------------------------------------RAILS AND RAKE--------------------------------------------------------------------------------------
 rails g scaffold motorSearch new_policy:boolean policy_exp_date:date year_of_manufacture:date idv_chart_id:integer register_type:string register_city:string has_claim:boolean ncb:integer elec_acc:integer non_elec_acc:integer cng_type:string cng_value:integer passenger_coverage_amt:integer has_anti_theft:boolean is_aai_member:boolean
 
 rails g scaffold motorDiscount idv_chart_id:integer company_id:integer amount:float rto_code rto_sub_code
@@ -20,7 +21,10 @@ rake routes
 
 rails g scaffold motorPolicy  policy_id:integer user_id:integer company_id:integer start_date:date end_date:date premium:integer discount:integer policy_path:string
 
+capify .
 
+
+--------------------------------------------------------------------------------------GIT--------------------------------------------------------------------------------------
 https://github.com/hiranpeiris/therubyracer_for_windows#readme
 git status
 git add .
@@ -32,3 +36,13 @@ git push
 
 
 rails g scaffold product name:string details:string points:integer image_name:string status:string start_date:date end_date:date
+=======
+git pull
+
+----adding a new repository
+git init
+git add .
+git commit -m "some comment"
+git remote add origin git@github.com:ryanb/blog.git
+git push -u origin master
+
