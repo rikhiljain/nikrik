@@ -7,4 +7,9 @@ def self.find_by_user(id)
     where("user_id = ? ", id)
 end
 
+def self.find_by_status(status)
+    where("status = ? ", status)
+end
+
+
 end

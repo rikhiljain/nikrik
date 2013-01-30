@@ -1,0 +1,17 @@
+<%= simple_form_for(@product) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :details, :as => :text , :input_html => { :cols => 20, :rows => 5 } %>
+    <%= f.input :points %>
+    <%= f.input :image_name %>
+    <%= f.input :status, :prompt => "Select Status", :collection => [ "ACTIVE", "INACTIVE"] %>
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

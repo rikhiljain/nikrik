@@ -29,3 +29,6 @@ git rm <path-to-the-file>
 git checkout <path-to-file-that-needs-revert>
 git commit -m "comments"
 git push
+
+
+rails g scaffold product name:string details:string points:integer image_name:string status:string start_date:date end_date:date

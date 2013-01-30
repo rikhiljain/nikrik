@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130126163833) do
+ActiveRecord::Schema.define(:version => 20130130173334) do
 
   create_table "companies", :force => true do |t|
     t.string   "name",       :limit => 20
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20130126163833) do
   end
 
   create_table "health_charts", :force => true do |t|
+    t.integer  "company_id", :null => false
     t.integer  "coverage"
     t.integer  "age_start"
     t.integer  "age_end"
@@ -109,6 +110,39 @@ ActiveRecord::Schema.define(:version => 20130126163833) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "products", :force => true do |t|
+    t.string   "name"
+    t.string   "details"
+    t.integer  "points"
+    t.string   "image_name"
+    t.string   "status"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "referances", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "email",      :limit => 50
+    t.string   "mobile",     :limit => 10
+    t.string   "ref_name",   :limit => 30
+    t.string   "ref_mobile", :limit => 10
+    t.string   "ref_desc",   :limit => 200
+    t.integer  "amount"
+    t.string   "status",     :limit => 10,  :null => false
+    t.datetime "created_at",                :null => false
+  end
+
+  create_table "rewards", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "ref_id"
+    t.integer  "points"
+    t.string   "status",     :limit => 10
+    t.datetime "exp_dt"
+    t.datetime "created_at",               :null => false
   end
 
   create_table "roles", :force => true do |t|

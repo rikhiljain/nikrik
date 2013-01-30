@@ -1,5 +1,8 @@
 Nikrik::Application.routes.draw do
 
+  resources :products
+
+
   devise_for :users,  :path => '', path_names:{sign_in: "login", sign_out: "logout"}
 
 
@@ -18,7 +21,10 @@ Nikrik::Application.routes.draw do
   post "health/searches/quote" => "health/searches#quote"
 
   post "loyalty/referance" => "loyalty#create_referance"
+  get  "loyalty/user_referances/:id" => "loyalty#user_referances"
+  get  "loyalty/find_referances" => "loyalty#find_referances"
   get  "loyalty/referance/:id" => "loyalty#referance"
+  put "loyalty/update_referance/:id" => "loyalty#update_referance"
 
   get "loyalty/rewards/:id" => "loyalty#rewards"
   post "loyalty/purchase" => "loyalty#purchase"
