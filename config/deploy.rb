@@ -5,11 +5,12 @@ server "178.79.190.82", :web, :app, :db, primary: true
 set :application, "nikrik"
 set :user, "root"
 set :deploy_to, "/home/#{user}/apps/#{application}"
-set :deploy_via, :remote_cache
+set :deploy_via, :export
 set :use_sudo, false
 
 set :scm, "git"
-set :repository, "git@github.com:rikhiljain/#{application}.git"
+#set :repository, "git@github.com:rikhiljain/#{application}.git"
+set :repository, "https://github.com/rikhiljain/#{application}.git"
 set :branch, "master"
 
 default_run_options[:pty] = true
