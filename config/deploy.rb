@@ -5,7 +5,7 @@ server "178.79.190.82", :web, :app, :db, primary: true
 set :application, "nikrik"
 set :user, "root"
 set :deploy_to, "/home/#{user}/apps/#{application}"
-set :deploy_via, :export
+set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
