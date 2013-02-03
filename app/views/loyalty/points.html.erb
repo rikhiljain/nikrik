@@ -1,0 +1,26 @@
+<fieldset >
+<legend>My Points</legend>
+
+<div>
+  Total Points = <%=@total_points%>
+</div>
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Referance Id</th>
+    <th>Earn Date</th>
+    <th>Expiry Date</th>
+    <th>Points</th>
+    <th>Staus</th>
+  </tr>
+
+  <% @points.each do |point| %>
+      <tr>
+        <td><%= link_to 'Details', {:controller => "loyalty", :action => "details" , :id => point.id, :ref_id => point.ref_id, :ref_type => point.ref_type }  %>  </td>
+        <td><%= point.created_at %></td>
+        <td><%= point.exp_dt %></td>
+        <td><%= point.value %></td>
+        <td><%= point.status %></td>
+      </tr>
+  <% end %>
+</table>
+</fieldset>

@@ -1,138 +1,111 @@
 class LoyaltyController < ApplicationController
   
-  def rewards
-     @rewards = Loyalty::Reward.find_by_user(params[:id])
-
-     @total_points = 0
-
-     @rewards.each do |reward|
-     
-      if reward.status == 'EARN'
-        @total_points += reward.points
-      end
-
-      if reward.status == 'USED'
-        @total_points -= reward.points
-      end
-
-     end
-
-     respond_to do |format|
-      format.html { render :template => '/loyalty/rewards'}
+  def points
+    @points = Loyalty::Point.find_by_user(params[:id])
+    @total_points = m_total_points(@points)
+    respond_to do |format|
+      format.html { render :template => '/loyalty/points'}
       format.json { render json: @search }
     end
 
   end
 
-   def referance
-    @referance = Loyalty::Referance.find(params[:id])
+  def referral
+    @referral = Loyalty::Referral.find(params[:id])
     
     respond_to do |format|
-      format.html { render :template => '/loyalty/edit_referance'}
-   end
+      format.html { render :template => '/loyalty/edit_referral'}
+    end
 
   end
 
-  def find_referances
+  def find_referrals
     @status = params[:status]
     if @status.nil?
       @status = 'OPEN'
     end
-    @referances = Loyalty::Referance.find_by_status(@status)
+    @referrals = Loyalty::Referral.find_by_status(@status)
     
     respond_to do |format|
-      format.html { render :template => '/loyalty/find_referances'}
+      format.html { render :template => '/loyalty/find_referrals'}
     end
 
   end
 
-  def create_referance
-  	referance = Loyalty::Referance.new(params[:refer])
-  	referance.status = 'OPEN'
+  def create_referral
+  	referral = Loyalty::Referral.new(params[:refer])
+  	referral.status = 'OPEN'
 
   	if (user_signed_in? && (current_user.has_role? :user) )
-         referance.user_id = current_user.id
+         referral.user_id = current_user.id
     end
 
-  	Rails.logger.debug "Referance attributes : #{referance.inspect}"
+  	Rails.logger.debug "Referral attributes : #{referral.inspect}"
   	
-  	referance.save
+  	referral.save
 
   	redirect_to root_url, :notice => "We will Contact you within 24 hours"
 
   end
 
-  def update_referance
-    @referance = Loyalty::Referance.find(params[:id])
-    new_referance = params[:loyalty_referance]
+  def update_referral
+    @referral = Loyalty::Referral.find(params[:id])
+    new_referral = params[:loyalty_referral]
 
-    Rails.logger.debug "Referance attributes : #{new_referance.inspect}"
+    Rails.logger.debug "referral attributes : #{new_referral.inspect}"
     
-    if new_referance[:status] == 'CONFIRM'
-      points = Loyalty::PointEngine.calculate(new_referance[:amount], @referance.user_id)
+    if new_referral[:status] == 'CONFIRM'
+      points = Loyalty::PointEngine.calculate(new_referral[:amount], @referral.user_id)
 
-      reward = Loyalty::Reward.new
-      reward.points =  points
-      reward.user_id =  @referance.user_id
-      reward.status = 'EARN'
-      reward.ref_type =  'REFERANCE'
-      reward.exp_dt = Time.now + 1.year
-      reward.ref_id = @referance.id
-      
-      reward.save
+      point = Loyalty::Point.new
+      point.value =  points
+      point.user_id =  @referral.user_id
+      point.status = 'EARN'
+      point.ref_type =  'REFERRAL'
+      point.exp_dt = Time.now + 1.year
+      point.ref_id = @referral.id
+      point.save
 
     end
 
     respond_to do |format|
-      if @referance.update_attributes(new_referance)
-        format.html { redirect_to '/loyalty/find_referances', notice: 'Referance was successfully updated.' }
+      if @referral.update_attributes(new_referral)
+        format.html { redirect_to '/loyalty/find_referrals', notice: 'Referral was successfully updated.' }
       else
-        format.html { render :template => '/loyalty/edit_referance'}
+        format.html { render :template => '/loyalty/edit_referral'}
       end
     end
 
   end
 
 
-  def user_referances
-  	@referances = Loyalty::Referance.find_by_user(params[:id])
+  def user_referrals
+  	@referrals = Loyalty::Referral.find_by_user(params[:id])
   	
   	respond_to do |format|
-      format.html { render :template => '/loyalty/referances'}
+      format.html { render :template => '/loyalty/referrals'}
       format.json { render json: @search }
     end
 
   end
 
 
-  def products
-    @products = Product.find_active_products()
+  def rewards
+    @rewards = Reward.find_active_rewards()
     respond_to do |format|
-      format.html { render :template => '/loyalty/products' }
+      format.html { render :template => '/loyalty/rewards' }
     end
   end
 
   def purchase
-     @product = Product.find(params[:id])
+     @reward = Reward.find(params[:id])
      if (user_signed_in? && (current_user.has_role? :user) )
          user_id = current_user.id
      end
 
-    rewards =  Loyalty::Reward.find_by_user(user_id)
+    points =  Loyalty::Point.find_by_user(user_id)
 
-    @total_points = 0
-
-    rewards.each do |reward|
-     
-      if reward.status == 'EARN'
-        @total_points += reward.points
-      end
-
-      if reward.status == 'USED'
-        @total_points -= reward.points
-      end
-
-    end
+    @total_points = m_total_points(points)
 
     respond_to do |format|
       format.html { render :template => '/loyalty/purchase' }
@@ -141,50 +114,38 @@ class LoyaltyController < ApplicationController
   end
 
   def confirm
-    product = Product.find(params[:id])
+    reward = Reward.find(params[:id])
      if (user_signed_in? && (current_user.has_role? :user) )
          user_id = current_user.id
      end
 
-    rewards =  Loyalty::Reward.find_by_user(user_id)
+    points =  Loyalty::Point.find_by_user(user_id)
 
-    total_points = 0
+    total_points = m_total_points(points)
 
-    rewards.each do |reward|
-     
-      if reward.status == 'EARN'
-        total_points += reward.points
-      end
-
-      if reward.status == 'USED'
-        total_points -= reward.points
-      end
-
-    end
-
-    if total_points <= product.points
+    if total_points <= reward.points
       notice = 'Your Points are not sufficient'
     else
-      reward = Loyalty::Reward.new
-      reward.points =  product.points
-      reward.user_id =  user_id
-      reward.status = 'USED'
-      reward.ref_type =  'PRODUCT'
-      reward.ref_id = product.id
-      reward.save
-      notice = 'Your Item will be shipped shortly'
+      point = Loyalty::Point.new
+      point.points =  reward.points
+      point.user_id =  user_id
+      point.status = 'USED'
+      point.ref_type =  'REWARD'
+      point.ref_id = reward.id
+      point.save
+      notice = 'Your Reward item will be shipped shortly'
     end
 
     respond_to do |format|
-        format.html { redirect_to '/loyalty/products', notice: notice }
+        format.html { redirect_to '/loyalty/rewards', notice: notice }
     end
     
 
   end
 
   def details
-    reward =  Loyalty::Reward.find(params[:id])
-    if params[:type] = 'PRODUCT'
+    reward =  Loyalty::Point.find(params[:id])
+    if params[:type] = 'REWARD'
 
     else
     
@@ -192,5 +153,18 @@ class LoyaltyController < ApplicationController
 
   end
 
+def m_total_points(points)
+  
+  total_points = 0
+  points.each do |point|
+    if point.status == 'EARN'
+      total_points += point.value
+    end
+    if point.status == 'USED'
+      total_points -= point.value
+    end
+  end
+  return total_points
+end
 
 end

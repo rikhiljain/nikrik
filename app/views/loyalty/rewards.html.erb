@@ -1,26 +1,24 @@
-<fieldset >
-<legend>My Points</legend>
+<h2>Rewards</h2>
 
-<div>
-  Total Points = <%=@total_points%>
-</div>
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" >
   <tr>
-    <th>Referance Id</th>
-    <th>Earn Date</th>
-    <th>Expiry Date</th>
+    <th>Name</th>
+    <th>Details</th>
     <th>Points</th>
-    <th>Staus</th>
+    <th>Image name</th>
+    <th></th>
   </tr>
 
-  <% @rewards.each do |reward| %>
-      <tr>
-        <td><%= link_to 'Details', {:controller => "loyalty", :action => "details" , :id => reward.id, :ref_id => reward.ref_id, :ref_type => reward.ref_type }  %>  </td>
-        <td><%= reward.created_at %></td>
-        <td><%= reward.exp_dt %></td>
-        <td><%= reward.points %></td>
-        <td><%= reward.status %></td>
-      </tr>
-  <% end %>
+<% @rewards.each do |reward| %>
+  <tr>
+    <td><%= reward.name %></td>
+    <td><%= reward.details %></td>
+    <td><%= reward.points %></td>
+    <td><%= reward.image_name %></td>
+    <td><%= link_to 'Bye', {:controller => "loyalty", :action => "purchase", :id => reward.id }  %></td>
+  </tr>
+<% end %>
 </table>
-</fieldset>
+
+<br />
+

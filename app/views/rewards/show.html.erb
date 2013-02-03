@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @reward.name %>
+</p>
+
+<p>
+  <b>Details:</b>
+  <%= @reward.details %>
+</p>
+
+<p>
+  <b>Points:</b>
+  <%= @reward.points %>
+</p>
+
+<p>
+  <b>Image name:</b>
+  <%= @reward.image_name %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @reward.status %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @reward.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @reward.end_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_reward_path(@reward) %> |
+<%= link_to 'Back', rewards_path %>

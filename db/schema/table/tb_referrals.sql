@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `referances` (
+CREATE TABLE IF NOT EXISTS `referrals` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
