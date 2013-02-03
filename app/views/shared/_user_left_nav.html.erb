@@ -3,5 +3,6 @@
   <li><%= link_to 'My Policies', {:controller => "policies", :action => "policies", :id => current_user.id } %></li>
   <li><%= link_to 'My Referances', {:controller => "loyalty", :action => "user_referances", :id => current_user.id } %></li>
   <li><%= link_to 'My Points', {:controller => "loyalty", :action => "rewards", :id => current_user.id } %></li>
- 
+  <li><%= link_to 'Purchase', {:controller => "loyalty", :action => "products" } %></li>
+
 </ul>

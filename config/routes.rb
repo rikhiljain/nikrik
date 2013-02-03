@@ -27,7 +27,10 @@ Nikrik::Application.routes.draw do
   put "loyalty/update_referance/:id" => "loyalty#update_referance"
 
   get "loyalty/rewards/:id" => "loyalty#rewards"
-  post "loyalty/purchase" => "loyalty#purchase"
+  get "loyalty/products" => "loyalty#products"
+  get "loyalty/purchase/:id" => "loyalty#purchase"
+  get "loyalty/confirm/:id" => "loyalty#confirm"
+  get "loyalty/details/:id/:ref_type/:ref_id" => "loyalty#details"
 
   namespace :motor do
     resources :rtos

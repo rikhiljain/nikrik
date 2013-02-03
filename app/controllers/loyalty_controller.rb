@@ -3,6 +3,20 @@ class LoyaltyController < ApplicationController
   def rewards
      @rewards = Loyalty::Reward.find_by_user(params[:id])
 
+     @total_points = 0
+
+     @rewards.each do |reward|
+     
+      if reward.status == 'EARN'
+        @total_points += reward.points
+      end
+
+      if reward.status == 'USED'
+        @total_points -= reward.points
+      end
+
+     end
+
      respond_to do |format|
       format.html { render :template => '/loyalty/rewards'}
       format.json { render json: @search }
@@ -55,12 +69,13 @@ class LoyaltyController < ApplicationController
     Rails.logger.debug "Referance attributes : #{new_referance.inspect}"
     
     if new_referance[:status] == 'CONFIRM'
-      points = Loyalty::PointEngine.calculate(new_referance[:amount], @referance.user_id);
+      points = Loyalty::PointEngine.calculate(new_referance[:amount], @referance.user_id)
 
       reward = Loyalty::Reward.new
       reward.points =  points
       reward.user_id =  @referance.user_id
       reward.status = 'EARN'
+      reward.ref_type =  'REFERANCE'
       reward.exp_dt = Time.now + 1.year
       reward.ref_id = @referance.id
       
@@ -90,8 +105,92 @@ class LoyaltyController < ApplicationController
   end
 
 
-  def purchase
-  
+  def products
+    @products = Product.find_active_products()
+    respond_to do |format|
+      format.html { render :template => '/loyalty/products' }
+    end
   end
+
+  def purchase
+     @product = Product.find(params[:id])
+     if (user_signed_in? && (current_user.has_role? :user) )
+         user_id = current_user.id
+     end
+
+    rewards =  Loyalty::Reward.find_by_user(user_id)
+
+    @total_points = 0
+
+    rewards.each do |reward|
+     
+      if reward.status == 'EARN'
+        @total_points += reward.points
+      end
+
+      if reward.status == 'USED'
+        @total_points -= reward.points
+      end
+
+    end
+
+    respond_to do |format|
+      format.html { render :template => '/loyalty/purchase' }
+    end
+
+  end
+
+  def confirm
+    product = Product.find(params[:id])
+     if (user_signed_in? && (current_user.has_role? :user) )
+         user_id = current_user.id
+     end
+
+    rewards =  Loyalty::Reward.find_by_user(user_id)
+
+    total_points = 0
+
+    rewards.each do |reward|
+     
+      if reward.status == 'EARN'
+        total_points += reward.points
+      end
+
+      if reward.status == 'USED'
+        total_points -= reward.points
+      end
+
+    end
+
+    if total_points <= product.points
+      notice = 'Your Points are not sufficient'
+    else
+      reward = Loyalty::Reward.new
+      reward.points =  product.points
+      reward.user_id =  user_id
+      reward.status = 'USED'
+      reward.ref_type =  'PRODUCT'
+      reward.ref_id = product.id
+      reward.save
+      notice = 'Your Item will be shipped shortly'
+    end
+
+    respond_to do |format|
+        format.html { redirect_to '/loyalty/products', notice: notice }
+    end
+    
+
+  end
+
+  def details
+    reward =  Loyalty::Reward.find(params[:id])
+    if params[:type] = 'PRODUCT'
+
+    else
+    
+    end
+
+  end
+
 
 end
