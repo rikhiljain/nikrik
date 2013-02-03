@@ -9,5 +9,6 @@ CREATE TABLE IF NOT EXISTS `referrals` (
   `amount` int(11) DEFAULT NULL,
   `status` varchar(20) NOT NULL,
   `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
 )  ;

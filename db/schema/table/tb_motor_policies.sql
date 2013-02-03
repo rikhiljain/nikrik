@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `motor_policies` (
+CREATE TABLE IF NOT EXISTS `policies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `policy_id` int(11) DEFAULT NULL,
   `policy_type` varchar(20) DEFAULT NULL,
@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS `motor_policies` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
+) ;

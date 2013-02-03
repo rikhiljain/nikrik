@@ -1,5 +1,5 @@
 class Policy < ActiveRecord::Base
-  self.table_name = "motor_policies"
+  self.table_name = "policies"
   
   attr_accessible :policy_type, :company_id, :discount, :end_date, :policy_id, :policy_path, :premium, :start_date, :user_id
   belongs_to :company
