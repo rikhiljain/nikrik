@@ -1,6 +1,6 @@
 Nikrik::Application.routes.draw do
 
-  resources :products
+  resources :rewards
 
 
   devise_for :users,  :path => '', path_names:{sign_in: "login", sign_out: "logout"}
@@ -20,14 +20,14 @@ Nikrik::Application.routes.draw do
   
   post "health/searches/quote" => "health/searches#quote"
 
-  post "loyalty/referance" => "loyalty#create_referance"
-  get  "loyalty/user_referances/:id" => "loyalty#user_referances"
-  get  "loyalty/find_referances" => "loyalty#find_referances"
-  get  "loyalty/referance/:id" => "loyalty#referance"
-  put "loyalty/update_referance/:id" => "loyalty#update_referance"
+  post "loyalty/referral" => "loyalty#create_referral"
+  get  "loyalty/user_referrals/:id" => "loyalty#user_referrals"
+  get  "loyalty/find_referrals" => "loyalty#find_referrals"
+  get  "loyalty/referral/:id" => "loyalty#referral"
+  put "loyalty/update_referral/:id" => "loyalty#update_referral"
 
-  get "loyalty/rewards/:id" => "loyalty#rewards"
-  get "loyalty/products" => "loyalty#products"
+  get "loyalty/points/:id" => "loyalty#points"
+  get "loyalty/rewards" => "loyalty#rewards"
   get "loyalty/purchase/:id" => "loyalty#purchase"
   get "loyalty/confirm/:id" => "loyalty#confirm"
   get "loyalty/details/:id/:ref_type/:ref_id" => "loyalty#details"

@@ -38,11 +38,11 @@ CREATE TABLE IF NOT EXISTS `companies` (
 -- Dumping data for table `companies`
 --
 
-INSERT INTO `companies` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'ICICI', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'BAJAJ', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'TATA', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'RELIANCE', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `companies` (`id`, `name`, `created_at`) VALUES
+(1, 'ICICI', '0000-00-00 00:00:00'),
+(2, 'BAJAJ', '0000-00-00 00:00:00'),
+(3, 'TATA', '0000-00-00 00:00:00'),
+(4, 'RELIANCE', '0000-00-00 00:00:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -7,4 +7,4 @@ CREATE TABLE IF NOT EXISTS `roles` (
   PRIMARY KEY (`id`),
   KEY `index_roles_on_name` (`name`),
   KEY `index_roles_on_name_and_resource_type_and_resource_id` (`name`,`resource_type`,`resource_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
+) ;

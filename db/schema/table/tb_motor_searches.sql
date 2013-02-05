@@ -24,4 +24,4 @@ CREATE TABLE IF NOT EXISTS `motor_searches` (
   `final_premium` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
+) ;

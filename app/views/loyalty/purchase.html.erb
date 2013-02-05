@@ -2,17 +2,17 @@
 
 <p>
   <b>Name:</b>
-  <%= @product.name %>
+  <%= @reward.name %>
 </p>
 
 <p>
   <b>Details:</b>
-  <%= @product.details %>
+  <%= @reward.details %>
 </p>
 
 <p>
   <b>Points:</b>
-  <%= @product.points %>
+  <%= @reward.points %>
 </p>
 
 
@@ -22,5 +22,5 @@
 </p>
 
 
-<%= link_to 'Confirm', {:controller => "loyalty", :action => "confirm" , :id => @product.id }  %>    |    
-<%= link_to 'Back to Purchas List', {:controller => "loyalty", :action => "products" } %>
+<%= link_to 'Confirm', {:controller => "loyalty", :action => "confirm" , :id => @reward.id }  %>    |    
+<%= link_to 'Back to Rewards List', {:controller => "loyalty", :action => "rewards" } %>

@@ -7,4 +7,4 @@ CREATE TABLE IF NOT EXISTS `rtos` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
+) ;
