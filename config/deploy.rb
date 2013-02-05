@@ -9,8 +9,8 @@ set :deploy_via, :export
 set :use_sudo, false
 
 set :scm, "git"
-#set :repository, "git@github.com:rikhiljain/#{application}.git"
-set :repository, "https://github.com/rikhiljain/#{application}.git"
+set :repository, "git@github.com:rikhiljain/#{application}.git"
+#set :repository, "https://github.com/rikhiljain/#{application}.git"
 set :branch, "master"
 
 default_run_options[:pty] = true
