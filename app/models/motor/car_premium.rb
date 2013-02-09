@@ -26,7 +26,7 @@ class Motor::CarPremium < Motor::Premium
 
     #total_premium = m_total_premium(MotorQuote.new, base_od, 0)
     Rails.logger.info "Base OD = #{base_od}"
-    companies = Motor::Company.all
+    companies = Company.all
 
     companies.each do |company|
       motor_quote = Motor::Quote.new

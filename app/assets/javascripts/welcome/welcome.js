@@ -219,19 +219,19 @@ function bindAccordionEvents(){
 		if(e.type == "shown"){
 			var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
 			if(index == 1){ //"Motor Quote Form"
-				$(".breadcrumb > li:nth-child(1)").addClass("active");
-				$(".breadcrumb > li:nth-child(2)").removeClass("active");
-				$(".breadcrumb > li:nth-child(3)").removeClass("active");
+				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-warning");
+				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
+				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
 			}
 			else if(index == 2){ //"Results"
-				$(".breadcrumb > li:nth-child(1)").removeClass("active");
-				$(".breadcrumb > li:nth-child(2)").addClass("active");
-				$(".breadcrumb > li:nth-child(3)").removeClass("active");
+				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
+				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
+				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
 			}
 			else if(index == 3){//"Insured Contact Details"
-				$(".breadcrumb > li:nth-child(1)").removeClass("active");
-				$(".breadcrumb > li:nth-child(2)").removeClass("active");
-				$(".breadcrumb > li:nth-child(3)").addClass("active");
+				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
+				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
+				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
 			}
 		}
     	$(e.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-arrow-down icon-arrow-up');
@@ -239,11 +239,11 @@ function bindAccordionEvents(){
 }
 
 function bindBreadcrumbEvents(){
-	$(".breadcrumb > li").bind("click", function(e){
+	$("[id=breadcrumb] > div").bind("click", function(e){
 		if($(e.target).hasClass("active")){
 			return;
 		}
-		var index = $(".breadcrumb li").index($(e.target)) + 1;
+		var index = $("[id=breadcrumb] > div").index($(e.target)) + 1;
 		if(index == 3){//"Enter details and Review"
 			$(".accordion-group:nth-child(3) [id=link]").click();
 		}
