@@ -20,7 +20,7 @@
         <%= f.label :policy_path %>
         <%= f.file_field :policy_path %>
         <% unless  @policy.policy_path.nil?%>
-            <%= link_to 'Download policy',  {:controller => "policies", :action => "download", :id => @policy.id } %>
+            <%= link_to 'Download policy',  {:controller => "/policies", :action => "download", :id => @policy.id } %>
          <% end %>
   </div>
     </div>

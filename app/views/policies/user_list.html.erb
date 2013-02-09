@@ -19,7 +19,7 @@
         <td><%= policy.end_date %></td>
         <td><%= policy.premium %></td>
         <td> <% unless  policy.policy_path.nil?%>
-            <%= link_to 'Download',  {:controller => "policies", :action => "download", :id => policy.id } %>
+            <%= link_to 'Download',  {:controller => "/policies", :action => "download", :id => policy.id } %>
          <% end %>
        </td>
       </tr>

@@ -1,9 +1,6 @@
 Nikrik::Application.routes.draw do
 
-  resources :rewards
-
-
-  devise_for :users,  :path => '', path_names:{sign_in: "login", sign_out: "logout"}
+  devise_for :users,:path => '', path_names:{sign_in: "login", sign_out: "logout"}
 
 
   get "welcome/index"
@@ -41,15 +38,14 @@ Nikrik::Application.routes.draw do
   end
   
   resources :policies
+  resources :rewards
 
   get "policies/display/:id"  =>    "policies#display"
   get "policies/policies/:id"  =>    "policies#policies"
   get "policies/download/:id"  => "policies#download"
  
-  resources :admin_users do
-    resources :policies, :shallow=>true      
-  end
-
+  resources :admin_users
+  
 
   root :to => "welcome#index"
 
