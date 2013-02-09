@@ -181,12 +181,12 @@ $navbarCollapseWidth:             979px !default;
 $navbarCollapseDesktopWidth:      $navbarCollapseWidth + 1;
 
 $navbarHeight:                    40px !default;
-$navbarBackgroundHighlight:       $blueDark !default;
+$navbarBackgroundHighlight:       $white !default;
 $navbarBackground:                darken($navbarBackgroundHighlight, 5%) !default;
 $navbarBorder:                    darken($navbarBackground, 12%) !default;
 
-$navbarText:                      $white !default;
-$navbarLinkColor:                 $white !default;
+$navbarText:                      $blue !default;
+$navbarLinkColor:                 $blue !default;
 $navbarLinkColorHover:            $grayDark !default;
 $navbarLinkColorActive:           $gray !default;
 $navbarLinkBackgroundHover:       transparent !default;

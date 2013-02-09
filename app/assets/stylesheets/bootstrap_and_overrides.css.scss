@@ -11,7 +11,7 @@
 @import "welcome";
 
 body { 
-	padding-top: 60px;
+  padding-top: 120px;
  }
 
 
@@ -53,6 +53,19 @@ body {
   font-weight: bold;
 }
 
+.navbar-inner {
+  min-height: $navbarHeight;
+  padding-left:  20px;
+  padding-right: 20px;
+  //@include gradient-vertical($navbarBackgroundHighlight, $navbarBackground);
+  border: 1px solid $navbarBorder;
+  @include border-radius($baseBorderRadius);
+  @include box-shadow(0 1px 4px rgba(0,0,0,.065));
+
+  // Prevent floats from breaking the navbar
+  @include clearfix();
+}
+
 //
 // Breadcrumbs
 // --------------------------------------------------
@@ -83,7 +96,7 @@ body {
   .active {
     color: white;
     font-size: $baseFontSize * 1.5;
-	font-weight: bold;
+  font-weight: bold;
   }
 }
 
