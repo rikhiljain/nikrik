@@ -32,19 +32,25 @@ var m_names = new Array("January", "February", "March",
 (function($){
 	$(document).ready(function(){
 
-		$("[id=secondLevelNavBar] [id=1]").bind("click", function(){
+		$("[id=secondLevelNavBar] [id=1]").bind("click", function(e){
+			$("[id=secondLevelNavBar] li").removeClass("active");
+			$(e.currentTarget).addClass("active")
 			$("[id=motor]").addClass("active");
 			$("[id=health]").removeClass("active");
 			$("[id=travel]").removeClass("active");
 		});
 
-		$("[id=secondLevelNavBar] [id=2]").bind("click", function(){
+		$("[id=secondLevelNavBar] [id=2]").bind("click", function(e){
+			$("[id=secondLevelNavBar] li").removeClass("active");
+			$(e.currentTarget).addClass("active")
 			$("[id=motor]").removeClass("active");
 			$("[id=health]").addClass("active");
 			$("[id=travel]").removeClass("active");
 		});
 
-		$("[id=secondLevelNavBar] [id=3]").bind("click", function(){
+		$("[id=secondLevelNavBar] [id=3]").bind("click", function(e){
+			$("[id=secondLevelNavBar] li").removeClass("active");
+			$(e.currentTarget).addClass("active")
 			$("[id=motor]").removeClass("active");
 			$("[id=health]").removeClass("active");
 			$("[id=travel]").addClass("active");
