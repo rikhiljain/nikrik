@@ -2,7 +2,6 @@ class Loyalty::PointEngine < ActiveRecord::Base
 
 
 	def self.calculate(premium, user_id)
-		debugger
 		user_type = ''
 		unless user_id.nil?
 			user = User.find(user_id)

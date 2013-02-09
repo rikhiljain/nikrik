@@ -43,11 +43,9 @@ class User < ActiveRecord::Base
 private
   
   def default_role
-    debugger
     unless self.roles.size > 0
       self.roles << Role.where(:name => 'user').first
     end
-    debugger
   end
 
 end
