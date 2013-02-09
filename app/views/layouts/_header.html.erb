@@ -1,32 +1,43 @@
-<div  class="navbar navbar-fixed-top iSHeader">
-  <div class="navbar-inner">
-    <div class="container" style="height: 120px">
-      <%= link_to "Insurance Shopee", "/welcome/index", :class => 'brand' %>
-      <ul class="nav">
-        <% if user_signed_in? %>
-          <li>
-          <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>        
-          </li>
-        <% else %>
-          <li>
-          <%= link_to 'Login', new_user_session_path %>  
-          </li>
-        <% end %>
-        <% if user_signed_in? %>
-          <li>
-          <%= link_to 'Edit account', edit_user_registration_path %>
-          </li>
-          <% if current_user.has_role? :admin %>
+<div>
+  <div  class="navbar navbar-fixed-top iSHeader" id="firstLevelNavBar">
+    <div class="navbar-inner">
+      <div class="container" style="height: 80px">
+        <%= link_to "Insurance Shopee", "/welcome/index", :class => 'brand' %>
+        <ul class="nav">
+          <% if user_signed_in? %>
             <li>
-            <%= link_to 'Admin', home_admin_path %>
+            <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>        
+            </li>
+          <% else %>
+            <li>
+            <%= link_to 'Login', new_user_session_path %>  
             </li>
           <% end %>
-        <% else %>
-          <li>
-          <%= link_to 'Sign up', new_user_registration_path %>
-          </li>
-        <% end %>
+          <% if user_signed_in? %>
+            <li>
+            <%= link_to 'Edit account', edit_user_registration_path %>
+            </li>
+            <% if current_user.has_role? :admin %>
+              <li>
+              <%= link_to 'Admin', home_admin_path %>
+              </li>
+            <% end %>
+          <% else %>
+            <li>
+            <%= link_to 'Sign up', new_user_registration_path %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="navbar-inner" id="secondLevelNavBar">
+      <a class="brand" href="#">Options</a>
+      <ul class="nav">
+        <li id="1" class="active"><a href="#">Motor Insurance</a></li>
+        <li id="2" ><a href="#">Health Insurance</a></li>
+        <li id="3" ><a href="#">Home Insurance</a></li>
       </ul>
     </div>
   </div>
+
 </div>

@@ -28,3 +28,27 @@
 var m_names = new Array("January", "February", "March", 
 "April", "May", "June", "July", "August", "September", 
 "October", "November", "December");
+
+(function($){
+	$(document).ready(function(){
+
+		$("[id=secondLevelNavBar] [id=1]").bind("click", function(){
+			$("[id=motor]").addClass("active");
+			$("[id=health]").removeClass("active");
+			$("[id=travel]").removeClass("active");
+		});
+
+		$("[id=secondLevelNavBar] [id=2]").bind("click", function(){
+			$("[id=motor]").removeClass("active");
+			$("[id=health]").addClass("active");
+			$("[id=travel]").removeClass("active");
+		});
+
+		$("[id=secondLevelNavBar] [id=3]").bind("click", function(){
+			$("[id=motor]").removeClass("active");
+			$("[id=health]").removeClass("active");
+			$("[id=travel]").addClass("active");
+		});
+
+	});
+})(jQuery);			
