@@ -46,6 +46,7 @@ Nikrik::Application.routes.draw do
  
   resources :admin_users
   
+  match "/delayed_job" => DelayedJobWeb, :anchor => false
 
   root :to => "welcome#index"
 
