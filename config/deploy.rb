@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+require "delayed/recipes"
 
 server "178.79.190.82", :web, :app, :db, primary: true
 
@@ -23,6 +24,7 @@ namespace :deploy do
   %w[start stop restart].each do |command|
     desc "#{command} unicorn server"
     task command, roles: :app, except: {no_release: true} do
+      run "chmod 755 #{current_path}/config/unicorn_init.sh"
       run "/etc/init.d/unicorn_#{application} #{command}"
     end
   end
