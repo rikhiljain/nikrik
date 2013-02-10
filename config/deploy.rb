@@ -1,5 +1,4 @@
 require "bundler/capistrano"
-require "delayed/recipes"
 
 server "178.79.190.82", :web, :app, :db, primary: true
 
@@ -58,3 +57,39 @@ namespace :deploy do
   end
   before "deploy", "deploy:check_revision"
 end
+
+namespace :delayed_job do
+    def rails_env
+      fetch(:rails_env, false) ? "RAILS_ENV=#{fetch(:rails_env)}" : ''
+    end
+
+    def args
+      fetch(:delayed_job_args, "")
+    end
+
+    def roles
+      fetch(:delayed_job_server_role, :app)
+    end
+    
+    def delayed_job_command
+      fetch(:delayed_job_command, "script/delayed_job")
+    end
+
+    desc "Stop the delayed_job process"
+    task :stop, :roles => lambda { roles } do
+      run "cd #{current_path};#{rails_env} #{delayed_job_command} stop"
+    end
+
+    desc "Start the delayed_job process"
+    task :start, :roles => lambda { roles } do
+      run "cd #{current_path};#{rails_env} #{delayed_job_command} start #{args}"
+    end
+
+    desc "Restart the delayed_job process"
+    task :restart, :roles => lambda { roles } do
+      run "chmod 755 #{current_path}/#{delayed_job_command}"
+      run "cd #{current_path};#{rails_env} #{delayed_job_command} restart #{args}"
+    end
+end
+
+

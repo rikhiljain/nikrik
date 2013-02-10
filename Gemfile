@@ -41,7 +41,6 @@ end
 
 # To use debugger
 gem 'debugger'
-
 gem 'daemons'
-gem 'delayed_job_active_record', :require => nil
+gem 'delayed_job_active_record', '~> 0.4.0'
 gem "delayed_job_web"
