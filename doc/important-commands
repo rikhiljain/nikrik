@@ -1,0 +1,269 @@
+--------------------------------------------------------------------------------------VAGRANT--------------------------------------------------------------------------------------
+http://www.vagrantbox.es/
+vagrant box add lucid32 http://files.vagrantup.com/licid32.box
+vagrant init lucid32
+vagrant up
+vagrant reload
+vagrant halt
+vagrant suspend
+vagrant resume
+vagrant destroy
+
+--following entries needs to be made in 'Vagrantfile'
+config.vm.share_folder("v-root", "/vagrant", ".", :extra => 'dmode=0775,fmode=0775')
+config.vm.share_folder("v-perforce", "/perforceEnergyIP", "D:/perforce/nikhag/nikhag_p4repo.emeter.com_1776/EnergyIP")
+
+vagrant ssh
+
+--booting from a box
+vagrant box add my_box /path/to/the/package.box
+vagrant init my_box
+vagrant up
+
+--------------------------------------------------------------------------------------VIRUAL BOX SETUP--------------------------------------------------------------------------------------
+#basic
+	sudo apt-get update
+	sudo apt-get install build-essential
+	sudo apt-get install git-core
+
+#installing ruby and rbenv
+	git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+	echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+	echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+	exec $SHELL -l
+	git clone git://github.com/sstephenson/ruby-build.git
+	cd ruby-build
+	sudo ./install.sh
+	rbenv install 1.9.3-p327
+	rbenv rehash
+	rbenv global 1.9.3-p327
+
+#installing jruby and jdk7
+	sudo apt-get install python-software-properties
+	sudo apt-add-repository ppa:webupd8team/java
+	sudo apt-get update
+	sudo apt-get install oracle-java7-installer
+	sudo update-alternatives --config java
+	rbenv install jruby-1.7.0
+	rbenv rehash
+	vi .bash_profile
+	export PATH="$HOME/.rbenv/versions/jruby-1.7.0/bin:$PATH"
+	jruby -v
+	ruby -v
+	java -version
+#zsh	
+	sudo apt-get install zsh
+	git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+	cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+	chsh -s /bin/zsh
+#for sqlplus
+	sudo apt-get install alien
+	sudo apt-get install libaio1
+	sudo apt-get install libaio-dev
+
+	#http://marcelozambranav.blogspot.in/2012/08/how-to-install-oracle-sql-plus-on.html
+	oracle-instantclient11.1-basic-xx.x.x.x.x-x.i386.rpm
+	oracle-instantclient11.1-sqlplus-xx.x.x.x.x-x.i386.rpm
+	oracle-instantclient11.1-devel-xx.x.x.x.x-x.i386.rpm
+
+	sudo alien -i oracle-instantclient11.2-basic-11.2.0.3.0-1.i386.rpm
+	sudo alien -i oracle-instantclient11.2-devel-11.2.0.3.0-1.i386.rpm
+	sudo alien -i oracle-instantclient11.2-sqlplus-11.2.0.3.0-1.i386.rpm
+
+	cd /usr/lib/oracle/11.2/client
+	sudo mkdir network
+	cd network
+	sudo mkdir admin
+	cd admin
+	sudo vi sqlnet.ora
+		SQLNET.AUTHENTICATION_SERVICES=(NTS)
+		NAMES.DIRECTORY_PATH=(LDAP,TNSNAMES,ONAMES,HOSTNAME)
+		DEFAULT_SDU_SIZE=8761
+	sudo vi tnsnames.ora
+		XE =
+		  (DESCRIPTION =
+		    (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))
+		    (CONNECT_DATA =
+		      (SERVER = DEDICATED)
+		      (SERVICE_NAME = XE)
+		    )
+		  )
+	sudo chmod a+w *.ora
+
+	#make following entries in .bashrc
+	export LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client/lib
+	export ORACLE_HOME=/usr/lib/oracle/11.2/client
+	export TNS_ADMIN=/usr/lib/oracle/11.2/client/network/admin
+
+	exec $SHELL -l
+	#add this in run.sh to run it in bash and not in zsh
+	#!/bin/bash
+
+#to run our website command
+	remove jruby entry from the path by editing the .zshrc file
+	exec $SHELL -l
+	ruby -v -> should point to ruby and not jruby
+	gem install bundler --no-ri --no-rdoc
+	sudo apt-get install mysql-client libmysqlclient-dev
+	bundle install
+	#after this we can switch back to ruby
+
+
+--------------------------------------------------------------------------------------ORACLE XE--------------------------------------------------------------------------------------
+http://localhost:8080/apex/
+system/manager
+
+
+
+--------------------------------------------------------------------------------------LINODE--------------------------------------------------------------------------------------
+apt-get -y update
+apt-get -y install curl git-core python-software-properties
+add-apt-repository ppa:nginx/stable
+apt-get -y update
+apt-get -y install nginx
+vi /etc/init.d/nginx
+nginx -h
+service nginx start
+service nginx stop
+apt-get install build-essential
+sudo apt-get install git-core
+sudo apt-get install lamp-server^
+vi /etc/init.d/apache2
+cd /etc/apache2
+vi /etc/apache2/ports.conf [Change the port to 8081]
+service apache2 stop
+service apache2 start
+apt-get install php5 php5-gd php5-mysql php5-curl php5-cli php5-cgi php5-dev
+apt-get install phpmyadmin
+vi /etc/dbconfig-common/phpmyadmin.conf
+http://178.79.190.82:8081/phpmyadmin [root -> Asterik1]
+Created a new database with name nikrik and password Asterik1
+
+http://gregrickaby.com/2011/10/how-to-install-lamp-on-ubuntu.html
+
+apt-get -y install telnet postfix
+linode270166.members.linode.com
+add-apt-repository ppa:chris-lea/node.js
+apt-get -y update
+apt-get -y install nodejs
+adduser deployer --ingroup admin
+su deployer
+
+apt-get -y install curl
+https://github.com/fesplugas/rbenv-installer
+curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
+
+vi ~/.bashrc
+copy the following before [ -z "$PS1" ] && return  
+if [ -d $HOME/.rbenv ]; then                                                                                                                                                                        
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
+. ~/.bashrc
+
+rbenv bootstrap-ubuntu-12-04
+rbenv install 1.9.3-p327
+rbenv rehash
+rbenv global 1.9.3-p327
+rbenv rehash
+gem install bundler --no-ri --no-rdoc
+rbenv rehash
+bundle -v
+
+apt-get install mailutils
+mail
+
+--for website
+apt-get install mysql-client libmysqlclient-dev
+#run the following after cap:deploy
+update-rc.d unicorn_blog defaults
+rm /etc/nginx/sites-enabled/default
+service nginx restart
+
+
+--------------------------------------------------------------------------------------UBUNTU TROUBLE SHOOT--------------------------------------------------------------------------------------
+
+netstat -an | grep 22
+lsof -i | grep ssh
+netstat -l --numeric-ports | grep 22
+service ssh restart [/etc/init.d/ssh restart]
+cd /etc/ssh
+vi /etc/ssh/sshd_config
+grep -ir ssh /var/log/* | curl -F 'sprunge=<-' http://sprunge.us
+vi /var/log/dpkg.log
+sudo apt-get install openssh-server
+
+
+ifconfig -a
+ifconfig <adapter-name>
+nslookup <server-name>
+mtr --report <server-name or ip-address>
+
+
+/var/log/messages or /var/log/auth.log
+
+who
+useradd <username>
+userdel <username>
+ps -ax
+kill -9 <pid>
+
+
+
+--------------------------------------------------------------------------------------GIT------------------------------------------------------------------------------------------
+http://git-scm.com/book/en/Git-on-the-Server-The-Protocols
+
+git init
+git add *.c
+git add README
+git commit -m 'initial project version'
+git status
+
+git clone git://github.com/schacon/grit.git
+git clone git://github.com/schacon/grit.git mygrit
+git remote
+git remote -v
+git remote add pb git://github.com/paulboone/ticgit.git
+
+https://help.github.com/articles/generating-ssh-keys
+
+--------------------------------------------------------------------------------------CAPISTRANO--------------------------------------------------------------------------------------
+cap deploy:check_revision
+cap deploy:update
+cap deploy:update_code
+cap deploy:finalize_update
+cap deploy:assets:symlink
+cap bundle:install
+cap deploy:symlink_config
+cap deploy:assets:precompile
+cap deploy:assets:update_asset_mtimes
+cap deploy:create_symlink
+cap deploy:restart
+cap deploy:cold
+
+cap deploy -d
+cap -T
+cap -vT
+
+--------------------------------------------------------------------------------------SSH--------------------------------------------------------------------------------------
+cd ~/.ssh
+			there should be id_rsa and id_rsa.pub keys
+			known_hosts is the entries for known hosts
+ssh-keygen -lf known_hosts
+ssh-keygen -t rsa -C "your_email@youremail.com"
+vi ~/.ssh/id_rsa.pub
+			copy paste the above in your account or to your server
+ssh -vT git@github.com
+ssh-keygen -lf authorized_keys
+			these are the public keys corresponding to the private keys for which our ssh server is authorized
+ssh root@178.79.190.82 "git ls-remote https://github.com/rikhiljain/nikrik.git"
+ssh -t root@178.79.190.82 "git ls-remote https://github.com/rikhiljain/nikrik.git"
+
+--------------------------------------------------------------------------------------RUBY--------------------------------------------------------------------------------------
+
+rdubug cap deploy:my_task
+http://pivotallabs.com/ruby-debug-in-30-seconds-we-don-t-need-no-stinkin-gui/
+
+ruby -r rubygems -e "p Gem.path"
+rdebug cap deploy:my_task
+http://stackoverflow.com/questions/8545553/best-way-to-debug-third-part-gems-in-ruby

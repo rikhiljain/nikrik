@@ -1,4 +1,4 @@
-  <div class="tab-content">
+<div class="tab-content">
     <div class="tab-pane active" id="mainContentDiv">
 
       <div id="breadcrumb" class="progress">
@@ -19,7 +19,10 @@
       					 <%= render "motor/forms/quote_form" %>
                 </div>
                 <div id="accordion1Health"  style="display:none">
-                <%= render "health/forms/quote_form" %>
+                  <%= render "health/forms/quote_form" %>
+                </div>
+                <div id="accordion1Travel"  style="display:none">
+                  <%= render "travel/forms/quote_form" %>
                 </div>
       				</div>
     			</div>
@@ -42,44 +45,11 @@
 		    	</div>
 		    	<div id="collapseThree" class="accordion-body collapse">
 		      		<div id="table"class="accordion-inner">
-		        		<%= render "motor/forms/contact_details_form" %>
+		        		<%= render "welcome/forms/contact_details_form" %>
 		      		</div>
 		    	</div>
 		  	</div> 		  	 
 		</div>
-
 		<%= render 'motor/forms/premium_breakup' %>
-
-    </div>
-    <!--
-    <div class="tab-pane" id="health">
-      <div class="accordion" id="health1">
-
-        <div id="healthFormAccordion" class="accordion-group">
-          <div class="accordion-heading">
-            <a id="link" class="accordion-toggle" data-toggle="collapse" data-parent="#health1" href="#healthCollapseOne"><i class="icon-arrow-up"></i>Calculate Premium</a>
-          </div>
-          <div id="healthCollapseOne" class="accordion-body collapse in">
-              <div class="accordion-inner">
-                <%= render "health/forms/quote_form" %>
-              </div>
-          </div>
-        </div>
-
-        <div id="healthResultsAccordion" class="accordion-group">
-          <div class="accordion-heading">
-              <a id="link" class="accordion-toggle" data-toggle="collapse" data-parent="#health1" href="#healthCollapseTwo"><i class="icon-arrow-down"></i>Results</a>
-          </div>
-          <div id="healthCollapseTwo" class="accordion-body collapse">
-              <div id="table"class="accordion-inner">
-                Looks like you did not fill in the form...
-              </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <div class="tab-pane" id="travel">
-      <p>Coming very soon.</p>
-    </div>-->
+  </div>
   </div>
