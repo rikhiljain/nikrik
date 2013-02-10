@@ -1,4 +1,4 @@
-function openMotorQuoteBuyForm(id){
+function __common__openQuoteBuyForm(id){
 	$("[id=motorQuoteBuyFormNotificationDiv] a").click();
 	for(var result, i = -1; result = motorquotes[++i];){
 		if (result.company_id == id)
@@ -9,19 +9,19 @@ function openMotorQuoteBuyForm(id){
 	}
 
 	if(user != null){
-    prefillMotorQuoteBuyForm(user);
+    __common__prefillQuoteBuyForm(user);
 	}
 	$quoteResultsBuyAccordionLink.click();
   return false;
 }
 
-function prefillMotorQuoteBuyForm(user){
+function __common__prefillQuoteBuyForm(user){
   $mobileNumber.val(user.mobile);
   $emailAddress.val(user.email);
   $address.val(user.address);
 }
 
-function submitMotorQuoteBuyRequest(serializedJSON){
+function __common__submitQuoteBuyRequest(serializedJSON){
 	$.ajax({
   				url: "/motor/searches/buy",
   				type: "POST",
@@ -35,7 +35,7 @@ function submitMotorQuoteBuyRequest(serializedJSON){
 
   				success: function() {
     				//called when successful
-            buildNotificationsForMotorQuoteBuyForm();
+            __common__buildNotificationsForQuoteBuyForm();
  				},
 
   				error: function(textStatus, errorThrown) {
@@ -45,12 +45,12 @@ function submitMotorQuoteBuyRequest(serializedJSON){
 			})
 }
 
-function buildNotificationsForMotorQuoteBuyForm(){
+function __common__buildNotificationsForQuoteBuyForm(){
   var message = "A very sincere thanks for your interest. We will contact you very shortly. You should also receive one email with the quote details.";
   $motorQuoteBuyFormNotificationDiv.append("<div class='alert alert-success'>"+message+"<a class='close' data-dismiss='alert'>&#215;</a></div>");
 }
 
-function validateMotorQuoteBuyForm(){
+function __common__validateQuoteBuyForm(){
   // Validation
   $motorQuoteBuyForm.validate({
     rules:{
@@ -79,15 +79,15 @@ function validateMotorQuoteBuyForm(){
     },
     submitHandler: function(form){
         $motorQuoteBuyFormNotificationDivCloseLink.click();
-        var serializedJSON = createMotorQuoteBuyRequest();
+        var serializedJSON = __common__createQuoteBuyRequest();
         console.log(serializedJSON);
-        submitMotorQuoteBuyRequest(serializedJSON);
+        __common__submitQuoteBuyRequest(serializedJSON);
         return false;
     }
   });
 }
 
-function createMotorQuoteBuyRequest(){
+function __common__createQuoteBuyRequest(){
     var json = {};
     $.map($motorQuoteBuyForm.serializeArray(), function(el, i){
       if(el.value == ""){

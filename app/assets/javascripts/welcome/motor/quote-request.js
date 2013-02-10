@@ -1,4 +1,4 @@
-function createMotorQuoteRequest(){
+function __motor__createQuoteRequest(){
   	var ignoreFormFields = new Array();
   	if($("[id=basicDetails] > [id=currentInsuranceDetails] [id=policyType]:checked").val() == "true"){
   		ignoreFormFields["policy_exp_date"] = "dummy";
@@ -25,7 +25,7 @@ function createMotorQuoteRequest(){
   	return JSON.stringify(json);
 }
 
-function submitMotorQuoteRequest(serializedJSON){
+function __motor__submitQuoteRequest(serializedJSON){
 	$.ajax({
   				url: "/motor/searches/quote",
   				type: "POST",
@@ -39,7 +39,7 @@ function submitMotorQuoteRequest(serializedJSON){
 
   				success: function(data) {
     				//called when successful
-    				fillResultTable(data);
+    				__motor__fillResultTable(data);
     				$quoteFormAccordionLink.click();
 					  $quoteResultsAccordionLink.click();
  				},
@@ -51,7 +51,7 @@ function submitMotorQuoteRequest(serializedJSON){
 			})
 }
 
-function validateMotorQuoteForm(){
+function __motor__validateQuoteForm(){
   //$.validator.setDefaults({focusCleanup: "true", invalidHandler: motorQuoteFormInvalidHandler});
   // Validation
   $motorQuoteForm.validate({
@@ -94,85 +94,10 @@ function validateMotorQuoteForm(){
     },
     submitHandler: function(form){
       $motorQuoteFormNotificationDivCloseLink.click();
-      var serializedJSON = createMotorQuoteRequest();
+      var serializedJSON = __motor__createQuoteRequest();
       console.log(serializedJSON);
-      submitMotorQuoteRequest(serializedJSON);
+      __motor__submitQuoteRequest(serializedJSON);
       return false;
     }
   });
-}
-
-
-function validateHealthQuoteForm(){
-  //$.validator.setDefaults({focusCleanup: "true", invalidHandler: motorQuoteFormInvalidHandler});
-  // Validation
-  $healthQuoteForm.validate({
-    rules:{
-    },
-
-    messages:{
-    },
-    errorClass: "help-inline",
-    errorElement: "span",
-    highlight:function(element, errorClass, validClass)
-    {
-      $(element).parents('.control-group').addClass('_iSError');
-    },
-    unhighlight: function(element, errorClass, validClass)
-    {
-      $(element).parents('.control-group').removeClass('_iSError');
-      //$(element).parents('.control-group').add:Class('success');
-    },
-    onfocusout: function(element, event){
-      this.settings.unhighlight.call( this, element, this.settings.errorClass, this.settings.validClass );
-    },
-    onkeyup: function(element, event) {
-    },
-    onclick: function(element, event) {
-    },
-    invalidHandler: function (form, validator){
-    },
-    submitHandler: function(form){
-      //$motorQuoteFormNotificationDivCloseLink.click();
-      var serializedJSON = createHealthQuoteRequest();
-      console.log(serializedJSON);
-      submitHealthQuoteRequest(serializedJSON);
-      return false;
-    }
-  });
-}
-
-function createHealthQuoteRequest(){
-    var json = {};
-    console.log($healthQuoteForm.serializeArray());
-    $.map($healthQuoteForm.serializeArray(), function(el, i){
-        json[el.name] = el.value;
-    });
-    return JSON.stringify(json);
-}
-
-function submitHealthQuoteRequest(serializedJSON){
-  $.ajax({
-          url: "/health/searches/quote",
-          type: "POST",
-        dataType: "json", // expected format for response
-        contentType: "application/json", // send as JSON
-        data: serializedJSON,
-
-          complete: function(data) {
-            //called when complete
-          },
-
-          success: function(data) {
-            //called when successful
-            fillHealthResultTable(data);
-            $healthFormAccordionLink.click();
-            $healthResultsAccordionLink.click();
-       },
-
-          error: function(data, textStatus, errorThrown) {
-            //called when there is an error
-            console.log("some error happened" + textStatus);
-          },
-      })
 }

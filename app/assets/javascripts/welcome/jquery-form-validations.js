@@ -1,9 +1,12 @@
 function jqueryFormValidations(){
-	cusomValidationMethods();
+	__common__cusomValidationMethods();
+	__motor__customValidationMethods();
+	__health__customValidationMethods();
+	__travel__customValidationMethods();
 }
 
-function cusomValidationMethods(){
-		$.validator.addMethod("register_city_val", function() {
+function __common__cusomValidationMethods(){
+	$.validator.addMethod("register_city_val", function() {
 	    if ($rtoId.val() == ""){
 	    	return false;
 	    } 

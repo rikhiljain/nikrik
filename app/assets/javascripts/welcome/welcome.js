@@ -1,12 +1,14 @@
 (function($){
 	$(document).ready(function(){
 		var user;
-		var motorquotes;
-		var selectedMotorQuote;
+		var quotes;
+		var selectedQuote;
 
 		$quoteFormAccordionLink = $("[id=quoteFormAccordion] [id=link]");
 		$quoteResultsAccordionLink = $("[id=quoteResultsAccordion] [id=link]");
 		$quoteResultsBuyAccordionLink = $("[id=quoteResultsBuyAccordion] [id=link]");
+
+		//***********************Motor*******************************************
 
 		$motorQuoteForm = $("[id=motorQuoteForm]");
 		$motorQuoteFormNotificationDiv = $("[id=motorQuoteFormNotificationDiv]");
@@ -44,9 +46,8 @@
 		$motorQuoteBuyFormNotificationDiv = $("[id=motorQuoteBuyFormNotificationDiv]");
 		$motorQuoteBuyFormNotificationDivCloseLink = $("[id=motorQuoteBuyFormNotificationDiv] a");
 
-		$mobileNumber = $("[id=motorQuoteBuyForm] [id=mobileNumber]");
-		$emailAddress = $("[id=motorQuoteBuyForm] [id=emailAddress]");
-		$address = $("[id=motorQuoteBuyForm] [id=address]");
+
+		//***********************Health*******************************************
 
 		$noOfChilds = $("[id=healthQuoteForm] [id=no_of_childs]");
 		$healthCover = $("[id=healthQuoteForm] [id=heath_cover]");
@@ -59,7 +60,11 @@
 		$healthResultsAccordionLink = $("[id=healthResultsAccordion] [id=link]");
 		//$healthResultsBuyAccordionLink = $("[id=quoteResultsBuyAccordion] [id=link]");
 
-		cacheAllJquerySelectore(); //jquery-selector.js
+		$mobileNumber = $("[id=motorQuoteBuyForm] [id=mobileNumber]");
+		$emailAddress = $("[id=motorQuoteBuyForm] [id=emailAddress]");
+		$address = $("[id=motorQuoteBuyForm] [id=address]");
+
+		cacheAllJquerySelector(); //jquery-selector.js
 		jqueryFormValidations(); //jquery-form-validations.js
 		populateStaticData(); //static-data.js
 		bindToolTips(); //tooltips.js
@@ -70,28 +75,6 @@
 		postInitialization(); //post-initialization.js
 	});
 })(jQuery);	
-
-function bindAllEventHandlers(){
-
-	bindMotorQuoteFormEvents();
-	bindMotorQuoteBuyFormEvents();
-	bindAccordionEvents();
-	bindBreadcrumbEvents();
-	bindHealthQuoteFormEvents();
-
-	$legendProtectionForAccessories.bind("click", function(){
-		$("[id=protectionForAccessories1]").toggle();
-	});
-
-	$legendAdditionalDiscount.bind("click", function(){
-		$("[id=additionalDiscount1]").toggle();
-	});
-
-	$legendAdditionalCovers.bind("click", function(){
-		$("[id=additionalCovers1]").toggle();
-	});
-
-}
 
 
 
@@ -129,129 +112,4 @@ function esc(text){
 			.replace("<", "&lt;")
 			.replace(">", "&gt;");
 	return a;
-}
-
-function bindHealthQuoteFormEvents(){
-
-	$healthPolicyFor.bind("change",function(){
-		if($(this).val() == "1" || $(this).val() == "2" ){
-			$noOfChildsGrp.hide();
-		}else{
-			$noOfChildsGrp.show();
-		}
-	});
-
-	//Binding the form validation
-	validateHealthQuoteForm();
-}
-
-
-function bindMotorQuoteFormEvents(){
-	//this will hide/unhide the previous policy details div
-	$policyType.bind("change",function(){
-		if($(this).val() == "true"){
-			$previousPolicyDetails.hide();
-		}else{
-			$previousPolicyDetails.show();
-		}
-	});
-	
-	//this will change the model drop down when we change the make
-	$make.bind("change",function(){
-		populateModel($make.val());
-	});
-
-	//this will update the price when we change the model
-	$model.bind("change",function(){
-		populatePrice($(this).val());
-	});
-
-	//this will update the price when we change day, month or year of purchase date
-	$registerDate.bind("change",function(){
-		populatePrice();
-	});
-
-	//If a claim has been made in previous policy year we will not show the ncb drop down and checkbox
-	//But if a claim has not been made in previous policy year then we want to show these options
-	$claimsMade.bind("change",function(){
-		if($(this).val() == "true"){
-			$ncbDiv.hide();
-			$noCliamBounsVerified.hide();
-		}else{
-			$ncbDiv.show();
-			$noCliamBounsVerified.show();
-		}
-	});	
-
-	//If the kit is not factory fitted, we must show the kit value drop down
-	$kit.bind("change",function(){
-		if($(this).val() == "CNG" || $(this).val() == "LPG" ){
-			$kitPriceControlGroup.show();
-		}
-		else{
-			$kitPriceControlGroup.hide();
-		}
-	});
-
-
-	$policyExpDate.bind("change",function(){
-	 	populateNewPolicyStartDate();
-	 });
-
-	//Binding the form validation
-	validateMotorQuoteForm();
-
-	$("[id=motorQuoteFormResetLink]").bind("click",function(e){
-		$("[id=motorQuoteForm]").each (function(){
-  			this.reset();
-		});
-	});
-}
-
-function bindMotorQuoteBuyFormEvents(){
-	//Binding the form validation
-	validateMotorQuoteBuyForm();
-}
-
-function bindAccordionEvents(){
-	//Binding the accordion
-	$(".accordion").on('shown hidden', function(e){
-		if(e.type == "shown"){
-			var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
-			if(index == 1){ //"Motor Quote Form"
-				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-warning");
-				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
-				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
-			}
-			else if(index == 2){ //"Results"
-				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
-				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
-				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
-			}
-			else if(index == 3){//"Insured Contact Details"
-				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
-				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
-				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
-			}
-		}
-    	$(e.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-arrow-down icon-arrow-up');
-	});
-}
-
-function bindBreadcrumbEvents(){
-	$("[id=breadcrumb] > div").bind("click", function(e){
-		if($(e.target).hasClass("active")){
-			return;
-		}
-		var index = $("[id=breadcrumb] > div").index($(e.target)) + 1;
-		if(index == 3){//"Enter details and Review"
-			$(".accordion-group:nth-child(3) [id=link]").click();
-		}
-		else if(index == 2){//"Results/"
-			$(".accordion-group:nth-child(2) [id=link]").click();
-		}
-		else if(index == 1){//"Calculate Premium/"
-			$(".accordion-group:nth-child(1) [id=link]").click();
-		}
-	});
 }
