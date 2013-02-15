@@ -1,9 +1,9 @@
 function __common__openQuoteBuyForm(id){
-	$("[id=motorQuoteBuyFormNotificationDiv] a").click();
-	for(var result, i = -1; result = motorquotes[++i];){
+	$("[id=quoteBuyFormNotificationDiv] a").click();
+	for(var result, i = -1; result = quotes[++i];){
 		if (result.company_id == id)
 		{
-			selectedMotorQuote = result;
+			selectedQuote = result;
 			break;
 		}
 	}
@@ -47,12 +47,12 @@ function __common__submitQuoteBuyRequest(serializedJSON){
 
 function __common__buildNotificationsForQuoteBuyForm(){
   var message = "A very sincere thanks for your interest. We will contact you very shortly. You should also receive one email with the quote details.";
-  $motorQuoteBuyFormNotificationDiv.append("<div class='alert alert-success'>"+message+"<a class='close' data-dismiss='alert'>&#215;</a></div>");
+  $quoteBuyFormNotificationDiv.append("<div class='alert alert-success'>"+message+"<a class='close' data-dismiss='alert'>&#215;</a></div>");
 }
 
 function __common__validateQuoteBuyForm(){
   // Validation
-  $motorQuoteBuyForm.validate({
+  $quoteBuyForm.validate({
     rules:{
       mobile_number: {required:true, phoneIndia:true},
       email_id: {required:true, email:true},
@@ -75,10 +75,10 @@ function __common__validateQuoteBuyForm(){
       //$(element).parents('.control-group').addClass('success');
     },
     invalidHandler: function (form, validator){
-      $motorQuoteBuyFormNotificationDivCloseLink.click();
+      $quoteBuyFormNotificationDivCloseLink.click();
     },
     submitHandler: function(form){
-        $motorQuoteBuyFormNotificationDivCloseLink.click();
+        $quoteBuyFormNotificationDivCloseLink.click();
         var serializedJSON = __common__createQuoteBuyRequest();
         console.log(serializedJSON);
         __common__submitQuoteBuyRequest(serializedJSON);
@@ -89,7 +89,7 @@ function __common__validateQuoteBuyForm(){
 
 function __common__createQuoteBuyRequest(){
     var json = {};
-    $.map($motorQuoteBuyForm.serializeArray(), function(el, i){
+    $.map($quoteBuyForm.serializeArray(), function(el, i){
       if(el.value == ""){
         //ignore
       }
@@ -99,9 +99,9 @@ function __common__createQuoteBuyRequest(){
 
     });
 
-    json["company_name"] = selectedMotorQuote.company_name;
-    json["id"] = selectedMotorQuote.motor_search_id;
-    json["final_premium"] = selectedMotorQuote.final_premium;
+    json["company_name"] = selectedQuote.company_name;
+    json["id"] = selectedQuote.motor_search_id;
+    json["final_premium"] = selectedQuote.final_premium;
 
     return JSON.stringify(json);
 }

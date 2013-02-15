@@ -7,7 +7,7 @@ function jqueryFormValidations(){
 
 function __common__cusomValidationMethods(){
 	$.validator.addMethod("register_city_val", function() {
-	    if ($rtoId.val() == ""){
+	    if (window.$rtoId.val() == ""){
 	    	return false;
 	    } 
    		else{

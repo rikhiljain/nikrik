@@ -29,9 +29,9 @@ $("[id=healthResultsAccordion] [id=table]")[0].innerHTML = html.join('');
 }
 
 function __health__recomputeQuoteForm(){
-		$healthQuoteForm.each (function(){
+		window.$healthQuoteForm.each (function(){
   			this.reset();
 		});
-		$healthFormAccordionLink.click();
+		window.$healthFormAccordionLink.click();
 }
 

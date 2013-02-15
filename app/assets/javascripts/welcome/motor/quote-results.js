@@ -5,7 +5,7 @@ function __motor__fillResultTable(data){
 //alert(data[0].company_name);
 //var results = JSON.parse(a);
 var results = data;
-motorquotes = data;
+quotes = data;
 var e = esc;
 var html = [], h = -1;
 html[++h] = "<table id='quoteResultsTable' class='table table-bordered'>";
@@ -33,9 +33,9 @@ $("[id=quoteResultsAccordion] [id=table]")[0].innerHTML = html.join('');
 }
 
 function __motor__fillPremiumBreakupTable(id){
-	//alert(motorquotes[0].company_name);
+	//alert(quotes[0].company_name);
 	var motorquote ;
-	for(var result, i = -1; result = motorquotes[++i];){
+	for(var result, i = -1; result = quotes[++i];){
 		if (result.company_id == id)
 		{
 			motorquote = result;
@@ -132,8 +132,8 @@ function __motor__fillPremiumBreakupTable(id){
 }
 
 function __motor__recomputeQuoteForm(){
-		$motorQuoteForm.each (function(){
+		window.$motorQuoteForm.each (function(){
   			this.reset();
 		});
-		$quoteFormAccordionLink.click();
+		window.$quoteFormAccordionLink.click();
 }

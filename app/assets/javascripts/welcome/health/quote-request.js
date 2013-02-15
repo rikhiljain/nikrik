@@ -61,8 +61,8 @@ function __health__submitQuoteRequest(serializedJSON){
           success: function(data) {
             //called when successful
             fillHealthResultTable(data);
-            $healthFormAccordionLink.click();
-            $healthResultsAccordionLink.click();
+            window.$healthFormAccordionLink.click();
+            window.$healthResultsAccordionLink.click();
        },
 
           error: function(data, textStatus, errorThrown) {

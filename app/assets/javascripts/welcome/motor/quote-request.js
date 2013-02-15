@@ -8,7 +8,7 @@ function __motor__createQuoteRequest(){
   	if($("[id=previousPolicyDetails] [id=claimsMade]:checked").val() == "true"){
   		ignoreFormFields["ncb"] = "dummy";
   	}
-  	if($kit.val() != "LPG" || $kit.val() != "CNG"){
+  	if(window.$kit.val() != "LPG" || $kit.val() != "CNG"){
   		ignoreFormFields["cng_value"] = "dummy";
   	}
   	var json = {};
@@ -89,11 +89,11 @@ function __motor__validateQuoteForm(){
     onclick: function(element, event) {
     },
     invalidHandler: function (form, validator){
-      $motorQuoteFormNotificationDivCloseLink.click();
-      $motorQuoteFormNotificationDiv.append("<div class='alert alert-error'>You missed "+validator.numberOfInvalids()+" fields. They have been highlighted below.<a class='close' data-dismiss='alert'>&#215;</a></div>");
+      window.$motorQuoteFormNotificationDivCloseLink.click();
+      window.$motorQuoteFormNotificationDiv.append("<div class='alert alert-error'>You missed "+validator.numberOfInvalids()+" fields. They have been highlighted below.<a class='close' data-dismiss='alert'>&#215;</a></div>");
     },
     submitHandler: function(form){
-      $motorQuoteFormNotificationDivCloseLink.click();
+      window.$motorQuoteFormNotificationDivCloseLink.click();
       var serializedJSON = __motor__createQuoteRequest();
       console.log(serializedJSON);
       __motor__submitQuoteRequest(serializedJSON);

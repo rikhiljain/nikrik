@@ -6,9 +6,9 @@ function __health__bindQuoteFormEvents(){
 
 	$healthPolicyFor.bind("change",function(){
 		if($(this).val() == "1" || $(this).val() == "2" ){
-			$noOfChildsGrp.hide();
+			window.$noOfChildsGrp.hide();
 		}else{
-			$noOfChildsGrp.show();
+			window.$noOfChildsGrp.show();
 		}
 	});
 

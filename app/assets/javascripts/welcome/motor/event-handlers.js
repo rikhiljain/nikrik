@@ -2,15 +2,15 @@ function  __motor__bindAllEventHandlers(){
 
 	__motor__bindQuoteFormEvents();
 
-	$legendProtectionForAccessories.bind("click", function(){
+	window.$legendProtectionForAccessories.bind("click", function(){
 		$("[id=protectionForAccessories1]").toggle();
 	});
 
-	$legendAdditionalDiscount.bind("click", function(){
+	window.$legendAdditionalDiscount.bind("click", function(){
 		$("[id=additionalDiscount1]").toggle();
 	});
 
-	$legendAdditionalCovers.bind("click", function(){
+	window.$legendAdditionalCovers.bind("click", function(){
 		$("[id=additionalCovers1]").toggle();
 	});
 
@@ -18,53 +18,53 @@ function  __motor__bindAllEventHandlers(){
 
 function __motor__bindQuoteFormEvents(){
 	//this will hide/unhide the previous policy details div
-	$policyType.bind("change",function(){
+	window.$policyType.bind("change",function(){
 		if($(this).val() == "true"){
-			$previousPolicyDetails.hide();
+			window.$previousPolicyDetails.hide();
 		}else{
-			$previousPolicyDetails.show();
+			window.$previousPolicyDetails.show();
 		}
 	});
 	
 	//this will change the model drop down when we change the make
-	$make.bind("change",function(){
+	window.$make.bind("change",function(){
 		__motor__populateModel($make.val());
 	});
 
 	//this will update the price when we change the model
-	$model.bind("change",function(){
+	window.$model.bind("change",function(){
 		__motor__populatePrice($(this).val());
 	});
 
 	//this will update the price when we change day, month or year of purchase date
-	$registerDate.bind("change",function(){
+	window.$registerDate.bind("change",function(){
 		__motor__populatePrice();
 	});
 
 	//If a claim has been made in previous policy year we will not show the ncb drop down and checkbox
 	//But if a claim has not been made in previous policy year then we want to show these options
-	$claimsMade.bind("change",function(){
+	window.$claimsMade.bind("change",function(){
 		if($(this).val() == "true"){
-			$ncbDiv.hide();
-			$noCliamBounsVerified.hide();
+			window.$ncbDiv.hide();
+			window.$noCliamBounsVerified.hide();
 		}else{
-			$ncbDiv.show();
-			$noCliamBounsVerified.show();
+			window.$ncbDiv.show();
+			window.$noCliamBounsVerified.show();
 		}
 	});	
 
 	//If the kit is not factory fitted, we must show the kit value drop down
-	$kit.bind("change",function(){
+	window.$kit.bind("change",function(){
 		if($(this).val() == "CNG" || $(this).val() == "LPG" ){
-			$kitPriceControlGroup.show();
+			window.$kitPriceControlGroup.show();
 		}
 		else{
-			$kitPriceControlGroup.hide();
+			window.$kitPriceControlGroup.hide();
 		}
 	});
 
 
-	$policyExpDate.bind("change",function(){
+	window.$policyExpDate.bind("change",function(){
 	 	__motor__populateNewPolicyStartDate();
 	 });
 

@@ -6,12 +6,13 @@ function __motor__populateManufacturers(){
 	var selOptions = '<option value="">Select Manufacturer</option>'; 
 	var address = "/motor/idv_charts/distinctMakers.json";
 	//var address = "make.json";
+	console.log($make);
 	$.getJSON(address,function(options){
 		$.each(options, function(){
 			selOptions += '<option value="' + this['optionValue'] + '">' + this['optionDisplay'] + '</option>';
 		});
-		$make.html(selOptions);
-		$make.change();
+		window.$make.html(selOptions);
+		window.$make.change();
 	});
 }
 
@@ -23,7 +24,7 @@ function  __motor__populateModel(manufacturer){
 		$.each(options, function(){
 			selOptions += '<option value="' + this['optionValue'] + '">' + this['optionDisplay'] + '</option>';
 		});
-		$model.html(selOptions);
+		window.$model.html(selOptions);
 		//$("[id=basicDetails] > [id=vehicleDetails] [id=model]").change();
 	});	
 }
@@ -38,7 +39,7 @@ function  __motor__populatePrice(){
 	var address = "/motor/idv_charts/"+idvChartId+"/motorValue.json?mdate="+mdate;
 	//var address = "model.json";
 	$.getJSON(address,function(price){
-		$price.text(price);
+		window.$price.text(price);
 	});
 }
 
@@ -48,7 +49,7 @@ function  __motor__populateNewPolicyStartDate(){
 	var d = currentDate;
 	d.setDate(currentDate.getDate() + 1);
 	console.log(d.getMonth());
-	$newPolicyStartDate.text(d.getDate()+"-"+ m_names[d.getMonth()]+"-"+d.getFullYear());
+	window.$newPolicyStartDate.text(d.getDate()+"-"+ m_names[d.getMonth()]+"-"+d.getFullYear());
 }
 
 function loadCurrentUser(){
