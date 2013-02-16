@@ -37,24 +37,31 @@ function __common__bindQuoteBuyFormEvents(){
 }
 
 function __common__bindAccordionEvents(){
+
+	$(".accordion").on('click', function(e){
+		var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
+		if(window.allowedAccordionIndexes[index] == 0){
+			alert("display some useful message over here")
+			return false;
+		}
+	});
+
 	//Binding the accordion
 	$(".accordion").on('shown hidden', function(e){
 		if(e.type == "shown"){
 			var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
-			if(index == 1){ //"Motor Quote Form"
-				accordionIndex = 1;
+			window.currentAccordionIndex = index;
+			if(index == 1){ //"Motor Quote Form"				
 				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-warning");
 				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
 				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
 			}
 			else if(index == 2){ //"Results"
-				accordionIndex = 2;
 				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
 				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
 				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
 			}
 			else if(index == 3){//"Insured Contact Details"
-				accordionIndex = 3;
 				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
 				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
 				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");

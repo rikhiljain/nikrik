@@ -13,7 +13,7 @@ function __common__populateDynamicData(){
 function __common__loadCurrentUser(){
 	var address = "/motor/searches/currentUser.json";
 	$.getJSON(address,function(currentUser){
-		user = currentUser;
+		window.user = currentUser;
 	});
 }
 

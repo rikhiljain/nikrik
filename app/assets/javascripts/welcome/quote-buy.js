@@ -3,14 +3,15 @@ function __common__openQuoteBuyForm(id){
 	for(var result, i = -1; result = quotes[++i];){
 		if (result.company_id == id)
 		{
-			selectedQuote = result;
+			window.selectedQuote = result;
 			break;
 		}
 	}
 
-	if(user != null){
-    __common__prefillQuoteBuyForm(user);
+	if(window.user != null){
+    __common__prefillQuoteBuyForm(window.user);
 	}
+  window.allowedAccordionIndexes[3] = 1;
   window.$quoteResultsBuyAccordionLink.css('cursor','pointer');
 	window.$quoteResultsBuyAccordionLink.click();
   return false;

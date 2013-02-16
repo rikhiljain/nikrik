@@ -1,10 +1,10 @@
 function initialize(){
 	
-	if(selection == "Motor"){
+	if(window.currentSelection == "Motor"){
 		__motor__initialize();
-	}else if(selection == "Health"){
+	}else if(window.currentSelection == "Health"){
 		__health__initialize();
-	}else if(selection == "Travel"){
+	}else if(window.currentSelection == "Travel"){
 		__travel__initialize();
 	}
 
@@ -14,8 +14,8 @@ function initialize(){
 
 function __common__initialize(){
 
-	quotes = null;
-	selectedQuote = null;
+	window.quotes = null;
+	window.selectedQuote = null;
 
 	//reset the results div
 	window.$quoteResultsAccordionTable[0].innerHTML = "Looks like you did not fill in the form...";
@@ -26,11 +26,19 @@ function __common__initialize(){
 	});
 
 	//show the quote form
-	if(accordionIndex != 1){
+	if(window.currentAccordionIndex != 1){
 		window.$quoteFormAccordionLink.click();
 	}
 
 	//disable the result and buy form
 	window.$quoteResultsAccordionLink.css('cursor','url(assets/famfamfam/icons/delete.png),default');
 	window.$quoteResultsBuyAccordionLink.css('cursor','url(assets/famfamfam/icons/delete.png),default');
+
+	//reinitialize the array
+	window.allowedAccordionIndexes = new Array();
+	//we will create three indexes for three accordion
+	window.allowedAccordionIndexes[0] = 0;
+	window.allowedAccordionIndexes[1] = 1; //only first will be on
+	window.allowedAccordionIndexes[2] = 0;
+	window.allowedAccordionIndexes[3] = 0;
 }

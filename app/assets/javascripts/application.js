@@ -55,16 +55,18 @@
 //= require welcome/health/initialization
 //= require welcome/travel/initialization
 //= require welcome/welcome
+//= require_self
 
 var m_names = new Array("January", "February", "March", 
 "April", "May", "June", "July", "August", "September", 
 "October", "November", "December");
 
-var user;
-var quotes;
-var selectedQuote;
-var selection = "Motor";
-var accordionIndex = -1;
+window.user;
+window.quotes;
+window.selectedQuote;
+window.currentSelection = "Motor";
+window.currentAccordionIndex = -1;
+window.allowedAccordionIndexes = new Array();
 
 
 (function($){
@@ -72,30 +74,30 @@ var accordionIndex = -1;
 
 		$("[id=secondLevelNavBar] [id=1]").bind("click", function(e){
 			//Motor
-			if(selection != "Motor"){
+			if(window.currentSelection != "Motor"){
 				$("[id=secondLevelNavBar] li").removeClass("active");
 				$(e.currentTarget).addClass("active");
-				selection = "Motor";
+				window.currentSelection = "Motor";
 				initialize();
 			}
 		});
 
 		$("[id=secondLevelNavBar] [id=2]").bind("click", function(e){
 			//Health
-			if(selection != "Health"){
+			if(window.currentSelection != "Health"){
 				$("[id=secondLevelNavBar] li").removeClass("active");
 				$(e.currentTarget).addClass("active");
-				selection = "Health";
+				window.currentSelection = "Health";
 				initialize();
 			}
 		});
 
 		$("[id=secondLevelNavBar] [id=3]").bind("click", function(e){
 			//Travel
-			if(selection != "Travel"){
+			if(window.currentSelection != "Travel"){
 				$("[id=secondLevelNavBar] li").removeClass("active");
 				$(e.currentTarget).addClass("active");
-				selection = "Travel";
+				window.currentSelection = "Travel";
 				initialize();
 			}
 		});
