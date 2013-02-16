@@ -68,9 +68,6 @@ function __motor__bindQuoteFormEvents(){
 	 	__motor__populateNewPolicyStartDate();
 	 });
 
-	//Binding the form validation
-	__motor__validateQuoteForm();
-
 	$("[id=motorQuoteFormResetLink]").bind("click",function(e){
 		$("[id=motorQuoteForm]").each (function(){
   			this.reset();

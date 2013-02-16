@@ -49,40 +49,53 @@
 //= require welcome/health/quote-results
 //= require welcome/travel/quote-results
 //= require welcome/quote-buy
+//= require welcome/initialization
+//= require welcome/motor/initialization
+//= require welcome/health/initialization
+//= require welcome/travel/initialization
 //= require welcome/welcome
 
 var m_names = new Array("January", "February", "March", 
 "April", "May", "June", "July", "August", "September", 
 "October", "November", "December");
 
+var user;
+var quotes;
+var selectedQuote;
+var selection = "Motor";
+
+
 (function($){
 	$(document).ready(function(){
 
 		$("[id=secondLevelNavBar] [id=1]").bind("click", function(e){
 			//Motor
-			$("[id=secondLevelNavBar] li").removeClass("active");
-			$(e.currentTarget).addClass("active")
-			$("[id=accordion1Motor]").show();
-			$("[id=accordion1Health]").hide();
-			$("[id=accordion1Travel]").hide();
+			if(selection != "Motor"){
+				$("[id=secondLevelNavBar] li").removeClass("active");
+				$(e.currentTarget).addClass("active");
+				selection = "Motor";
+				initialize();
+			}
 		});
 
 		$("[id=secondLevelNavBar] [id=2]").bind("click", function(e){
 			//Health
-			$("[id=secondLevelNavBar] li").removeClass("active");
-			$(e.currentTarget).addClass("active")
-			$("[id=accordion1Motor]").hide();
-			$("[id=accordion1Health]").show();
-			$("[id=accordion1Travel]").hide();
+			if(selection != "Health"){
+				$("[id=secondLevelNavBar] li").removeClass("active");
+				$(e.currentTarget).addClass("active");
+				selection = "Health";
+				initialize();
+			}
 		});
 
 		$("[id=secondLevelNavBar] [id=3]").bind("click", function(e){
 			//Travel
-			$("[id=secondLevelNavBar] li").removeClass("active");
-			$(e.currentTarget).addClass("active")
-			$("[id=accordion1Motor]").hide();
-			$("[id=accordion1Health]").hide();
-			$("[id=accordion1Travel]").show();
+			if(selection != "Travel"){
+				$("[id=secondLevelNavBar] li").removeClass("active");
+				$(e.currentTarget).addClass("active");
+				selection = "Travel";
+				initialize();
+			}
 		});
 
 	});

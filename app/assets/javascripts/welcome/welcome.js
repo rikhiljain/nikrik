@@ -1,7 +1,3 @@
-var user;
-var quotes;
-var selectedQuote;
-
 (function($){
 	$(document).ready(function(){
 
@@ -43,9 +39,6 @@ function bindDatePickers(){
 	window.$registerDate.datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true", changeMonth: "true", changeYear: "true",defaultDate: registrationDate });
 	//$("[id=registrationDetails] [id=registerDate]").val(registrationDate.getDate()+"-"+registrationDate.getMonth()+1+"-"+registrationDate.getFullYear());
 }
-
-
-
 
 function esc(text){
 	var a =  text

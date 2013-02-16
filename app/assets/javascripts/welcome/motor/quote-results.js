@@ -29,7 +29,7 @@ for(var result, i = -1; result = results[++i];){
 html[++h] = "</tbody>";
 html[++h] = "</table>";
 html[++h] = "<button id='motorQuoteResultsRecomputeLink' class='btn btn-link' type='button' onclick='__motor__recomputeQuoteForm()c'>Recompute</button>";
-$("[id=quoteResultsAccordion] [id=table]")[0].innerHTML = html.join('');
+window.$quoteResultsAccordionTable[0].innerHTML = html.join('');
 }
 
 function __motor__fillPremiumBreakupTable(id){

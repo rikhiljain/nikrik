@@ -12,6 +12,4 @@ function __health__bindQuoteFormEvents(){
 		}
 	});
 
-	//Binding the form validation
-	__health__validateQuoteForm();
 }
