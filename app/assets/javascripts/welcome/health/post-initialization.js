@@ -8,3 +8,4 @@ function __health__showOrHideElements(){
 
 function __health__fireEventsManually(){
 }
+

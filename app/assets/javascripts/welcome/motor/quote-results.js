@@ -5,7 +5,7 @@ function __motor__fillResultTable(data){
 //alert(data[0].company_name);
 //var results = JSON.parse(a);
 var results = data;
-quotes = data;
+window.quotes = data;
 var e = esc;
 var html = [], h = -1;
 html[++h] = "<table id='quoteResultsTable' class='table table-bordered'>";
