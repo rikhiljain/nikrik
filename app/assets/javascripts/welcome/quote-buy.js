@@ -11,7 +11,8 @@ function __common__openQuoteBuyForm(id){
 	if(user != null){
     __common__prefillQuoteBuyForm(user);
 	}
-	$quoteResultsBuyAccordionLink.click();
+  window.$quoteResultsBuyAccordionLink.css('cursor','pointer');
+	window.$quoteResultsBuyAccordionLink.click();
   return false;
 }
 

@@ -13,9 +13,9 @@ function __common__cacheAllJquerySelector(){
 
 	window.$mainContentDiv =  $("[id=mainContentDiv]");
 
-	window.$quoteFormAccordionLink = $("[id=quoteFormAccordion] [id=link]");
-	window.$quoteResultsAccordionLink = $("[id=quoteResultsAccordion] [id=link]");
-	window.$quoteResultsBuyAccordionLink = $("[id=quoteResultsBuyAccordion] [id=link]");
+	window.$quoteFormAccordionLink = $("[id=quoteFormAccordion] a");
+	window.$quoteResultsAccordionLink = $("[id=quoteResultsAccordion] a");
+	window.$quoteResultsBuyAccordionLink = $("[id=quoteResultsBuyAccordion] a");
 
 	window.$quoteResultsAccordionTable = $("[id=quoteResultsAccordion] [id=table]");
 

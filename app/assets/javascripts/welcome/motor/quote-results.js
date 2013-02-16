@@ -132,8 +132,5 @@ function __motor__fillPremiumBreakupTable(id){
 }
 
 function __motor__recomputeQuoteForm(){
-		window.$motorQuoteForm.each (function(){
-  			this.reset();
-		});
-		window.$quoteFormAccordionLink.click();
+		intialize();
 }

@@ -69,8 +69,6 @@ function __motor__bindQuoteFormEvents(){
 	 });
 
 	$("[id=motorQuoteFormResetLink]").bind("click",function(e){
-		$("[id=motorQuoteForm]").each (function(){
-  			this.reset();
-		});
+		initialize();
 	});
 }

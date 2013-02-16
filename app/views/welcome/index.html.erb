@@ -11,26 +11,24 @@
 
     		<div id="quoteFormAccordion" class="accordion-group">
     			<div class="accordion-heading">
-    				<a id="link" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne"><i class="icon-arrow-up"></i>Calculate Premium</a>
+    				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne"><i class="icon-plus-sign icon-white"></i>Calculate Premium</a>
       		</div>
-				  <div id="collapseOne" class="accordion-body collapse in">
-      				<div class="accordion-inner">
-                <div id="accordion1Motor">
+				  <div id="collapseOne" class="accordion-body collapse">
+                <div id="accordion1Motor" class="accordion-inner">
       					 <%= render "motor/forms/quote_form" %>
                 </div>
-                <div id="accordion1Health"  style="display:none">
+                <div id="accordion1Health" class="accordion-inner" style="display:none">
                   <%= render "health/forms/quote_form" %>
                 </div>
-                <div id="accordion1Travel"  style="display:none">
+                <div id="accordion1Travel" class="accordion-inner" style="display:none">
                   <%= render "travel/forms/quote_form" %>
                 </div>
-      				</div>
     			</div>
   			</div>
 
-		   	<div id="quoteResultsAccordion" class="accordion-group" id="accordion2">
+		   	<div id="quoteResultsAccordion" class="accordion-group">
 		    	<div class="accordion-heading">
-		      		<a id="link" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo"><i class="icon-arrow-down"></i>Results</a>
+		      		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo"><i class="icon-plus-sign icon-white"></i>Results</a>
 		    	</div>
 		    	<div id="collapseTwo" class="accordion-body collapse">
 		      		<div id="table"class="accordion-inner">
@@ -39,9 +37,9 @@
 		    	</div>
 		  	</div>
 
-		   	<div id="quoteResultsBuyAccordion" class="accordion-group" id="accordion3">
+		   	<div id="quoteResultsBuyAccordion" class="accordion-group">
 		    	<div class="accordion-heading">
-		      		<a id="link" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree"><i class="icon-arrow-down"></i>Insured Contact Details</a>
+		      		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree"><i class="icon-plus-sign icon-white"></i>Insured Contact Details</a>
 		    	</div>
 		    	<div id="collapseThree" class="accordion-body collapse">
 		      		<div id="table"class="accordion-inner">

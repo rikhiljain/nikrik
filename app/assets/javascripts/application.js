@@ -13,6 +13,7 @@
 //= require jquery/jquery-1.8.3
 //= require jquery/jquery.validate
 //= require jquery/jquery-ui-1.9.2.custom
+//= require jquery/jquery.blockUI
 //= require bootstrap
 //= require welcome/jquery-selectors
 //= require welcome/motor/jquery-selectors
@@ -63,6 +64,7 @@ var user;
 var quotes;
 var selectedQuote;
 var selection = "Motor";
+var accordionIndex = -1;
 
 
 (function($){

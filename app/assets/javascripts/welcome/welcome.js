@@ -9,6 +9,7 @@
 		bindCityAutoComplete(); //this file
 		bindAllEventHandlers(); //this file
 		populateDynamicData(); //dynamic-data.js
+		initialize();
 		postInitialization(); //post-initialization.js
 	});
 })(jQuery);	

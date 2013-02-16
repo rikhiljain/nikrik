@@ -20,13 +20,13 @@ function __common__bindBreadcrumbEvents(){
 		}
 		var index = $("[id=breadcrumb] > div").index($(e.target)) + 1;
 		if(index == 3){//"Enter details and Review"
-			$(".accordion-group:nth-child(3) [id=link]").click();
+			$(".accordion-group:nth-child(3) a").click();
 		}
 		else if(index == 2){//"Results/"
-			$(".accordion-group:nth-child(2) [id=link]").click();
+			$(".accordion-group:nth-child(2) a").click();
 		}
 		else if(index == 1){//"Calculate Premium/"
-			$(".accordion-group:nth-child(1) [id=link]").click();
+			$(".accordion-group:nth-child(1) a").click();
 		}
 	});
 }
@@ -42,21 +42,24 @@ function __common__bindAccordionEvents(){
 		if(e.type == "shown"){
 			var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
 			if(index == 1){ //"Motor Quote Form"
+				accordionIndex = 1;
 				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-warning");
 				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
 				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
 			}
 			else if(index == 2){ //"Results"
+				accordionIndex = 2;
 				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
 				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
 				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
 			}
 			else if(index == 3){//"Insured Contact Details"
+				accordionIndex = 3;
 				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
 				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
 				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
 			}
 		}
-    	$(e.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-arrow-down icon-arrow-up');
+    	$(e.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-plus-sign icon-minus-sign');
 	});
 }

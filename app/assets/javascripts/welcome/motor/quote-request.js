@@ -39,9 +39,11 @@ function __motor__submitQuoteRequest(serializedJSON){
 
   				success: function(data) {
     				//called when successful
+            __motor__disableForm();
     				__motor__fillResultTable(data);
-    				$quoteFormAccordionLink.click();
-					  $quoteResultsAccordionLink.click();
+    				window.$quoteFormAccordionLink.click();
+            window.$quoteResultsAccordionLink.css('cursor','pointer');
+					  window.$quoteResultsAccordionLink.click();
  				},
 
   				error: function(data, textStatus, errorThrown) {
@@ -49,4 +51,18 @@ function __motor__submitQuoteRequest(serializedJSON){
     				console.log("some error happened" + textStatus);
   				},
 			})
+}
+
+function __motor__disableForm(){
+  window.$motorQuoteForm.block({ message: "Please click on Reset the Form link" }); 
+  //$('#motorQuoteForm select').attr("disabled", true);
+  //$('#motorQuoteForm input').attr("disabled", true);
+  //$('#motorQuoteForm button').attr("disabled", true);
+}
+
+function __motor__enableForm(){ 
+  window.$motorQuoteForm.unblock(); 
+  //$('#motorQuoteForm select').attr("disabled", false);
+  //$('#motorQuoteForm input').attr("disabled", false);
+  //$('#motorQuoteForm button').attr("disabled", false);
 }
