@@ -56,7 +56,7 @@ function __common__buildNotificationsForQuoteBuyForm(){
 function __common__makeProgressBarGreen(){
   $("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
   $("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
-  $("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
+  $("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-success");
 }
 
 function __common__validateQuoteBuyForm(){

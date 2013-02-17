@@ -15,7 +15,7 @@ function __common__bindAllEventHandlers(){
 
 function __common__bindBreadcrumbEvents(){
 	$("[id=breadcrumb] > div").bind("click", function(e){
-		if($(e.target).hasClass("active")){
+		if($(e.target).hasClass("bar-warning")){
 			return;
 		}
 		var index = $("[id=breadcrumb] > div").index($(e.target)) + 1;
@@ -65,14 +65,23 @@ function __common__bindAccordionEvents(){
 		if(e.type == "shown"){
 			var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
 			window.currentAccordionIndex = index;
-			if(window.allowedAccordionIndexes[2] != 0){
-				//make calculate premium green
-				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
-			}
 			if(window.allowedAccordionIndexes[3] != 0){
+				//make "Calculate premium" accordion green
 				//make "Results" accordion green
+				//make "Eneter details and Review" accordion yellow
+				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
 				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
+				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
+			}else if(window.allowedAccordionIndexes[2] != 0){
+				//make "Calculate premium" accordion green
+				//make "Results" accordion yellow
+				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
+				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
+			}else if(window.allowedAccordionIndexes[1] != 0){
+				//make "Calculate premium" accordion yellow
+				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-warning");
 			}
+
 		}
     	$(e.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-plus-sign icon-minus-sign');
 	});

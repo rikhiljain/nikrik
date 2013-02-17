@@ -135,7 +135,7 @@ a:link, a:visited, a:active {
 }
 
 .my-breadcrumb.progress .bar-warning{
-  @include gradient-vertical($yellow, $yellow);
+  @include gradient-vertical(#FF9E00, #FF9E00);
 }
 
 .my-breadcrumb.progress .bar-success{
