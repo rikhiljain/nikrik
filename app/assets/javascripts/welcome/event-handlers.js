@@ -39,25 +39,25 @@ function __common__bindQuoteBuyFormEvents(){
 function __common__bindAccordionEvents(){
 
 	$(".accordion").on('click', function(e){
-		// //index of the accordion being clicked
-		// var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
-		// //if the accordion being clicked is not allowed yet
-		// if(window.allowedAccordionIndexes[index] == 0){
-		// 	//if it is "Results" accordion
-		// 	if(index = 2){
-		// 		alert("Please enter your vehicles details and generate a quote first");
-		// 	}else if(index = 3){
-		// 		//if it is "Eneter details and Review" accordion and user has not even genrated a quote
-		// 		if(window.allowedAccordionIndexes[2] == 0){
-		// 			alert("Please enter your vehicles details and generate a quote first");
-		// 		}else {
-		// 			//it is a "Eneter details and Review" accordion and the user has not click on the buy link in "Results" accordion
-		// 			alert("Please click on buy link");
-		// 		}
-		// 	}
+		//index of the accordion being clicked
+		var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
+		//if the accordion being clicked is not allowed yet
+		if(window.allowedAccordionIndexes[index] == 0){
+			//if it is "Results" accordion
+			if(index = 2){
+				alert("Please enter your vehicles details and generate a quote first");
+			}else if(index = 3){
+				//if it is "Eneter details and Review" accordion and user has not even genrated a quote
+				if(window.allowedAccordionIndexes[2] == 0){
+					alert("Please enter your vehicles details and generate a quote first");
+				}else {
+					//it is a "Eneter details and Review" accordion and the user has not click on the buy link in "Results" accordion
+					alert("Please click on buy link");
+				}
+			}
 			
-		// 	return false;
-		// }
+			return false;
+		}
 	});
 
 	//Binding the accordion
