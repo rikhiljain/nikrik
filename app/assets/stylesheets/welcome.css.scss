@@ -126,6 +126,24 @@ a:link, a:visited, a:active {
     text-align:center;
 }
 
+.my-breadcrumb.progress{
+  height:20px;
+}
+
+.my-breadcrumb.progress .bar-danger{
+  @include gradient-vertical($red, $red);
+}
+
+.my-breadcrumb.progress .bar-warning{
+  @include gradient-vertical($yellow, $yellow);
+}
+
+.my-breadcrumb.progress .bar-success{
+  @include gradient-vertical($green, $green);
+}
+
+
+
 //Element selectors
 //*************************************************************
 legend{

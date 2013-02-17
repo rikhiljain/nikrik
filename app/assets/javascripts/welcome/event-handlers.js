@@ -39,20 +39,25 @@ function __common__bindQuoteBuyFormEvents(){
 function __common__bindAccordionEvents(){
 
 	$(".accordion").on('click', function(e){
-		var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
-		if(window.allowedAccordionIndexes[index] == 0){
-			if(index = 2){
-				alert("Please enter your vehicles details and generate a quote first");
-			}else if(index = 3){
-				if(window.allowedAccordionIndexes[2] == 0){
-					alert("Please enter your vehicles details and generate a quote first");
-				}else {
-					alert("Please click on buy link");
-				}
-			}
+		// //index of the accordion being clicked
+		// var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
+		// //if the accordion being clicked is not allowed yet
+		// if(window.allowedAccordionIndexes[index] == 0){
+		// 	//if it is "Results" accordion
+		// 	if(index = 2){
+		// 		alert("Please enter your vehicles details and generate a quote first");
+		// 	}else if(index = 3){
+		// 		//if it is "Eneter details and Review" accordion and user has not even genrated a quote
+		// 		if(window.allowedAccordionIndexes[2] == 0){
+		// 			alert("Please enter your vehicles details and generate a quote first");
+		// 		}else {
+		// 			//it is a "Eneter details and Review" accordion and the user has not click on the buy link in "Results" accordion
+		// 			alert("Please click on buy link");
+		// 		}
+		// 	}
 			
-			return false;
-		}
+		// 	return false;
+		// }
 	});
 
 	//Binding the accordion
@@ -60,20 +65,13 @@ function __common__bindAccordionEvents(){
 		if(e.type == "shown"){
 			var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
 			window.currentAccordionIndex = index;
-			if(index == 1){ //"Motor Quote Form"				
-				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-warning");
-				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
-				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
-			}
-			else if(index == 2){ //"Results"
+			if(window.allowedAccordionIndexes[2] != 0){
+				//make calculate premium green
 				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
-				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
-				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
 			}
-			else if(index == 3){//"Insured Contact Details"
-				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
+			if(window.allowedAccordionIndexes[3] != 0){
+				//make "Results" accordion green
 				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
-				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
 			}
 		}
     	$(e.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-plus-sign icon-minus-sign');

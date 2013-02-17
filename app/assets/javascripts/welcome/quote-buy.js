@@ -38,6 +38,7 @@ function __common__submitQuoteBuyRequest(serializedJSON){
   				success: function() {
     				//called when successful
             __common__buildNotificationsForQuoteBuyForm();
+            __common__makeProgressBarGreen();
  				},
 
   				error: function(textStatus, errorThrown) {
@@ -50,6 +51,12 @@ function __common__submitQuoteBuyRequest(serializedJSON){
 function __common__buildNotificationsForQuoteBuyForm(){
   var message = "A very sincere thanks for your interest. We will contact you very shortly. You should also receive one email with the quote details.";
   $quoteBuyFormNotificationDiv.html("<div class='alert alert-success'>"+message+"<a class='close' data-dismiss='alert'>&#215;</a></div>");
+}
+
+function __common__makeProgressBarGreen(){
+  $("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
+  $("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
+  $("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
 }
 
 function __common__validateQuoteBuyForm(){
