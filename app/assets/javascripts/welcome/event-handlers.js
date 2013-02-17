@@ -41,7 +41,16 @@ function __common__bindAccordionEvents(){
 	$(".accordion").on('click', function(e){
 		var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
 		if(window.allowedAccordionIndexes[index] == 0){
-			alert("display some useful message over here")
+			if(index = 2){
+				alert("Please enter your vehicles details and generate a quote first");
+			}else if(index = 3){
+				if(window.allowedAccordionIndexes[2] == 0){
+					alert("Please enter your vehicles details and generate a quote first");
+				}else {
+					alert("Please click on buy link");
+				}
+			}
+			
 			return false;
 		}
 	});
