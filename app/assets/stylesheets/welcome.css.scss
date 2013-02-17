@@ -118,6 +118,10 @@ a:link, a:visited, a:active {
     vertical-align: top;
 }
 
+.center.navbar .nav > li > a{
+  padding: 4px 16px;
+}
+
 .center .navbar-inner {
     text-align:center;
 }
