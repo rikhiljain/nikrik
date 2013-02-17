@@ -41,6 +41,6 @@ gem 'capistrano'
 
 # To use debugger
 gem 'debugger'
-gem 'daemons'
-gem 'delayed_job_active_record', '~> 0.4.0'
-gem "delayed_job_web"
+gem 'daemons', "~> 1.1.9"
+gem 'delayed_job_active_record', '~> 0.4.1'
+gem "delayed_job_web" , "~> 1.1.2"

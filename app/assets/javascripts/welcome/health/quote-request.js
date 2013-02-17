@@ -21,9 +21,11 @@ function __health__submitQuoteRequest(serializedJSON){
 
           success: function(data) {
             //called when successful
-            fillHealthResultTable(data);
-            window.$healthFormAccordionLink.click();
-            window.$healthResultsAccordionLink.click();
+            __health__fillResultTable(data);
+            window.$quoteFormAccordionLink.click();
+            window.allowedAccordionIndexes[2] = 1;
+            window.$quoteResultsAccordionLink.css('cursor','pointer');
+            window.$quoteResultsAccordionLink.click();
        },
 
           error: function(data, textStatus, errorThrown) {

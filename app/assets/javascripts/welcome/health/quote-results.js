@@ -25,7 +25,7 @@ for(var result, i = -1; result = results[++i];){
 html[++h] = "</tbody>";
 html[++h] = "</table>";
 html[++h] = "<button id='healthQuoteResultsRecomputeLink' class='btn btn-link' type='button' onclick='__health__recomputeQuoteForm()'>Recompute</button>";
-$("[id=healthResultsAccordion] [id=table]")[0].innerHTML = html.join('');
+window.$quoteResultsAccordionTable[0].innerHTML = html.join('');
 }
 
 function __health__recomputeQuoteForm(){
