@@ -55,7 +55,7 @@ function __motor__submitQuoteRequest(serializedJSON){
 }
 
 function __motor__disableForm(){
-  window.$motorQuoteForm.block({ message: "Please click on Reset the Form link" }); 
+  window.$motorQuoteForm.block({ message: "Please click on Reset the Form link", css: "{ backgroundColor: '#f00', color: '#fff'}" }); 
   //$('#motorQuoteForm select').attr("disabled", true);
   //$('#motorQuoteForm input').attr("disabled", true);
   //$('#motorQuoteForm button').attr("disabled", true);

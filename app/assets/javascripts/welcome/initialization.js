@@ -25,11 +25,6 @@ function __common__initialize(){
   			this.reset();
 	});
 
-	//show the quote form
-	if(window.currentAccordionIndex != 1){
-		window.$quoteFormAccordionLink.click();
-	}
-
 	//disable the result and buy form
 	window.$quoteResultsAccordionLink.css('cursor','url(assets/famfamfam/icons/delete.png),default');
 	window.$quoteResultsBuyAccordionLink.css('cursor','url(assets/famfamfam/icons/delete.png),default');
@@ -41,4 +36,13 @@ function __common__initialize(){
 	window.allowedAccordionIndexes[1] = 1; //only first will be on
 	window.allowedAccordionIndexes[2] = 0;
 	window.allowedAccordionIndexes[3] = 0;
+
+		//show the quote form
+	if(window.currentAccordionIndex != 1){
+		window.$quoteFormAccordionLink.click();
+	}else{
+		//we don't want to click the accordion, but still want to reset the bread crumb
+		__common__updateBreadCrumbs();
+	}
+
 }

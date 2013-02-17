@@ -8,6 +8,8 @@ function __motor__initialize(){
 
 	window.$motorQuoteForm.each (function(){
   			this.reset();
+  			window.$newPolicyStartDate.html("");
+  			window.$price.html("");
 	});
 
 	$("[id=protectionForAccessories] [id=kitPriceControlGroup]").hide();

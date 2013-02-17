@@ -1,4 +1,7 @@
 function __health__cacheAllJquerySelector(){
+
+	window.$healthQuoteForm = $("[id=healthQuoteForm]");
+
 	window.$noOfChilds = $("[id=healthQuoteForm] [id=no_of_childs]");
 	window.$healthCover = $("[id=healthQuoteForm] [id=heath_cover]");
 	window.$healthAge = $("[id=healthQuoteForm] [id=adult_age]");
