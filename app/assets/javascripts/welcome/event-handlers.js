@@ -43,13 +43,21 @@ function __common__bindAccordionEvents(){
 		var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
 		//if the accordion being clicked is not allowed yet
 		if(window.allowedAccordionIndexes[index] == 0){
+			var message = "";
+			if(window.currentSelection == "Motor"){
+				message = "Please enter your vehicles details and generate a quote first";
+			}else if(window.currentSelection == "Motor"){
+				message = "Please enter your health details and generate a quote first";
+			}else if(window.currentSelection == "Motor"){
+				message = "Please enter your travel details and generate a quote first";
+			}
 			//if it is "Results" accordion
 			if(index == 2){
-				alert("Please enter your vehicles details and generate a quote first");
+				alert(message);
 			}else if(index == 3){
 				//if it is "Eneter details and Review" accordion and user has not even genrated a quote
 				if(window.allowedAccordionIndexes[2] == 0){
-					alert("Please enter your vehicles details and generate a quote first");
+					alert(message);
 				}else {
 					//it is a "Eneter details and Review" accordion and the user has not click on the buy link in "Results" accordion
 					alert("Please click on buy link");
@@ -65,31 +73,34 @@ function __common__bindAccordionEvents(){
 		if(e.type == "shown"){
 			var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
 			window.currentAccordionIndex = index;
-			if(window.allowedAccordionIndexes[0] == 1){
-				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
-				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
-				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-success");
-			}else if(window.allowedAccordionIndexes[3] == 1){
-				//make "Calculate premium" accordion green
-				//make "Results" accordion green
-				//make "Eneter details and Review" accordion yellow
-				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
-				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
-				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
-			}else if(window.allowedAccordionIndexes[2] == 1){
-				//make "Calculate premium" accordion green
-				//make "Results" accordion yellow
-				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
-				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
-				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-danger");
-			}else if(window.allowedAccordionIndexes[1] == 1){
-				//make "Calculate premium" accordion yellow
-				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-warning");
-				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-danger");
-				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-danger");
-			}
-
+			__common__updateBreadCrumbs();
 		}
     	$(e.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-plus-sign icon-minus-sign');
 	});
+}
+
+function __common__updateBreadCrumbs(){
+	if(window.allowedAccordionIndexes[0] == 1){
+		$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
+		$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
+		$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-success");
+	}else if(window.allowedAccordionIndexes[3] == 1){
+		//make "Calculate premium" accordion green
+		//make "Results" accordion green
+		//make "Eneter details and Review" accordion yellow
+		$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
+		$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
+		$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
+	}else if(window.allowedAccordionIndexes[2] == 1){
+		//make "Calculate premium" accordion green
+		//make "Results" accordion yellow
+		$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
+		$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
+		$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-danger");
+	}else if(window.allowedAccordionIndexes[1] == 1){
+		//make "Calculate premium" accordion yellow
+		$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-warning");
+		$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-danger");
+		$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-danger");
+	}
 }
