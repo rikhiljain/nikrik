@@ -1,7 +1,7 @@
 <div>
   <div  class="navbar navbar-fixed-top iSHeader" id="firstLevelNavBar">
     <div class="navbar-inner">
-      <div class="container" style="height: 80px">
+      <div class="container" style="height: 60px;">
         <%= link_to "Insurance Shopee", "/welcome/index", :class => 'brand' %>
         <ul class="nav">
           <% if user_signed_in? %>
@@ -31,7 +31,6 @@
       </div>
     </div>
     <div class="navbar-inner" id="secondLevelNavBar">
-      <a class="brand" href="#">Options</a>
       <ul class="nav">
         <li id="1" class="active"><a href="#">Motor Insurance</a></li>
         <li id="2" ><a href="#">Health Insurance</a></li>

@@ -1,17 +1,22 @@
-<form method="post" action="/loyalty/referral" id="referanceForm">
-  <fieldset style="margin:10px">
-    <legend>Refer Friend & Earn Money</legend>
-    <label>Your Mobile Number</label>
-    <input type="text" name="refer[mobile]" placeholder="Your Mobile"/>
-    <label>Your Email address</label>
-    <input type="text" name="refer[email]" placeholder="Email Address"/>
-    <label>Referral Name</label>
-    <input type="text" name="refer[ref_name]" placeholder="Referral Name"/>
-    <label>Referral Mobile</label>
-    <input type="text" name="refer[ref_mobile]" placeholder="Referral Mobile"/>
-    <label>Referral Details</label>
-    <textarea name="refer[ref_desc]" placeholder="Referral Details"> </textarea>
-
-    <button type="submit" class="btn">Submit</button>
-  </fieldset>
-</form>
+<div class="rightHandDiv">
+    <div class="alert alert-block alert-heading">
+        <strong>Refer Friend & Earn Money</strong>
+    </div>
+    <div>
+        <form method="post" action="/loyalty/referral" id="referanceForm" class="callUsForm">
+            <fieldset style="margin:10px">
+                <label>Your Mobile Number</label>
+                <input type="text" name="refer[mobile]" placeholder="Your Mobile"/>
+                <label>Your Email address</label>
+                <input type="text" name="refer[email]" placeholder="Email Address"/>
+                <label>Referral Name</label>
+                <input type="text" name="refer[ref_name]" placeholder="Referral Name"/>
+                <label>Referral Mobile</label>
+                <input type="text" name="refer[ref_mobile]" placeholder="Referral Mobile"/>
+                <label>Referral Details</label>
+                <textarea name="refer[ref_desc]" placeholder="Referral Details"> </textarea>
+                <button type="submit" class="btn btn-custom">Submit</button>
+            </fieldset>
+        </form>
+    </div>
+</div>

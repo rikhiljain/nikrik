@@ -11,7 +11,7 @@
 @import "welcome";
 
 body { 
-  padding-top: 120px;
+  padding-top: 100px;
  }
 
 
@@ -101,11 +101,11 @@ body {
 }
 
 .accordion-inner{
-  background-color: $grayBgColor;
+  background-color: $white;
 }
 
 .accordion .accordion-heading{
-  background-color: rgba(255, 71, 0, 0.89);
+  background-color: #04346C;
   border-radius: 8px 8px 8px 8px;
   > a {
     color:white;
