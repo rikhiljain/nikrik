@@ -28,7 +28,7 @@ for(var result, i = -1; result = results[++i];){
 }
 html[++h] = "</tbody>";
 html[++h] = "</table>";
-html[++h] = "<button id='motorQuoteResultsRecomputeLink' class='btn btn-link' type='button' onclick='__motor__recomputeQuoteForm()c'>Recompute</button>";
+html[++h] = "<button id='motorQuoteResultsRecomputeLink' class='btn btn-link' type='button' onclick='__motor__recomputeQuoteForm()'>Recompute</button>";
 window.$quoteResultsAccordionTable[0].innerHTML = html.join('');
 }
 
@@ -132,5 +132,5 @@ function __motor__fillPremiumBreakupTable(id){
 }
 
 function __motor__recomputeQuoteForm(){
-		intialize();
+		initialize();
 }

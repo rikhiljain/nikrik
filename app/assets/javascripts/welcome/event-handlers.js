@@ -44,9 +44,9 @@ function __common__bindAccordionEvents(){
 		//if the accordion being clicked is not allowed yet
 		if(window.allowedAccordionIndexes[index] == 0){
 			//if it is "Results" accordion
-			if(index = 2){
+			if(index == 2){
 				alert("Please enter your vehicles details and generate a quote first");
-			}else if(index = 3){
+			}else if(index == 3){
 				//if it is "Eneter details and Review" accordion and user has not even genrated a quote
 				if(window.allowedAccordionIndexes[2] == 0){
 					alert("Please enter your vehicles details and generate a quote first");
@@ -65,21 +65,28 @@ function __common__bindAccordionEvents(){
 		if(e.type == "shown"){
 			var index =  $(".accordion-group").index($(e.target).parents(".accordion-group")) + 1;
 			window.currentAccordionIndex = index;
-			if(window.allowedAccordionIndexes[3] != 0){
+			if(window.allowedAccordionIndexes[0] == 1){
+				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
+				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
+				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-success");
+			}else if(window.allowedAccordionIndexes[3] == 1){
 				//make "Calculate premium" accordion green
 				//make "Results" accordion green
 				//make "Eneter details and Review" accordion yellow
 				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
 				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
 				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-warning");
-			}else if(window.allowedAccordionIndexes[2] != 0){
+			}else if(window.allowedAccordionIndexes[2] == 1){
 				//make "Calculate premium" accordion green
 				//make "Results" accordion yellow
 				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
 				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-warning");
-			}else if(window.allowedAccordionIndexes[1] != 0){
+				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-danger");
+			}else if(window.allowedAccordionIndexes[1] == 1){
 				//make "Calculate premium" accordion yellow
 				$("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-warning");
+				$("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-danger");
+				$("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-danger");
 			}
 
 		}

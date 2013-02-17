@@ -21,9 +21,12 @@ function __health__submitQuoteRequest(serializedJSON){
 
           success: function(data) {
             //called when successful
-            fillHealthResultTable(data);
-            window.$healthFormAccordionLink.click();
-            window.$healthResultsAccordionLink.click();
+            __health__disableForm();
+            __health__fillResultTable(data);
+            window.$quoteFormAccordionLink.click();
+            window.allowedAccordionIndexes[2] = 1;
+            window.$quoteResultsAccordionLink.css('cursor','pointer');
+            window.$quoteResultsAccordionLink.click(); 
        },
 
           error: function(data, textStatus, errorThrown) {
@@ -31,4 +34,12 @@ function __health__submitQuoteRequest(serializedJSON){
             console.log("some error happened" + textStatus);
           },
       })
+}
+
+function __health__disableForm(){
+  window.$motorQuoteForm.block({ message: "Please click on Reset the Form link" }); 
+}
+
+function __health__enableForm(){ 
+  window.$motorQuoteForm.unblock(); 
 }

@@ -57,6 +57,7 @@ function __common__makeProgressBarGreen(){
   $("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
   $("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
   $("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-success");
+  window.allowedAccordionIndexes[0] = 1;
 }
 
 function __common__validateQuoteBuyForm(){
