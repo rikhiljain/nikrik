@@ -5,7 +5,7 @@ function __health__fillResultTable(data){
 //alert(data[0].company_name);
 //var results = JSON.parse(a);
 var results = data;
-quotes = data;
+window.quotes = data;
 var e = esc;
 var html = [], h = -1;
 html[++h] = "<table id='quoteHealthResultsTable' class='table table-bordered'>";
@@ -15,11 +15,11 @@ html[++h] = "<th></th>";
 html[++h] = "<tbody>";
 for(var result, i = -1; result = results[++i];){
 	html[++h] = "<tr><td>";
-	html[++h] = result.company_id;
+	html[++h] = result.company_name;
 	html[++h] = "</td><td>";
 	html[++h] = result.total_premium;
 	html[++h] = "</td><td>";
-	html[++h] = "<a class='_iSHandCursor' onclick='__common__openQuoteBuyForm("+result.company_id+");'>Buy</a>";
+	html[++h] = "<a class='_is_hand-cursor' onclick='__common__openQuoteBuyForm("+result.company_id+");'>Buy</a>";
 	html[++h] = "</td></tr>";
 }
 html[++h] = "</tbody>";
@@ -29,9 +29,6 @@ window.$quoteResultsAccordionTable[0].innerHTML = html.join('');
 }
 
 function __health__recomputeQuoteForm(){
-		window.$healthQuoteForm.each (function(){
-  			this.reset();
-		});
-		window.$healthFormAccordionLink.click();
+	initialize();
 }
 

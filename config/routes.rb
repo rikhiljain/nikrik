@@ -16,6 +16,7 @@ Nikrik::Application.routes.draw do
   post "motor/searches/buy" => "motor/searches#buy"
   
   post "health/searches/quote" => "health/searches#quote"
+  post "health/searches/buy" => "health/searches#buy"
 
   post "loyalty/referral" => "loyalty#create_referral"
   get  "loyalty/user_referrals/:id" => "loyalty#user_referrals"

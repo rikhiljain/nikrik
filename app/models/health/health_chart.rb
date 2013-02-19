@@ -7,7 +7,7 @@ class Health::HealthChart < ActiveRecord::Base
   end
 
   def self.find_by_coverage_age(heath_cover, age)
-    where("coverage = ? AND age_start <= ? and ? <= age_end ", heath_cover, age, age)
+    where("coverage = ? AND age_start <= ? and age_end >= ? ", heath_cover, age, age)
   end
 
 end

@@ -24,8 +24,16 @@ function __common__prefillQuoteBuyForm(user){
 }
 
 function __common__submitQuoteBuyRequest(serializedJSON){
+  var postUrl;
+  if(window.currentSelection == "Motor"){
+    postUrl = "/motor/searches/buy";
+  }else if(window.currentSelection == "Health"){
+    postUrl = "/health/searches/buy";
+  }else if(window.currentSelection == "Travel"){
+    postUrl = "/travel/searches/buy";
+  }
 	$.ajax({
-  				url: "/motor/searches/buy",
+  				url: postUrl,
   				type: "POST",
 				dataType: "json", // expected format for response
 				contentType: "application/json", // send as JSON
@@ -110,7 +118,13 @@ function __common__createQuoteBuyRequest(){
     });
 
     json["company_name"] = selectedQuote.company_name;
-    json["id"] = selectedQuote.motor_search_id;
+    if(window.currentSelection == "Motor"){
+      json["id"] = selectedQuote.motor_search_id;
+    }else if(window.currentSelection == "Health"){
+      json["id"] = selectedQuote.health_search_id;
+    }else if(window.currentSelection == "Travel"){
+      json["id"] = selectedQuote.travel_search_id;
+    }
     json["final_premium"] = selectedQuote.final_premium;
 
     return JSON.stringify(json);

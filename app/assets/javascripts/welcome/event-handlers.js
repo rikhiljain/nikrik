@@ -46,9 +46,9 @@ function __common__bindAccordionEvents(){
 			var message = "";
 			if(window.currentSelection == "Motor"){
 				message = "Please enter your vehicles details and generate a quote first";
-			}else if(window.currentSelection == "Motor"){
+			}else if(window.currentSelection == "Health"){
 				message = "Please enter your health details and generate a quote first";
-			}else if(window.currentSelection == "Motor"){
+			}else if(window.currentSelection == "Travel"){
 				message = "Please enter your travel details and generate a quote first";
 			}
 			//if it is "Results" accordion
