@@ -9,5 +9,4 @@ function __health__initialize(){
 	window.$healthQuoteForm.each (function(){
   			this.reset();
 	});
-
 }

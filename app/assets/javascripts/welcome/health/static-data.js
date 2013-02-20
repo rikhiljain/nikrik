@@ -33,7 +33,7 @@ function __health__populateNoOfChild( selectElement )
 function __health__populateHealthCover( selectElement )
 {
 	var options = [
-					{"optionValue":"0", "optionDisplay": "Select Amount"},
+					{"optionValue":"", "optionDisplay": "Select Amount"},
 	               	{"optionValue":"100000", "optionDisplay": "100000"},
 	               	{"optionValue":"200000", "optionDisplay": "200000"},
     	          	{"optionValue":"300000", "optionDisplay": "300000"},
@@ -48,7 +48,7 @@ function __health__populateHealthCover( selectElement )
 }
 
 function __health__pouplateAge(selectElement){
-	var options = '<option value="0">Select Age</option>';  
+	var options = '<option value="">Select Age</option>';  
 	for (var i=21; i <= 100;++i) { 
 		options += '<option value="' + i + '">' + i + '</option>';
 	 }

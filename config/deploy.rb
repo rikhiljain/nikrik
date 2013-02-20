@@ -74,11 +74,13 @@ namespace :delayed_job do
 
     desc "Stop the delayed_job process"
     task :stop, :roles => lambda { roles } do
+      
       run "cd #{current_path};#{rails_env} #{delayed_job_command} stop"
     end
 
     desc "Start the delayed_job process"
     task :start, :roles => lambda { roles } do
+      run "chmod 755 #{current_path}/#{delayed_job_command}"
       run "cd #{current_path};#{rails_env} #{delayed_job_command} start #{args}"
     end
 
