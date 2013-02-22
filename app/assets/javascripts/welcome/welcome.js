@@ -11,6 +11,7 @@
 		populateDynamicData(); //dynamic-data.js
 		initialize();
 		postInitialization(); //post-initialization.js
+		affixAll();
 	});
 })(jQuery);	
 
@@ -47,4 +48,27 @@ function esc(text){
 			.replace("<", "&lt;")
 			.replace(">", "&gt;");
 	return a;
+}
+
+function affixAll(){
+	var positions = new Array();
+	var widths = new Array();
+	var elements = new Array();
+	$(".is_affix").each(function( index, elem ) {
+		var position = $(elem).position();
+		if(position.left != 0 && position.top != 0){
+			positions.push($(elem).position());
+			widths.push($(elem).width());
+			elements.push($(elem));
+		}
+	});
+
+	$.each(elements, function( index, elem ) {
+		$(elem).css({
+		    "position":"fixed", 
+		    "top": positions[index].top + "px",
+		    "left": positions[index].left + "px",
+		    "width": widths[index] + "px"
+		});
+	});		
 }

@@ -1,10 +1,10 @@
-<div style="margin-bottom:20px;">
+<div style="margin-bottom:20px;" class="is_affix">
 	<ul class="nav nav-list bs-docs-sidenav">
 	  <li><%= link_to 'Edit Profile', edit_user_registration_path  %></li>
-	  <li><%= link_to 'My Policies', {:controller => "/policies", :action => "policies", :id => current_user.id } %></li>
+	  <li><%= link_to 'My Policies', {:controller => "/policies", :action => "policies.json", :userId => current_user.id } %></li>
 	  <li><%= link_to 'My Referrals', {:controller => "/loyalty", :action => "user_referrals", :id => current_user.id } %></li>
 	  <li><%= link_to 'My Points', {:controller => "/loyalty", :action => "points", :id => current_user.id } %></li>
-	  <li><%= link_to 'Rewards', {:controller => "/loyalty", :action => "rewards" } %></li>
+	  <li><%= link_to 'My Rewards', {:controller => "/loyalty", :action => "rewards" } %></li>
 
 	</ul>
 </div>
