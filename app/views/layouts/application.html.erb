@@ -21,7 +21,8 @@
                </div>
                 <div class="span7">
                   <%= render 'layouts/messages' %>
-                  <%= yield %>
+                   <%= yield :insuranceContent %>
+                   <%= yield %>
                 </div>
                 <div class="span3">
                   <%= render "shared/ad_banner" %>
@@ -35,6 +36,7 @@
                   </div>
                   <div class="span7">
                     <%= render 'layouts/messages' %>
+                    <%= yield :insuranceContent %>
                     <%= yield %>
                   </div>
                  <div class="span3 affix span9Pos">

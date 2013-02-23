@@ -4,7 +4,6 @@ function cacheAllJquerySelector(){
 	__motor__cacheAllJquerySelector();
 	__health__cacheAllJquerySelector();
 	__travel__cacheAllJquerySelector();
-
 }
 
 function __common__cacheAllJquerySelector(){
@@ -12,6 +11,7 @@ function __common__cacheAllJquerySelector(){
 	window.$mainMessagesDiv =  $("[id=mainMessagesDiv]");
 
 	window.$mainContentDiv =  $("[id=mainContentDiv]");
+	window.$userMenuContentDiv =  $("[id=userMenuContentDiv]");
 
 	window.$quoteFormAccordionLink = $("[id=quoteFormAccordion] a");
 	window.$quoteResultsAccordionLink = $("[id=quoteResultsAccordion] a");

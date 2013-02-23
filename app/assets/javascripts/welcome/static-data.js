@@ -3,7 +3,6 @@ function populateStaticData(){
 	__motor__populateStaticData();
 	__health__populateStaticData();
 	__travel__populateStaticData();
-
 }
 
 function __common__populateStaticData(){

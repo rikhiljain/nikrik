@@ -4,7 +4,6 @@ function bindAllEventHandlers(){
 	__motor__bindAllEventHandlers();
 	__health__bindAllEventHandlers();
 	__travel__bindAllEventHandlers();
-
 }
 
 function __common__bindAllEventHandlers(){

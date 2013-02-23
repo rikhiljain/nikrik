@@ -142,6 +142,7 @@ class PoliciesController < ApplicationController
     @policies = Policy.where("user_id=?", params[:id])
     respond_to do |format|
       format.html { render :template => "/policies/user_list" }
+      format.json { render json: @policies }
     end
 
   end

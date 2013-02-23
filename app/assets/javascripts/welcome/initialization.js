@@ -17,7 +17,11 @@ function __common__initialize(){
 	window.quotes = null;
 	window.selectedQuote = null;
 
-	//reset the results div
+	//show main content
+	window.$mainContentDiv.show();
+	window.$userMenuContentDiv.hide();
+
+	//res//et the results div
 	window.$quoteResultsAccordionTable[0].innerHTML = "Looks like you did not fill in the form...";
 
 	//reset the quote buy form

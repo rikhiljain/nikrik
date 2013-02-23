@@ -1,4 +1,4 @@
-<div class="is_right-hand-div">
+<div id="deviseDiv" class="is_right-hand-div">
   <div class="alert alert-block">
     <h3>Sign up</h3>
   </div>
@@ -22,5 +22,9 @@
     <% end %>
   </div>
 </div>
-
-
+<% content_for :insuranceContent do %>
+  <%= render :partial => "welcome/index", :locals => { :display => "true" } %>
+<% end %>
+<%= javascript_tag do %>
+  window.content = "devise";
+<% end %>   
