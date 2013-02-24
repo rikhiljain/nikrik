@@ -84,12 +84,17 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText, inHea
             if(typeof(parsedJson[0]) == 'object')
             {
                 if(inHeaders != null){
-                    headers = inHeaders;
+                    headers = new Array();
+                    for (i = 0; i < inHeaders.length; i++){
+                            var values = inHeaders[i].split(":");
+                            thCon += thRow.format(values[0]);
+                            headers.push(values[1]);
+                    }
                 }else{
                     headers = array_keys(parsedJson[0]); 
+                    for (i = 0; i < headers.length; i++)
+                        thCon += thRow.format(headers[i]);
                 }
-                for (i = 0; i < headers.length; i++)
-                    thCon += thRow.format(headers[i]);
             }
         }
         th = th.format(tr.format(thCon));

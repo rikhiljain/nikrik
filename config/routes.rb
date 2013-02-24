@@ -30,6 +30,19 @@ Nikrik::Application.routes.draw do
   get "loyalty/confirm/:id" => "loyalty#confirm"
   get "loyalty/details/:id/:ref_type/:ref_id" => "loyalty#details"
 
+  #post  "loyalty/referrals" => "loyalty#create_referral"
+  #get   "loyalty/:userId/referrals" => "loyalty#user_referrals"  #user
+  #get   "loyalty/referrals?status=:status" => "loyalty#find_referrals"
+  #get   "loyalty/referrals/:id" => "loyalty#referral"
+  #put   "loyalty/referrals/:id" => "loyalty#update_referral"
+
+  #get "loyalty/:userId/points" => "loyalty#points" #user
+  #get "loyalty/activeRewards" => "loyalty#rewards" #user
+
+  get "policies/display/:id"  =>    "policies#display"
+  get "policies/policies/:id"  =>    "policies#policies"
+  get "policies/download/:id"  => "policies#download"
+
   namespace :motor do
     resources :rtos
     resources :discounts
@@ -39,12 +52,7 @@ Nikrik::Application.routes.draw do
   end
   
   resources :policies
-  resources :rewards
-
-  get "policies/display/:id"  =>    "policies#display"
-  get "policies/policies/:id"  =>    "policies#policies"
-  get "policies/download/:id"  => "policies#download"
- 
+  resources :rewards 
   resources :admin_users
   
   match "/delayed_job" => DelayedJobWeb, :anchor => false

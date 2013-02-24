@@ -1,11 +1,11 @@
 class LoyaltyController < ApplicationController
   
   def points
-    @points = Loyalty::Point.find_by_user(params[:userId])
+    @points = Loyalty::Point.find_by_user(params[:id])
     @total_points = m_total_points(@points)
     respond_to do |format|
       format.html { render :template => '/loyalty/points'}
-      format.json { render json: @search }
+      format.json { render json: @points }
     end
 
   end

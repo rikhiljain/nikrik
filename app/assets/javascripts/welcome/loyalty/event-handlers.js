@@ -29,19 +29,19 @@ function __loyalty__myLinksClickHandlers(){
 }
 
 function populatePolicies(address){
-	getJsonAndPopulateTable(address+".json", ["ref_name", "ref_mobile", "ref_desc", "status", "created_at", "updated_at"], "My Policies")
+	getJsonAndPopulateTable(address+".json", ["Name:ref_name", "Mobile Number:ref_mobile", "Description:ref_desc", "Status:status", "Created At:created_at", "Updated At:updated_at"], "My Policies")
 }
 
 function populateReferrals(address){
-	getJsonAndPopulateTable(address+".json", ["ref_name", "ref_mobile", "ref_desc", "status", "created_at", "updated_at"], "My Referrals")
+	getJsonAndPopulateTable(address+".json", ["Name:ref_name", "Mobile Number:ref_mobile", "Description:ref_desc", "Status:status", "Created At:created_at", "Updated At:updated_at"], "My Referrals")
 }
 
 function populatePoints(address){
-	getJsonAndPopulateTable(address+".json", ["ref_name", "ref_mobile", "ref_desc", "status", "created_at", "updated_at"], "My Points")
+	getJsonAndPopulateTable(address+".json", ["Reference Type:ref_type", "Reference Id:ref_id", "Value:value", "Status:status", "Created At:created_at", "Expiry Date At:exp_dt"], "My Points")
 }
 
 function populateRewards(address){
-	getJsonAndPopulateTable(address+".json", ["ref_name", "ref_mobile", "ref_desc", "status", "created_at", "updated_at"], "My Rewards")
+	getJsonAndPopulateTable(address+".json", ["Name:ref_name", "Mobile Number:ref_mobile", "Description:ref_desc", "Status:status", "Created At:created_at", "Updated At:updated_at"], "My Rewards")
 }
 
 function getJsonAndPopulateTable(address, headers, heading){
