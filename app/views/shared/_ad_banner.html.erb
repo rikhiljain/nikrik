@@ -1,15 +1,29 @@
-<div class="is_right-hand-div is_affix">
+<div class="is_right-hand-div">
 	<div class="alert alert-block is_alert-heading">
 		<strong>Want us to call you</strong>
 	</div>
+	<div id="callUsFormNotificationDiv">
+	</div>
 	<div>
-		<form method="post" action="/home/callus" id="callUsForm" >
+		<form method="post" action="" id="callUsForm" >
 			  <fieldset>
-				    <label>Mobile Number</label>
-				    <input type="text" name="mobile_number" placeholder="mobile number">
-				    <label>Email address</label>
-				    <input type="text" name="email_address" placeholder="abc@gmail.com">
-				    <button type="submit" class="btn is_btn-custom">Submit</button>
+				   <div class="control-group">
+  						<label class="control-label" for="mobile_number">Mobile Number</label>
+				  		<div class="controls">
+				    		<input type="text" id="mobile_number" name="mobile_number" placeholder="mobile number"></input>
+				    	</div>
+				    </div>    
+				    <div class="control-group">
+  						<label class="control-label" for="email_address">Email address</label>
+				  		<div class="controls">
+				    		<input type="text" id="email_address" name="email_address" placeholder="abc@gmail.com"></input>
+				    	</div>
+				    </div>  
+				    <div class="control-group">
+						<div class="controls">
+							<button type="submit" class="btn is_btn-custom">Submit</button>
+						</div>
+					</div>  
 			  </fieldset>
 		</form>
 	</div>

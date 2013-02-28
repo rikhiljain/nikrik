@@ -33,7 +33,8 @@ class LoyaltyController < ApplicationController
   end
 
   def create_referral
-  	referral = Loyalty::Referral.new(params[:refer])
+    
+    referral = Loyalty::Referral.new(params[:loyalty_referral])
   	referral.status = 'OPEN'
 
   	if (user_signed_in? && (current_user.has_role? :user) )
@@ -44,7 +45,11 @@ class LoyaltyController < ApplicationController
   	
   	referral.save
 
-  	redirect_to root_url, :notice => "We will Contact you within 24 hours"
+    ContactMailer.delay.referral_email(referral)
+
+  	respond_to do |format|
+      format.json { render :json => :success}
+    end
 
   end
 

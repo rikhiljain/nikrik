@@ -12,9 +12,10 @@ class HomeController < ApplicationController
     contact.email_address = params[:email_address]
     contact.mobile_number = params[:mobile_number]
 
-    ContactMailer.callus_email(contact).deliver
-
-    redirect_to root_url, :notice => "We will Contact you within 24 hours"
+    ContactMailer.delay.callus_email(contact)
+    respond_to do |format|
+      format.json { render :json => :success}
+    end
 
   end
 end

@@ -57,6 +57,8 @@
 //= require welcome/health/quote-results
 //= require welcome/travel/quote-results
 //= require welcome/quote-buy
+//= require welcome/call-us
+//= require welcome/referral
 //= require welcome/initialization
 //= require welcome/motor/initialization
 //= require welcome/health/initialization

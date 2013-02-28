@@ -46,3 +46,7 @@ git commit -m "some comment"
 git remote add origin git@github.com:ryanb/blog.git
 git push -u origin master
 
+rake jobs:work
+
+If you want to just run all available jobs and exit you can use rake 
+rake jobs:workoff

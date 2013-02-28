@@ -10,6 +10,8 @@ function __common__bindAllEventHandlers(){
 	__common__bindBreadcrumbEvents();
 	__common__bindQuoteBuyFormEvents();
 	__common__bindAccordionEvents();
+	__common__validateCallUsForm();
+	__common__validateReferralForm();
 }
 
 function __common__bindBreadcrumbEvents(){
