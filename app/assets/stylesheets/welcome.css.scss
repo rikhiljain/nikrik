@@ -5,8 +5,6 @@
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
 
-$grayBgColor:	rgba(128, 128, 128, 0.1);	
-
 // Mixin for form field states
 @mixin _iSFormFieldState($textColor: #555, $borderColor: #ccc, $backgroundColor: #f5f5f5) {
   // Set the text color
@@ -96,8 +94,8 @@ a:link, a:visited, a:active {
 }
 
 .is_right-hand-div {
-  background-color: #FCF8E3;
-  border-bottom: 2px solid #BF610F;
+  background-color: $isBackground;
+  border-bottom: 2px solid $isHeading;
   border-radius: 8px 8px 8px 8px;
   margin-bottom: 20px;
 }
@@ -107,8 +105,8 @@ a:link, a:visited, a:active {
 }
 
 .is_alert-heading {
-  background-color: #BF610F;
-  border-color: #4284D3;
+  background-color: $isHeading;
+  //border-color: #4284D3;
   color: $white;
 }
 
@@ -138,7 +136,7 @@ a:link, a:visited, a:active {
 }
 
 .is_breadcrumb.progress .bar-warning{
-  @include gradient-vertical(#FF9E00, #FF9E00);
+  @include gradient-vertical($isBarWarning, $isBarWarning);
 }
 
 .is_breadcrumb.progress .bar-success{
@@ -146,7 +144,7 @@ a:link, a:visited, a:active {
 }
 
 .is_helpIcon{
-  font-size: 14px; color: rgb(157, 38, 29);
+  font-size: 14px; color: $red;
 }
 
 
@@ -161,4 +159,13 @@ legend{
 	font-size: $baseFontSize;	
 	text-align: center;
 	width: 200px;
+}
+
+.table{
+  background-color: $white; 
+  thead{
+    th {
+    color: $isBrand;
+    } 
+  }
 }

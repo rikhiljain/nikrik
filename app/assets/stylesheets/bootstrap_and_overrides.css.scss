@@ -74,7 +74,7 @@ body {
 
 
 .navbar .brand {
-    color: #04346C;
+    color: $isBrand;
     display: block;
     float: left;
     font-family: museo-slab;
@@ -85,7 +85,7 @@ body {
     margin-left: -20px;
     padding: 13.5px 20px;
     text-rendering: optimizelegibility;
-    text-shadow: 2px 2px 2px #4284D3;
+    text-shadow: 2px 2px 2px $isHeaderBg;
 }
 
 //
@@ -109,14 +109,14 @@ body {
     cursor: pointer;
     > .divider {
       padding: 0 5px;
-      color: white;
+      color: $white;
     }
   }
     > a {
-      color: white;
+      color: $white;
     }
   .active {
-    color: white;
+    color: $white;
     font-size: $baseFontSize * 1.5;
   font-weight: bold;
   }
@@ -127,7 +127,7 @@ body {
 }
 
 .accordion .accordion-heading{
-  background-color: #04346C;
+  background-color: $isBrand;
   border-radius: 8px 8px 8px 8px;
   > a {
     color:white;

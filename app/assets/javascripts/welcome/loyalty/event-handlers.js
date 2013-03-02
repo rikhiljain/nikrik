@@ -41,8 +41,7 @@ function __loyalty__populatePoints(address){
 		function () {
 		$("[id=userMenuContentDiv] > [id=userMenuContentDivTable] tr td:nth-child(2)").each(function(index, value){
 			 if(value.innerHTML != "<i></i>"){
-			 	var abc = "hi";
-			 	value.innerHTML = "<a class=\"_is_hand-cursor\" onclick=\"__loyalty__populateReferrals('/loyalty/user_referrals/"+value.innerHTML+"');\">"+value.innerHTML+"</a>";
+			 	value.innerHTML = "<a class=\"is_hand-cursor\" onclick=\"__loyalty__populateReferrals('/loyalty/user_referrals/"+value.innerHTML+"');\">"+value.innerHTML+"</a>";
 			 }
 		 });		
 	});

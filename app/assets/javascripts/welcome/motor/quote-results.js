@@ -23,7 +23,7 @@ for(var result, i = -1; result = results[++i];){
 	html[++h] = "<br><a class='_iSHandCursor' onclick='__motor__fillPremiumBreakupTable(";
 	html[++h] = result.company_id + ");' >Premium Break-up</a>";
 	html[++h] = "</td><td>";
-	html[++h] = "<a class='_is_hand-cursor' onclick='__common__openQuoteBuyForm("+result.company_id+");'>Buy</a>";
+	html[++h] = "<a class='is_hand-cursor' onclick='__common__openQuoteBuyForm("+result.company_id+");'>Buy</a>";
 	html[++h] = "</td></tr>";
 }
 html[++h] = "</tbody>";

@@ -2,6 +2,17 @@
 // Variables
 // --------------------------------------------------
 
+// Insurance Shopee values
+// --------------------------------------------------
+
+$grayBgColor:	  		rgba(128, 128, 128, 0.1);	
+$isHeading:     		#BF610F;
+$isBackground:  		#FCF8E3;
+$isBarWarning:  		#FF9E00;
+$isHeaderBg:			#4284D3;
+$isBrand:				#04346C;
+$isHeaderLinkHoverBg:	#6899D3;
+
 
 // Global values
 // --------------------------------------------------
@@ -33,7 +44,7 @@ $purple:                #7a43b6 !default;
 // Scaffolding
 // -------------------------
 $bodyBackground:        $white !default;
-$textColor:             darken(#04346C,10%) !default;
+$textColor:             darken($isBrand,10%) !default;
 
 
 // Links
@@ -181,18 +192,18 @@ $navbarCollapseWidth:             979px !default;
 $navbarCollapseDesktopWidth:      $navbarCollapseWidth + 1;
 
 $navbarHeight:                    40px !default;
-$navbarBackgroundHighlight:       #4284D3 !default;
-$navbarBackground:                #4284D3 !default;
+$navbarBackgroundHighlight:       $isHeaderBg !default;
+$navbarBackground:                $isHeaderBg !default;
 $navbarBorder:                    darken($navbarBackground, 12%) !default;
 
 $navbarText:                      $white !default;
 $navbarLinkColor:                 $white !default;
-$navbarLinkColorHover:            #04346C !default;
-$navbarLinkBackgroundHover:       #6899D3 !default;
-$navbarLinkColorActive:           darken(#04346C, 10%) !default;
-$navbarLinkBackgroundActive:      lighten(#6899D3, 20%) !default;
+$navbarLinkColorHover:            $isBrand !default;
+$navbarLinkBackgroundHover:       $isHeaderLinkHoverBg !default;
+$navbarLinkColorActive:           darken($isBrand, 10%) !default;
+$navbarLinkBackgroundActive:      lighten($isHeaderLinkHoverBg, 20%) !default;
 
-$navbarBrandColor:                #04346C !default;
+$navbarBrandColor:                $isBrand !default;
 
 // Inverted navbar
 $navbarInverseBackground:                #111111 !default;
