@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import "bootstrap/variables";
+@import "bootstrap/mixins";
 
 $grayBgColor:	rgba(128, 128, 128, 0.1);	
 
@@ -143,6 +144,11 @@ a:link, a:visited, a:active {
 .is_breadcrumb.progress .bar-success{
   @include gradient-vertical($green, $green);
 }
+
+.is_helpIcon{
+  font-size: 14px; color: rgb(157, 38, 29);
+}
+
 
 
 

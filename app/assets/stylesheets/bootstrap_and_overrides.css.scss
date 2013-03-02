@@ -1,14 +1,20 @@
 /*
+ *= require font-awesome/font-awesome
+ *= require bootstrap/bootstrap
+ *= require bootstrap/responsive
+ *= require jquery/jquery-ui-1.9.2.custom 
+ *= require _override_responsive-767px-max
+ *= require _override_responsive-768px-979px
+ *= require _override_responsive-1200px-min
+ *= require welcome 
  *= require_self
 */
 
-@import "bootstrap/bootstrap";
-@import "bootstrap/responsive";
-@import "jquery/jquery-ui-1.9.2.custom";
-@import "_override_responsive-767px-max";
-@import "_override_responsive-768px-979px";
-@import "_override_responsive-1200px-min";
-@import "welcome";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+$baseFontFamily: 'FontAwesome';
+
 
 body { 
   padding-top: 100px;
@@ -64,6 +70,22 @@ body {
 
   // Prevent floats from breaking the navbar
   @include clearfix();
+}
+
+
+.navbar .brand {
+    color: #04346C;
+    display: block;
+    float: left;
+    font-family: museo-slab;
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: -2px;
+    line-height: 0.8;
+    margin-left: -20px;
+    padding: 13.5px 20px;
+    text-rendering: optimizelegibility;
+    text-shadow: 2px 2px 2px #4284D3;
 }
 
 //

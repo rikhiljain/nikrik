@@ -121,6 +121,9 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText, inHea
                     for (j = 0; j < headers.length; j++)
                     {
                         var value = parsedJson[i][headers[j]];
+                        if(value == null){
+                            value = "";
+                        }
                         var isUrl = urlRegExp.test(value) || javascriptRegExp.test(value);
 
                         if(isUrl)   // If value is URL we auto-create a link

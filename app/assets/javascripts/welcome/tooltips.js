@@ -7,5 +7,5 @@ function bindToolTips(){
 }
 
 function __common__bindToolTips(){
-		$("i").tooltip({"placement": "right"});
+		//$("i").tooltip({"placement": "right"});
 }

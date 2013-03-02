@@ -3,6 +3,9 @@
 // --------------------------------------------------
 
 
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
 @media (min-width: 768px) and (max-width: 979px) {
 
   .span9Pos{
