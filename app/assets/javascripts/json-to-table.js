@@ -43,7 +43,7 @@ String.prototype.format = function()
  * 
  * @return string Converted JSON to HTML table
  */
-function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText, inHeaders)
+function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText, inHeaders, hiddenFieldName)
 {
     //Patterns for links and NULL value
     var italic = '<i>{0}</i>';
@@ -64,7 +64,9 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText, inHea
     var tb = '<tbody>{0}</tbody>';
     var tr = '<tr>{0}</tr>';
     var thRow = '<th>{0}</th>';
+    var thRowHidden = '<th style="display:none;">{0}</th>';
     var tdRow = '<td>{0}</td>';
+    var tdRowHidden = '<td style="display:none;">{0}</td>';
     var thCon = '';
     var tbCon = '';
     var trCon = '';
@@ -87,7 +89,13 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText, inHea
                     headers = new Array();
                     for (i = 0; i < inHeaders.length; i++){
                             var values = inHeaders[i].split(":");
-                            thCon += thRow.format(values[0]);
+                            var displayName = values[0];
+                            var fieldName = values[1];
+                            if(hiddenFieldName != null && fieldName == hiddenFieldName){
+                                thCon += thRowHidden.format(values[0]); 
+                            }else{
+                                thCon += thRow.format(values[0]); 
+                            }
                             headers.push(values[1]);
                     }
                 }else{
@@ -135,7 +143,11 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText, inHea
                                 //for supporting nested tables
                                 tbCon += tdRow.format(ConvertJsonToTable(eval(value.data), value.tableId, value.tableClassName, value.linkText));
                               } else {
-                                tbCon += tdRow.format(value);
+                                if(hiddenFieldName != null && headers[j] == hiddenFieldName){
+                                    tbCon += tdRowHidden.format(value);
+                                }else{
+                                    tbCon += tdRow.format(value);
+                                }
                               }
                                 
                             } else {    // If value == null we format it like PhpMyAdmin NULL values
