@@ -1,10 +1,10 @@
 <div style="margin-bottom:20px;" class="is_affix">
 	<ul class="nav nav-list bs-docs-sidenav">
-	  <li><%= link_to 'Edit Profile', edit_user_registration_path, :id => "editProfile"  %></li>
-	  <li><%= link_to 'My Policies', {:controller => "/policies", :action => "policies", :id => current_user.id }, :id => "myPolicies" %></li>
-	  <li><%= link_to 'My Referrals', {:controller => "/loyalty", :action => "user_referrals", :id => current_user.id }, :id => "myReferrals" %></li>
-	  <li><%= link_to 'My Points', {:controller => "/loyalty", :action => "points", :id => current_user.id }, :id => "myPoints" %></li>
-	  <li><%= link_to 'My Rewards', {:controller => "/loyalty", :action => "rewards" }, :id => "myRewards" %></li>
+	  <li><%= link_to '<i class="icon-edit"></i> Edit Profile'.html_safe, edit_user_registration_path, :id => "editProfile"  %></li>
+	  <li><%= link_to '<i class="icon-book"></i> My Policies'.html_safe, {:controller => "/policies", :action => "policies", :id => current_user.id }, :id => "myPolicies" %></li>
+	  <li><%= link_to '<i class="icon-group"></i> My Referrals'.html_safe, {:controller => "/loyalty", :action => "user_referrals", :id => current_user.id }, :id => "myReferrals" %></li>
+	  <li><%= link_to '<i class="icon-magic"></i> My Points'.html_safe, {:controller => "/loyalty", :action => "points", :id => current_user.id }, :id => "myPoints" %></li>
+	  <li><%= link_to '<i class="icon-gift"></i> My Rewards'.html_safe, {:controller => "/loyalty", :action => "rewards" }, :id => "myRewards" %></li>
 
 	</ul>
 </div>

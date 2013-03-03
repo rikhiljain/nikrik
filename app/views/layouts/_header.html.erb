@@ -6,38 +6,38 @@
         <ul class="nav">
           <% if user_signed_in? %>
             <li>
-            <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>        
+            <%= link_to '<i class="icon-signout"></i> Logout'.html_safe, destroy_user_session_path, :method=>'delete' %>        
             </li>
           <% else %>
             <li>
-            <%= link_to 'Login', new_user_session_path %>  
+            <%= link_to '<i class="icon-signin"></i> Login'.html_safe, new_user_session_path %>  
             </li>
           <% end %>
           <% if user_signed_in? %>
             <li>
-            <%= link_to 'Edit account', edit_user_registration_path %>
+            <%= link_to '<i class="icon-edit"></i> Edit account'.html_safe, edit_user_registration_path %>
             </li>
             <% if current_user.has_role? :admin %>
               <li>
-              <%= link_to 'Admin', home_admin_path %>
+              <%= link_to '<i class="icon-cogs"></i> Admin'.html_safe, home_admin_path %>
               </li>
             <% end %>
           <% else %>
             <li>
-            <%= link_to 'Sign up', new_user_registration_path %>
+            <%= link_to '<i class="icon-edit"></i> Sign up'.html_safe, new_user_registration_path %>
             </li>
           <% end %>
           <li>
-              <%= link_to 'Complaints', new_user_registration_path %>
+              <%= link_to '<i class="icon-thumbs-down"></i> Complaints'.html_safe, new_user_registration_path %>
            </li>
            <li>
-              <%= link_to 'Career', new_user_registration_path %>
+              <%= link_to '<i class="icon-laptop"></i> Career'.html_safe, new_user_registration_path %>
            </li>
            <li>
-              <%= link_to 'Contact Us', new_user_registration_path %>
+              <%= link_to '<i class="icon-envelope"></i> Contact Us'.html_safe, new_user_registration_path %>
            </li>
            <li>
-              <%= link_to 'FAQ', new_user_registration_path %>
+              <%= link_to '<i class="icon-question-sign"></i> FAQ'.html_safe, new_user_registration_path %>
            </li>                           
         </ul>
       </div>
