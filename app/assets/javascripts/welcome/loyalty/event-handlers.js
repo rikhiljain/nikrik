@@ -19,7 +19,7 @@ function __loyalty__myLinksClickHandlers(){
 			__loyalty__populateReferrals($(this).attr("href"));
 		}else if($(this).attr("id") == "myPoints"){
 			__loyalty__populatePoints($(this).attr("href"));
-		}else if($(this).attr("id") == "myPolicies"){
+		}else if($(this).attr("id") == "myRewards"){
 			__loyalty__populateRewards($(this).attr("href"));
 		}
 
@@ -29,11 +29,11 @@ function __loyalty__myLinksClickHandlers(){
 }
 
 function __loyalty__populatePolicies(address){
-	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Name:ref_name", "Mobile Number:ref_mobile", "Description:ref_desc", "Status:status", "Created At:created_at", "Updated At:updated_at"], "My Policies","id");
+	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Name:ref_name", "Mobile Number:ref_mobile", "Description:ref_desc", "Status:status", "Created At:created_at", "Updated At:updated_at"], "My Policies",["id"]);
 }
 
 function __loyalty__populateReferrals(address, referralId){
-	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Name:ref_name", "Mobile Number:ref_mobile", "Description:ref_desc", "Status:status", "Created At:created_at", "Updated At:updated_at"], "My Referrals","id",
+	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Name:ref_name", "Mobile Number:ref_mobile", "Description:ref_desc", "Status:status", "Created At:created_at", "Updated At:updated_at"], "My Referrals",["id"],
 		function (data) {
 			if(referralId == null){
 				//if referaal id is null, we don't need to anything
@@ -41,7 +41,7 @@ function __loyalty__populateReferrals(address, referralId){
 			}else{
 				$("[id=userMenuContentDiv] > [id=userMenuContentDivTable] tr td:nth-child(1)").each(function(index, value){
 					if(value.innerHTML == referralId){
-						$(this).parent().addClass("error");
+						$(this).parent().children().addClass("is_redBorderAndBg");
 					}
 		 		});
 			}
@@ -49,7 +49,7 @@ function __loyalty__populateReferrals(address, referralId){
 }
 
 function __loyalty__populatePoints(address){
-	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Reference Type:ref_type", "Reference Id:ref_id", "Value:value", "Status:status", "Created At:created_at", "Expiry Date At:exp_dt"], "My Points","id", 
+	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Reference Type:ref_type", "Reference Id:ref_id", "Value:value", "Status:status", "Created At:created_at", "Expiry Date At:exp_dt"], "My Points",["id"], 
 		function (data) {
 			//This will be the third column as the first it column is hidden
 		$("[id=userMenuContentDiv] > [id=userMenuContentDivTable] tr td:nth-child(3)").each(function(index, value){
@@ -62,12 +62,23 @@ function __loyalty__populatePoints(address){
 }
 
 function __loyalty__populateRewards(address){
-	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Name:ref_name", "Mobile Number:ref_mobile", "Description:ref_desc", "Status:status", "Created At:created_at", "Updated At:updated_at"], "My Rewards","id");
+	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Name:name", "Image:image_name", "Points:points", "Description:details"], "My Rewards", ["id","name"],
+		function (data) {
+			//This will be the third column as the first it column is hidden
+		$("[id=userMenuContentDiv] > [id=userMenuContentDivTable] tr td:nth-child(3)").each(function(index, value){
+			var altName = $(this).parent().children(":nth-child(2)").text();
+			var json = {};
+			json["title"] = altName;
+			json["placement"] = "right";
+			value.innerHTML = "<img rel='rewardsTooltip' src='/assets/rewards/"+value.innerHTML+"' class='img-circle' title='"+altName+"' data-toggle='tooltip' data-placement='right'></img>";
+		 });
+		$("[rel=rewardsTooltip]").tooltip();		
+	});		
 }
 
-function __loyalty__getJsonAndPopulateTable(urlAddress, tableHeaders, formHeading, hiddenFieldName, callBackFn){
+function __loyalty__getJsonAndPopulateTable(urlAddress, tableHeaders, formHeading, hiddenFieldNames, callBackFn){
 	$.getJSON(urlAddress,function(data){
-		var jsonHtmlTable = ConvertJsonToTable(data, 'jsonTable', "table table-bordered table-striped", 'Download', tableHeaders, hiddenFieldName);
+		var jsonHtmlTable = ConvertJsonToTable(data, 'jsonTable', "table table-bordered table-striped", 'Download', tableHeaders, hiddenFieldNames);
 		window.$userMenuContentDivAlert[0].innerHTML = "<h3>"+formHeading+"</h3>";
 		window.$userMenuContentDivTable[0].innerHTML = jsonHtmlTable;
 		if(callBackFn != null){

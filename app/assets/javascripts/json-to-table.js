@@ -43,7 +43,7 @@ String.prototype.format = function()
  * 
  * @return string Converted JSON to HTML table
  */
-function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText, inHeaders, hiddenFieldName)
+function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText, inHeaders, hiddenFieldNames)
 {
     //Patterns for links and NULL value
     var italic = '<i>{0}</i>';
@@ -91,7 +91,7 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText, inHea
                             var values = inHeaders[i].split(":");
                             var displayName = values[0];
                             var fieldName = values[1];
-                            if(hiddenFieldName != null && fieldName == hiddenFieldName){
+                            if(hiddenFieldNames != null && window.jQuery.inArray(fieldName, hiddenFieldNames) != -1){
                                 thCon += thRowHidden.format(values[0]); 
                             }else{
                                 thCon += thRow.format(values[0]); 
@@ -143,7 +143,7 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText, inHea
                                 //for supporting nested tables
                                 tbCon += tdRow.format(ConvertJsonToTable(eval(value.data), value.tableId, value.tableClassName, value.linkText));
                               } else {
-                                if(hiddenFieldName != null && headers[j] == hiddenFieldName){
+                                if(hiddenFieldNames != null && window.jQuery.inArray(headers[j], hiddenFieldNames) != -1){
                                     tbCon += tdRowHidden.format(value);
                                 }else{
                                     tbCon += tdRow.format(value);

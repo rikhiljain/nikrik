@@ -99,6 +99,7 @@ class LoyaltyController < ApplicationController
     @rewards = Reward.find_active_rewards()
     respond_to do |format|
       format.html { render :template => '/loyalty/rewards' }
+      format.json { render json: @rewards }
     end
   end
 

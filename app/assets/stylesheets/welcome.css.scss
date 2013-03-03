@@ -147,6 +147,12 @@ a:link, a:visited, a:active {
   font-size: 14px; color: $red;
 }
 
+.is_redBorderAndBg{
+ background-color: #188A00;
+ color: $white;
+ font-weight: bolder;
+}
+
 
 
 
@@ -165,7 +171,9 @@ legend{
   background-color: $white; 
   thead{
     th {
-    color: $isBrand;
+      color: $isBrand;
+      background-color: #4284D3;
+      font-weight: bolder;
     } 
   }
 }

@@ -30,8 +30,8 @@ function __common__initialize(){
 	});
 
 	//disable the result and buy form
-	window.$quoteResultsAccordionLink.css('cursor','url(assets/famfamfam/icons/delete.png),default');
-	window.$quoteResultsBuyAccordionLink.css('cursor','url(assets/famfamfam/icons/delete.png),default');
+	window.$quoteResultsAccordionLink.css('cursor','url(/assets/famfamfam/icons/delete.png),default');
+	window.$quoteResultsBuyAccordionLink.css('cursor','url(/assets/famfamfam/icons/delete.png),default');
 
 	//reinitialize the array
 	window.allowedAccordionIndexes = new Array();
