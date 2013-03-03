@@ -33,8 +33,13 @@ class LoyaltyController < ApplicationController
   end
 
   def create_referral
-    
-    referral = Loyalty::Referral.new(params[:loyalty_referral])
+    referral = Loyalty::Referral.new
+    referral.mobile = params[:mobile]
+    referral.email = params[:email]
+    referral.ref_name = params[:ref_name]
+    referral.ref_mobile = params[:ref_mobile]
+    referral.ref_desc = params[:ref_desc]
+
   	referral.status = 'OPEN'
 
   	if (user_signed_in? && (current_user.has_role? :user) )
