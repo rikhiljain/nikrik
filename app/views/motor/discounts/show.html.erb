@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Idv chart:</b>
+  <b>Motor Details:</b>
   <%= @motor_discount.idv_chart.maker + " - " + @motor_discount.idv_chart.model + " - "+ @motor_discount.idv_chart.subtype %>
 </p>
 
@@ -11,13 +11,15 @@
 </p>
 
 <p>
-  <b>Amount:</b>
+  <b>Discount(%):</b>
   <%= @motor_discount.amount %>
 </p>
 
 <p>
   <b>RTO:</b>
-  <%= @motor_discount.rto.city + " (" + @motor_discount.rto.state + ")" %>
+  <% unless  @motor_discount.rto.nil?%>
+  	<%= @motor_discount.rto.city + " (" + @motor_discount.rto.state + ")" %>
+  <%end%>
 </p>
 
 <%= link_to 'Edit', edit_motor_discount_path(@motor_discount) %> |

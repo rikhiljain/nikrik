@@ -2,10 +2,10 @@
 
 <table class="table table-bordered table-striped">
   <tr>
-    <th>Idv chart</th>
+    <th>Motor Details</th>
     <th>Company</th>
-    <th>Amount</th>
-    <th>Rto </th>
+    <th>Discount(%)</th>
+    <th>RTO</th>
     <th></th>
     <th></th>
   </tr>
@@ -14,8 +14,15 @@
   <tr>
     <td><%= motor_discount.idv_chart.maker + " - " + motor_discount.idv_chart.model + " - "+ motor_discount.idv_chart.subtype %></td>
     <td><%= motor_discount.company.name %></td>
-    <td><%= motor_discount.amount %></td>
-    <td><%= motor_discount.rto.city + " (" + motor_discount.rto.state + ")" %></td>
+    <td><%= motor_discount.amount %> 
+      <% unless motor_discount.amount >= 0 %>
+        (Loading)
+      <% end%>
+    </td>
+    <td> <% unless  motor_discount.rto.nil?%>
+          <%= motor_discount.rto.city + " (" + motor_discount.rto.state + ")" %>
+         <%end%>
+    </td>
     <td><%= link_to 'Edit', edit_motor_discount_path(motor_discount) %></td>
     <td><%= link_to 'Destroy', motor_discount, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
