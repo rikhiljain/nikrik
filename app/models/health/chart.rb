@@ -1,4 +1,4 @@
-class Health::HealthChart < ActiveRecord::Base
+class Health::Chart < ActiveRecord::Base
 	self.table_name = "health_charts"
   attr_accessible :company_id, :age_end, :age_start, :coverage, :premium
 

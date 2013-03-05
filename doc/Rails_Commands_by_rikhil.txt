@@ -50,3 +50,8 @@ rake jobs:work
 
 If you want to just run all available jobs and exit you can use rake 
 rake jobs:workoff
+
+
+rails g scaffold travelChart  company_id:integer coverage:integer age_start:integer age_end:integer plan:string days:integer has_usa:boolean  premium:integer 
+
+company_id,coverage,age_start,age_end,plan,days,has_usa,premium 

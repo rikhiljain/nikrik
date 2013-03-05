@@ -1,5 +1,8 @@
 Nikrik::Application.routes.draw do
 
+ 
+
+
   devise_for :users,:path => '', path_names:{sign_in: "login", sign_out: "logout"}
 
 
@@ -50,7 +53,15 @@ Nikrik::Application.routes.draw do
     resources :quotes
     resources :idv_charts
   end
-  
+ 
+ namespace :travel do
+   resources :charts
+ end
+
+ namespace :health do
+   resources :charts
+ end
+
   resources :policies
   resources :rewards 
   resources :admin_users

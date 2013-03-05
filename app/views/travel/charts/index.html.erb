@@ -1,0 +1,37 @@
+<h2>Listing Travel Charts</h2>
+
+<table class="table table-bordered table-striped" >
+  <tr>
+    <th>Company</th>
+    <th>Coverage</th>
+    <th>Age start</th>
+    <th>Age end</th>
+    <th>Plan</th>
+    <th>Days</th>
+    <th>Has usa</th>
+    <th>Premium</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @travel_charts.each do |travel_chart| %>
+  <tr>
+    <td><%= travel_chart.company_id %></td>
+    <td><%= travel_chart.coverage %></td>
+    <td><%= travel_chart.age_start %></td>
+    <td><%= travel_chart.age_end %></td>
+    <td><%= travel_chart.plan %></td>
+    <td><%= travel_chart.days %></td>
+    <td><%= travel_chart.has_usa %></td>
+    <td><%= travel_chart.premium %></td>
+    <td><%= link_to 'Show', travel_chart %></td>
+    <td><%= link_to 'Edit', edit_travel_chart_path(travel_chart) %></td>
+    <td><%= link_to 'Destroy', travel_chart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Travel chart', new_travel_chart_path %>

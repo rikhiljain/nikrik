@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Company:</b>
+  <%= @health_chart.company_id %>
+</p>
+
+<p>
+  <b>Coverage:</b>
+  <%= @health_chart.coverage %>
+</p>
+
+<p>
+  <b>Age start:</b>
+  <%= @health_chart.age_start %>
+</p>
+
+<p>
+  <b>Age end:</b>
+  <%= @health_chart.age_end %>
+</p>
+
+<p>
+  <b>Premium:</b>
+  <%= @health_chart.premium %>
+</p>
+
+
+<%= link_to 'Edit', edit_health_chart_path(@health_chart) %> |
+<%= link_to 'Back', health_charts_path %>
