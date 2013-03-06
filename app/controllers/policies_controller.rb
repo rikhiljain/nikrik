@@ -139,10 +139,11 @@ class PoliciesController < ApplicationController
   end
 
   def policies
-    @policies = Policy.where("user_id=?", params[:id])
+    @policies = Policy.where("user_id=?", params[:id]).order("start_date DESC")
+    
     respond_to do |format|
       format.html { render :template => "/policies/user_list" }
-      format.json { render json: @policies }
+      format.json { render json: @policies, :except=>  [:created_at, :updated_at,:discount,:user_id, :company_id], :methods => :company_name}
     end
 
   end
