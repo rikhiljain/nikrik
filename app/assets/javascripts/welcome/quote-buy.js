@@ -72,11 +72,13 @@ function __common__validateQuoteBuyForm(){
   // Validation
   $quoteBuyForm.validate({
     rules:{
+      name: {required:true},
       mobile_number: {required:true, phoneIndia:true},
       email_id: {required:true, email:true},
       address: {required:true}
     },
     messages:{
+      name: "Please provide your name",
       mobile_number:"Enter a valid mobile number",
       email_id:"Enter a valid email address",
       address:"Enter a valid address"

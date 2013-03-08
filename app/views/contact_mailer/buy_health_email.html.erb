@@ -1,0 +1,62 @@
+A very sincere thanks for your interest. We will contact you very shortly. 
+
+Please find below the health Insurance details
+
+<table>
+<tr>
+	<td>Name</td>
+	<td><%=@search.name %></td>
+</tr>
+<tr>
+	<td>Email Id</td>
+	<td><%=@search.email_id %></td>
+</tr>
+<tr>
+	<td>Mobile Number</td>
+	<td><%=@search.mobile_number%></td>
+</tr>
+<tr>
+	<td>Address</td>
+	<td><%=@search.address%></td>
+</tr>
+<tr>
+	<td>Company Name</td>
+	<td><%=@search.company_name%></td>
+</tr>
+<tr>
+	<td>Policy For</td>
+	<td>
+	<%
+
+	case @search.policy_for
+     when 1
+       policy_for_text = 'Self'
+     when 2
+       policy_for_text = 'Parents'
+   	 when 3
+     	policy_for_text = 'Self Plus Spouse Plus Childrens'
+     else
+       policy_for_text = 'Self Plus Childrens'
+   end
+    %>
+    <%=policy_for_text%>
+
+	</td>
+</tr>
+<tr>
+	<td>Final Premium</td>
+	<td><%=@search.final_premium%></td>
+</tr>
+<tr>
+	<td>Adult Age</td>
+	<td><%=@search.adult_age%></td>
+</tr>
+<tr>
+	<td>Number Of Children</td>
+	<td><%=@search.no_of_childs%></td>
+</tr>
+<tr>
+	<td>Health Coverage</td>
+	<td><%=@search.heath_cover%></td>
+</tr>
+</table>

@@ -116,11 +116,15 @@ class Motor::SearchesController < ApplicationController
     existing_motor_search = Motor::Search.find(params[:id])
     existing_motor_search.company_name = params[:company_name]
     existing_motor_search.final_premium = params[:final_premium]
+    existing_motor_search.name = params[:name]
     existing_motor_search.email_id = params[:email_id]
     existing_motor_search.mobile_number = params[:mobile_number]
     existing_motor_search.address = params[:address]     
 
     existing_motor_search.save
+
+    idvChart = Motor::IdvChart.find(existing_motor_search.idv_chart_id)
+    ContactMailer.delay.buy_motor_email(existing_motor_search,idvChart)
 
     render :json => existing_motor_search
 

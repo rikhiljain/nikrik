@@ -46,15 +46,18 @@ def quote
   end
 
   def buy
-    debugger
+    
     existing_health_search = Health::Search.find(params[:id])
     existing_health_search.company_name = params[:company_name]
     existing_health_search.final_premium = params[:final_premium]
+    existing_health_search.name = params[:name]
     existing_health_search.email_id = params[:email_id]
     existing_health_search.mobile_number = params[:mobile_number]
     existing_health_search.address = params[:address]     
 
     existing_health_search.save
+
+    ContactMailer.delay.buy_health_email(existing_health_search)
 
     render :json => existing_health_search
 

@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `motor_searches` (
   `has_anti_theft` tinyint(1) DEFAULT NULL,
   `has_full_cover` tinyint(1) DEFAULT NULL,
   `is_aai_member` tinyint(1) DEFAULT NULL,
+  `name` varchar(30) DEFAULT NULL,
   `email_id` varchar(50) DEFAULT NULL,
   `mobile_number` int(11) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
