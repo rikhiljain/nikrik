@@ -20,7 +20,7 @@ for(var result, i = -1; result = results[++i];){
 	html[++h] = "</td><td>";
 	html[++h] = result.final_premium;
 	html[++h] = "</td><td>";
-	html[++h] = "<br><a class='_iSHandCursor' onclick='__motor__fillPremiumBreakupTable(";
+	html[++h] = "<a class='is_hand-cursor' onclick='__motor__fillPremiumBreakupTable(";
 	html[++h] = result.company_id + ");' >Premium Break-up</a>";
 	html[++h] = "</td><td>";
 	html[++h] = "<a class='is_hand-cursor' onclick='__common__openQuoteBuyForm("+result.company_id+");'>Buy</a>";
@@ -43,12 +43,12 @@ function __motor__fillPremiumBreakupTable(id){
 		}
 	}
 	var html = [], h = -1;
-	html[++h] = "<div><strong>Insured declared Value (IDV) = "
+	html[++h] = "<p class='text-success'><strong>Insured declared Value (IDV) = "
 	html[++h] = motorquote.idv_value
-	html[++h] = "</strong></div>"
+	html[++h] = "</strong></p>"
 	html[++h] = "<table class='table table-bordered table-striped'>";
 	html[++h] = "<tbody>";
-	html[++h] = "<tr style='background-color:#ffc40d;font-weight:bold;' ><td colspan='2'>Own Damage</td>";
+	html[++h] = "<tr style='background-color:#ffc40d;font-weight:bold;' class='info'><td colspan='2'>Own Damage</td>";
 	html[++h] = "<td colspan='2'>Liability</td></tr>";
 
 	html[++h] = "<tr><td>Basic Premium</td><td>";
@@ -82,7 +82,7 @@ function __motor__fillPremiumBreakupTable(id){
 	html[++h] = "0";	
 	html[++h] = "</td></tr>";
 
-	html[++h] = "<tr style='font-weight:bold;'><td>Sub Total (A)</td><td>";
+	html[++h] = "<tr style='font-weight:bold;' class='success'><td>Sub Total (A)</td><td>";
 	html[++h] = motorquote.net_od;
 	html[++h] = "</td><td>Total (B)</td><td>";
 	html[++h] =	motorquote.final_tp;
@@ -100,24 +100,24 @@ function __motor__fillPremiumBreakupTable(id){
 	html[++h] = motorquote.ncb_dis;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
-	html[++h] = "<tr style='font-weight:bold;'><td>Total Discount (C)</td><td>";
+	html[++h] = "<tr style='font-weight:bold;' class='success'><td>Total Discount (C)</td><td>";
 	html[++h] = motorquote.net_dis ;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
-	html[++h] = "<tr style='font-weight:bold;' ><td>Total Own Damage Premium (D = A - C)</td><td>";
+	html[++h] = "<tr style='font-weight:bold;' class='success'><td>Total Own Damage Premium (D = A - C)</td><td>";
 	html[++h] = motorquote.final_od;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
 
-	html[++h] = "<tr style='font-weight:bold;' ><td>Total Premium (E = D + B)</td><td>";
+	html[++h] = "<tr style='font-weight:bold;' class='success'><td>Total Premium (E = D + B)</td><td>";
 	html[++h] = motorquote.total_premium ;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
-	html[++h] = "<tr><td>Service Tax (F)</td><td>";
+	html[++h] = "<tr style='font-weight:bold;' class='success'><td>Service Tax (F)</td><td>";
 	html[++h] = motorquote.service_tax;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
-	html[++h] = "<tr style='font-weight:bold;' ><td>Total Premium Payable (E+F)</td><td>";
+	html[++h] = "<tr style='font-weight:bold;' class='success'><td>Total Premium Payable (E+F)</td><td>";
 	html[++h] = motorquote.final_premium;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
