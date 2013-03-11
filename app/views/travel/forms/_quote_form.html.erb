@@ -1,1 +1,64 @@
-coming soon
+<div id="travelQuoteFormNotificationDiv"></div>
+<button id="travelQuoteFormResetLink" class="btn btn-link" type="button">Reset the form</button>
+<form id="travelQuoteForm" action="" class="form-horizontal">
+
+<div class="control-group">
+	<label class="control-label" for="policy_for">Choose Policy For <span class="is_helpIcon"><i id="policyFor_icon" class="icon-question-sign"></i></span></label>
+	<div class="controls">
+		<label class="radio">
+			<input type="radio" id="policy_for" name="policy_for" value="I">Individual
+		</label>
+		<label class="radio">
+			<input type="radio" id="policy_for" name="policy_for" value="S" >Student
+		</label>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="age">Traveller Age<span class="is_helpIcon"><i id="adult_age_icon" class="icon-question-sign"></i></span></label>
+	<div class="controls form-inline">
+		<select id="age" name="age" class="span2"></select>
+	</div> 
+</div>
+<div class="control-group">
+	<label class="control-label" for="location">Geographic Location <span class="is_helpIcon"><i id="adult_age_icon" class="icon-question-sign"></i></span></label>
+	<div class="controls form-inline">
+		<select id="location" name="location" class="span2">
+			<option value="">Select Location</option>
+			<option value="W">US/Canada</option>
+			<option value="X">World excluding US/Canada</option>
+			<option value="W">Worldwide</option>
+		</select>
+	</div> 
+</div>
+<div class="control-group">
+	<label class="control-label" for="travel_cover">Coverage Amount (US $)<span class="is_helpIcon"><i id="heath_cover_icon" class="icon-question-sign"></i></span></label>
+	<div class="controls form-inline">
+		<select id="travel_cover" name="travel_cover" class="span2">
+			<option value="">Select Coverage</option>
+			<option value="50000">50,000</option>
+			<option value="100000">1,00,000</option>
+			<option value="150000">1,50,000</option>
+			<option value="200000">2,00,000</option>
+			<option value="250000">2,50,000</option>
+			<option value="500000">5,00,000</option>
+		</select>
+	</div> 
+</div>
+<div class="control-group">
+	<label class="control-label" for="start_date">Travel Start Date<span class="is_helpIcon"><i id="day_icon" class="icon-question-sign"></i></span></label>
+	<div class="controls">
+		<input type="text" id="start_date" name="start_date" class="span2" placeholder="dd-mm-yyyy">
+	</div>		
+</div>
+<div class="control-group">
+	<label class="control-label" for="end_date">Travel End Date<span class="is_helpIcon"><i id="day_icon" class="icon-question-sign"></i></span></label>
+	<div class="controls">
+		<input type="text" id="end_date" name="end_date" class="span2" placeholder="dd-mm-yyyy">
+	</div>		
+</div>
+<div class="control-group">
+	<div class="controls">
+		<button type="submit" class="btn is_btn-custom">Calculate Premium</button>
+	</div>
+</div>
+</form/>

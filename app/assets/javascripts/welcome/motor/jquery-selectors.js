@@ -12,7 +12,6 @@ function __motor__cacheAllJquerySelector(){
 
 	window.$policyExpDate = $("[id=previousPolicyDetails] [id=date]");
 	window.$newPolicyStartDate = $("[id=previousPolicyDetails] [id=newPolicyStartDate]");
-	window.
 	window.$legendProtectionForAccessories = $("[id=protectionForAccessories] > fieldset > legend > input");
 	window.$legendAdditionalDiscount = $("[id=additionalDiscount] > fieldset > legend > input");
 	window.$legendAdditionalCovers = $("[id=additionalCovers] > fieldset > legend > input");

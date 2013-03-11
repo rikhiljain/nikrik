@@ -2,7 +2,7 @@ class Motor::RtosController < ApplicationController
   # GET /rtos
   # GET /rtos.json
   def index
-    @rtos = Motor::Rto.order(:city).where("city like ?", "%#{params[:term]}%")
+    @rtos = Motor::Rto.order(:city).where("city like ?", "#{params[:term]}%").order( "city")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @rtos.map { |rto| {:id => rto.id, :value => rto.city + " (" + rto.state + ")" } } }

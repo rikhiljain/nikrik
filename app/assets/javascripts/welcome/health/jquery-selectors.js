@@ -7,8 +7,7 @@ function __health__cacheAllJquerySelector(){
 	window.$healthAge = $("[id=healthQuoteForm] [id=adult_age]");
 	window.$healthPolicyFor = $("[id=healthQuoteForm] [id=policy_for]");
 	window.$noOfChildsGrp = $("[id=healthQuoteForm] [id=no_of_childs_grp]");
-	window.$healthQuoteForm = $("[id=healthQuoteForm]");
-
+	
 	window.$healthFormAccordionLink = $("[id=healthFormAccordion] [id=link]");
 	window.$healthResultsAccordionLink = $("[id=healthResultsAccordion] [id=link]");
 	//$healthResultsBuyAccordionLink = $("[id=quoteResultsBuyAccordion] [id=link]");
