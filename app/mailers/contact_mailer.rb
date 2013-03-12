@@ -24,4 +24,9 @@ class ContactMailer < ActionMailer::Base
     mail(to: search.email_id , bcc: COMPANY_TO_EMAIL , subject: 'Health Insuarance Details').deliver
   end
 
+  def buy_travel_email(search)
+    @search = search
+    mail(to: search.email_id , bcc: COMPANY_TO_EMAIL , subject: 'Travel Insuarance Details').deliver
+  end
+
 end
