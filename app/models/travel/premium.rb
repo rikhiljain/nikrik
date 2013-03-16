@@ -7,8 +7,6 @@ def initialize( search)
   def  calculate_premium
   	results = Array.new
 
-    days = (@input.end_date - @input.start_date).to_i
-    Rails.logger.info "Days= #{days}"
     has_usa = 0
     if (@input.location == 'W')
       has_usa = 1
@@ -16,7 +14,13 @@ def initialize( search)
     #Database is mapped with 50,100...etc.
     @input.travel_cover = @input.travel_cover/1000
 
-    travel_charts = Travel::Chart.find_by_coverage_age(@input.travel_cover, @input.age, days,has_usa)
+    if (@input.trip_type == 'S')
+      days = (@input.end_date - @input.start_date).to_i
+      travel_charts = Travel::Chart.find_premium_for_single_trip(@input, days, has_usa)
+    else
+      travel_charts = Travel::Chart.find_premium_for_multiple_trip(@input)
+    end
+
     
     Rails.logger.info "Charts = #{travel_charts.to_yaml}"
 

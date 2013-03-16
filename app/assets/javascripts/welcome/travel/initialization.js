@@ -9,5 +9,7 @@ function __travel__initialize(){
 	window.$travelQuoteForm.each (function(){
   			this.reset();
  	});
+
+	window.$maxTripDurationCG.hide(); 	
 				
 }

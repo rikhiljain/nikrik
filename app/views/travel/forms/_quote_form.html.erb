@@ -14,6 +14,28 @@
 	</div>
 </div>
 <div class="control-group">
+	<label class="control-label" for="trip_type">Frequency of Travel<span class="is_helpIcon"><i id="trip_type_icon" class="icon-question-sign"></i></span></label>
+	<div class="controls" >
+		<label class="radio">
+			<input type="radio" id="trip_type" name="trip_type" value="S">Single Trip
+		</label>
+		<label class="radio" id="annualTripRadio">
+			<input type="radio" id="trip_type" name="trip_type" value="M" >Annual Multiple Trip
+		</label>
+	</div>
+</div>
+<div class="control-group" id="maxTripDurationControlGroup" >
+	<label class="control-label" for="max_trip_duration">Maximum Duration of each trip<span class="is_helpIcon"><i id="max_trip_duration_icon" class="icon-question-sign"></i></span></label>
+	<div class="controls">
+		<label class="radio">
+			<input type="radio" id="max_trip_duration" name="max_trip_duration" value="30">30 Days
+		</label>
+		<label class="radio">
+			<input type="radio" id="max_trip_duration" name="max_trip_duration" value="45" >45 Days
+		</label>
+	</div>
+</div>
+<div class="control-group">
 	<label class="control-label" for="age">Traveller Age<span class="is_helpIcon"><i id="adult_age_icon" class="icon-question-sign"></i></span></label>
 	<div class="controls form-inline">
 		<select id="age" name="age" class="span2"></select>
@@ -24,7 +46,6 @@
 	<div class="controls form-inline">
 		<select id="location" name="location" class="span2">
 			<option value="">Select Location</option>
-			<option value="W">US/Canada</option>
 			<option value="X">World excluding US/Canada</option>
 			<option value="W">Worldwide</option>
 		</select>
@@ -55,6 +76,12 @@
 	<div class="controls">
 		<input type="text" id="end_date" name="end_date" class="span2" placeholder="dd-mm-yyyy">
 	</div>		
+</div>
+<div class="control-group">
+	<label class="control-label" for="total_days" >Total Days</label>
+	<div class="controls">
+		<span id="total_days" class="label label-important"></span>		
+	</div>	
 </div>
 <div class="control-group">
 	<div class="controls">

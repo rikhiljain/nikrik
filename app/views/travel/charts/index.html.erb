@@ -3,11 +3,15 @@
 <table class="table table-bordered table-striped" >
   <tr>
     <th>Company</th>
+    <th>Policy For</th>
+    <th>Trip Type</th>
+    <th>Max Trip Duration</th>
     <th>Coverage</th>
     <th>Age start</th>
     <th>Age end</th>
     <th>Plan</th>
-    <th>Days</th>
+    <th>Duration Start</th>
+    <th>Duration End</th>
     <th>Has usa</th>
     <th>Premium</th>
     <th></th>
@@ -18,11 +22,15 @@
 <% @travel_charts.each do |travel_chart| %>
   <tr>
     <td><%= travel_chart.company_id %></td>
+    <td><%= travel_chart.policy_for %></td>
+    <td><%= travel_chart.trip_type %></td>
+    <td><%= travel_chart.max_trip_duration %></td>
     <td><%= travel_chart.coverage %></td>
     <td><%= travel_chart.age_start %></td>
     <td><%= travel_chart.age_end %></td>
     <td><%= travel_chart.plan %></td>
-    <td><%= travel_chart.days %></td>
+    <td><%= travel_chart.duration_start %></td>
+    <td><%= travel_chart.duration_end %></td>
     <td><%= travel_chart.has_usa %></td>
     <td><%= travel_chart.premium %></td>
     <td><%= link_to 'Show', travel_chart %></td>
