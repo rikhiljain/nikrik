@@ -1,7 +1,9 @@
 CREATE TABLE IF NOT EXISTS `health_searches` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `no_of_childs` smallint(2) NOT NULL,
-  `adult_age` smallint(3) NOT NULL,
+  `no_of_childs` smallint(2) DEFAULT NULL,
+  `adult_age` smallint(3) DEFAULT NULL,
+  `father_age` smallint(3) DEFAULT NULL,
+  `mother_age` smallint(3) DEFAULT NULL,
   `health_cover` int(11) NOT NULL,
   `policy_for` smallint(2) NOT NULL,
   `name` varchar(30) DEFAULT NULL,

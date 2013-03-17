@@ -27,6 +27,19 @@ def quote
    if new_search.no_of_childs.blank?
       new_search.no_of_childs = 0
    end
+
+   if new_search.mother_age.blank?
+      new_search.mother_age = 0
+   end
+
+   if new_search.father_age.blank?
+      new_search.father_age = 0
+   end
+
+   if new_search.adult_age.blank?
+      new_search.adult_age = 0
+   end
+
    new_search.save
 
    premiums = Health::HealthPremium.new(new_search).calculate_premium

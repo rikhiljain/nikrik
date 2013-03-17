@@ -6,9 +6,19 @@ function __health__bindQuoteFormEvents(){
 
 	$healthPolicyFor.bind("change",function(){
 		if($(this).val() == "1" || $(this).val() == "2" ){
-			window.$noOfChildsGrp.hide();
+			$noOfChildsGrp.hide();
 		}else{
-			window.$noOfChildsGrp.show();
+			$noOfChildsGrp.show();
+		}
+
+		if($(this).val() == "2" ){
+			$motherAgeGrp.show();
+			$fatherAgeGrp.show();
+			$adultAgeGrp.hide();
+		}else {
+			$motherAgeGrp.hide();
+			$fatherAgeGrp.hide();
+			$adultAgeGrp.show();
 		}
 	});
 

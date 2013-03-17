@@ -9,4 +9,7 @@ function __health__initialize(){
 	window.$healthQuoteForm.each (function(){
   			this.reset();
 	});
+	window.$motherAgeGrp.hide();
+	window.$fatherAgeGrp.hide();
+	window.$adultAgeGrp.show();
 }
