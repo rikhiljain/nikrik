@@ -14,7 +14,6 @@ function __travel__customValidationMethods(){
   $.validator.addMethod("travel_individual_max_limit", function() {
       
       var days = __travel__days();
-      alert($travelPolicyFor.filter(":checked").val());
       if ( days > 180 && $travelPolicyFor.filter(":checked").val() == 'I' && $tripType.filter(":checked").val() == 'S')
       {
         return false;
@@ -44,8 +43,11 @@ function __travel__validateQuoteForm(){
   $travelQuoteForm.validate({
     rules:{
       policy_for:{required:true},
+      trip_type:{required:true},
       location:{required:true},
+      age:{required:true},
       travel_cover:{required:true},
+      max_trip_duration:{required:true},
       start_date: {required:true},
       end_date: {required:true , travel_date_range:true, 
                 travel_individual_max_limit:true,
@@ -54,10 +56,13 @@ function __travel__validateQuoteForm(){
 
     messages:{
       policy_for: { required: '' },
+      trip_type: { required: '' },
       location: { required: '' },
+      age: { required: '' },
       travel_cover: { required: '' },
+      max_trip_duration: { required: '' },
       start_date: { required: '' } ,
-      end_date: { required: "", 
+      end_date: { required: '', 
       travel_date_range: "End date cannot be less than Start date", 
       travel_individual_max_limit: "Single trip cannot be more than 180 days for Individual",
       travel_student_max_limit: "Single trip cannot be more than 730 days for Student"}

@@ -11,5 +11,6 @@ function __travel__initialize(){
  	});
 
 	window.$maxTripDurationCG.hide(); 	
-				
+	window.$travelTotalDays.text('');
+	window.$travelEndDate.removeAttr('disabled');			
 }

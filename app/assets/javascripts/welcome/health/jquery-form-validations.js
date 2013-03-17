@@ -11,6 +11,15 @@ function __health__customValidationMethods(){
     return true;
   });
 
+   $.validator.addMethod("valid_parents_age", function() {
+      policy_for = window.$healthPolicyFor.filter(":checked").val();
+      if ( policy_for == "2" ){
+        if( window.$motherAge.val() == '' && window.$fatherAge.val() == '' )
+        { return false;}
+      }
+    return true;
+  });
+
 	__health__validateQuoteForm();
 }
 
@@ -21,13 +30,15 @@ function __health__validateQuoteForm(){
   $healthQuoteForm.validate({
     rules:{
       adult_age:"required",
-      heath_cover:"required",
+      mother_age:"valid_parents_age",
+      health_cover:"required",
       no_of_childs:"no_of_childs_val"
     },
 
     messages:{
       adult_age:"",
-      heath_cover: "",
+      health_cover: "",
+      mother_age: "Father or Mother age should be provided",
       no_of_childs: ""
     },
     errorClass: "help-inline",

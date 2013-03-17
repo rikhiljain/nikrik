@@ -3,6 +3,8 @@ function __health__populateStaticData(){
 	__health__populateNoOfChild($noOfChilds);
 	__health__populateHealthCover($healthCover);
 	__health__pouplateAge($healthAge);
+	__health__pouplateAge($motherAge);
+	__health__pouplateAge($fatherAge);
 }
 
 function __health__pouplatePACoverage(selectElement){

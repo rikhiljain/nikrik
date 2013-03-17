@@ -6,7 +6,11 @@ def initialize( search)
 
   def  calculate_premium
   	results = Array.new
-    health_charts = Health::Chart.find_by_coverage_age(@input.health_cover, @input.adult_age)
+    if(@input.policy_for == 2)
+      health_charts = Health::Chart.find_by_coverage_age(@input.health_cover, @input.father_age)
+    else
+      health_charts = Health::Chart.find_by_coverage_age(@input.health_cover, @input.adult_age)
+    end
   
     company_hash = {}
     Company.all.each do |company|
@@ -22,6 +26,7 @@ def initialize( search)
     	if(@input.policy_for == 3)
     		health_quote.total_premium = health_quote.total_premium + chart.premium * 0.5
     	end
+      
     	health_quote.total_premium = health_quote.total_premium + @input.no_of_childs* chart.premium * 0.25
       health_quote.service_tax = calculate_service_tax(health_quote.total_premium)
       health_quote.final_premium = health_quote.total_premium + health_quote.service_tax
