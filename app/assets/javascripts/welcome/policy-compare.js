@@ -40,27 +40,24 @@ function __common__policyCompare(policyType){
 	}
 
 
-
-
-
-	html[++h] = "<table id='quoteCompareTable' class='table table-bordered datatable'>";
+	html[++h] = "<table id='quoteCompareTable' class='table table-bordered datatable' style='border-style:none solid solid none;'>";
 	html[++h] = "<thead><tr><th>col1</th><th>col2</th><th>col3</th><th>col4</th><th>col5</th></tr></thead>";	
 	html[++h] = "<tbody>";	
 	html[++h] = "<tr>";
-	html[++h] = "<td></td>"; //We need one empty cell to store the attribute names
+	html[++h] = "<td style='border:none;'></td>"; //We need one empty cell to store the attribute names
 	for(var result, i = -1; result = results[++i];){
 		html[++h] = "<td class='alert-success'>";
-		html[++h] = result.company_name;
+		html[++h] = "<strong>"+result.company_name+"</strong>";
 		//TODO - add plan name as well
 		companyIds.push(result.company_id);
 		html[++h] = "</td>";
 	}
 	html[++h] = "</tr>";
 	html[++h] = "<tr>";	
-	html[++h] = "<td></td>"; //We need one empty cell to store the attribute names	
+	html[++h] = "<td style='border:none;'></td>"; //We need one empty cell to store the attribute names	
 	for(var result, i = -1; result = results[++i];){
 		html[++h] = "<td class='alert-success'>";
-		html[++h] = result.final_premium;
+		html[++h] = "<strong>"+result.final_premium+"</strong>";
 		html[++h] = "</td>";
 	}			
 	html[++h] = "</tr>";
@@ -69,12 +66,19 @@ function __common__policyCompare(policyType){
 	for(var prompt in policyAttributes){
 		html[++h] = "<tr>";
 		html[++h] = "<td class='alert-error'>";
-		html[++h] = prompt;
+		html[++h] = "<strong>"+prompt+"</strong>";
 		html[++h] = "</td>";
 		//for loop over company ids
 		for(var companyId, i = -1; companyId = companyIds[++i];){
 			html[++h] = "<td>";
-			html[++h] = policyAttributes[prompt][companyId];
+			var attribValue = policyAttributes[prompt][companyId];
+			if(attribValue != null && (attribValue.toUpperCase() == "TRUE" || attribValue.toUpperCase() == "YES" || attribValue.toUpperCase() == "SUPPORTED")){
+				html[++h] = "<i class='icon-ok'></i>";
+			}else if(attribValue != null && (attribValue.toUpperCase() == "FALSE" || attribValue.toUpperCase() == "NO" || attribValue.toUpperCase() == "NOT SUPPORTED")){
+				html[++h] = "<i class='icon-remove'></i>";
+			}else{
+				html[++h] = attribValue;
+			}
 			html[++h] = "</td>";
 		}
 		html[++h] = "</tr>";
