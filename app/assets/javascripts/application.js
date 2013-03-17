@@ -14,7 +14,10 @@
 //= require jquery/jquery.validate
 //= require jquery/jquery-ui-1.9.2.custom
 //= require jquery/jquery.blockUI
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap
 //= require bootstrap
+//= require dataTables/jquery.dataTables
 //= require welcome/jquery-selectors
 //= require welcome/motor/jquery-selectors
 //= require welcome/health/jquery-selectors
@@ -67,6 +70,7 @@
 //= require welcome/policy-compare
 //= require welcome/welcome
 //= require json-to-table
+
 //= require_self
 
 var m_names = new Array("January", "February", "March", 
