@@ -165,3 +165,9 @@ body {
     top: 109%;
     width: 20px;
 }
+
+input[type="radio"], input[type="checkbox"] {
+    line-height: normal;
+    margin-bottom: 5px;
+    margin-top: 0;
+}
