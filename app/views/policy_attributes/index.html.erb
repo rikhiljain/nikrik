@@ -1,0 +1,31 @@
+<h2>Listing Policy Attributes</h2>
+
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Company</th>
+    <th>Policy type</th>
+    <th>Plan</th>
+    <th>Attribute name</th>
+    <th>Attribute value</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @policy_attributes.each do |policy_attribute| %>
+  <tr>
+    <td><%= policy_attribute.company_id %></td>
+    <td><%= policy_attribute.policy_type %></td>
+    <td><%= policy_attribute.plan %></td>
+    <td><%= policy_attribute.attrib_name %></td>
+    <td><%= policy_attribute.attrib_value %></td>
+    <td><%= link_to 'Show', policy_attribute %></td>
+    <td><%= link_to 'Edit', edit_policy_attribute_path(policy_attribute) %></td>
+    <td><%= link_to 'Destroy', policy_attribute, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Policy attribute', new_policy_attribute_path %>

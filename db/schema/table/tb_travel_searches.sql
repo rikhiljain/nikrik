@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `travel_searches` (
   `travel_cover` int(11) NOT NULL,
   `policy_for` char(1) NOT NULL,
   `trip_type` char(1) NOT NULL,
-  `max_trip_duration` tinyint(3) NOT NULL DEFAULT '0',
+  `max_trip_duration` smallint(3) NOT NULL DEFAULT '0',
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `name` varchar(30) DEFAULT NULL,
