@@ -147,3 +147,21 @@ body {
 .dataTables_wrapper table thead{
     display:none;
 }
+
+.carousel-control {
+    background: none repeat scroll 0 0 #BF610F;
+    border: 1px solid white;
+    border-radius: 13px 13px 13px 13px;
+    color: white;
+    font-size: 20px;
+    font-weight: 100;
+    height: 20px;
+    left: 5px;
+    line-height: 20px;
+    margin-top: -20px;
+    opacity: 0.9;
+    position: absolute;
+    text-align: center;
+    top: 109%;
+    width: 20px;
+}
