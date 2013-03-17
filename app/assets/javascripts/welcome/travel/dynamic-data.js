@@ -9,3 +9,8 @@ function __travel__populateDynamicData(){
 	window.$travelEndDate.datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true", changeMonth: "true", changeYear: "true",defaultDate: endDate });
 	
 }
+
+
+function  __travel__populateDays(){
+	window.$travelTotalDays.text( __travel__days() );
+}

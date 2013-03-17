@@ -4,6 +4,8 @@ CREATE TABLE IF NOT EXISTS `travel_searches` (
   `location` char(1) NOT NULL,
   `travel_cover` int(11) NOT NULL,
   `policy_for` char(1) NOT NULL,
+  `trip_type` char(1) NOT NULL,
+  `max_trip_duration` tinyint(3) NOT NULL DEFAULT '0',
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `name` varchar(30) DEFAULT NULL,
@@ -11,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `travel_searches` (
   `mobile_number` int(11) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `company_name` varchar(20) DEFAULT NULL,
-  `final_premium` int(11) DEFAULT NULL, 
+  `final_premium` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ;

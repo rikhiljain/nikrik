@@ -6,7 +6,7 @@ def initialize( search)
 
   def  calculate_premium
   	results = Array.new
-    health_charts = Health::Chart.find_by_coverage_age(@input.heath_cover, @input.adult_age)
+    health_charts = Health::Chart.find_by_coverage_age(@input.health_cover, @input.adult_age)
   
     company_hash = {}
     Company.all.each do |company|
