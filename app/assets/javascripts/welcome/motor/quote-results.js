@@ -29,6 +29,7 @@ for(var result, i = -1; result = results[++i];){
 html[++h] = "</tbody>";
 html[++h] = "</table>";
 html[++h] = "<button id='motorQuoteResultsRecomputeLink' class='btn btn-link' type='button' onclick='__motor__recomputeQuoteForm()'>Recompute</button>";
+html[++h] = "<button id='motorQuoteResultsCompareLink' class='btn btn-link' type='button' onclick='__common__policyCompare()'>Compare All Policies</button>";
 window.$quoteResultsAccordionTable[0].innerHTML = html.join('');
 }
 
