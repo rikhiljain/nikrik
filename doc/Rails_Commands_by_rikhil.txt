@@ -13,6 +13,8 @@ rake db:migrate
 
 rails g scaffold  rto  code:string sub_code:string city:string state:string
 
+rails g scaffold policyAttribute company_id:integer policy_type:string plan:string attrib_name:string attrib_value:string
+
 
 bundle exec rake db:migrate
 
@@ -55,3 +57,5 @@ rake jobs:workoff
 rails g scaffold travelChart  company_id:integer coverage:integer age_start:integer age_end:integer plan:string days:integer has_usa:boolean  premium:integer 
 
 company_id,coverage,age_start,age_end,plan,days,has_usa,premium 
+
+git config --global http.sslVerify false

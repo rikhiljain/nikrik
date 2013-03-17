@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Company:</b>
+  <%= @policy_attribute.company_id %>
+</p>
+
+<p>
+  <b>Policy type:</b>
+  <%= @policy_attribute.policy_type %>
+</p>
+
+<p>
+  <b>Plan:</b>
+  <%= @policy_attribute.plan %>
+</p>
+
+<p>
+  <b>Attrib name:</b>
+  <%= @policy_attribute.attrib_name %>
+</p>
+
+<p>
+  <b>Attrib value:</b>
+  <%= @policy_attribute.attrib_value %>
+</p>
+
+
+<%= link_to 'Edit', edit_policy_attribute_path(@policy_attribute) %> |
+<%= link_to 'Back', policy_attributes_path %>

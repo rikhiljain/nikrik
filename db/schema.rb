@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304163735) do
+ActiveRecord::Schema.define(:version => 20130317112358) do
 
   create_table "companies", :force => true do |t|
     t.string   "name",       :limit => 20
@@ -45,11 +45,19 @@ ActiveRecord::Schema.define(:version => 20130304163735) do
   end
 
   create_table "health_searches", :force => true do |t|
-    t.integer  "no_of_childs",              :null => false
-    t.integer  "adult_age",                 :null => false
-    t.integer  "heath_cover",               :null => false
-    t.integer  "policy_for",   :limit => 2, :null => false
-    t.datetime "created_at",                :null => false
+    t.integer  "no_of_childs",  :limit => 1
+    t.integer  "adult_age",     :limit => 2
+    t.integer  "father_age",    :limit => 2
+    t.integer  "mother_age",    :limit => 2
+    t.integer  "health_cover",                 :null => false
+    t.integer  "policy_for",    :limit => 2,   :null => false
+    t.string   "name",          :limit => 30
+    t.string   "email_id",      :limit => 50
+    t.integer  "mobile_number"
+    t.string   "address",       :limit => 250
+    t.string   "company_name",  :limit => 20
+    t.integer  "final_premium"
+    t.datetime "created_at",                   :null => false
   end
 
   create_table "idv_charts", :force => true do |t|
@@ -76,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20130304163735) do
   create_table "motor_discounts", :force => true do |t|
     t.integer  "idv_chart_id"
     t.integer  "company_id",   :limit => 2
-    t.integer  "rto_id",                    :null => false
+    t.integer  "rto_id"
     t.float    "amount"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
@@ -100,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20130304163735) do
     t.boolean  "has_anti_theft"
     t.boolean  "has_full_cover"
     t.boolean  "is_aai_member"
+    t.string   "name",                   :limit => 30
     t.string   "email_id",               :limit => 50
     t.integer  "mobile_number"
     t.string   "address"
@@ -130,6 +139,16 @@ ActiveRecord::Schema.define(:version => 20130304163735) do
     t.string   "policy_path"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+  end
+
+  create_table "policy_attributes", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "policy_type"
+    t.string   "plan"
+    t.string   "attrib_name"
+    t.string   "attrib_value"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "policy_types", :force => true do |t|
@@ -175,23 +194,45 @@ ActiveRecord::Schema.define(:version => 20130304163735) do
   create_table "rtos", :force => true do |t|
     t.string   "code",       :limit => 2
     t.string   "sub_code",   :limit => 2
-    t.string   "city",       :limit => 20
+    t.string   "city",       :limit => 30
     t.string   "state",      :limit => 20
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end
 
   create_table "travel_charts", :force => true do |t|
-    t.integer  "company_id"
+    t.integer  "company_id",        :limit => 2
+    t.string   "policy_for",        :limit => 2
+    t.string   "trip_type",         :limit => 1,                 :null => false
+    t.integer  "max_trip_duration", :limit => 1,  :default => 0, :null => false
     t.integer  "coverage"
-    t.integer  "age_start"
-    t.integer  "age_end"
-    t.string   "plan"
-    t.integer  "days"
+    t.integer  "age_start",         :limit => 1
+    t.integer  "age_end",           :limit => 1
+    t.string   "plan",              :limit => 20
+    t.integer  "duration_start",    :limit => 1
+    t.integer  "duration_end",      :limit => 1
     t.boolean  "has_usa"
     t.integer  "premium"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+  end
+
+  create_table "travel_searches", :force => true do |t|
+    t.integer  "age",               :limit => 2,                 :null => false
+    t.string   "location",          :limit => 1,                 :null => false
+    t.integer  "travel_cover",                                   :null => false
+    t.string   "policy_for",        :limit => 1,                 :null => false
+    t.string   "trip_type",         :limit => 1,                 :null => false
+    t.integer  "max_trip_duration", :limit => 1,  :default => 0, :null => false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "name",              :limit => 30
+    t.string   "email_id",          :limit => 50
+    t.integer  "mobile_number"
+    t.string   "address"
+    t.string   "company_name",      :limit => 20
+    t.integer  "final_premium"
+    t.datetime "created_at",                                     :null => false
   end
 
   create_table "users", :force => true do |t|
