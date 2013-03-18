@@ -2,11 +2,36 @@ class PolicyAttributesController < ApplicationController
   # GET /policy_attributes
   # GET /policy_attributes.json
   def index
-    @policy_attributes = PolicyAttribute.all
+     policy_type = params[:type]
+     if ( policy_type.blank?)
+       @policy_attributes = PolicyAttribute.order("attrib_name asc, company_id asc").all
+     else
+        @policy_attributes = PolicyAttribute.find_By_policy_type(policy_type)
+     end
+    child_hash = Hash.new
+    parent_hash = Hash.new
+    prev_attribute_name = ""
+    @policy_attributes.each do |attribute|
+
+      if (prev_attribute_name != attribute.attrib_name)
+        parent_hash[prev_attribute_name] = child_hash unless prev_attribute_name == ""
+        child_hash = Hash.new
+        prev_attribute_name = attribute.attrib_name
+      end
+      if attribute.plan.blank?
+        child_hash[attribute.company_id] = attribute.attrib_value
+      else
+        child_hash["#{attribute.company_id}:#{attribute.plan}"] = attribute.attrib_value
+      end
+    
+    end
+
+    #for last attribute
+    parent_hash[prev_attribute_name] = child_hash unless prev_attribute_name == ""
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @policy_attributes }
+      format.json { render json: parent_hash }
     end
   end
 
