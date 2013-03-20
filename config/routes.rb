@@ -7,6 +7,8 @@ Nikrik::Application.routes.draw do
   get "welcome/index"
   get "home/admin"
   post "home/callus" => "home#callus"
+  get "home/complaint" => "home#new_complaint"
+  post "home/complaint" => "home#complaint"
 
   get "motor/idv_charts/distinctMakers" => "motor/idv_charts#distinctMakers"
   get "motor/idv_charts/modelsForAManufacturer" => "motor/idv_charts#modelsForAManufacturer"
