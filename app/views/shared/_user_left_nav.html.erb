@@ -1,4 +1,4 @@
-<div style="margin-bottom:20px;" class="is_affix">
+<div style="margin-bottom:20px;" id="userMenuDiv">
 	<ul class="nav nav-list bs-docs-sidenav">
 	  <li><%= link_to '<i class="icon-edit"></i> Edit Profile'.html_safe, edit_user_registration_path, :id => "editProfile"  %></li>
 	  <li><%= link_to '<i class="icon-book"></i> My Policies'.html_safe, {:controller => "/policies", :action => "policies", :id => current_user.id }, :id => "myPolicies" %></li>

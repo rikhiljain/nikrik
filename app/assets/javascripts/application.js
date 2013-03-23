@@ -18,6 +18,7 @@
 //= require dataTables/jquery.dataTables.bootstrap
 //= require bootstrap
 //= require dataTables/jquery.dataTables
+//= require lonelytype/cluster
 //= require welcome/jquery-selectors
 //= require welcome/motor/jquery-selectors
 //= require welcome/health/jquery-selectors
@@ -87,6 +88,8 @@ window.allowedAccordionIndexes;
 
 (function($){
 	$(document).ready(function(){
+
+		//cluster.init('brandText');
 
 		if(window.content == "devise"){
 			//this will happen only when the devise forms are being displayed.

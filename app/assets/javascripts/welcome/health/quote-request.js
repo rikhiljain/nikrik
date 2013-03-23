@@ -37,9 +37,26 @@ function __health__submitQuoteRequest(serializedJSON){
 }
 
 function __health__disableForm(){
-  window.$motorQuoteForm.block({ message: "Please click on Reset the Form link" }); 
+  window.$healthQuoteForm.block(
+    { 
+      message: $('#formDisableDisplay'), 
+      overlayCSS: { backgroundColor: '#00f', cursor: 'default' },
+      css: { 
+        padding:        0, 
+        margin:         0, 
+        width:          '50%', 
+        top:            '40%', 
+        left:           '35%', 
+        textAlign:      'center', 
+        color:          '#000', 
+        border:         '1px solid #aaa', 
+        backgroundColor:'#fff', 
+        cursor:         'default' 
+      } 
+    }
+  ); 
 }
 
 function __health__enableForm(){ 
-  window.$motorQuoteForm.unblock(); 
+  window.$healthQuoteForm.unblock(); 
 }

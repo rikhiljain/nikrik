@@ -627,12 +627,12 @@ input.search-query {
 
 // Margin to space out fieldsets
 .control-group {
-  margin-bottom: $baseLineHeight / 2;
+  margin-bottom: 0px;
 }
 
 // Legend collapses margin, so next element is responsible for spacing
 legend + .control-group {
-  margin-top: $baseLineHeight;
+  margin-top: 0px;
   -webkit-margin-top-collapse: separate;
 }
 
@@ -642,7 +642,7 @@ legend + .control-group {
 .form-horizontal {
   // Increase spacing between groups
   .control-group {
-    margin-bottom: $baseLineHeight;
+    margin-bottom: 3px;
     @include clearfix();
   }
   // Float the labels left

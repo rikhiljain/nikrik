@@ -55,7 +55,25 @@ function __motor__submitQuoteRequest(serializedJSON){
 }
 
 function __motor__disableForm(){
-  //window.$motorQuoteForm.block({ message: "Please click on Reset the Form link", css: "{ backgroundColor: '#f00', color: '#fff'}" }); 
+  window.$motorQuoteForm.block(
+    { 
+      message: $('#formDisableDisplay'), 
+      overlayCSS: { backgroundColor: '#00f', cursor: 'default' },
+      css: { 
+        padding:        0, 
+        margin:         0, 
+        width:          '50%', 
+        top:            '40%', 
+        left:           '35%', 
+        textAlign:      'center', 
+        color:          '#000', 
+        border:         '1px solid #aaa', 
+        backgroundColor:'#fff', 
+        cursor:         'default' 
+      } 
+    }
+  ); 
+  //window.$motorQuoteForm.growl('Growl Notification', 'Have a nice day!'); 
   //$('#motorQuoteForm select').attr("disabled", true);
   //$('#motorQuoteForm input').attr("disabled", true);
   //$('#motorQuoteForm button').attr("disabled", true);
