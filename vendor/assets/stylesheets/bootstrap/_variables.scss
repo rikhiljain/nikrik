@@ -260,8 +260,8 @@ $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
 
 // Tooltips and popovers
 // -------------------------
-$tooltipColor:            #fff !default;
-$tooltipBackground:       #000 !default;
+$tooltipColor:            $white !default;
+$tooltipBackground:       $green !default;
 $tooltipArrowWidth:       5px !default;
 $tooltipArrowColor:       $tooltipBackground !default;
 
