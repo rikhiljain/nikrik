@@ -7,4 +7,5 @@ CREATE TABLE IF NOT EXISTS `policy_attributes` (
   `attrib_value` varchar(50) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
 );
