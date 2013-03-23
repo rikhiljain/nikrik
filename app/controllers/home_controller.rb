@@ -41,4 +41,25 @@ class HomeController < ApplicationController
 
   end
 
+   def new_contactus
+    @contactus = ContactUs.new
+    respond_to do |format|
+      format.html { render :template => '/home/contactus'}
+    end
+  end
+
+  def contactus
+    @contactus = ContactUs.new(params[:contact_us])
+  
+    respond_to do |format|
+      if @contactus.save
+         format.html { redirect_to home_contactus_url, notice: 'Thanks for contacting us. Our Advisor will contact you within 24 hours.' }
+         format.json { head :no_content }
+      else
+        format.html { render action: "contactus" }
+        format.json { render json: @contactus.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 end

@@ -9,6 +9,9 @@ Nikrik::Application.routes.draw do
   post "home/callus" => "home#callus"
   get "home/complaint" => "home#new_complaint"
   post "home/complaint" => "home#complaint"
+  get "home/contactus" => "home#new_contactus"
+  post "home/contactus" => "home#contactus"
+  get "home/faq" => "home#faq"
 
   get "motor/idv_charts/distinctMakers" => "motor/idv_charts#distinctMakers"
   get "motor/idv_charts/modelsForAManufacturer" => "motor/idv_charts#modelsForAManufacturer"

@@ -1,0 +1,28 @@
+<div id="deviseDiv" class="is_right-hand-div">
+<div class="accordion" id="accordionFAQ">
+  	<div id="motorPolicyFAQ" class="accordion-group">
+		<div class="accordion-heading">
+			<a id="1" class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFAQ" href="#collapseOne"><i class="icon-plus-sign icon-white"></i> Motor Policy</a>
+		</div>
+		<div id="collapseOne" class="accordion-body collapse">
+		</div>
+	</div>
+	<div id="healthPolicyFAQ" class="accordion-group">
+		<div class="accordion-heading">
+			<a id="1" class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFAQ" href="#collapseOne"><i class="icon-plus-sign icon-white"></i> Health Policy</a>
+		</div>
+		<div id="collapseOne" class="accordion-body collapse">
+		</div>
+	</div>
+	<div id="travelPolicyFAQ" class="accordion-group">
+		<div class="accordion-heading">
+			<a id="1" class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFAQ" href="#collapseOne"><i class="icon-plus-sign icon-white"></i> Travel Policy</a>
+		</div>
+		<div id="collapseOne" class="accordion-body collapse">
+		</div>
+	</div>
+</div>
+</div>
+<% content_for :insuranceContent do %>
+  <%= render :partial => "welcome/index", :locals => { :display => "none" } %>
+<% end %>
