@@ -95,7 +95,7 @@ a:link, a:visited, a:active {
 
 .is_right-hand-div {
   background-color: $isBackground;
-  border-bottom: 2px solid $isHeading;
+  border-bottom: 2px solid $isHeaderBg;
   border-radius: 8px 8px 8px 8px;
   margin-bottom: 20px;
 }
@@ -105,7 +105,7 @@ a:link, a:visited, a:active {
 }
 
 .is_alert-heading {
-  background-color: $isHeading;
+  background-color: $isHeaderBg;
   //border-color: #4284D3;
   color: $white;
 }
@@ -152,7 +152,6 @@ a:link, a:visited, a:active {
  color: $white;
  font-weight: bolder;
 }
-
 
 
 
