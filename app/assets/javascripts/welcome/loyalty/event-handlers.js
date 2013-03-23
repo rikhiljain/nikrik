@@ -3,7 +3,7 @@ function __loyalty__bindAllEventHandlers() {
 }
 
 function __loyalty__myLinksClickHandlers(){
-	$(".span2 .nav a").bind("click", function(){
+	$("[id=userMenuDiv] a").bind("click", function(){
 
 		displayInsuranceShopeeDiv();
 
