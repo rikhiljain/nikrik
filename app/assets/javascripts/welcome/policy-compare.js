@@ -49,6 +49,7 @@ function __common__policyCompareActual(policyAttributes){
 	// };			  
 
 	var companyIds = new Array();
+	var columnIndexes = new Array();
 
 //	var results = JSON.parse('[{"idv_value":1290100,"company_id":1,"company_name":"ICICI","base_od":44380,"elec_acc":0,"non_elec_acc":0,"bi_fuel_od":0,"net_od":44380,"anti_theft_dis":0,"aai_dis":0,"ncb_dis":8876,"net_dis":8876,"final_od":35504,"base_tp":2853,"bi_fuel_tp":60,"owner_pa":100,"passenger_pa":0,"pad_driver":50,"final_tp":3063,"total_premium":38567,"service_tax":4767,"final_premium":43334,"motor_search_id":38},{"idv_value":1290100,"company_id":2,"company_name":"BAJAJ","base_od":44380,"elec_acc":0,"non_elec_acc":0,"bi_fuel_od":0,"net_od":44380,"anti_theft_dis":0,"aai_dis":0,"ncb_dis":8876,"net_dis":8876,"final_od":35504,"base_tp":2853,"bi_fuel_tp":60,"owner_pa":100,"passenger_pa":0,"pad_driver":50,"final_tp":3063,"total_premium":38567,"service_tax":4767,"final_premium":43334,"motor_search_id":38},{"idv_value":1290100,"company_id":3,"company_name":"TATA","base_od":44380,"elec_acc":0,"non_elec_acc":0,"bi_fuel_od":0,"net_od":44380,"anti_theft_dis":0,"aai_dis":0,"ncb_dis":8876,"net_dis":8876,"final_od":35504,"base_tp":2853,"bi_fuel_tp":60,"owner_pa":100,"passenger_pa":0,"pad_driver":50,"final_tp":3063,"total_premium":38567,"service_tax":4767,"final_premium":43334,"motor_search_id":38},{"idv_value":1290100,"company_id":4,"company_name":"RELIANCE","base_od":44380,"elec_acc":0,"non_elec_acc":0,"bi_fuel_od":0,"net_od":44380,"anti_theft_dis":0,"aai_dis":0,"ncb_dis":8876,"net_dis":8876,"final_od":35504,"base_tp":2853,"bi_fuel_tp":60,"owner_pa":100,"passenger_pa":0,"pad_driver":50,"final_tp":3063,"total_premium":38567,"service_tax":4767,"final_premium":43334,"motor_search_id":38}]');
 
@@ -74,7 +75,12 @@ function __common__policyCompareActual(policyAttributes){
 
 
 	html[++h] = "<table id='quoteCompareTable' class='table table-bordered datatable' style='border-style:none solid solid none;'>";
-	html[++h] = "<thead><tr><th>col1</th><th>col2</th><th>col3</th><th>col4</th><th>col5</th></tr></thead>";	
+	html[++h] = "<thead><tr><th>col1</th>";
+	for(var result, i = -1; result = results[++i];){
+		columnIndexes.push(i);
+		html[++h] = "<th>col1</th>";
+	}
+	html[++h] = "</tr></thead>";	
 	html[++h] = "<tbody>";	
 	html[++h] = "<tr>";
 	html[++h] = "<td style='border:none;'></td>"; //We need one empty cell to store the attribute names
@@ -110,9 +116,11 @@ function __common__policyCompareActual(policyAttributes){
 		for(var companyId, i = -1; companyId = companyIds[++i];){
 			html[++h] = "<td>";
 			var attribValue = policyAttributes[prompt][companyId];
-			if(attribValue != null && (attribValue.toUpperCase() == "TRUE" || attribValue.toUpperCase() == "YES" || attribValue.toUpperCase() == "SUPPORTED")){
+			if(attribValue == null){
+				html[++h] = "-";
+			}else if(attribValue.toUpperCase() == "TRUE" || attribValue.toUpperCase() == "YES" || attribValue.toUpperCase() == "SUPPORTED"){
 				html[++h] = "<i class='icon-ok'></i>";
-			}else if(attribValue != null && (attribValue.toUpperCase() == "FALSE" || attribValue.toUpperCase() == "NO" || attribValue.toUpperCase() == "NOT SUPPORTED")){
+			}else if(attribValue.toUpperCase() == "FALSE" || attribValue.toUpperCase() == "NO" || attribValue.toUpperCase() == "NOT SUPPORTED"){
 				html[++h] = "<i class='icon-remove'></i>";
 			}else{
 				html[++h] = attribValue;
@@ -132,7 +140,7 @@ function __common__policyCompareActual(policyAttributes){
 	$("[id=policy_compare_model] [id=policy_compare_body]")[0].innerHTML = html.join('');
 
 	$('.datatable').dataTable({"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>", "sPaginationType": "bootstrap", "bPaginate": false,
-		    "aoColumnDefs": [{"bSortable":false,"aTargets":[ 0,1,2,3,4]}]
+		    "aoColumnDefs": [{"bSortable":false,"aTargets":columnIndexes}]
 	});
 
 	$('#policy_compare_model').modal();
