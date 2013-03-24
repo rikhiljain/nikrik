@@ -1,32 +1,38 @@
-Dear <%=@search.name %>,
+<html>
+<head>
+	<style type="text/css">
+	</style>
+</head>
+<body style="font-size:1.2em; letter-spacing:1px;padding: 4px;" >
 
-A very sincere thanks for your interest. We will contact you very shortly. 
+Dear <%=@search.name %>,<br/><br/>
+Greetings from InsuranceShopee.com! <br/> <br/>
+A very sincere thanks for your interest. We will contact you very shortly. <br/>
+Please find below the health Insurance details.<br/><br/><br/>
 
-Please find below the health Insurance details
-
-<table class="table table-bordered table-striped" >
+<table border="1" cellpadding="5" cellspacing="1"  >
 <tr>
-	<td>Name</td>
+	<td style="background: #def5e5;font-weight:bold;">Name</td>
 	<td><%=@search.name %></td>
 </tr>
 <tr>
-	<td>Email Id</td>
+	<td style="background: #def5e5;font-weight:bold;">Email Id</td>
 	<td><%=@search.email_id %></td>
 </tr>
 <tr>
-	<td>Mobile Number</td>
+	<td style="background: #def5e5;font-weight:bold;" >Mobile Number</td>
 	<td><%=@search.mobile_number%></td>
 </tr>
 <tr>
-	<td>Address</td>
-	<td><%=@search.address%></td>
+	<td  style="background: #def5e5;font-weight:bold;">Address</td>
+	<td style="white-space: pre-wrap;" ><%=@search.address%></td>
 </tr>
 <tr>
-	<td>Company Name</td>
+	<td  style="background: #def5e5;font-weight:bold;">Company Name</td>
 	<td><%=@search.company_name%></td>
 </tr>
 <tr>
-	<td>Policy For</td>
+	<td  style="background: #def5e5;font-weight:bold;">Policy For</td>
 	<td>
 	<%
 
@@ -46,22 +52,25 @@ Please find below the health Insurance details
 	</td>
 </tr>
 <tr>
-	<td>Final Premium</td>
+	<td  style="background: #def5e5;font-weight:bold;" >Final Premium</td>
 	<td><%=@search.final_premium%></td>
 </tr>
 <tr>
-	<td>Adult Age</td>
+	<td  style="background: #def5e5;font-weight:bold;">Adult Age</td>
 	<td><%=@search.adult_age%></td>
 </tr>
 <tr>
-	<td>Number Of Children</td>
+	<td  style="background: #def5e5;font-weight:bold;">Number Of Childrens</td>
 	<td><%=@search.no_of_childs%></td>
 </tr>
 <tr>
-	<td>Health Coverage</td>
-	<td><%=@search.heath_cover%></td>
+	<td  style="background: #def5e5;font-weight:bold;">Health Coverage</td>
+	<td><%=@search.health_cover%></td>
 </tr>
 </table>
-
-Regards,
-The InsuranceShopee Team 
+<br>
+<br>
+Regards,<br>
+The InsuranceShopee Team<br>
+</body>
+</html>

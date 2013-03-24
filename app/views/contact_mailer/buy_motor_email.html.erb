@@ -1,103 +1,134 @@
-Dear <%=@search.name %>,
-
-A very sincere thanks for your interest. We will contact you very shortly. 
-
-Please find below the motor Insurance details
-
-<table class="table table-bordered table-striped" >
+<html>
+<head>
+	<style type="text/css">
+	</style>
+</head>
+<body style="font-size:1.2em; letter-spacing:1px;padding: 4px;" >
+Dear <%=@search.name %>,<br/><br/>
+Greetings from InsuranceShopee.com! <br/> <br/>
+A very sincere thanks for your interest. We will contact you very shortly. <br/>
+Please find below the motor insurance details.<br/><br/><br/>
+<table border="1" cellpadding="5" cellspacing="1" >
 <tr>
-	<td>Name</td>
+	<td  style="background: #def5e5;font-weight:bold;">Name</td>
 	<td><%=@search.name %></td>
 </tr>
 <tr>
-	<td>Email Id</td>
+	<td  style="background: #def5e5;font-weight:bold;">Email Id</td>
 	<td><%=@search.email_id %></td>
 </tr>
 <tr>
-	<td>Mobile Number</td>
+	<td  style="background: #def5e5;font-weight:bold;">Mobile Number</td>
 	<td><%=@search.mobile_number%></td>
 </tr>
 <tr>
-	<td>Address</td>
-	<td><%=@search.address%></td>
+	<td style="background: #def5e5;font-weight:bold;">Address</td>
+	<td style="white-space: pre-wrap;" ><%=@search.address%></td>
 </tr>
 <tr>
-	<td>Company Name</td>
+	<td  style="background: #def5e5;font-weight:bold;">Company Name</td>
 	<td><%=@search.company_name%></td>
 </tr>
 <tr>
-	<td>Is New Policy</td>
+	<td  style="background: #def5e5;font-weight:bold;" >Is New Policy</td>
 	<td><%=@search.new_policy%></td>
 </tr>
 <tr>
-	<td>Final Premium</td>
+	<td style="background: #def5e5;font-weight:bold;">Final Premium</td>
 	<td><%=@search.final_premium%></td>
 </tr>
 <tr>
-	<td>Motor Maker</td>
+	<td  style="background: #def5e5;font-weight:bold;">Motor Maker</td>
 	<td><%=@idvChart.maker%></td>
 </tr>
 <tr>
-	<td>Motor Model</td>
+	<td  style="background: #def5e5;font-weight:bold;">Motor Model</td>
 	<td><%=@idvChart.model%> - <%=@idvChart.subtype%></td>
 </tr>
 <tr>
-	<td>Year of Manufacture</td>
+	<td  style="background: #def5e5;font-weight:bold;">Year of Manufacture</td>
 	<td><%=@search.year_of_manufacture%></td>
 </tr>
 <tr>
-	<td>Has Claim?</td>
+	<td  style="background: #def5e5;font-weight:bold;">Has Claim?</td>
 	<td><%=@search.has_claim%></td>
 </tr>
 <tr>
-	<td>NCB</td>
+	<td  style="background: #def5e5;font-weight:bold;">NCB%</td>
 	<td><%=@search.ncb%></td>
 </tr>
 <tr>
-	<td>Bi-Fuel Type</td>
-	<td><%=@search.cng_type%></td>
+	<td  style="background: #def5e5;font-weight:bold;">Bi-Fuel Type</td>
+	<td>
+		<%
+		case @search.cng_type
+	     when 'FF_CNG'
+	       cng_type_text = 'Factory Fitted CNG'
+	     when 'CNG'
+	       cng_type_text = 'CNG'
+	   	 when 'FF_LPG'
+	     	cng_type_text = 'Factory Fitted LPG'
+	     when 'LPG'
+	     	cng_type_text = 'Factory Fitted LPG'
+	     else
+	       cng_type_text = 'Not Applicable'
+	   end
+    %>
+	<%=cng_type_text%></td>
 </tr>
 <tr>
-	<td>Bi-Fuel Kit Value</td>
+	<td  style="background: #def5e5;font-weight:bold;">Bi-Fuel Kit Value</td>
 	<td><%=@search.cng_value%></td>
 </tr>
 <tr>
-	<td>Electric Acc Value</td>
+	<td  style="background: #def5e5;font-weight:bold;">Electric Acc Value</td>
 	<td><%=@search.elec_acc%></td>
 </tr>
 <tr>
-	<td>Non electric Acc Value</td>
+	<td  style="background: #def5e5;font-weight:bold;">Non electric Acc Value</td>
 	<td><%=@search.non_elec_acc%></td>
 </tr>
 <tr>
-	<td>Policy expiry date</td>
+	<td  style="background: #def5e5;font-weight:bold;">Policy expiry date</td>
 	<td><%=@search.policy_exp_date%></td>
 </tr>
 <tr>
-	<td>Has Full Coverage</td>
+	<td  style="background: #def5e5;font-weight:bold;"> Has Full Coverage</td>
 	<td><%=@search.has_full_cover%></td>
 </tr>
 <tr>
-	<td>Register Type</td>
-	<td><%=@search.register_type%></td>
+	<td  style="background: #def5e5;font-weight:bold;">Register Type</td>
+	<td>
+		<%
+	case @search.register_type
+     when 'I'
+       register_type_text = 'Individual'
+     else
+       register_type_text = 'Company'
+   end
+    %>
+	<%=register_type_text%></td>
 </tr>
 <tr>
-	<td>Motor Register Date</td>
+	<td  style="background: #def5e5;font-weight:bold;">Motor Register Date</td>
 	<td><%=@search.register_date%></td>
 </tr>
 <tr>
-	<td>Has Anti Theft?</td>
+	<td  style="background: #def5e5;font-weight:bold;">Has Anti Theft?</td>
 	<td><%=@search.has_anti_theft%></td>
 </tr>
 <tr>
-	<td>Is AAI Member</td>
+	<td  style="background: #def5e5;font-weight:bold;">Is AAI Member</td>
 	<td><%=@search.is_aai_member%></td>
 </tr>
 <tr>
-	<td>Passenger Coverage Amount</td>
+	<td  style="background: #def5e5;font-weight:bold;">Passenger Coverage Amount</td>
 	<td><%=@search.passenger_coverage_amt%></td>
 </tr>
 </table>
-
-Regards,
-The InsuranceShopee Team 
+<br>
+<br>
+Regards,<br>
+The InsuranceShopee Team<br>
+</body>
+</html>

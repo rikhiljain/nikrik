@@ -29,4 +29,14 @@ class ContactMailer < ActionMailer::Base
     mail(to: search.email_id , bcc: COMPANY_TO_EMAIL , subject: 'Travel Insuarance Details').deliver
   end
 
+  def complaint_email(contact)
+    @contact = contact
+    mail(to: COMPANY_TO_EMAIL, subject: 'Customer Complaint').deliver
+  end
+
+  def send_an_advisor_email(contact)
+    @contact = contact
+    mail(to: COMPANY_TO_EMAIL, subject: 'Send an Advisor to Customer').deliver
+  end
+
 end

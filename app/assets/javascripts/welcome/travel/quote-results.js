@@ -7,7 +7,7 @@ var html = [], h = -1;
 html[++h] = "<table id='quoteTravelResultsTable' class='table table-bordered'>";
 html[++h] = "<th>Company Name</th>";
 html[++h] = "<th>Plan</th>";
-html[++h] = "<th>Total Premium</th>";
+html[++h] = "<th>Final Premium</th>";
 html[++h] = "<th></th>";
 html[++h] = "<tbody>";
 for(var result, i = -1; result = results[++i];){

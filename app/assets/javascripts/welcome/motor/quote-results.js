@@ -10,7 +10,7 @@ var e = esc;
 var html = [], h = -1;
 html[++h] = "<table id='quoteResultsTable' class='table table-bordered'>";
 html[++h] = "<th>Company Name</th>";
-html[++h] = "<th>Total Premium</th>";
+html[++h] = "<th>Final Premium</th>";
 html[++h] = "<th>Details</th>";
 html[++h] = "<th></th>";
 html[++h] = "<tbody>";

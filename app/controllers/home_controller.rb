@@ -23,6 +23,7 @@ class HomeController < ApplicationController
   
     respond_to do |format|
       if @complaint.save
+          ContactMailer.delay.complaint_email(@complaint)
          format.html { redirect_to home_complaint_url, notice: 'Your Complaint has been registered. We will contact you within 24 hours.' }
          format.json { head :no_content }
       else
@@ -53,8 +54,9 @@ class HomeController < ApplicationController
   
     respond_to do |format|
       if @contactus.save
-         format.html { redirect_to home_contactus_url, notice: 'Thanks for contacting us. Our Advisor will contact you within 24 hours.' }
-         format.json { head :no_content }
+        ContactMailer.delay.send_an_advisor_email(@contactus)
+        format.html { redirect_to home_contactus_url, notice: 'Thanks for contacting us. Our Advisor will contact you within 24 hours.' }
+        format.json { head :no_content }
       else
         format.html { render action: "contactus" }
         format.json { render json: @contactus.errors, status: :unprocessable_entity }
