@@ -58,7 +58,15 @@ function __common__submitQuoteBuyRequest(serializedJSON){
 
 function __common__buildNotificationsForQuoteBuyForm(){
   var message = "A very sincere thanks for your interest. We will contact you very shortly. You should also receive one email with the quote details.";
-  $quoteBuyFormNotificationDiv.html("<div class='alert alert-success'>"+message+"<a class='close' data-dismiss='alert'>&#215;</a></div>");
+  $quoteBuyForm.block(
+    { 
+      message: "<div class='alert alert-success'><a class='close' data-dismiss='alert' onClick='$quoteBuyForm.unblock(); return true;'>&#215;</a>"+message+"</div>", 
+      timeout: 2000,
+      onUnblock: function(){
+        $quoteBuyForm.each (function(){this.reset();}); 
+      }
+    }
+  );  
 }
 
 function __common__makeProgressBarGreen(){
