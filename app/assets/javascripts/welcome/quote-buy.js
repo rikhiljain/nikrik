@@ -64,6 +64,7 @@ function __common__buildNotificationsForQuoteBuyForm(){
       timeout: 2000,
       onUnblock: function(){
         $quoteBuyForm.each (function(){this.reset();}); 
+        initialize();
       }
     }
   );  

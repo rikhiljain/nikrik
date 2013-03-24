@@ -84,10 +84,10 @@ function __common__buildNotificationsForReferralForm(){
   var message = "A very sincere thanks for your interest. We will contact you very shortly.";
   $referralForm.block(
     { 
-      message: "<div class='alert alert-success'><a class='close' data-dismiss='alert' onClick='$callUsForm.unblock(); return true;'>&#215;</a>"+message+"</div>", 
+      message: "<div class='alert alert-success'><a class='close' data-dismiss='alert' onClick='$referralForm.unblock(); return true;'>&#215;</a>"+message+"</div>", 
       timeout: 2000,
       onUnblock: function(){
-        $callUsForm.each (function(){this.reset();}); 
+        $referralForm.each (function(){this.reset();}); 
       }      
     }
   );
