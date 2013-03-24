@@ -10,6 +10,9 @@ Nikrik::Application.routes.draw do
   get "home/complaint" => "home#new_complaint"
   post "home/complaint" => "home#complaint"
   get "home/contactus" => "home#new_contactus"
+  get "home/aboutus" => "home#aboutus"
+  get "home/disclaimer" => "home#disclaimer"
+  get "home/privatepolicy" => "home#privatepolicy"
   post "home/contactus" => "home#contactus"
   get "home/faq" => "home#faq"
 
