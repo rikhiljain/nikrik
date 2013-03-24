@@ -85,7 +85,7 @@ function __common__buildNotificationsForReferralForm(){
   $referralForm.block(
     { 
       message: "<div class='alert alert-success'><a class='close' data-dismiss='alert' onClick='$referralForm.unblock(); return true;'>&#215;</a>"+message+"</div>", 
-      timeout: 2000,
+      timeout: 5000,
       onUnblock: function(){
         $referralForm.each (function(){this.reset();}); 
       }      

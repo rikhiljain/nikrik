@@ -61,7 +61,7 @@ function __common__buildNotificationsForQuoteBuyForm(){
   $quoteBuyForm.block(
     { 
       message: "<div class='alert alert-success'><a class='close' data-dismiss='alert' onClick='$quoteBuyForm.unblock(); return true;'>&#215;</a>"+message+"</div>", 
-      timeout: 2000,
+      timeout: 5000,
       onUnblock: function(){
         $quoteBuyForm.each (function(){this.reset();}); 
         initialize();

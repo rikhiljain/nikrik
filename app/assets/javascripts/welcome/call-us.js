@@ -81,7 +81,7 @@ function __common__buildNotificationsForCallUsForm(){
   $callUsForm.block(
     { 
       message: "<div class='alert alert-success'><a class='close' data-dismiss='alert' onClick='$callUsForm.unblock(); return true;'>&#215;</a>"+message+"</div>", 
-      timeout: 2000,
+      timeout: 5000,
       onUnblock: function(){
         $callUsForm.each (function(){this.reset();}); 
       }
