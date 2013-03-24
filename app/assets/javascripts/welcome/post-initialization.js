@@ -6,5 +6,6 @@ function postInitialization(){
 }
 
 function __common__postInitialization(){
-
+  $.blockUI.defaults.css = {cursor:'default'};
+  $.blockUI.defaults.overlayCSS = {backgroundColor: '#00f', opacity: 0.6, cursor: 'default', borderRadius:'6px 6px 6px 6px'};
 }

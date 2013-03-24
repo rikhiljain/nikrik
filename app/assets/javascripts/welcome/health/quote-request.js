@@ -39,20 +39,7 @@ function __health__submitQuoteRequest(serializedJSON){
 function __health__disableForm(){
   window.$healthQuoteForm.block(
     { 
-      message: $('#formDisableDisplay'), 
-      overlayCSS: { backgroundColor: '#00f', cursor: 'default' },
-      css: { 
-        padding:        0, 
-        margin:         0, 
-        width:          '50%', 
-        top:            '40%', 
-        left:           '35%', 
-        textAlign:      'center', 
-        color:          '#000', 
-        border:         '1px solid #aaa', 
-        backgroundColor:'#fff', 
-        cursor:         'default' 
-      } 
+      message: $('#formDisableDisplay')
     }
   ); 
 }

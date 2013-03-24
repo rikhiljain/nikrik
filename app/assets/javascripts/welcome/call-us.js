@@ -78,10 +78,12 @@ function __common__submitCallUsForm(serializedJSON){
 
 function __common__buildNotificationsForCallUsForm(){
   var message = "A very sincere thanks for your interest. We will contact you very shortly.";
-  $callUsForm.hide();
-  $callUsFormNotificationDiv.html("<div class='alert alert-success'>"+message+"<a class='close' data-dismiss='alert'>&#215;</a></div>");
-  $callUsFormNotificationDiv.delay(5000).queue(function(n) { $(this).html(""); $callUsForm.show();  });
-
+  $callUsForm.block(
+    { 
+      message: "<div class='alert alert-success'><a class='close' data-dismiss='alert' onClick='$callUsForm.unblock(); return true;'>&#215;</a>"+message+"</div>", 
+      timeout: 50000
+    }
+  );
 }
 
 

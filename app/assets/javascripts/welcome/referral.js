@@ -82,10 +82,12 @@ function __common__submitReferralForm(serializedJSON){
 
 function __common__buildNotificationsForReferralForm(){
   var message = "A very sincere thanks for your interest. We will contact you very shortly.";
-  $referralForm.hide();
-  $referralFormNotificationDiv.html("<div class='alert alert-success'>"+message+"<a class='close' data-dismiss='alert'>&#215;</a></div>");
-  $referralFormNotificationDiv.delay(5000).queue(function(n) { $(this).html(""); $referralForm.show();  });
-
+  $referralForm.block(
+    { 
+      message: "<div class='alert alert-success'><a class='close' data-dismiss='alert' onClick='$callUsForm.unblock(); return true;'>&#215;</a>"+message+"</div>", 
+      timeout: 2000
+    }
+  );
 }
 
 

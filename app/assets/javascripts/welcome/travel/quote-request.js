@@ -39,23 +39,9 @@ function __travel__submitQuoteRequest(serializedJSON){
 function __travel__disableForm(){
   window.$travelQuoteForm.block(
     { 
-      message: $('#formDisableDisplay'), 
-      overlayCSS: { backgroundColor: '#00f', cursor: 'default' },
-      css: { 
-        padding:        0, 
-        margin:         0, 
-        width:          '50%', 
-        top:            '40%', 
-        left:           '35%', 
-        textAlign:      'center', 
-        color:          '#000', 
-        border:         '1px solid #aaa', 
-        backgroundColor:'#fff', 
-        cursor:         'default' 
-      } 
+      message: $('#formDisableDisplay')
     }
   ); 
-.block({ message: "Please click on Reset the Form link" }); 
 }
 
 function __travel__enableForm(){ 
