@@ -26,3 +26,6 @@
 <% content_for :insuranceContent do %>
   <%= render :partial => "welcome/index", :locals => { :display => "none" } %>
 <% end %>
+<%= javascript_tag do %>
+  window.content = "devise";
+<% end %> 
