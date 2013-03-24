@@ -68,8 +68,12 @@ function __common__policyCompareActual(policyAttributes){
 	var html = [], h = -1;
 
 	for(var result, i = -1; result = results[++i];){
-		html[++h] = "<label class='checkbox inline'>";		
-		html[++h] = "<input type='checkbox' value='"+(i+1)+"' checked onclick='__common__policyCompare__ColumnToggele(this)'>"+result.company_name+"</input>";
+		html[++h] = "<label class='checkbox inline'>";
+		if(result.plan != null){
+			html[++h] = "<input type='checkbox' value='"+(i+1)+"' checked onclick='__common__policyCompare__ColumnToggele(this)'>"+result.company_name+"-"+result.plan+"</input>";
+		}else{
+			html[++h] = "<input type='checkbox' value='"+(i+1)+"' checked onclick='__common__policyCompare__ColumnToggele(this)'>"+result.company_name+"</input>";
+		}		
 		html[++h] =  "</label>";
 	}
 
