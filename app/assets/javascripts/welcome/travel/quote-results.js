@@ -18,13 +18,14 @@ for(var result, i = -1; result = results[++i];){
 	html[++h] = "</td><td>";
 	html[++h] = "<span class='rupee'>` "+result.total_premium+"</span>";
 	html[++h] = "</td><td>";
-	html[++h] = "<a class='_is_hand-cursor' onclick='__common__openQuoteBuyForm("+result.company_id+");'>Buy</a>";
+	html[++h] = "<button class='btn is_btn-custom' type='button' onclick='__common__openQuoteBuyForm("+result.company_id+");'>Buy</a>";
 	html[++h] = "</td></tr>";
 }
 html[++h] = "</tbody>";
 html[++h] = "</table>";
-html[++h] = "<button id='travelQuoteResultsRecomputeLink' class='btn btn-link' type='button' onclick='__travel__recomputeQuoteForm()'>Recompute</button>";
-html[++h] = "<button id='motorQuoteResultsCompareLink' class='btn btn-link' type='button' onclick='__common__policyCompare(\"Travel\")'>Compare All Policies</button>";
+html[++h] = "<button id='travelQuoteResultsRecomputeLink' class='btn is_btn-custom' type='button' onclick='__travel__recomputeQuoteForm()'>Recompute</button>";
+html[++h] = "&nbsp;&nbsp;"; 
+html[++h] = "<button id='motorQuoteResultsCompareLink' class='btn is_btn-custom' type='button' onclick='__common__policyCompare(\"Travel\")'>Compare All Policies</button>";
 window.$quoteResultsAccordionTable[0].innerHTML = html.join('');
 }
 
