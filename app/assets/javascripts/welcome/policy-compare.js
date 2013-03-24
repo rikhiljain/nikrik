@@ -83,7 +83,7 @@ function __common__policyCompareActual(policyAttributes){
 	html[++h] = "</tr></thead>";	
 	html[++h] = "<tbody>";	
 	html[++h] = "<tr>";
-	html[++h] = "<td style='border:none;'></td>"; //We need one empty cell to store the attribute names
+	html[++h] = "<td style='border:none;'><strong> Company Name <i class='icon-hand-right'></i></strong></td>"; //We need one empty cell to store the attribute names
 	for(var result, i = -1; result = results[++i];){
 		html[++h] = "<td class='alert-success'>";
 		if(result.plan != null){
@@ -98,10 +98,10 @@ function __common__policyCompareActual(policyAttributes){
 	}
 	html[++h] = "</tr>";
 	html[++h] = "<tr>";	
-	html[++h] = "<td style='border:none;'></td>"; //We need one empty cell to store the attribute names	
+	html[++h] = "<td style='border:none;'><strong> Final Premium <i class='icon-hand-right'></i></strong></td>"; //We need one empty cell to store the attribute names	
 	for(var result, i = -1; result = results[++i];){
 		html[++h] = "<td class='alert-success'>";
-		html[++h] = "<strong>"+result.final_premium+"</strong>";
+		html[++h] = "<span class='rupee'><strong>` "+result.final_premium+"</strong></span>";
 		html[++h] = "</td>";
 	}			
 	html[++h] = "</tr>";

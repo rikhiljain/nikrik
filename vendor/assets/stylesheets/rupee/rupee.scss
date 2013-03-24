@@ -1,0 +1,22 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+$rupeePath:   "/assets/rupee" !default;
+
+@font-face {
+  font-family: "Rupee Foradian";
+  src: url("#{$rupeePath}/Rupee_Foradian.eot");
+  src: local("Rupee Foradian"), url("#{$rupeePath}/Rupee_Foradian.ttf") format("truetype"),
+  url("#{$rupeePath}/Rupee_Foradian.woff") format("woff"),
+  url("#{$rupeePath}/Rupee_Foradian.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.rupee {
+  font-family: "Rupee Foradian";
+  font-size: $baseFontSize;
+  font-style: normal;
+  text-decoration: none;
+}
+

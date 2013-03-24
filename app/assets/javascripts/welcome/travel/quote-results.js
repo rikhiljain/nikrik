@@ -16,7 +16,7 @@ for(var result, i = -1; result = results[++i];){
 	html[++h] = "</td><td>";
 	html[++h] = result.plan;
 	html[++h] = "</td><td>";
-	html[++h] = result.total_premium;
+	html[++h] = "<span class='rupee'>` "+result.total_premium+"</span>";
 	html[++h] = "</td><td>";
 	html[++h] = "<a class='_is_hand-cursor' onclick='__common__openQuoteBuyForm("+result.company_id+");'>Buy</a>";
 	html[++h] = "</td></tr>";

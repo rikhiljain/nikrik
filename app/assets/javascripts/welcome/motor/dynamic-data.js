@@ -39,7 +39,7 @@ function  __motor__populatePrice(){
 	var address = "/motor/idv_charts/"+idvChartId+"/motorValue.json?mdate="+mdate;
 	//var address = "model.json";
 	$.getJSON(address,function(price){
-		window.$price.text(price);
+		window.$price.text("` "+price);
 	});
 }
 

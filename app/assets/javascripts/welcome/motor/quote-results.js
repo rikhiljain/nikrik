@@ -18,7 +18,7 @@ for(var result, i = -1; result = results[++i];){
 	html[++h] = "<tr><td>";
 	html[++h] = result.company_name;
 	html[++h] = "</td><td>";
-	html[++h] = result.final_premium;
+	html[++h] = "<span class='rupee'>` "+result.final_premium+"</span>";
 	html[++h] = "</td><td>";
 	html[++h] = "<a class='is_hand-cursor' onclick='__motor__fillPremiumBreakupTable(";
 	html[++h] = result.company_id + ");' >Premium Break-up</a>";
