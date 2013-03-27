@@ -62,13 +62,16 @@ body {
 }
 
 .navbar-inner {
+  background-color: white;
+  background-image: linear-gradient(to bottom, white, white);
+  border: 0px;
   min-height: $navbarHeight;
   padding-left:  20px;
   padding-right: 20px;
   //@include gradient-vertical($navbarBackgroundHighlight, $navbarBackground);
-  border: 1px solid $navbarBorder;
-  @include border-radius($baseBorderRadius);
-  @include box-shadow(0 1px 4px rgba(0,0,0,.065));
+  //border: 1px solid $navbarBorder;
+  //@include border-radius($baseBorderRadius);
+  //@include box-shadow(0 1px 4px rgba(0,0,0,.065));
 
   // Prevent floats from breaking the navbar
   @include clearfix();
@@ -87,7 +90,7 @@ body {
     margin-left: -20px;
     padding: 13.5px 20px;
     text-rendering: optimizelegibility;
-    text-shadow: 2px 2px 2px $isHeaderBg;
+    text-shadow: none;
 }
 
 //
@@ -172,3 +175,12 @@ input[type="radio"], input[type="checkbox"] {
     margin-bottom: 5px;
     margin-top: 0;
 }
+
+.navbar .nav > li > a{
+  color: #021C3B;
+  float: none;
+  padding: 13.5px 15px;
+  text-decoration: none;
+  text-shadow: none;
+}
+

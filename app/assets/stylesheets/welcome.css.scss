@@ -49,6 +49,97 @@
   margin-bottom: 10px;
 }
 
+#firstLevelNavBar{
+  box-shadow: none;
+  border-bottom: 0px solid $isBrand;
+  min-height: $baseFontSize * 2;
+  ul.second{
+    li > a{
+      background-color: $isHeaderBg;
+      color: $white;
+      padding: 5px 15px;
+      text-shadow: none;
+    }
+    li:first-child > a{
+      border-radius: 10px 0px 0px 10px;
+    }
+    li:last-child > a{
+      border-radius: 0px 10px 10px 0px;
+    }
+    .active > a, .active > a:focus{
+      background-color: green;
+    } 
+    a:focus{
+      //font-size: $baseFontSize;
+      background-color: $isHeaderLinkHoverBg;
+    }
+  }
+  ul.first{
+    li > a{
+      background-color: $isHeaderBg;
+      color: $white;
+      padding: 5px 2px;
+      text-shadow: none;
+      text-shadow: none;
+    }
+     li:first-child > a{
+      border-radius: 10px 0px 0px 10px;
+    }
+    li:last-child > a{
+      border-radius: 0px 10px 10px 0px;
+    }
+    .active > a, .active > a:focus{
+      background-color: green;
+    } 
+    a:focus{
+      //font-size: $baseFontSize;
+      background-color: $isHeaderLinkHoverBg;
+    }
+   
+  }
+}
+
+
+#secondLevelNavBar{
+  box-shadow: none;
+  background-color: $isHeaderBg;
+  background-image: linear-gradient(to bottom, $isHeaderBg, $isHeaderBg);
+  border-bottom: 0px solid $isBrand;
+  min-height: $baseFontSize * 2;  
+  li > a{
+    color: $white;
+    padding: 5px 20px;
+    text-shadow: none;
+  }
+  .active > a, .active > a:focus{
+    background-color: green;
+  }
+  a:focus{
+    //font-size: $baseFontSize;
+    background-color: $isHeaderLinkHoverBg;
+  }
+}
+
+#footerLevelNavBar{
+  box-shadow: none;
+  background-color: $isHeaderBg;
+  background-image: linear-gradient(to bottom, $isHeaderBg, $isHeaderBg);
+  border-bottom: 0px solid $isBrand;
+  min-height: $baseFontSize * 2;
+  li > a{
+    color: $white;
+    padding: 5px 20px;
+    text-shadow: none;
+  }
+  .active > a, .active > a:focus{
+    background-color: green;
+  }
+  a:focus{
+    //font-size: $baseFontSize;
+    background-color: $isHeaderLinkHoverBg;
+  }
+}
+
 //Class selectors
 //*************************************************************
 .is_border{
