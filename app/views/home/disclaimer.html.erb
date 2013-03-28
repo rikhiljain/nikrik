@@ -1,9 +1,6 @@
 <div id="deviseDiv" class="is_right-hand-div">
- FAQ
+ Disclaimer
 </div>
 <% content_for :insuranceContent do %>
   <%= render :partial => "welcome/index", :locals => { :display => "none" } %>
 <% end %>
-<%= javascript_tag do %>
-  window.content = "devise";
-<% end %> 

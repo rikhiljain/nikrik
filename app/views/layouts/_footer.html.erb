@@ -3,15 +3,24 @@
 		<div class="navbar-inner"  id="footerLevelNavBar">
 			<div class="container">
 				<ul class="nav">
-		          <li>
-		            <%= link_to '<i class="icon-group"></i> About Us'.html_safe, new_user_registration_path %>
-		          </li>
-		          <li>
-		            <%= link_to '<i class="icon-envelope"></i> Contact Us'.html_safe, new_user_registration_path %>
-		          </li>
-		          <li>
-		            <%= link_to '<i class="icon-warning-sign"></i> Disclaimer'.html_safe, new_user_registration_path %>
-		          </li> 
+				<li>
+             	 <%= link_to '<i class="icon-home"></i> Home'.html_safe, root_path %>
+           		</li>  
+		        <li>
+		           <%= link_to '<i class="icon-group"></i> About Us'.html_safe, home_aboutus_path %>
+		        </li>
+		        <li>
+             	 <%= link_to '<i class="icon-question-sign"></i> FAQ'.html_safe, home_faq_path %>
+           		</li>  
+		        <li>
+		          <%= link_to '<i class="icon-lock"></i> Private Policy'.html_safe, home_privatepolicy_path %>
+		        </li>
+		        <li>
+              	<%= link_to '<i class="icon-user"></i> Send an Advisor'.html_safe, home_contactus_path %>
+           		</li>
+		        <li>
+		            <%= link_to '<i class="icon-warning-sign"></i> Disclaimer'.html_safe, home_disclaimer_path %>
+		        </li> 
 				</ul>
 			</div>
 		</div>
