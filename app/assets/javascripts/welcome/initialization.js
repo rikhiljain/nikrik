@@ -49,4 +49,8 @@ function __common__initialize(){
 		__common__updateBreadCrumbs();
 	}
 
+	//Show refer a friend image
+	$("[id=referFriendFormDiv]").hide();
+	$("[id=referFriendImageDiv]").show();
+
 }

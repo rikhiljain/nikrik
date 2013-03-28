@@ -76,8 +76,8 @@
   }
   ul.first{
     li > a{
-      background-color: $isHeaderBg;
-      color: $white;
+      background-color: $white;
+      color: $red;
       padding: 5px 2px;
       text-shadow: none;
       text-shadow: none;
@@ -102,14 +102,21 @@
 
 #secondLevelNavBar{
   box-shadow: none;
-  background-color: $isHeaderBg;
-  background-image: linear-gradient(to bottom, $isHeaderBg, $isHeaderBg);
-  border-bottom: 0px solid $isBrand;
-  min-height: $baseFontSize * 2;  
+  background-color: $white;
+  background-image: linear-gradient(to bottom, $white, $white);
+  border-bottom: 4px solid #4284D3;
+  min-height: $baseFontSize * 2;
+  ul{
+    margin-right: 250px;
+  }  
   li > a{
+    border-radius: 5px 5px 0 0;
     color: $white;
     padding: 5px 20px;
     text-shadow: none;
+    font-size: 20px;
+    margin-left: 5px;
+    background-color: #4284D3;
   }
   .active > a, .active > a:focus{
     background-color: green;
