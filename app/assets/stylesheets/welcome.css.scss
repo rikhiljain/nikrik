@@ -70,8 +70,8 @@
     .active > a, .active > a:focus{
       background-color: green;
     } 
-    a:focus{
-      //font-size: $baseFontSize;
+    li > a:focus{
+      font-size: $baseFontSize * 4;
       background-color: $isHeaderLinkHoverBg;
     }
   }
@@ -84,15 +84,15 @@
       text-shadow: none;
     }
      li:first-child > a{
-      border-radius: 10px 0px 0px 10px;
+      border-radius: 0px 0px 0px 0px;
     }
     li:last-child > a{
-      border-radius: 0px 10px 10px 0px;
+      border-radius: 0px 0px 0px 0px;
     }
     .active > a, .active > a:focus{
       background-color: green;
     } 
-    a:focus{
+    a:hover{
       //font-size: $baseFontSize;
       background-color: $isHeaderLinkHoverBg;
     }
@@ -106,7 +106,7 @@
   box-shadow: none;
   background-color: $white;
   background-image: linear-gradient(to bottom, $white, $white);
-  border-bottom: 4px solid #4284D3;
+  border-bottom: 4px solid $isHeaderBg;
   min-height: $baseFontSize * 2;
   ul{
     margin-right: 0px;
@@ -118,7 +118,7 @@
     text-shadow: none;
     font-size: 20px;
     margin-left: 3px;
-    background-color: #4284D3;
+    background-color: $isHeaderBg;
   }
   .active > a, .active > a:focus{
     background-color: green;
@@ -130,12 +130,15 @@
 }
 
 #footerLevelNavBar{
+  background-image: none;
   box-shadow: none;
-  background-color: $isHeaderBg;
-  background-image: linear-gradient(to bottom, $isHeaderBg, $isHeaderBg);
-  border-bottom: 0px solid $isBrand;
+  background-color: $white;
+  background-image: linear-gradient(to bottom, $white, $white);
+  border-bottom: 4px solid $isHeaderBg;
   min-height: $baseFontSize * 2;
   li > a{
+    border-radius: 5px 5px 0 0;
+    background-color: $isHeaderBg;
     color: $white;
     padding: 5px 20px;
     text-shadow: none;
