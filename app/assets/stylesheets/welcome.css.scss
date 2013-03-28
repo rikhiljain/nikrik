@@ -50,6 +50,7 @@
 }
 
 #firstLevelNavBar{
+  background-image: none;
   box-shadow: none;
   border-bottom: 0px solid $isBrand;
   min-height: $baseFontSize * 2;
@@ -101,13 +102,14 @@
 
 
 #secondLevelNavBar{
+  background-image: none;
   box-shadow: none;
   background-color: $white;
   background-image: linear-gradient(to bottom, $white, $white);
   border-bottom: 4px solid #4284D3;
   min-height: $baseFontSize * 2;
   ul{
-    margin-right: 250px;
+    margin-right: 0px;
   }  
   li > a{
     border-radius: 5px 5px 0 0;
@@ -115,7 +117,7 @@
     padding: 5px 20px;
     text-shadow: none;
     font-size: 20px;
-    margin-left: 5px;
+    margin-left: 3px;
     background-color: #4284D3;
   }
   .active > a, .active > a:focus{
