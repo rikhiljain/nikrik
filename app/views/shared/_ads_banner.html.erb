@@ -1,11 +1,22 @@
 <div id="adsBannerDiv">
 	<div class="is_right-hand-div-all-border">   
-		<a href="#" onClick="showCallUsForm(); return false;"><img src="/assets/callback.jpg"/></a>
+		<img src="/assets/callback.jpg" usemap="#map1" />
+		<map name="map1">
+			<area shape="rect" coords="165,57,246,81" onclick="showCallUsForm();"  nohref="nohref" style="cursor: pointer;" />
+		</map>
 	</div>
 	<div class="is_right-hand-div-all-border">
-		<a href="#" onClick="showReferFriendForm(); return false;"><img src="/assets/cashback.gif"/></a>
+		<img src="/assets/cashback.gif" usemap="#map2" />
+		<map name="map2">
+			<area shape="rect" coords="142,116,261,131" onclick="alert('fill details over here');" nohref="nohref" style="cursor: pointer;" />
+			<area shape="rect" coords="167,136,265,154" onclick="showReferFriendForm();" nohref="nohref" style="cursor: pointer;" />
+		</map>
 	</div>
 	<div class="is_right-hand-div-all-border">
-		 <a href="/login"><img src="/assets/signuptest.jpg"/></a>
+		<img src="/assets/signuptest.jpg" usemap="#map3" />
+		<map name="map3">
+			<area shape="rect" coords="115,104,261,121" onclick="alert('fill details over here');" nohref="nohref" style="cursor: pointer;" />
+			<area shape="rect" coords="150,126,261,144" href="/login" style="cursor: pointer;" />
+		</map>		 
 	</div>
 </div>
