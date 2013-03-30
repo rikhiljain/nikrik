@@ -1,4 +1,20 @@
-function __common__validateCallUsForm(){
+ function initilizeCallUsFrom(){ 
+
+  window.$callUsForm = $("[id=callUsForm]");
+  window.$callUsFormNotificationDiv = $("[id=callUsFormNotificationDiv]");
+  window.$callUsFormNotificationDivCloseLink = $("[id=callUsFormNotificationDiv] a");
+  
+  window.$adsBannerDiv = $("[id=adsBannerDiv]");
+  window.$requestCallUsFormDiv = $("[id=requestCallBackFormDiv]");
+
+  validateCallUsForm();
+}
+
+function light_initilizeCallUsFrom(){
+  //we just need to reset the form
+}
+
+function validateCallUsForm(){
   // Validation
   $callUsForm.validate({
     rules:{
@@ -25,16 +41,16 @@ function __common__validateCallUsForm(){
     },
     submitHandler: function(form){
         $callUsFormNotificationDivCloseLink.click();
-        var serializedJSON = __common__createCallUsRequest();
+        var serializedJSON = createCallUsRequest();
         console.log(serializedJSON);
-        __common__submitCallUsForm(serializedJSON);
+        submitCallUsForm(serializedJSON);
         return false;
     }
   });
 }
 
 
-function __common__createCallUsRequest(){
+function createCallUsRequest(){
     var json = {};
     $.map($callUsForm.serializeArray(), function(el, i){
       if(el.value == ""){
@@ -50,7 +66,7 @@ function __common__createCallUsRequest(){
 }
 
 
-function __common__submitCallUsForm(serializedJSON){
+function submitCallUsForm(serializedJSON){
   $.ajax({
         url: "/home/callus",
         type: "POST",
@@ -66,7 +82,7 @@ function __common__submitCallUsForm(serializedJSON){
           success: function() {
             //called when successful
             console.log("Success" );
-            __common__buildNotificationsForCallUsForm();
+            buildNotificationsForCallUsForm();
         },
 
           error: function(textStatus, errorThrown) {
@@ -76,7 +92,7 @@ function __common__submitCallUsForm(serializedJSON){
       })
 }
 
-function __common__buildNotificationsForCallUsForm(){
+function buildNotificationsForCallUsForm(){
   var message = "A very sincere thanks for your interest. We will contact you very shortly.";
   $callUsForm.block(
     { 
@@ -84,9 +100,18 @@ function __common__buildNotificationsForCallUsForm(){
       timeout: 5000,
       onUnblock: function(){
         $callUsForm.each (function(){this.reset();}); 
+          window.$adsBannerDiv.show();
+          window.$referFriendFormDiv.hide();
+          window.$requestCallUsFormDiv.hide();         
       }
     }
   );
+}
+
+function showCallUsForm(){
+  window.$adsBannerDiv.hide();
+  window.$referFriendFormDiv.hide();
+  window.$requestCallUsFormDiv.show();
 }
 
 

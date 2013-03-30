@@ -120,6 +120,9 @@ window.allowedAccordionIndexes;
 		affixAll();
 		__loyalty__cacheAllJquerySelector();
 		__loyalty__bindAllEventHandlers();
+		initilizeCallUsFrom();
+		initilizeReferFriendFrom();
+		__common__cusomValidationMethods();
 	});
 })(jQuery);
 

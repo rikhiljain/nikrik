@@ -25,8 +25,9 @@
                    <%= yield %>
                 </div>
                 <div class="span3">
-                  <%= render "shared/ad_banner" %>
-                  <%= render "shared/refer_friend" %>
+                    <%= render "shared/ads_banner" %>
+                    <%= render "shared/request_callback" %>
+                    <%= render "shared/refer_friend" %>
                 </div>
              <% else %>
               <% if (current_user.has_role? :user) %>
@@ -40,7 +41,8 @@
                     <%= yield %>
                   </div>
                  <div class="span3 affix span9Pos">
-                    <%= render "shared/ad_banner" %>
+                    <%= render "shared/ads_banner" %>
+                    <%= render "shared/request_callback" %>
                     <%= render "shared/refer_friend" %>
                 </div>                 
               <% else %>

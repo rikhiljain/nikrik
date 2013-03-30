@@ -1,4 +1,15 @@
-function __common__validateReferralForm(){
+ function initilizeReferFriendFrom(){ 
+
+  window.$referralForm = $("[id=referralForm]");
+  window.$referralFormNotificationDiv = $("[id=referralFormNotificationDiv]");
+  window.$referralFormNotificationDivCloseLink = $("[id=referralFormNotificationDiv] a");
+
+  window.$adsBannerDiv = $("[id=adsBannerDiv]");
+  window.$referFriendFormDiv = $("[id=referFriendFormDiv]");
+
+  validateReferralForm();
+}
+function validateReferralForm(){
   // Validation
   $referralForm.validate({
     rules:{
@@ -29,16 +40,16 @@ function __common__validateReferralForm(){
     },
     submitHandler: function(form){
         $referralFormNotificationDivCloseLink.click();
-        var serializedJSON = __common__createReferralRequest();
+        var serializedJSON = createReferralRequest();
         console.log(serializedJSON);
-        __common__submitReferralForm(serializedJSON);
+        submitReferralForm(serializedJSON);
         return false;
     }
   });
 }
 
 
-function __common__createReferralRequest(){
+function createReferralRequest(){
     var json = {};
     $.map($referralForm.serializeArray(), function(el, i){
       if(el.value == ""){
@@ -54,7 +65,7 @@ function __common__createReferralRequest(){
 }
 
 
-function __common__submitReferralForm(serializedJSON){
+function submitReferralForm(serializedJSON){
   $.ajax({
         url: "/loyalty/referral",
         type: "POST",
@@ -70,7 +81,7 @@ function __common__submitReferralForm(serializedJSON){
           success: function() {
             //called when successful
             console.log("Success" );
-            __common__buildNotificationsForReferralForm();
+            buildNotificationsForReferralForm();
         },
 
           error: function(textStatus, errorThrown) {
@@ -80,17 +91,24 @@ function __common__submitReferralForm(serializedJSON){
       })
 }
 
-function __common__buildNotificationsForReferralForm(){
+function buildNotificationsForReferralForm(){
   var message = "A very sincere thanks for your interest. We will contact you very shortly.";
   $referralForm.block(
     { 
       message: "<div class='alert alert-success'><a class='close' data-dismiss='alert' onClick='$referralForm.unblock(); return true;'>&#215;</a>"+message+"</div>", 
       timeout: 5000,
       onUnblock: function(){
-        $referralForm.each (function(){this.reset();}); 
+        $referralForm.each (function(){this.reset();});
+          window.$adsBannerDiv.show();
+          window.$referFriendFormDiv.hide();
+          window.$requestCallUsFormDiv.hide(); 
       }      
     }
   );
 }
 
-
+function showReferFriendForm(){
+  window.$adsBannerDiv.hide();
+  window.$requestCallUsFormDiv.hide();
+  window.$referFriendFormDiv.show();
+}

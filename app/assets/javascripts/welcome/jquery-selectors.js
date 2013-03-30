@@ -27,14 +27,4 @@ function __common__cacheAllJquerySelector(){
 	window.$mobileNumber = $("[id=quoteBuyForm] [id=mobileNumber]");
 	window.$emailAddress = $("[id=quoteBuyForm] [id=emailAddress]");
 	window.$address = $("[id=quoteBuyForm] [id=address]");
-
-	window.$callUsForm = $("[id=callUsForm]");
-	window.$callUsFormNotificationDiv = $("[id=callUsFormNotificationDiv]");
-	window.$callUsFormNotificationDivCloseLink = $("[id=callUsFormNotificationDiv] a");
-
-	window.$referralForm = $("[id=referralForm]");
-	window.$referralFormNotificationDiv = $("[id=referralFormNotificationDiv]");
-	window.$referralFormNotificationDivCloseLink = $("[id=referralFormNotificationDiv] a");
-
-
 }
