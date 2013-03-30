@@ -22,7 +22,7 @@ html[++h] = "<th style='text-align:center;vertical-align:middle;'></th></tr></th
 html[++h] = "<tbody>";
 for(var result, i = -1; result = results[++i];){
 	html[++h] = "<tr><td style='text-align:center;vertical-align:middle;'>";
-	html[++h] = "<img src='/assets/company/logo/logo_" + result.company_id + ".png' style='height: 50px;width: 150px'/>";
+	html[++h] = "<img src='/assets/company/logo/logo_" + result.company_id + ".png' />";
 	html[++h] = "</td><td style='text-align:center;vertical-align:middle;'>";
 	html[++h] = result.plan;
 	html[++h] = "</td><td style='text-align:center;vertical-align:middle;' >";
