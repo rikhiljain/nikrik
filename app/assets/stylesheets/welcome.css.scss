@@ -270,11 +270,13 @@ a:link, a:visited, a:active {
 }
 
 .wizard a {
-    padding: 10px 12px 10px;
+    padding: 10px 2px;
     margin-right: 5px;
     background: #efefef;
     position: relative;
     display: inline-block;
+    text-align: center;
+    cursor: pointer;
 }
 .wizard a:before {
     width: 0;
@@ -329,6 +331,13 @@ a:link, a:visited, a:active {
     border-left-color: #007ACC;
 }
 
+.wizard .greentick {
+  display: none; 
+  font-size: 17px; 
+  padding-left: 2px;
+  color: $green;
+  font-weight: bold;
+}
 
 /* ff anti-aliasing bug - http://coderwall.com/p/tpmsta */
 .mywizard li {

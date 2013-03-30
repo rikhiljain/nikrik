@@ -81,25 +81,37 @@ function __common__bindAccordionEvents(){
 function __common__updateBreadCrumbs(){
 	if(window.allowedAccordionIndexes[0] == 1){
 		$("[id=breadcrumb]  [id=1]").removeClass().addClass("badge badge-success");
+		$("[id=breadcrumb]  [id=1] + .greentick").show();
 		$("[id=breadcrumb]  [id=2]").removeClass().addClass("badge badge-success");
+		$("[id=breadcrumb]  [id=2] + .greentick").show();
 		$("[id=breadcrumb]  [id=3]").removeClass().addClass("badge badge-success");
+		$("[id=breadcrumb]  [id=3] + .greentick").show();
 	}else if(window.allowedAccordionIndexes[3] == 1){
 		//make "Calculate premium" accordion green
 		//make "Results" accordion green
 		//make "Eneter details and Review" accordion yellow
 		$("[id=breadcrumb]  [id=1]").removeClass().addClass("badge badge-success");
+		$("[id=breadcrumb]  [id=1] + .greentick").show();
 		$("[id=breadcrumb]  [id=2]").removeClass().addClass("badge badge-success");
+		$("[id=breadcrumb]  [id=2] + .greentick").show();
 		$("[id=breadcrumb]  [id=3]").removeClass().addClass("badge badge-warning");
+		$("[id=breadcrumb]  [id=3] + .greentick").hide();
 	}else if(window.allowedAccordionIndexes[2] == 1){
 		//make "Calculate premium" accordion green
 		//make "Results" accordion yellow
 		$("[id=breadcrumb]  [id=1]").removeClass().addClass("badge badge-success");
+		$("[id=breadcrumb]  [id=1] + .greentick").show();
 		$("[id=breadcrumb]  [id=2]").removeClass().addClass("badge badge-warning");
+		$("[id=breadcrumb]  [id=2] + .greentick").hide();
 		$("[id=breadcrumb]  [id=3]").removeClass().addClass("badge badge-important");
+		$("[id=breadcrumb]  [id=3] + .greentick").hide();
 	}else if(window.allowedAccordionIndexes[1] == 1){
 		//make "Calculate premium" accordion yellow
 		$("[id=breadcrumb]  [id=1]").removeClass().addClass("badge badge-warning");
+		$("[id=breadcrumb]  [id=1] + .greentick").hide();
 		$("[id=breadcrumb]  [id=2]").removeClass().addClass("badge badge-important");
+		$("[id=breadcrumb]  [id=2] + .greentick").hide();
 		$("[id=breadcrumb]  [id=3]").removeClass().addClass("badge badge-important");
+		$("[id=breadcrumb]  [id=3] + .greentick").hide();
 	}
 }
