@@ -1,7 +1,3 @@
-function light_initilizeCallUsFrom(){
-  //we just need to reset the form
-}
-
 function validateCallUsForm(){
   // Validation
   $callUsForm.validate({
@@ -88,18 +84,18 @@ function buildNotificationsForCallUsForm(){
       timeout: 5000,
       onUnblock: function(){
         $callUsForm.each (function(){this.reset();}); 
-          window.$adsBannerDiv.show();
-          window.$referFriendFormDiv.hide();
-          window.$requestCallUsFormDiv.hide();         
+        window.$adsBannerDiv.show();
+        window.$referFriendFormDiv.hide();
+        window.$requestCallUsFormDiv.hide();         
       }
     }
   );
 }
 
 function showCallUsForm(){
+  $callUsForm.each (function(){this.reset();});
+  $callUsForm.find(".error").removeClass("error");
   window.$adsBannerDiv.hide();
   window.$referFriendFormDiv.hide();
   window.$requestCallUsFormDiv.show();
 }
-
-

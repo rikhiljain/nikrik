@@ -1,6 +1,6 @@
 function validateReferralForm(){
   // Validation
-  $referralForm.validate({
+  window.$referralFormValidator = $referralForm.validate({
     rules:{
       'mobile': {required:true, phoneIndia:true},
       'email': {required:true, email:true},
@@ -88,15 +88,20 @@ function buildNotificationsForReferralForm(){
       timeout: 5000,
       onUnblock: function(){
         $referralForm.each (function(){this.reset();});
-          window.$adsBannerDiv.show();
-          window.$referFriendFormDiv.hide();
-          window.$requestCallUsFormDiv.hide(); 
+        window.$adsBannerDiv.show();
+        window.$referFriendFormDiv.hide();
+        window.$requestCallUsFormDiv.hide(); 
       }      
     }
   );
 }
 
 function showReferFriendForm(){
+  //reset form
+  $referralForm.each (function(){this.reset();});
+  //remove all the previous error
+  $referralForm.find(".error").removeClass("error");
+  window.$referralFormValidator.resetForm();
   window.$adsBannerDiv.hide();
   window.$requestCallUsFormDiv.hide();
   window.$referFriendFormDiv.show();

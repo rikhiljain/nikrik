@@ -47,3 +47,10 @@ function __root__postInitialization(){
 
   $('.carousel').carousel('cycle');
 }
+
+function __root__showAdsBanner(){
+  window.$adsBannerDiv.show();
+  window.$referFriendFormDiv.hide();
+  window.$requestCallUsFormDiv.hide();
+ 
+}
