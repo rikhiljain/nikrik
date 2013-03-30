@@ -10,12 +10,12 @@ var e = esc;
 var html = [], h = -1;
 html[++h] = "<p><button id='healthQuoteResultsRecomputeLink' class='btn is_btn-custom' type='button' onclick='__health__recomputeQuoteForm()'>Recompute</button>";
 html[++h] = "&nbsp;&nbsp;"; 
-html[++h] = "<button id='motorQuoteResultsCompareLink' class='btn is_btn-custom' type='button' onclick='__health__policyCompare()'>Compare All Policies</button></p>";
+html[++h] = "<button id='motorQuoteResultsCompareLink' class='btn is_btn-custom' type='button' onclick='__health__policyCompare(true)'>Compare All Policies</button></p>";
 
 html[++h] = "<table id='quoteHealthResultsTable' class='table table-striped'>";
 html[++h] = "<thead><tr><th style='text-align:center;vertical-align:middle;'>Company</th>";
 html[++h] = "<th style='text-align:center;vertical-align:middle;'>Plan</th>";
-html[++h] = "<th><button id='motorQuoteResultsCompareLink' class='btn is_btn-custom' type='button' onclick='__health__policyCompare()'>Compare</button></th>";
+html[++h] = "<th><button id='motorQuoteResultsCompareLink' class='btn is_btn-custom' type='button' onclick='__health__policyCompare(false)'>Compare</button></th>";
 html[++h] = "<th style='text-align:center;vertical-align:middle;'>Final Premium</th>";
 html[++h] = "<th style='text-align:center;vertical-align:middle;'>Reward Points</th>";
 html[++h] = "<th style='text-align:center;vertical-align:middle;'></th></tr></thead>";
@@ -39,7 +39,7 @@ html[++h] = "</tbody>";
 html[++h] = "</table>";
 html[++h] = "<button id='healthQuoteResultsRecomputeLink' class='btn is_btn-custom' type='button' onclick='__health__recomputeQuoteForm()'>Recompute</button>";
 html[++h] = "&nbsp;&nbsp;"; 
-html[++h] = "<button id='motorQuoteResultsCompareLink' class='btn is_btn-custom' type='button' onclick='__health__policyCompare()'>Compare All Policies</button>";
+html[++h] = "<button id='motorQuoteResultsCompareLink' class='btn is_btn-custom' type='button' onclick='__health__policyCompare(true)'>Compare All Policies</button>";
 window.$quoteResultsAccordionTable[0].innerHTML = html.join('');
 }
 

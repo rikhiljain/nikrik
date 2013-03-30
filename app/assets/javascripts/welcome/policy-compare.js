@@ -9,12 +9,12 @@ function __common__policyCompare(policyType, map){
 	});
 }
 
-function __health__policyCompare(){
+function __health__policyCompare(is_all){
 
 	var map = {}
 	$("[id=quoteHealthResultsTable] [id=compare]").each(function( index ) 
 	{
-		if ( $(this).is(':checked'))
+		if ( is_all || $(this).is(':checked'))
 			map[index] = "checked";
 		else
 			map[index] = "";
@@ -167,7 +167,7 @@ function __common__policyCompareActual(policyAttributes,map){
 	//now we need to enable/disable the checkboxes
 	for(var colNumber in map){
 		if(map[colNumber] == ""){
-			__common__policyCompare__fnShowHide(colNumber);
+			__common__policyCompare__fnShowHide( parseInt(colNumber, 10) + 1 );
 		}
 	}
 

@@ -66,7 +66,8 @@ def quote
     existing_health_search.name = params[:name]
     existing_health_search.email_id = params[:email_id]
     existing_health_search.mobile_number = params[:mobile_number]
-    existing_health_search.address = params[:address]     
+    existing_health_search.address = params[:address]
+    existing_health_search.plan = params[:plan]     
 
     existing_health_search.save
 
