@@ -19,41 +19,35 @@
 //= require bootstrap
 //= require dataTables/jquery.dataTables
 //= require lonelytype/cluster
+
 //= require welcome/jquery-selectors
 //= require welcome/motor/jquery-selectors
 //= require welcome/health/jquery-selectors
 //= require welcome/travel/jquery-selectors
-//= require welcome/loyalty/jquery-selectors
 //= require welcome/jquery-form-validations
 //= require welcome/motor/jquery-form-validations
 //= require welcome/health/jquery-form-validations
 //= require welcome/travel/jquery-form-validations
-//= require welcome/loyalty/jquery-form-validations
 //= require welcome/static-data
 //= require welcome/motor/static-data
 //= require welcome/health/static-data
 //= require welcome/travel/static-data
-//= require welcome/loyalty/static-data
 //= require welcome/tooltips
 //= require welcome/motor/tooltips
 //= require welcome/health/tooltips
 //= require welcome/travel/tooltips
-//= require welcome/loyalty/tooltips
 //= require welcome/event-handlers
 //= require welcome/motor/event-handlers
 //= require welcome/health/event-handlers
 //= require welcome/travel/event-handlers
-//= require welcome/loyalty/event-handlers
 //= require welcome/dynamic-data
 //= require welcome/motor/dynamic-data
 //= require welcome/health/dynamic-data
 //= require welcome/travel/dynamic-data
-//= require welcome/loyalty/dynamic-data
 //= require welcome/post-initialization
 //= require welcome/motor/post-initialization
 //= require welcome/health/post-initialization
 //= require welcome/travel/post-initialization
-//= require welcome/loyalty/post-initialization
 //= require welcome/motor/quote-request
 //= require welcome/health/quote-request
 //= require welcome/travel/quote-request
@@ -65,11 +59,26 @@
 //= require welcome/motor/initialization
 //= require welcome/health/initialization
 //= require welcome/travel/initialization
-//= require welcome/loyalty/initialization
-//= require welcome/call-us
-//= require welcome/referral
 //= require welcome/policy-compare
 //= require welcome/welcome
+
+//= require loyalty/jquery-selectors
+//= require loyalty/jquery-form-validations
+//= require loyalty/static-data
+//= require loyalty/tooltips
+//= require loyalty/event-handlers
+//= require loyalty/dynamic-data
+//= require loyalty/post-initialization
+//= require loyalty/initialization
+
+//= require callus/initialization
+//= require callus/callus
+
+//= require referral/initialization
+//= require referral/referral
+
+//= require root/initialization
+
 //= require json-to-table
 
 //= require_self
@@ -111,18 +120,17 @@ window.allowedAccordionIndexes;
 			//This might already be displayed, but calling again will not hurt us.
 			displayInsuranceShopeeDiv();
 			//we also want to intilize every thing. Every evnet binding for mainContentDiv.
-			__insurance__welcome();
+			welcome();
 		}
 		//Setting the event handlers for 'Motor', 'Health' and 'Travel' links.
 		//This is needed no matter what is being displayed.
 		secondLevelNavBarEventHandlers();	
 		//We need to fix the affix no matter what is being displayed.
 		affixAll();
-		__loyalty__cacheAllJquerySelector();
-		__loyalty__bindAllEventHandlers();
-		initilizeCallUsFrom();
-		initilizeReferFriendFrom();
-		__common__cusomValidationMethods();
+		__loyalty__initialize();
+		__referral__initialize();
+		__callus__initialize();
+		__root__initialize();
 	});
 })(jQuery);
 
@@ -137,7 +145,7 @@ function secondLevelNavBarEventHandlers(){
 			$("[id=secondLevelNavBar] li").removeClass("active");
 			$(e.currentTarget).addClass("active");
 			window.currentSelection = "Motor";
-			__insurance__initialize();
+			initialize();
 		}
 	});
 
@@ -150,7 +158,7 @@ function secondLevelNavBarEventHandlers(){
 			$("[id=secondLevelNavBar] li").removeClass("active");
 			$(e.currentTarget).addClass("active");
 			window.currentSelection = "Health";
-			__insurance__initialize();
+			initialize();
 		}
 	});
 
@@ -163,7 +171,7 @@ function secondLevelNavBarEventHandlers(){
 			$("[id=secondLevelNavBar] li").removeClass("active");
 			$(e.currentTarget).addClass("active");
 			window.currentSelection = "Travel";
-			__insurance__initialize();
+			initialize();
 		}
 	});
 
@@ -179,7 +187,7 @@ function displayInsuranceShopeeDiv(){
 			//If we want to display the insuranceShopeeDiv, then we will also activate all the events.
 			//If those have already been not run. That will be the case when we click on devise forms
 			//and then click on 'Motor' etc links or on MyRewards etc links
-			__insurance__welcome();
+			welcome();
 			//Once we have initialized it, we do not want to do it again.
 			window.content == "insuranceShopee";
 		}

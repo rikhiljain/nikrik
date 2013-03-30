@@ -1,4 +1,4 @@
-function __insurance__initialize(){
+function initialize(){
 	
 	if(window.currentSelection == "Motor"){
 		__motor__initialize();

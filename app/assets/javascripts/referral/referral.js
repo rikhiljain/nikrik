@@ -1,14 +1,3 @@
- function initilizeReferFriendFrom(){ 
-
-  window.$referralForm = $("[id=referralForm]");
-  window.$referralFormNotificationDiv = $("[id=referralFormNotificationDiv]");
-  window.$referralFormNotificationDivCloseLink = $("[id=referralFormNotificationDiv] a");
-
-  window.$adsBannerDiv = $("[id=adsBannerDiv]");
-  window.$referFriendFormDiv = $("[id=referFriendFormDiv]");
-
-  validateReferralForm();
-}
 function validateReferralForm(){
   // Validation
   $referralForm.validate({

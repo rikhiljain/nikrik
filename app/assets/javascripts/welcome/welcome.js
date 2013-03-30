@@ -17,7 +17,7 @@
 // 	});
 // })(jQuery);
 
-function __insurance__welcome(){
+function welcome(){
 	cacheAllJquerySelector(); //jquery-selector.js
 	jqueryFormValidations(); //jquery-form-validations.js
 	populateStaticData(); //static-data.js
@@ -26,7 +26,7 @@ function __insurance__welcome(){
 	bindCityAutoComplete(); //this file
 	bindAllEventHandlers(); //this file
 	populateDynamicData(); //dynamic-data.js
-	__insurance__initialize();
+	initialize();
 	postInitialization(); //post-initialization.js
 }	
 

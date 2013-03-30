@@ -1,15 +1,3 @@
- function initilizeCallUsFrom(){ 
-
-  window.$callUsForm = $("[id=callUsForm]");
-  window.$callUsFormNotificationDiv = $("[id=callUsFormNotificationDiv]");
-  window.$callUsFormNotificationDivCloseLink = $("[id=callUsFormNotificationDiv] a");
-  
-  window.$adsBannerDiv = $("[id=adsBannerDiv]");
-  window.$requestCallUsFormDiv = $("[id=requestCallBackFormDiv]");
-
-  validateCallUsForm();
-}
-
 function light_initilizeCallUsFrom(){
   //we just need to reset the form
 }
