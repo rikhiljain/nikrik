@@ -160,6 +160,7 @@ function __common__createQuoteBuyRequest(){
       json["id"] = selectedQuote.travel_search_id;
     }
     json["final_premium"] = selectedQuote.final_premium;
+    json["plan"] = selectedQuote.plan;
 
     return JSON.stringify(json);
 }
