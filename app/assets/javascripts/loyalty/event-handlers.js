@@ -80,7 +80,7 @@ function __loyalty__populateRewards(address){
 			var json = {};
 			json["title"] = altName;
 			json["placement"] = "right";
-			$(this).children(":nth-child(3)").html("<img rel='rewardsTooltip' src='/assets/rewards/"+$(this).children(":nth-child(3)").text()+"' class='img-circle' title='"+altName+"' data-toggle='tooltip' data-placement='right'></img>");
+			$(this).children(":nth-child(3)").html("<a class=\"is_hand-cursor\" onclick=\"__loyalty__purchase('1') \">1</a>");
 		 });
 		$("[rel=rewardsTooltip]").tooltip();		
 	});		
@@ -97,6 +97,67 @@ function __loyalty__getJsonAndPopulateTable(urlAddress, tableHeaders, formHeadin
 	});	
 
 }
+
+function __loyalty__purchase(id){
+	$.getJSON("/loyalty/purchase/"+ id,function(data){
+		var html = [], h = -1;
+html[++h] = "<div id=\"purchase_confirm_msg\"></div>";
+html[++h] = "<table class='table'>";
+html[++h] = "<tbody>";
+html[++h] = "<tr><td>Name:</td><td>";
+html[++h] = data.name;
+html[++h] = "</tr><tr><td>Details:</td><td>";
+html[++h] = data.details;
+html[++h] = "</tr><tr><td>Points:</td><td>";
+html[++h] = data.points;
+html[++h] = "</td></tr>";
+html[++h] = "</tbody>";
+html[++h] = "</table>";
+html[++h] = "<a class=\"is_hand-cursor\" onclick=\"__loyalty__confirmPurchase('" + data.id + "')\" > Confirm </a>";
+window.$userMenuContentDivAlert[0].innerHTML = "<h3>Confirm Your Purchase</h3>";
+window.$userMenuContentDivTable[0].innerHTML = html.join('');
+	});	
+
+}
+
+
+function __loyalty__confirmPurchase(id){
+	var json = {};
+	json["id"] = id;
+	serializedJSON = JSON.stringify(json);
+  $.ajax({
+        url: "/loyalty/confirm/",
+        type: "POST",
+        dataType: "json", // expected format for response
+        contentType: "application/json", // send as JSON
+        timeout: 3000, //3 second timeout
+        data: serializedJSON,
+
+          complete: function() {
+            //called when complete
+          },
+
+          success: function( data) {
+            //called when successful
+            purchase_div = $("[id=purchase_confirm_msg]");
+            if(data.error == true)
+            {
+            	purchase_div.addClass("alert alert-error");
+            }
+            else
+            {
+            	purchase_div.addClass("alert alert-success");
+            }
+            purchase_div[0].innerHTML = data.notice;
+        },
+
+          error: function(textStatus, errorThrown) {
+            //called when there is an error
+            console.log("some error happened" + textStatus + errorThrown);
+          },
+      })
+}
+
 
 
 

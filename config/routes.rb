@@ -39,7 +39,7 @@ Nikrik::Application.routes.draw do
   get "loyalty/points/:id" => "loyalty#points"
   get "loyalty/rewards" => "loyalty#rewards"
   get "loyalty/purchase/:id" => "loyalty#purchase"
-  get "loyalty/confirm/:id" => "loyalty#confirm"
+  post "loyalty/confirm/" => "loyalty#confirm"
   get "loyalty/details/:id/:ref_type/:ref_id" => "loyalty#details"
 
   #post  "loyalty/referrals" => "loyalty#create_referral"

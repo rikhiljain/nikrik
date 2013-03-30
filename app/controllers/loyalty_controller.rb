@@ -120,11 +120,13 @@ class LoyaltyController < ApplicationController
 
     respond_to do |format|
       format.html { render :template => '/loyalty/purchase' }
+      format.json { render json: @reward }
     end
 
   end
 
   def confirm
+    result = Hash.new
     reward = Reward.find(params[:id])
      if (user_signed_in? && (current_user.has_role? :user) )
          user_id = current_user.id
@@ -136,6 +138,7 @@ class LoyaltyController < ApplicationController
 
     if total_points <= reward.points
       notice = 'Your Points are not sufficient'
+      result[:error] = true
     else
       point = Loyalty::Point.new
       point.points =  reward.points
@@ -145,10 +148,12 @@ class LoyaltyController < ApplicationController
       point.ref_id = reward.id
       point.save
       notice = 'Your Reward item will be shipped shortly'
+      result[:error] = false
     end
-
+    result[:notice] = notice
     respond_to do |format|
         format.html { redirect_to '/loyalty/rewards', notice: notice }
+        format.json { render :json => result }
     end
     
 
