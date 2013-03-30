@@ -7,5 +7,4 @@ function __referral__initialize(){
   window.$referFriendFormDiv = $("[id=referFriendFormDiv]");
 
   validateReferralForm();
-
 }

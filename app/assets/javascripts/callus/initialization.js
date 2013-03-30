@@ -7,4 +7,5 @@ function __callus__initialize(){
   window.$requestCallUsFormDiv = $("[id=requestCallBackFormDiv]");
 
   validateCallUsForm();
+  $callUsForm.each (function(){this.reset();});
 }
