@@ -4,13 +4,13 @@ class Motor::CarPremium < Motor::Premium
   ZONE_B_RATING = { 0 => { 0 => 3.039, 1 => 3.191,  2 =>3.343} ,
                  1 => { 0 => 3.191, 1 => 3.351, 2 =>3.51},
                 2 => { 0 => 3.267, 1 => 3.43, 2 =>3.594},
-                4 => { 0 => 784, 1 => 925, 2 =>2853}}
+                4 => { 0 => 941, 1 => 1110, 2 =>3424}}
 
  #matrix[Age][Cubic] for zone-A car rating and matrix[4] use for third party
  ZONE_A_RATING = { 0 => { 0 => 3.127, 1 => 3.283,  2 =>3.44} ,
                  1 => { 0 => 3.283, 1 => 3.447, 2 =>3.612},
                  2 => { 0 => 3.362, 1 => 3.529, 2 =>3.698},
-                 4 => { 0 => 784, 1 => 925, 2 =>2853}}
+                 4 => { 0 => 941, 1 => 1110, 2 =>3424}}
 
   def initialize( motorSearch)
       @input = motorSearch

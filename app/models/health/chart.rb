@@ -1,6 +1,6 @@
 class Health::Chart < ActiveRecord::Base
 	self.table_name = "health_charts"
-  attr_accessible :company_id, :age_end, :age_start, :coverage, :premium
+  attr_accessible :company_id,:plan, :age_end, :age_start, :coverage, :premium
 
   def to_s
     "HealthChart: #{@comapny_id}--#{@age_end} (#{@coverage})"
