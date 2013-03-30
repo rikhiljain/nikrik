@@ -1,15 +1,30 @@
-function __common__policyCompare(policyType){
+function __common__policyCompare(policyType, map){
 
 	//make one ajax call to pull the data
 	//for a policy type.
 	//Polict type will be either "Motor", "Health" or "Travel"
 	var address = "/policy_attributes.json?type="+policyType;
 	$.getJSON(address,function(policyAttributes){
-		__common__policyCompareActual(policyAttributes);
+		__common__policyCompareActual(policyAttributes,map);
 	});
 }
 
-function __common__policyCompareActual(policyAttributes){
+function __health__policyCompare(){
+
+	var map = {}
+	$("[id=quoteHealthResultsTable] [id=compare]").each(function( index ) 
+	{
+		if ( $(this).is(':checked'))
+			map[index] = "checked";
+		else
+			map[index] = "";
+
+	});
+
+	__common__policyCompare( 'Health' , map)
+}
+
+function __common__policyCompareActual(policyAttributes,map){
 
 
 	// var policyAttributes = {
@@ -70,9 +85,9 @@ function __common__policyCompareActual(policyAttributes){
 	for(var result, i = -1; result = results[++i];){
 		html[++h] = "<label class='checkbox inline'>";
 		if(result.plan != null){
-			html[++h] = "<input type='checkbox' value='"+(i+1)+"' checked onclick='__common__policyCompare__ColumnToggele(this)'>"+result.company_name+"-"+result.plan+"</input>";
+			html[++h] = "<input type='checkbox' value='"+(i+1)+"' "+map[i]+" onclick='__common__policyCompare__ColumnToggele(this)'>"+result.company_name+"-"+result.plan+"</input>";
 		}else{
-			html[++h] = "<input type='checkbox' value='"+(i+1)+"' checked onclick='__common__policyCompare__ColumnToggele(this)'>"+result.company_name+"</input>";
+			html[++h] = "<input type='checkbox' value='"+(i+1)+"' " +map[i]+ " onclick='__common__policyCompare__ColumnToggele(this)'>"+result.company_name+"</input>";
 		}		
 		html[++h] =  "</label>";
 	}
@@ -148,6 +163,13 @@ function __common__policyCompareActual(policyAttributes){
 	});
 
 	$('#policy_compare_model').modal();
+
+	//now we need to enable/disable the checkboxes
+	for(var colNumber in map){
+		if(map[colNumber] == ""){
+			__common__policyCompare__fnShowHide(colNumber);
+		}
+	}
 
 	return false;
 }

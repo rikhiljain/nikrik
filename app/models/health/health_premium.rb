@@ -22,15 +22,18 @@ def initialize( search)
     	health_quote = Health::Quote.new
     	health_quote.company_id = chart.company_id
       health_quote.company_name = company_hash[chart.company_id]
+      health_quote.plan = chart.plan
     	health_quote.total_premium = chart.premium
     	if(@input.policy_for == 3)
     		health_quote.total_premium = health_quote.total_premium + chart.premium * 0.5
     	end
       
     	health_quote.total_premium = health_quote.total_premium + @input.no_of_childs* chart.premium * 0.25
-      health_quote.service_tax = calculate_service_tax(health_quote.total_premium)
-      health_quote.final_premium = health_quote.total_premium + health_quote.service_tax
+      #health_quote.service_tax = calculate_service_tax(health_quote.total_premium)
+      health_quote.final_premium = health_quote.total_premium
     	
+      health_quote.points = health_quote.final_premium * 0.05
+
     	Health::Quote.format_fields(health_quote)
      	Rails.logger.info "Final Premium= #{chart.premium}"
       results.push( health_quote )
