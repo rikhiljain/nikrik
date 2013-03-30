@@ -111,7 +111,7 @@ window.allowedAccordionIndexes;
 			//This might already be displayed, but calling again will not hurt us.
 			displayInsuranceShopeeDiv();
 			//we also want to intilize every thing. Every evnet binding for mainContentDiv.
-			welcome();
+			__insurance__welcome();
 		}
 		//Setting the event handlers for 'Motor', 'Health' and 'Travel' links.
 		//This is needed no matter what is being displayed.
@@ -137,7 +137,7 @@ function secondLevelNavBarEventHandlers(){
 			$("[id=secondLevelNavBar] li").removeClass("active");
 			$(e.currentTarget).addClass("active");
 			window.currentSelection = "Motor";
-			initialize();
+			__insurance__initialize();
 		}
 	});
 
@@ -150,7 +150,7 @@ function secondLevelNavBarEventHandlers(){
 			$("[id=secondLevelNavBar] li").removeClass("active");
 			$(e.currentTarget).addClass("active");
 			window.currentSelection = "Health";
-			initialize();
+			__insurance__initialize();
 		}
 	});
 
@@ -163,7 +163,7 @@ function secondLevelNavBarEventHandlers(){
 			$("[id=secondLevelNavBar] li").removeClass("active");
 			$(e.currentTarget).addClass("active");
 			window.currentSelection = "Travel";
-			initialize();
+			__insurance__initialize();
 		}
 	});
 
@@ -179,7 +179,7 @@ function displayInsuranceShopeeDiv(){
 			//If we want to display the insuranceShopeeDiv, then we will also activate all the events.
 			//If those have already been not run. That will be the case when we click on devise forms
 			//and then click on 'Motor' etc links or on MyRewards etc links
-			welcome();
+			__insurance__welcome();
 			//Once we have initialized it, we do not want to do it again.
 			window.content == "insuranceShopee";
 		}
