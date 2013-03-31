@@ -24,6 +24,36 @@ function __health__policyCompare(is_all){
 	__common__policyCompare( 'Health' , map)
 }
 
+function __travel__policyCompare(is_all){
+
+	var map = {}
+	$("[id=quoteTravelResultsTable] [id=compare]").each(function( index ) 
+	{
+		if ( is_all || $(this).is(':checked'))
+			map[index] = "checked";
+		else
+			map[index] = "";
+
+	});
+
+	__common__policyCompare( 'Travel' , map)
+}
+
+function __motor__policyCompare(is_all){
+
+	var map = {}
+	$("[id=quoteResultsTable] [id=compare]").each(function( index ) 
+	{
+		if ( is_all || $(this).is(':checked'))
+			map[index] = "checked";
+		else
+			map[index] = "";
+
+	});
+	
+	__common__policyCompare( 'Motor' , map)
+}
+
 function __common__policyCompareActual(policyAttributes,map){
 
 

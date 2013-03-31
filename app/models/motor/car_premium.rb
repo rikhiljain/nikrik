@@ -26,7 +26,7 @@ class Motor::CarPremium < Motor::Premium
 
     #total_premium = m_total_premium(MotorQuote.new, base_od, 0)
     Rails.logger.info "Base OD = #{base_od}"
-    companies = Company.all
+    companies = Company.find_motor_company()
 
     companies.each do |company|
       motor_quote = Motor::Quote.new
@@ -40,7 +40,7 @@ class Motor::CarPremium < Motor::Premium
       Rails.logger.info "Discount= #{discount}"
 
       final_premium = m_total_premium(motor_quote, base_od, discount)
-   
+      motor_quote.points = final_premium * 0.02
  
       Motor::Quote.format_fields(motor_quote)
       Rails.logger.info "Final Premium= #{final_premium}"

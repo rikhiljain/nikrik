@@ -26,17 +26,22 @@ function __common__prefillQuoteBuyForm(){
   var html = [], h = -1;
   html[++h] = "<table id='quoteHealthResultsTable' class='table'";
   html[++h] = "<thead><tr><th style='text-align:center;vertical-align:middle;'>Company</th>";
-  html[++h] = "<th style='text-align:center;vertical-align:middle;'>Plan</th>";
+  if( window.selectedQuote.plan != null)
+    html[++h] = "<th style='text-align:center;vertical-align:middle;'>Plan</th>";
+
   html[++h] = "<th style='text-align:center;vertical-align:middle;'>Final Premium</th>";
   html[++h] = "<th style='text-align:center;vertical-align:middle;'>Reward Points</th>";
   html[++h] = "</tr></thead>";
   html[++h] = "<tbody>";
   html[++h] = "<tr><td style='text-align:center;vertical-align:middle;'>";
-  html[++h] = "<img src='/assets/company/logo/logo_" + window.selectedQuote.company_id + ".png' style='height: 50px;width: 150px'/>";
-  html[++h] = "</td><td style='text-align:center;vertical-align:middle;'>";
-  html[++h] = window.selectedQuote.plan;
-  html[++h] = "</td><td style='text-align:center;vertical-align:middle;' >";
-  html[++h] = "<span class='rupee'>` "+window.selectedQuote.final_premium+"</span>";
+  html[++h] = "<img src='/assets/company/logo/logo_" + window.selectedQuote.company_id + ".png' style='height: 50px;width: 150px'/></td>";
+  if( window.selectedQuote.plan != null)
+  {
+    html[++h] = "<td style='text-align:center;vertical-align:middle;'>";
+    html[++h] = window.selectedQuote.plan;
+    html[++h] = "</td>";
+  }
+  html[++h] = "<td style='text-align:center;vertical-align:middle;' ><span class='rupee'>` "+window.selectedQuote.final_premium+"</span>";
   html[++h] = "</td><td style='text-align:center;vertical-align:middle;'>";
   html[++h] = window.selectedQuote.points;
   html[++h] = "</td></tr>";

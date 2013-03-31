@@ -38,6 +38,8 @@ def initialize( search)
 
     	travel_quote.final_premium = chart.premium
     	travel_quote.plan = chart.plan
+      travel_quote.points = travel_quote.final_premium * 0.05
+      
     	Travel::Quote.format_fields(travel_quote)
      	Rails.logger.info "Final Premium= #{chart.premium}"
       results.push( travel_quote )

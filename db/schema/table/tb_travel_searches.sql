@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `travel_searches` (
   `mobile_number` int(11) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `company_name` varchar(20) DEFAULT NULL,
+  `plan` varchar(20) DEFAULT NULL,
   `final_premium` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
