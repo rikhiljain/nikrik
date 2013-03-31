@@ -91,7 +91,7 @@ function __loyalty__populateRewards(address){
 			html[++h] = "<img src='/assets/rewards/"+ result.image_name +"''></img>";
 			html[++h] = "<p><span class='label label-info'>"+result.name + ", " + result.points + " Points" +"</span></p>";
 			html[++h] = "<p><button class='btn btn-link' type='button' onClick='__loyalty__rewardsDescription("+JSON.stringify(result)+")'>"+result.details+"</button></p>";
-			html[++h] = "<p><button class='btn btn-danger' type='button' onClick=''>Qty 1 -  Select</button></p>";
+			html[++h] = "<p><button class='btn btn-danger' type='button' onClick='__loyalty__confirmPurchase("+result.id+")'>Qty 1 -  Confirm</button></p>";
 		}
 		html[++h] = "</tr></tbody></table>";
 		window.$userMenuContentDivTable.html(html.join(''));
@@ -111,24 +111,25 @@ function __loyalty__getJsonAndPopulateTable(urlAddress, tableHeaders, formHeadin
 
 }
 
-function __loyalty__purchase(id){
+function __loyalty__confirmPurchase(id){
+	alert("woo" + id);
 	$.getJSON("/loyalty/purchase/"+ id,function(data){
 		var html = [], h = -1;
-html[++h] = "<div id=\"purchase_confirm_msg\"></div>";
-html[++h] = "<table class='table'>";
-html[++h] = "<tbody>";
-html[++h] = "<tr><td>Name:</td><td>";
-html[++h] = data.name;
-html[++h] = "</tr><tr><td>Details:</td><td>";
-html[++h] = data.details;
-html[++h] = "</tr><tr><td>Points:</td><td>";
-html[++h] = data.points;
-html[++h] = "</td></tr>";
-html[++h] = "</tbody>";
-html[++h] = "</table>";
-html[++h] = "<a class=\"is_hand-cursor\" onclick=\"__loyalty__confirmPurchase('" + data.id + "')\" > Confirm </a>";
-window.$userMenuContentDivAlert[0].innerHTML = "<h3>Confirm Your Purchase</h3>";
-window.$userMenuContentDivTable[0].innerHTML = html.join('');
+		html[++h] = "<div id=\"purchase_confirm_msg\"></div>";
+		html[++h] = "<table class='table'>";
+		html[++h] = "<tbody>";
+		html[++h] = "<tr><td>Name:</td><td>";
+		html[++h] = data.name;
+		html[++h] = "</tr><tr><td>Details:</td><td>";
+		html[++h] = data.details;
+		html[++h] = "</tr><tr><td>Points:</td><td>";
+		html[++h] = data.points;
+		html[++h] = "</td></tr>";
+		html[++h] = "</tbody>";
+		html[++h] = "</table>";
+		html[++h] = "<a class=\"is_hand-cursor\" onclick=\"__loyalty__confirmPurchase('" + data.id + "')\" > Confirm </a>";
+		window.$userMenuContentDivAlert[0].innerHTML = "<h3>Confirm Your Purchase</h3>";
+		window.$userMenuContentDivTable[0].innerHTML = html.join('');
 	});	
 
 }
@@ -174,8 +175,10 @@ function __loyalty__confirmPurchase(id){
 function __loyalty__rewardsDescription(result){
 	
 	$("[id=rewards_details_model] .first").html(result.details);
+	$("[id=rewards_details_model] .second").attr("src", "/assets/rewards/"+ result.image_name);
 	$("[id=rewards_details_model] .third").html("Reward points: " + result.points);
 	$("[id=rewards_details_model] .fourth").html(result.description);
+	$("[id=rewards_details_model] .fifth").attr("rewardsId", result.id);
 
 	$('#rewards_details_model').modal();
 
