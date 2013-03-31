@@ -22,7 +22,7 @@ html[++h] = "<th style='text-align:center;vertical-align:middle;'></th></tr></th
 html[++h] = "<tbody>";
 for(var result, i = -1; result = results[++i];){
 	html[++h] = "<tr><td style='text-align:center;vertical-align:middle;'>";
-	html[++h] = "<img src='/assets/company/logo/logo_" + result.company_id + ".png' />";
+	html[++h] = "<img src='/assets/company/logo/logo_" + result.company_id + ".png' data-toggle='tooltip' title='"+result.company_name+"' data-placement='right'/>";
 	html[++h] = "</td><td style='text-align:center;vertical-align:middle;'>";
 	html[++h] = result.plan;
 	html[++h] = "</td><td style='text-align:center;vertical-align:middle;' >";
@@ -41,6 +41,7 @@ html[++h] = "<button id='healthQuoteResultsRecomputeLink' class='btn is_btn-cust
 html[++h] = "&nbsp;&nbsp;"; 
 html[++h] = "<button id='motorQuoteResultsCompareLink' class='btn is_btn-custom' type='button' onclick='__health__policyCompare(true)'>Compare All Policies</button>";
 window.$quoteResultsAccordionTable[0].innerHTML = html.join('');
+$("[id=quoteHealthResultsTable] img").tooltip();
 }
 
 function __health__recomputeQuoteForm(){
