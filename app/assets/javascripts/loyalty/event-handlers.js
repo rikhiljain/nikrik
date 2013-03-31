@@ -1,10 +1,11 @@
 function __loyalty__bindAllEventHandlers() {
-	__loyalty__myLinksClickHandlers();
+
+	$("[id=userMenuDiv] a").bind("click", function(){
+		return __loyalty__myLinksClickHandlers($(this).attr("id"), $(this).attr("href"));
+	});
 }
 
-function __loyalty__myLinksClickHandlers(){
-	$("[id=userMenuDiv] a").bind("click", function(){
-
+function __loyalty__myLinksClickHandlers(id, href){
 		displayInsuranceShopeeDiv();
 
 		//console.log($(this).attr("href"));
@@ -13,21 +14,19 @@ function __loyalty__myLinksClickHandlers(){
 
 		window.currentSelection = "XXX";
 
-		if($(this).attr("id") == "myPolicies"){
-			__loyalty__populatePolicies($(this).attr("href"));
-		}else if($(this).attr("id") == "myReferrals"){
-			__loyalty__populateReferrals($(this).attr("href"));
-		}else if($(this).attr("id") == "myPoints"){
-			__loyalty__populatePoints($(this).attr("href"));
-		}else if($(this).attr("id") == "myRewards"){
-			__loyalty__populateRewards($(this).attr("href"));
-		}else if($(this).attr("id") == "editProfile"){
+		if(id == "myPolicies"){
+			__loyalty__populatePolicies(href);
+		}else if(id == "myReferrals"){
+			__loyalty__populateReferrals(href);
+		}else if(id == "myPoints"){
+			__loyalty__populatePoints(href);
+		}else if(id == "myRewards"){
+			__loyalty__populateRewards(href);
+		}else if(id == "editProfile"){
 			return true;
 		}
 
-		return false;
-	});
-
+		return false;	
 }
 
 function __loyalty__populatePolicies(address){
@@ -72,18 +71,43 @@ function __loyalty__populatePoints(address){
 }
 
 function __loyalty__populateRewards(address){
-	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Name:name", "Image:image_name", "Points:points", "Description:details"], "My Rewards", ["id","name"],
-		function (data) {
-			//This will be the third column as the first it column is hidden
-		$("[id=userMenuContentDiv] > [id=userMenuContentDivTable] tbody tr").each(function(index, value){
-			var altName = $(this).children(":nth-child(2)").text();
-			var json = {};
-			json["title"] = altName;
-			json["placement"] = "right";
-			$(this).children(":nth-child(3)").html("<a class=\"is_hand-cursor\" onclick=\"__loyalty__purchase('1') \">1</a>");
-		 });
-		$("[rel=rewardsTooltip]").tooltip();		
-	});		
+
+	var itemsInRow = 2;
+	var formHeading = "Insurance Shopee Rewards Program";
+	if(window.user != null){
+		formHeading = "My Rewards";
+	}
+	window.$userMenuContentDivAlert[0].innerHTML = "<h3>"+formHeading+"</h3>";
+	var html = [], h = -1;
+	html[++h] = "<table class='table is_rewards'><tbody><tr>";
+	$.getJSON(address+".json",function(data){
+		for(var result, i = -1; result = data[++i];){
+			if(i != 0 && i % itemsInRow == 0){
+				html[++h] = "</tr><tr>";
+			}
+			html[++h] = "<td width='50%'>";
+			html[++h] = "<div>";
+			html[++h] = "<img src='/assets/rewards/"+ result.image_name +"''></img>";
+			html[++h] = "<p><span class='label label-info'>"+result.name + ", " + result.points + " Points" +"</span></p>";
+			html[++h] = "<p><button class='btn btn-link' type='button'>"+result.details+"</button></p>";
+		}
+		html[++h] = "</tr></tbody></table>";
+		window.$userMenuContentDivTable[0].innerHTML = html.join('');;
+
+	});	
+
+	// __loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Name:name", "Image:image_name", "Points:points", "Description:details"], formHeading, ["id","name"],
+	// 	function (data) {
+	// 		//This will be the third column as the first it column is hidden
+	// 	$("[id=userMenuContentDiv] > [id=userMenuContentDivTable] tbody tr").each(function(index, value){
+	// 		var altName = $(this).children(":nth-child(2)").text();
+	// 		var json = {};
+	// 		json["title"] = altName;
+	// 		json["placement"] = "right";
+	// 		$(this).children(":nth-child(3)").html("<a class=\"is_hand-cursor\" onclick=\"__loyalty__purchase('1') \">1</a>");
+	// 	 });
+	// 	$("[rel=rewardsTooltip]").tooltip();		
+	// });		
 }
 
 function __loyalty__getJsonAndPopulateTable(urlAddress, tableHeaders, formHeading, hiddenFieldNames, callBackFn){

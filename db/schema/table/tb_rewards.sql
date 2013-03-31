@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS `rewards` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
-  `details` varchar(1000) DEFAULT NULL,
+  `details` varchar(50) DEFAULT NULL,
+  `description` varchar(4000) NOT NULL,
   `points` int(11) DEFAULT NULL,
   `image_name` varchar(50) DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL,
@@ -10,4 +11,5 @@ CREATE TABLE IF NOT EXISTS `rewards` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ;
+)
+
