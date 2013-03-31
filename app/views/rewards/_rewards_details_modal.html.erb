@@ -6,9 +6,11 @@
   </div>
   <div class="modal-body">
       <div id="rewards_details_body">
+      	<div id="notificationDiv">
+		</div>
       	<div class="media">
   			<a class="pull-left" href="#">
-    			<img class="media-object" class="second" src="/assets/rewards/logo_1.png">
+    			<img class="media-object second" src="/assets/rewards/logo_1.png">
   			</a>		
 	  		<div class="media-body">
 	  			<p class="third"></p>
@@ -16,10 +18,13 @@
 	  			<p><strong>Description:</strong><p>
 	  			<p class="fourth"></p>
 	  			<hr>
-	    		<p><button class='btn btn-danger fifth' type='button' onClick='__loyalty__confirmPurchase(this.rewardsId)' rewardsId="-1">Qty 1 -  Confirm</button></p>
+          <div class="alert alert-success notification">
+          </div>
+	    		<p><button class='btn btn-danger fifth' type='button' onClick='__loyalty__confirmUserPoints($(this).attr("reward"));' reward='-1'>Qty 1 -  Select</button></p>
 	      </div>
 	    </div>
 	   </div>
+     <input type="hidden" class="status"/>
   </div>
   <div class="modal-footer">
     <button class="btn is_btn-custom" data-dismiss="modal" aria-hidden="true">Close</button>

@@ -3,6 +3,14 @@ function __loyalty__bindAllEventHandlers() {
 	$("[id=userMenuDiv] a").bind("click", function(){
 		return __loyalty__myLinksClickHandlers($(this).attr("id"), $(this).attr("href"));
 	});
+
+	window.$rewardsDetailsModel.on('shown', function () {
+  		window.$rewardsDetailsModel.find(".status").val("shown");
+	});
+
+	window.$rewardsDetailsModel.on('.hidden', function () {
+  		window.$rewardsDetailsModel.find(".status").val("hidden");
+	});
 }
 
 function __loyalty__myLinksClickHandlers(id, href){
@@ -91,7 +99,7 @@ function __loyalty__populateRewards(address){
 			html[++h] = "<img src='/assets/rewards/"+ result.image_name +"''></img>";
 			html[++h] = "<p><span class='label label-info'>"+result.name + ", " + result.points + " Points" +"</span></p>";
 			html[++h] = "<p><button class='btn btn-link' type='button' onClick='__loyalty__rewardsDescription("+JSON.stringify(result)+")'>"+result.details+"</button></p>";
-			html[++h] = "<p><button class='btn btn-danger' type='button' onClick='__loyalty__confirmPurchase("+result.id+")'>Qty 1 -  Confirm</button></p>";
+			html[++h] = "<p><button class='btn btn-danger' type='button' onClick='__loyalty__confirmUserPoints("+JSON.stringify(result)+")'>Qty 1 -  Select</button></p>";
 		}
 		html[++h] = "</tr></tbody></table>";
 		window.$userMenuContentDivTable.html(html.join(''));
@@ -111,25 +119,23 @@ function __loyalty__getJsonAndPopulateTable(urlAddress, tableHeaders, formHeadin
 
 }
 
-function __loyalty__confirmPurchase(id){
-	alert("woo" + id);
-	$.getJSON("/loyalty/purchase/"+ id,function(data){
-		var html = [], h = -1;
-		html[++h] = "<div id=\"purchase_confirm_msg\"></div>";
-		html[++h] = "<table class='table'>";
-		html[++h] = "<tbody>";
-		html[++h] = "<tr><td>Name:</td><td>";
-		html[++h] = data.name;
-		html[++h] = "</tr><tr><td>Details:</td><td>";
-		html[++h] = data.details;
-		html[++h] = "</tr><tr><td>Points:</td><td>";
-		html[++h] = data.points;
-		html[++h] = "</td></tr>";
-		html[++h] = "</tbody>";
-		html[++h] = "</table>";
-		html[++h] = "<a class=\"is_hand-cursor\" onclick=\"__loyalty__confirmPurchase('" + data.id + "')\" > Confirm </a>";
-		window.$userMenuContentDivAlert[0].innerHTML = "<h3>Confirm Your Purchase</h3>";
-		window.$userMenuContentDivTable[0].innerHTML = html.join('');
+function __loyalty__confirmUserPoints(result){
+	$.getJSON("/loyalty/purchase/"+ result.id+".json",function(data){
+		if(data.operationResult == false){
+			//we should close out the rewardsDetailsModel if that is open
+			if(!__loyalty__isModalActive()){
+				window.$rewardsDetailsModel.modal('hide');
+			}
+			$("[id=errorMessageModalBody]").html("It seems that either you have not logged in or your session has expired. Please login to confirm your purchase.");
+			$("[id=errorMessageModal]").modal();
+		}else{
+			if(data.total_points < result.points){
+				__loyalty__buildErrorMessageForPoints(result, data.total_points);
+			}
+			else{
+				__loyalty__buildSuccessMessageForPoints(result, data.total_points);
+			}
+		}
 	});	
 
 }
@@ -172,18 +178,54 @@ function __loyalty__confirmPurchase(id){
       })
 }
 
-function __loyalty__rewardsDescription(result){
-	
-	$("[id=rewards_details_model] .first").html(result.details);
-	$("[id=rewards_details_model] .second").attr("src", "/assets/rewards/"+ result.image_name);
-	$("[id=rewards_details_model] .third").html("Reward points: " + result.points);
-	$("[id=rewards_details_model] .fourth").html(result.description);
-	$("[id=rewards_details_model] .fifth").attr("rewardsId", result.id);
-
-	$('#rewards_details_model').modal();
+function __loyalty__rewardsDescription(result){	
+	//hide the notification
+	window.$rewardsDetailsModel.find(".notification").hide();
+	__loyalty__displayModal(result);
 
 }
 
+function __loyalty__displayModal(result){
+	window.$rewardsDetailsModel.find(".first").html(result.details);
+	window.$rewardsDetailsModel.find(".second").attr("src", "/assets/rewards/"+ result.image_name);
+	window.$rewardsDetailsModel.find(".third").html("Reward points: " + result.points);
+	window.$rewardsDetailsModel.find(".fourth").html(result.description);
+	window.$rewardsDetailsModel.find(".fifth").attr("reward", JSON.stringify(result));
+	window.$rewardsDetailsModel.modal();
+}
 
+function __loyalty__buildErrorMessageForPoints(result, userPoints){
+	
+	//display the notification
+	var message = "You don't seem to have the sufficient reward points to proceed with the purchase. Please check your reward points balance.";
+	message +=  "<p><strong>Current balance: "+userPoints+"</p>";
+	message +=  "<p><strong>Points required: " + result.points+"</p>";
+	window.$rewardsDetailsModel.find(".notification").html(message);
+	window.$rewardsDetailsModel.find(".notification").show();
+
+	//if rewardsDetailsModel is not active, we need to display that
+	if(!__loyalty__isModalActive()){
+		__loyalty__displayModal(result);
+	}
+}
+
+function __loyalty__buildSuccessMessageForPoints(result, userPoints){
+	
+	//display the notification
+	var message = "You have sufficient reward points to proceed with the purchase. Please confirm your purchase.";
+	message +=  "<strong>Current balance: "+userPoints+"</p>";
+	message +=  "<strong>Points required: " + result.points+"</p>";
+	window.$rewardsDetailsModel.find(".notification").html(message);
+	window.$rewardsDetailsModel.find(".notification").show();
+
+	//if rewardsDetailsModel is not active, we need to display that
+	if(!__loyalty__isModalActive()){
+		__loyalty__displayModal(result);
+	}
+}
+
+function __loyalty__isModalActive(){
+	return window.$rewardsDetailsModel.find(".status").val() == "shown";
+}
 
 

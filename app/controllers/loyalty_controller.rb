@@ -109,18 +109,19 @@ class LoyaltyController < ApplicationController
   end
 
   def purchase
-     @reward = Reward.find(params[:id])
-     if (user_signed_in? && (current_user.has_role? :user) )
-         user_id = current_user.id
-     end
-
-    points =  Loyalty::Point.find_by_user(user_id)
-
-    @total_points = m_total_points(points)
-
+    result = Hash.new    
+    if (user_signed_in? && (current_user.has_role? :user) )
+      user_id = current_user.id
+      points =  Loyalty::Point.find_by_user(user_id)
+      @total_points = m_total_points(points)
+      result[:operationResult] = true
+      result[:total_points] = @total_points
+    else
+      result[:operationResult] = false
+    end
     respond_to do |format|
       format.html { render :template => '/loyalty/purchase' }
-      format.json { render json: @reward }
+      format.json { render json: result }
     end
 
   end
