@@ -147,6 +147,7 @@ function secondLevelNavBarEventHandlers(){
 			window.currentSelection = "Motor";
 			initialize();
 		}
+		return false;
 	});
 
 	$("[id=secondLevelNavBar] [id=2]").bind("click", function(e){
@@ -160,6 +161,7 @@ function secondLevelNavBarEventHandlers(){
 			window.currentSelection = "Health";
 			initialize();
 		}
+		return false;
 	});
 
 	$("[id=secondLevelNavBar] [id=3]").bind("click", function(e){
@@ -173,7 +175,19 @@ function secondLevelNavBarEventHandlers(){
 			window.currentSelection = "Travel";
 			initialize();
 		}
+		return false;
 	});
+
+	$("[id=secondLevelNavBar] [id=4]").bind("click", function(e){
+		//Rewards
+		//This check is important so that if some one clicks on already active link. Nothing should happen.
+		if(window.currentSelection != "Rewards"){
+			$("[id=secondLevelNavBar] li").removeClass("active");
+			$(e.currentTarget).addClass("active");
+			__loyalty__myLinksClickHandlers($(this).attr("userMenuId"), $(this).attr("userMenuHref"));
+		}
+		return false;
+	});	
 
 }
 

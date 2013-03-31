@@ -379,6 +379,20 @@ a:link, a:visited, a:active {
     padding-top: 3px;
 }
 
+.is_rewards{
+  margin-bottom: 1.5 * $baseLineHeight;
+  margin-top: 1.5 * $baseLineHeight;
+  td{
+    padding-bottom: 2.5 * $baseLineHeight;
+    padding-top: 2.5 * $baseLineHeight;
+    text-align: center;
+    border-right: 1px solid #DDDDDD;
+  }
+  img{
+  margin-bottom: $baseLineHeight;
+  }
+}
+
 
 
 

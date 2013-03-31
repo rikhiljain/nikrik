@@ -24,9 +24,9 @@ SET time_zone = "+00:00";
 -- Dumping data for table `rewards`
 --
 
-INSERT INTO `rewards` (`id`, `name`, `details`, `points`, `image_name`, `status`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
-(1, 'tupperware', 'tupperware items', 1000, 'box.png', 'active', NULL, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'car vaccum cleaner', 'This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.', 2000, 'box.png', 'active', NULL, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `rewards` (`id`, `name`, `details`, `description`, `points`, `image_name`, `status`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
+(1, 'tupperware', 'tupperware items', 'This is good description. <h1> but this coulld be better <h1>', 1000, 'box.png', 'active', NULL, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'car vaccum cleaner', 'This is a very good product.', 'This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.This is a very good product and will help you.', 2000, 'box.png', 'active', NULL, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
