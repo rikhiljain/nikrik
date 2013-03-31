@@ -81,6 +81,7 @@ function __loyalty__populateRewards(address){
 	var html = [], h = -1;
 	html[++h] = "<table class='table is_rewards'><tbody><tr>";
 	$.getJSON(address+".json",function(data){
+		rewardResults = data;
 		for(var result, i = -1; result = data[++i];){
 			if(i != 0 && i % itemsInRow == 0){
 				html[++h] = "</tr><tr>";
@@ -89,25 +90,13 @@ function __loyalty__populateRewards(address){
 			html[++h] = "<div>";
 			html[++h] = "<img src='/assets/rewards/"+ result.image_name +"''></img>";
 			html[++h] = "<p><span class='label label-info'>"+result.name + ", " + result.points + " Points" +"</span></p>";
-			html[++h] = "<p><button class='btn btn-link' type='button'>"+result.details+"</button></p>";
+			html[++h] = "<p><button class='btn btn-link' type='button' onClick='__loyalty__rewardsDescription("+JSON.stringify(result)+")'>"+result.details+"</button></p>";
+			html[++h] = "<p><button class='btn btn-danger' type='button' onClick=''>Qty 1 -  Select</button></p>";
 		}
 		html[++h] = "</tr></tbody></table>";
-		window.$userMenuContentDivTable[0].innerHTML = html.join('');;
+		window.$userMenuContentDivTable.html(html.join(''));
 
-	});	
-
-	// __loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Name:name", "Image:image_name", "Points:points", "Description:details"], formHeading, ["id","name"],
-	// 	function (data) {
-	// 		//This will be the third column as the first it column is hidden
-	// 	$("[id=userMenuContentDiv] > [id=userMenuContentDivTable] tbody tr").each(function(index, value){
-	// 		var altName = $(this).children(":nth-child(2)").text();
-	// 		var json = {};
-	// 		json["title"] = altName;
-	// 		json["placement"] = "right";
-	// 		$(this).children(":nth-child(3)").html("<a class=\"is_hand-cursor\" onclick=\"__loyalty__purchase('1') \">1</a>");
-	// 	 });
-	// 	$("[rel=rewardsTooltip]").tooltip();		
-	// });		
+	});		
 }
 
 function __loyalty__getJsonAndPopulateTable(urlAddress, tableHeaders, formHeading, hiddenFieldNames, callBackFn){
@@ -180,6 +169,16 @@ function __loyalty__confirmPurchase(id){
             console.log("some error happened" + textStatus + errorThrown);
           },
       })
+}
+
+function __loyalty__rewardsDescription(result){
+	
+	$("[id=rewards_details_model] .first").html(result.details);
+	$("[id=rewards_details_model] .third").html("Reward points: " + result.points);
+	$("[id=rewards_details_model] .fourth").html(result.description);
+
+	$('#rewards_details_model').modal();
+
 }
 
 

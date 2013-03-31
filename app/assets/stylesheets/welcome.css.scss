@@ -152,6 +152,12 @@
   }
 }
 
+#rewards_details_model{
+  .pull-left{
+    margin-right: 4 * $baseLineHeight;
+  }
+}
+
 //Class selectors
 //*************************************************************
 .is_border{
@@ -386,7 +392,9 @@ a:link, a:visited, a:active {
     padding-bottom: 2.5 * $baseLineHeight;
     padding-top: 2.5 * $baseLineHeight;
     text-align: center;
-    border-right: 1px solid #DDDDDD;
+    border-right: 3px solid $white;
+    border-bottom: 3px solid white;
+    background-color: #EEEEEE;
   }
   img{
   margin-bottom: $baseLineHeight;
