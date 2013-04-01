@@ -109,10 +109,10 @@ class LoyaltyController < ApplicationController
   end
 
   def purchase
+    #debugger
     result = Hash.new    
     if (user_signed_in? && (current_user.has_role? :user) )
-      user_id = current_user.id
-      points =  Loyalty::Point.find_by_user(user_id)
+      points =  Loyalty::Point.find_by_user(current_user.id)
       @total_points = m_total_points(points)
       result[:operationResult] = true
       result[:total_points] = @total_points
@@ -127,37 +127,36 @@ class LoyaltyController < ApplicationController
   end
 
   def confirm
+    #debugger
     result = Hash.new
     reward = Reward.find(params[:id])
-     if (user_signed_in? && (current_user.has_role? :user) )
-         user_id = current_user.id
-     end
-
-    points =  Loyalty::Point.find_by_user(user_id)
-
-    total_points = m_total_points(points)
-
-    if total_points <= reward.points
-      notice = 'Your Points are not sufficient'
-      result[:error] = true
-    else
-      point = Loyalty::Point.new
-      point.points =  reward.points
-      point.user_id =  user_id
-      point.status = 'USED'
-      point.ref_type =  'REWARD'
-      point.ref_id = reward.id
-      point.save
-      notice = 'Your Reward item will be shipped shortly'
-      result[:error] = false
-    end
-    result[:notice] = notice
-    respond_to do |format|
+      if (user_signed_in? && (current_user.has_role? :user) )
+        points =  Loyalty::Point.find_by_user(current_user.id)
+        total_points = m_total_points(points)
+        if total_points <= reward.points
+          result[:result] = false
+          result[:resultCode] = "NOT_SUFFICIENT_POINTS"
+          result[:resultDesc] = "{'result': {'points': "+reward.points+"}, 'userPoints': "+total_points+"}"
+        else
+          point = Loyalty::Point.new
+          point.points =  reward.points
+          point.user_id =  user_id
+          point.status = 'USED'
+          point.ref_type =  'REWARD'
+          point.ref_id = reward.id
+          point.save
+          result[:result] = true
+          result[:resultDesc] = ""
+        end
+      else
+        result[:result] = false
+        result[:resultCode] = "NOT_LOGGED_IN"
+        result[:resultDesc] = ""
+      end
+      respond_to do |format|
         format.html { redirect_to '/loyalty/rewards', notice: notice }
         format.json { render :json => result }
-    end
-    
-
+      end
   end
 
   def details
@@ -174,7 +173,7 @@ def m_total_points(points)
   
   total_points = 0
   points.each do |point|
-    if point.status == 'EARN'
+    if point.status == 'EARNED'
       total_points += point.value
     end
     if point.status == 'USED'

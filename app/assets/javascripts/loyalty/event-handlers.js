@@ -4,13 +4,13 @@ function __loyalty__bindAllEventHandlers() {
 		return __loyalty__myLinksClickHandlers($(this).attr("id"), $(this).attr("href"));
 	});
 
-	window.$rewardsDetailsModel.on('shown', function () {
-  		window.$rewardsDetailsModel.find(".status").val("shown");
-	});
+	// window.$rewardsDetailsModel.on('shown', function () {
+ //  		window.$rewardsDetailsModel.find(".status").val("shown");
+	// });
 
-	window.$rewardsDetailsModel.on('.hidden', function () {
-  		window.$rewardsDetailsModel.find(".status").val("hidden");
-	});
+	// window.$rewardsDetailsModel.on('.hidden', function () {
+ //  		window.$rewardsDetailsModel.find(".status").val("hidden");
+	// });
 }
 
 function __loyalty__myLinksClickHandlers(id, href){
@@ -122,12 +122,7 @@ function __loyalty__getJsonAndPopulateTable(urlAddress, tableHeaders, formHeadin
 function __loyalty__confirmUserPoints(result){
 	$.getJSON("/loyalty/purchase/"+ result.id+".json",function(data){
 		if(data.operationResult == false){
-			//we should close out the rewardsDetailsModel if that is open
-			if(!__loyalty__isModalActive()){
-				window.$rewardsDetailsModel.modal('hide');
-			}
-			$("[id=errorMessageModalBody]").html("It seems that either you have not logged in or your session has expired. Please login to confirm your purchase.");
-			$("[id=errorMessageModal]").modal();
+			__loyalty__buildErrorMessageForSignin();
 		}else{
 			if(data.total_points < result.points){
 				__loyalty__buildErrorMessageForPoints(result, data.total_points);
@@ -145,12 +140,12 @@ function __loyalty__confirmPurchase(id){
 	var json = {};
 	json["id"] = id;
 	serializedJSON = JSON.stringify(json);
-  $.ajax({
+  	$.ajax({
         url: "/loyalty/confirm/",
         type: "POST",
         dataType: "json", // expected format for response
         contentType: "application/json", // send as JSON
-        timeout: 3000, //3 second timeout
+        timeout: 100000, //3 second timeout
         data: serializedJSON,
 
           complete: function() {
@@ -159,73 +154,91 @@ function __loyalty__confirmPurchase(id){
 
           success: function( data) {
             //called when successful
-            purchase_div = $("[id=purchase_confirm_msg]");
-            if(data.error == true)
+            if(data.result == true)
             {
-            	purchase_div.addClass("alert alert-error");
+            	__loyalty__buildSuccessMessageForConfirmation();
             }
             else
             {
-            	purchase_div.addClass("alert alert-success");
+            	if(data.resultCode == "NOT_SUFFICIENT_POINTS"){
+            		__loyalty__buildErrorMessageForPoints(data.result, data.userPoints);
+
+            	}else if(data.resultCode == "NOT_LOGGED_IN"){
+            		__loyalty__buildErrorMessageForSignin();
+            	}
             }
-            purchase_div[0].innerHTML = data.notice;
+
         },
 
           error: function(textStatus, errorThrown) {
             //called when there is an error
-            console.log("some error happened" + textStatus + errorThrown);
+            __loyalty__buildErrorMessageForUnknownError("Some error has happened" + textStatus + errorThrown);
           },
       })
 }
 
 function __loyalty__rewardsDescription(result){	
-	//hide the notification
-	window.$rewardsDetailsModel.find(".notification").hide();
-	__loyalty__displayModal(result);
-
+	window.$errorModal.hide();
+	window.$rewardDetailsModal.find(".notification").hide();
+	window.$rewardDetailsModal.find(".first").html(result.details);
+	window.$rewardDetailsModal.find(".second").attr("src", "/assets/rewards/"+ result.image_name);
+	window.$rewardDetailsModal.find(".third").html("Reward points: " + result.points);
+	window.$rewardDetailsModal.find(".fourth").html(result.description);
+	//window.$rewardDetailsModal.find(".fifth").attr("reward", JSON.stringify(result));
+	window.$rewardDetailsModal.find(".fifth").text("Qty 1 - Select");	
+	window.$rewardDetailsModal.find(".fifth").click(function(){__loyalty__confirmUserPoints(result)});
+	window.$rewardDetailsModal.show();
+	window.$rewardDeatilsOrErrorModal.modal();
 }
 
-function __loyalty__displayModal(result){
-	window.$rewardsDetailsModel.find(".first").html(result.details);
-	window.$rewardsDetailsModel.find(".second").attr("src", "/assets/rewards/"+ result.image_name);
-	window.$rewardsDetailsModel.find(".third").html("Reward points: " + result.points);
-	window.$rewardsDetailsModel.find(".fourth").html(result.description);
-	window.$rewardsDetailsModel.find(".fifth").attr("reward", JSON.stringify(result));
-	window.$rewardsDetailsModel.modal();
-}
 
 function __loyalty__buildErrorMessageForPoints(result, userPoints){
-	
-	//display the notification
-	var message = "You don't seem to have the sufficient reward points to proceed with the purchase. Please check your reward points balance.";
+	var message = "<p>You don't seem to have the sufficient reward points to proceed with the purchase. Please check your reward points balance.</p>";
 	message +=  "<p><strong>Current balance: "+userPoints+"</p>";
 	message +=  "<p><strong>Points required: " + result.points+"</p>";
-	window.$rewardsDetailsModel.find(".notification").html(message);
-	window.$rewardsDetailsModel.find(".notification").show();
-
-	//if rewardsDetailsModel is not active, we need to display that
-	if(!__loyalty__isModalActive()){
-		__loyalty__displayModal(result);
-	}
+	window.$errorModal.find(".first").html(message);
+	window.$rewardDetailsModal.hide();
+	window.$errorModal.show();
+	window.$rewardDeatilsOrErrorModal.modal();
 }
 
 function __loyalty__buildSuccessMessageForPoints(result, userPoints){
-	
-	//display the notification
-	var message = "You have sufficient reward points to proceed with the purchase. Please confirm your purchase.";
-	message +=  "<strong>Current balance: "+userPoints+"</p>";
-	message +=  "<strong>Points required: " + result.points+"</p>";
-	window.$rewardsDetailsModel.find(".notification").html(message);
-	window.$rewardsDetailsModel.find(".notification").show();
-
-	//if rewardsDetailsModel is not active, we need to display that
-	if(!__loyalty__isModalActive()){
-		__loyalty__displayModal(result);
-	}
+	var message = "<p>You have sufficient reward points to proceed with the purchase. Please confirm your purchase.</p>";
+	message +=  "<p><strong>Current balance: "+userPoints+"</p>";
+	message +=  "<p><strong>Points required: " + result.points+"</p>";
+	window.$rewardDetailsModal.find(".notification").html(message);
+	window.$rewardDetailsModal.find(".notification").show();
+	window.$errorModal.hide();
+	window.$rewardDetailsModal.find(".first").html(result.details);
+	window.$rewardDetailsModal.find(".second").attr("src", "/assets/rewards/"+ result.image_name);
+	window.$rewardDetailsModal.find(".third").html("Reward points: " + result.points);
+	window.$rewardDetailsModal.find(".fourth").html(result.description);
+	//window.$rewardDetailsModal.find(".fifth").attr("reward", JSON.stringify(result));
+	window.$rewardDetailsModal.find(".fifth").text("Qty 1 - Confirm");	
+	window.$rewardDetailsModal.find(".fifth").click(function(){__loyalty__confirmPurchase(result.id)});	
+	window.$rewardDetailsModal.show();
+	window.$rewardDeatilsOrErrorModal.modal();
 }
 
-function __loyalty__isModalActive(){
-	return window.$rewardsDetailsModel.find(".status").val() == "shown";
+function __loyalty__buildSuccessMessageForConfirmation(){
+	var message = "It seems that either you have not logged in or your session has expired. Please login to confirm your purchase.";
+	window.$errorModal.find(".first").html(message);
+	window.$rewardDetailsModal.hide();
+	window.$errorModal.show();
+	window.$rewardDeatilsOrErrorModal.modal();
 }
 
+function __loyalty__buildErrorMessageForSignin(){
+	var message = "It seems that either you have not logged in or your session has expired. Please login to confirm your purchase.";
+	window.$errorModal.find(".first").html(message);
+	window.$rewardDetailsModal.hide();
+	window.$errorModal.show();
+	window.$rewardDeatilsOrErrorModal.modal();
+}
 
+function __loyalty__buildErrorMessageForUnknownError(error){
+	window.$errorModal.find(".first").html(error);
+	window.$rewardDetailsModal.hide();
+	window.$errorModal.show();
+	window.$rewardDeatilsOrErrorModal.modal();
+}
