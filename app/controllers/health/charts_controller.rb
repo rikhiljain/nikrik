@@ -2,7 +2,12 @@ class Health::ChartsController < ApplicationController
   # GET /health_charts
   # GET /health_charts.json
   def index
-    @health_charts = Health::Chart.all
+     company_id = params[:company_id]
+    if company_id.nil?
+      company_id = '1'
+    end
+
+    @health_charts = Health::Chart.find_by_company(company_id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -80,4 +85,9 @@ class Health::ChartsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def company_data
+  
+  end
+
 end

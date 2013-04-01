@@ -11,4 +11,8 @@ class Travel::Chart < ActiveRecord::Base
     where("coverage = ? AND age_start <= ? and age_end >= ? and max_trip_duration = ? and policy_for = 'I' and trip_type = 'M' ", input.travel_cover, input.age, input.age, input.max_trip_duration ).order("company_id")
   end
   
+  def self.find_by_company(company_id)
+    where("company_id = ?", company_id)
+  end
+
 end

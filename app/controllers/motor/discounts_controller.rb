@@ -2,7 +2,12 @@ class Motor::DiscountsController < ApplicationController
   # GET /motor_discounts
   # GET /motor_discounts.json
   def index
-    @motor_discounts = Motor::Discount.all
+    company_id = params[:company_id]
+    if company_id.nil?
+      company_id = '1'
+    end
+
+    @motor_discounts = Motor::Discount.find_by_company(company_id)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -3,9 +3,12 @@
 
   <div class="form-inputs">
     <%= f.input :company_id %>
+    <%= f.input :plan , :required => true%>
     <%= f.input :coverage , :required => true%>
     <%= f.input :age_start, :required => true %>
     <%= f.input :age_end , :required => true %>
+    <%= f.input :adults , :required => true %>
+    <%= f.input :childs , :required => true %>
     <%= f.input :premium, :required => true %>
   </div>
 

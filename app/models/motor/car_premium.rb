@@ -34,7 +34,7 @@ class Motor::CarPremium < Motor::Premium
       motor_quote.company_id = company.id
       motor_quote.company_name = company.name
 
-      motor_discount = Motor::Discount.get_discount(@idv_chart.id, company.id,@input.rto_id)
+      motor_discount = Motor::Discount.get_discount(@idv_chart.id, company.id,@input.rto_id, @input.register_date.year)
 
       discount = (base_od * ((motor_discount.nil?)? 0: motor_discount.amount) )/100
       Rails.logger.info "Discount= #{discount}"

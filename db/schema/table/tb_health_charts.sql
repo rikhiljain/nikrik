@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS `health_charts` (
   `coverage` int(11) DEFAULT NULL,
   `age_start` smallint(3) DEFAULT NULL,
   `age_end` smallint(3) DEFAULT NULL,
+  `adults` smallint(2) DEFAULT NULL,
+  `childs` smallint(2) DEFAULT NULL,
   `premium` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,

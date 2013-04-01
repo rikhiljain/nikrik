@@ -1,5 +1,29 @@
 <h2>Listing Travel Charts</h2>
 
+
+<div>
+<form method="get" action="/travel/charts" class="form-horizontal" >
+  <select type="text" name="company_id" >
+   <option value="1" >ICICI</option>
+   <option value="2" >BAJAJ</option>
+   <option value="3" >TATA</option>
+   <option value="4" >RELIANCE</option>
+   <option value="5" >Apollo Munich</option>
+   <option value="6" >Max Bupa</option>
+   <option value="7" >Religare</option>
+   <option value="8" >HDFC</option>
+   <option value="9" >Bharti Axa</option>
+   <option value="10" >IFFCO Tokio</option>
+   <option value="11" >L&T</option>
+   <option value="12" >National</option>
+   <option value="13" >United India</option>
+  </select>
+ <input type="submit" name="search" value="Search" />
+</form>
+</div>
+
+<p><%= link_to 'Add Travel Record', new_travel_chart_path, :class => "btn" %></p>
+
 <table class="table table-bordered table-striped" >
   <tr>
     <th>Company</th>
@@ -42,4 +66,4 @@
 
 <br />
 
-<%= link_to 'New Travel chart', new_travel_chart_path %>
+<%= link_to 'Add Travel Record', new_travel_chart_path, :class => "btn"  %>

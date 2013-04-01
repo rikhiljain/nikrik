@@ -2,7 +2,12 @@ class Travel::ChartsController < ApplicationController
   # GET /travel_charts
   # GET /travel_charts.json
   def index
-    @travel_charts = Travel::Chart.all
+    company_id = params[:company_id]
+    if company_id.nil?
+      company_id = '1'
+    end
+
+    @travel_charts = Travel::Chart.find_by_company(company_id)
 
     respond_to do |format|
       format.html # index.html.erb
