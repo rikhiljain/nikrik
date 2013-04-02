@@ -25,9 +25,25 @@
   <tr>
     <th>Motor Details</th>
     <th>Company</th>
-    <th>Year Of Manufacture</th>
-    <th>Discount(%)</th>
     <th>RTO</th>
+    <th>Dis(%)<br>
+        New Car 
+    </th>
+    <th>Dis(%)<br>
+        1 Year Old 
+    </th>
+    <th>Dis(%)<br>
+        2 Year Old 
+    </th>
+    <th>Dis(%)<br>
+        3 Year Old
+    </th>
+    <th>Dis(%)<br>
+        4 Year Old
+    </th>
+    <th>Dis(%)<br>
+        5 Year Old
+    </th>
     <th></th>
     <th></th>
   </tr>
@@ -36,18 +52,42 @@
   <tr>
     <td><%= motor_discount.idv_chart.maker + " - " + motor_discount.idv_chart.model + " - "+ motor_discount.idv_chart.subtype %></td>
     <td><%= motor_discount.company.name %></td>
-    <td><%= motor_discount.year %></td>
-    <td><%= motor_discount.amount %> 
-      <% unless motor_discount.amount >= 0 %>
+    <td> <% unless  motor_discount.rto.nil?%>
+          <%= motor_discount.rto.city %>
+       <%end%>
+    </td>
+    <td><%= motor_discount.dis_year_0 %> 
+      <% unless motor_discount.dis_year_0 >= 0 %>
         (Loading)
       <% end%>
     </td>
-    <td> <% unless  motor_discount.rto.nil?%>
-          <%= motor_discount.rto.city + " (" + motor_discount.rto.state + ")" %>
-         <%end%>
+    <td><%= motor_discount.dis_year_1 %> 
+      <% unless motor_discount.dis_year_1 >= 0 %>
+        (Loading)
+      <% end%>
     </td>
+     <td><%= motor_discount.dis_year_2 %> 
+      <% unless motor_discount.dis_year_2 >= 0 %>
+        (Loading)
+      <% end%>
+    </td>
+     <td><%= motor_discount.dis_year_3 %> 
+      <% unless motor_discount.dis_year_3 >= 0 %>
+        (Loading)
+      <% end%>
+    </td>
+    <td><%= motor_discount.dis_year_4 %> 
+      <% unless motor_discount.dis_year_4 >= 0 %>
+        (Loading)
+      <% end%>
+    </td>
+    <td><%= motor_discount.dis_year_5 %> 
+      <% unless motor_discount.dis_year_5 >= 0 %>
+        (Loading)
+      <% end%>
+    </td>
+    <td><%= link_to 'Show', motor_discount %></td>
     <td><%= link_to 'Edit', edit_motor_discount_path(motor_discount) %></td>
-    <td><%= link_to 'Destroy', motor_discount, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
