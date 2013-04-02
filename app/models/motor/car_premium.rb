@@ -34,9 +34,9 @@ class Motor::CarPremium < Motor::Premium
       motor_quote.company_id = company.id
       motor_quote.company_name = company.name
 
-      motor_discount = Motor::Discount.get_discount(@idv_chart.id, company.id,@input.rto_id, @input.register_date.year)
+      motor_discount = Motor::Discount.get_discount(@idv_chart.id, company.id,@input.rto_id)
 
-      discount = (base_od * ((motor_discount.nil?)? 0: motor_discount.amount) )/100
+      discount = (base_od * m_get_discount( motor_discount) )/100
       Rails.logger.info "Discount= #{discount}"
 
       final_premium = m_total_premium(motor_quote, base_od, discount)
@@ -49,6 +49,39 @@ class Motor::CarPremium < Motor::Premium
     end
 
     return results
+
+  end
+
+  def m_get_discount( motor_discount)
+
+    if motor_discount.nil?
+      return 0
+    end
+    age_in_years = m_motor_age_in_years()
+    Rails.logger.info "age_in_years= #{age_in_years}"
+
+    case age_in_years
+     when 0
+        motor_discount.dis_year_0
+     when 1
+        motor_discount.dis_year_1
+     when 2
+        motor_discount.dis_year_2
+     when 3
+        motor_discount.dis_year_3
+     when 4
+        motor_discount.dis_year_4
+     when 5
+        motor_discount.dis_year_5
+     when 6
+        motor_discount.dis_year_6
+     when 7
+        motor_discount.dis_year_7
+     when 8
+        motor_discount.dis_year_8
+     else
+        motor_discount.dis_year_8
+   end
 
   end
 
@@ -99,8 +132,17 @@ class Motor::CarPremium < Motor::Premium
     return motor_quote.final_premium
   end
 
+  def m_motor_age_in_years
+    now = Date.today
+    age_in_years =  now.year - @input.register_date.year
+     #Need to check boundary condition
+    if  now.year.month < @input.register_date.month
+       age_in_years -= 1
+    end
+    return age_in_years
+  end
 
- def m_base_premium(idv_value)
+  def m_base_premium(idv_value)
 
    now = Date.today
    age_in_years =  now.year - @input.register_date.year

@@ -4,9 +4,16 @@
   <div class="form-inputs">
     <%= f.association :idv_chart, label: 'Motor Details', :collection => Motor::IdvChart.select(" id, concat(maker , ' - ', model, ' - ', subtype) as label" ), :label_method => :label, :value_method => :id, :required => true , :autofocus => true %>
     <%= f.association :company, :label_method => :name, :value_method => :id,  :prompt => "Select Company", :required => true %>
-    <%= f.input :year, label:'Year Of Manufacture', :required => true %>
-    <%= f.input :amount, label:'Discount(%)', hint: 'Use (-) sign for Loading', :required => true %>
     <%= f.association :rto ,label:'RTO', :collection => Motor::Rto.select(" id, concat(city , ' - ', state) as label" ), :label_method => :label, :value_method => :id,  :prompt => "Select RTO" %>
+    <%= f.input :dis_year_0, label:'Discount(%) for New Motor',hint: 'Use (-) sign for Loading' %>
+    <%= f.input :dis_year_1, label:'Discount(%) for 1 Year Old Motor',hint: 'Use (-) sign for Loading' %>
+    <%= f.input :dis_year_2, label:'Discount(%) for 2 Year Old Motor',hint: 'Use (-) sign for Loading' %>
+    <%= f.input :dis_year_3, label:'Discount(%) for 3 Year Old Motor',hint: 'Use (-) sign for Loading' %>
+    <%= f.input :dis_year_4, label:'Discount(%) for 4 Year Old Motor',hint: 'Use (-) sign for Loading' %>
+    <%= f.input :dis_year_5, label:'Discount(%) for 5 Year Old Motor',hint: 'Use (-) sign for Loading' %>
+    <%= f.input :dis_year_6, label:'Discount(%) for 6 Year Old Motor',hint: 'Use (-) sign for Loading' %>
+    <%= f.input :dis_year_7, label:'Discount(%) for 7 Year Old Motor',hint: 'Use (-) sign for Loading' %>
+    <%= f.input :dis_year_8, label:'Discount(%) for 8 Year Old Motor',hint: 'Use (-) sign for Loading' %>
   </div>
 
   <div class="form-actions">
