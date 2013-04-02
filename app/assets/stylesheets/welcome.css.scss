@@ -158,6 +158,27 @@
   }
 }
 
+#policy_compare_model {
+  .checkbox{
+    padding-left: 0px;
+  }
+  input[type=checkbox]{
+    opacity: 0;
+  }
+  input[type=checkbox] + label {
+    background: url("/assets/html/checkbox/off_24x24.png") 0 0px no-repeat;
+    padding: 0 0 0 2 * $baseFontSize + 3;
+    font-size: 1.25 * $baseFontSize;
+    line-height: 2 * $baseFontSize;
+   }
+    input[type=checkbox]:checked + label {
+      background: url("/assets/html/checkbox/on_24x24.png") 0 0px no-repeat;
+      padding: 0 0 0 2 * $baseFontSize + 3;
+      font-size: 1.25 * $baseFontSize;
+      line-height: 2 * $baseFontSize;
+ }
+}
+
 //Class selectors
 //*************************************************************
 .is_border{
@@ -432,3 +453,8 @@ legend{
     /* prevent horizontal scrollbar */
     overflow-x: hidden;
   }
+
+
+
+
+
