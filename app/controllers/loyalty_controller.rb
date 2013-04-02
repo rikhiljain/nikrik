@@ -70,7 +70,7 @@ class LoyaltyController < ApplicationController
       point = Loyalty::Point.new
       point.value =  points
       point.user_id =  @referral.user_id
-      point.status = 'EARN'
+      point.status = 'EARNED'
       point.ref_type =  'REFERRAL'
       point.exp_dt = Time.now + 1.year
       point.ref_id = @referral.id
@@ -127,7 +127,6 @@ class LoyaltyController < ApplicationController
   end
 
   def confirm
-    #debugger
     result = Hash.new
     reward = Reward.find(params[:id])
       if (user_signed_in? && (current_user.has_role? :user) )
@@ -139,8 +138,8 @@ class LoyaltyController < ApplicationController
           result[:resultDesc] = "{'result': {'points': "+reward.points+"}, 'userPoints': "+total_points+"}"
         else
           point = Loyalty::Point.new
-          point.points =  reward.points
-          point.user_id =  user_id
+          point.value =  reward.points
+          point.user_id = current_user.id
           point.status = 'USED'
           point.ref_type =  'REWARD'
           point.ref_id = reward.id

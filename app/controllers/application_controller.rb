@@ -15,4 +15,11 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+#Rails raises an InvalidAuthenticityToken when the CSRF token doesn't match. 
+  def handle_unverified_request
+    super
+    cookies.delete 'remember_user_token' # Use by Device gem to store session token
+    sign_out :user
+  end
+
 end

@@ -98,7 +98,8 @@ window.allowedAccordionIndexes;
 (function($){
 	$(document).ready(function(){
 
-		//cluster.init('brandText');
+		// Make sure that every Ajax request sends the CSRF token
+		$.ajaxPrefilter(function(options, originalOptions, xhr) { CSRFProtection(xhr); });
 
 		if(window.content == "devise"){
 			//this will happen only when the devise forms are being displayed.
@@ -230,3 +231,11 @@ function affixAll(){
 		});
 	});		
 }			
+
+
+// Make sure that every Ajax request sends the CSRF token
+function CSRFProtection(xhr) {
+ var token = $('meta[name="csrf-token"]').attr('content');
+ if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+}
+

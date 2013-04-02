@@ -81,7 +81,7 @@ function __loyalty__populatePoints(address){
 function __loyalty__populateRewards(address){
 
 	var itemsInRow = 2;
-	var formHeading = "Insurance Shopee Rewards Program";
+	var formHeading = "Rewards Program";
 	if(window.user != null){
 		formHeading = "My Rewards";
 	}
@@ -221,7 +221,7 @@ function __loyalty__buildSuccessMessageForPoints(result, userPoints){
 }
 
 function __loyalty__buildSuccessMessageForConfirmation(){
-	var message = "It seems that either you have not logged in or your session has expired. Please login to confirm your purchase.";
+	var message = "Your Purchase has been comfirmed.";
 	window.$errorModal.find(".first").html(message);
 	window.$rewardDetailsModal.hide();
 	window.$errorModal.show();
