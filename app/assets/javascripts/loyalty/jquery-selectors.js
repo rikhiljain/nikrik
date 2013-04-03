@@ -7,4 +7,5 @@ function __loyalty__cacheAllJquerySelector(){
 	window.$rewardDeatilsOrErrorModal = $("[id=rewardDeatilsOrErrorModal]");
 	window.$rewardDetailsModal = $("[id=rewardDeatilsOrErrorModal] [id=rewardDetailsModal]");
 	window.$errorModal = $("[id=rewardDeatilsOrErrorModal] [id=errorModal]");
+	window.$successModal = $("[id=rewardDeatilsOrErrorModal] [id=successModal]");
 }

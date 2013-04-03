@@ -179,6 +179,7 @@ function __loyalty__confirmPurchase(id){
 
 function __loyalty__rewardsDescription(result){	
 	window.$errorModal.hide();
+	window.$successModal.hide();
 	window.$rewardDetailsModal.find(".notification").hide();
 	window.$rewardDetailsModal.find(".first").html(result.details);
 	window.$rewardDetailsModal.find(".second").attr("src", "/assets/rewards/"+ result.image_name);
@@ -186,6 +187,7 @@ function __loyalty__rewardsDescription(result){
 	window.$rewardDetailsModal.find(".fourth").html(result.description);
 	//window.$rewardDetailsModal.find(".fifth").attr("reward", JSON.stringify(result));
 	window.$rewardDetailsModal.find(".fifth").text("Qty 1 - Select");	
+	window.$rewardDetailsModal.find(".fifth").unbind('click');
 	window.$rewardDetailsModal.find(".fifth").click(function(){__loyalty__confirmUserPoints(result)});
 	window.$rewardDetailsModal.show();
 	window.$rewardDeatilsOrErrorModal.modal();
@@ -198,6 +200,7 @@ function __loyalty__buildErrorMessageForPoints(result, userPoints){
 	message +=  "<p><strong>Points required: " + result.points+"</p>";
 	window.$errorModal.find(".first").html(message);
 	window.$rewardDetailsModal.hide();
+	window.$successModal.hide();
 	window.$errorModal.show();
 	window.$rewardDeatilsOrErrorModal.modal();
 }
@@ -208,23 +211,27 @@ function __loyalty__buildSuccessMessageForPoints(result, userPoints){
 	message +=  "<p><strong>Points required: " + result.points+"</p>";
 	window.$rewardDetailsModal.find(".notification").html(message);
 	window.$rewardDetailsModal.find(".notification").show();
-	window.$errorModal.hide();
+
 	window.$rewardDetailsModal.find(".first").html(result.details);
 	window.$rewardDetailsModal.find(".second").attr("src", "/assets/rewards/"+ result.image_name);
 	window.$rewardDetailsModal.find(".third").html("Reward points: " + result.points);
 	window.$rewardDetailsModal.find(".fourth").html(result.description);
 	//window.$rewardDetailsModal.find(".fifth").attr("reward", JSON.stringify(result));
 	window.$rewardDetailsModal.find(".fifth").text("Qty 1 - Confirm");	
+	window.$rewardDetailsModal.find(".fifth").unbind('click');
 	window.$rewardDetailsModal.find(".fifth").click(function(){__loyalty__confirmPurchase(result.id)});	
+	window.$errorModal.hide();
+	window.$successModal.hide();
 	window.$rewardDetailsModal.show();
 	window.$rewardDeatilsOrErrorModal.modal();
 }
 
 function __loyalty__buildSuccessMessageForConfirmation(){
 	var message = "Your Purchase has been comfirmed.";
-	window.$errorModal.find(".first").html(message);
+	window.$successModal.find(".first").html(message);
 	window.$rewardDetailsModal.hide();
-	window.$errorModal.show();
+	window.$errorModal.hide();
+	window.$successModal.show();
 	window.$rewardDeatilsOrErrorModal.modal();
 }
 
@@ -232,6 +239,7 @@ function __loyalty__buildErrorMessageForSignin(){
 	var message = "It seems that either you have not logged in or your session has expired. Please login to confirm your purchase.";
 	window.$errorModal.find(".first").html(message);
 	window.$rewardDetailsModal.hide();
+	window.$successModal.hide();
 	window.$errorModal.show();
 	window.$rewardDeatilsOrErrorModal.modal();
 }
@@ -239,6 +247,7 @@ function __loyalty__buildErrorMessageForSignin(){
 function __loyalty__buildErrorMessageForUnknownError(error){
 	window.$errorModal.find(".first").html(error);
 	window.$rewardDetailsModal.hide();
+	window.$successModal.hide();
 	window.$errorModal.show();
 	window.$rewardDeatilsOrErrorModal.modal();
 }
