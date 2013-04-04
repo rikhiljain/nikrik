@@ -11,11 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130317112358) do
+ActiveRecord::Schema.define(:version => 20130404041519) do
 
   create_table "companies", :force => true do |t|
     t.string   "name",       :limit => 20
     t.datetime "created_at",               :null => false
+    t.boolean  "is_health"
+    t.boolean  "is_motor"
+    t.boolean  "is_travel"
+  end
+
+  create_table "complaints", :force => true do |t|
+    t.string   "product",    :limit => 10,   :null => false
+    t.string   "subject",    :limit => 100,  :null => false
+    t.string   "message",    :limit => 2000, :null => false
+    t.string   "email",      :limit => 50,   :null => false
+    t.string   "mobile",     :limit => 11,   :null => false
+    t.string   "name",       :limit => 30,   :null => false
+    t.datetime "created_at",                 :null => false
+  end
+
+  create_table "contact_us", :force => true do |t|
+    t.string   "product",    :limit => 10
+    t.string   "name",       :limit => 100
+    t.string   "address",    :limit => 250
+    t.string   "message",    :limit => 1000
+    t.string   "email",      :limit => 50
+    t.string   "mobile",     :limit => 11
+    t.datetime "created_at",                 :null => false
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -35,13 +58,16 @@ ActiveRecord::Schema.define(:version => 20130317112358) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "health_charts", :force => true do |t|
-    t.integer  "company_id", :null => false
+    t.integer  "company_id",               :null => false
+    t.string   "plan",       :limit => 20
     t.integer  "coverage"
     t.integer  "age_start"
     t.integer  "age_end"
+    t.integer  "adults",     :limit => 2
+    t.integer  "childs",     :limit => 2
     t.integer  "premium"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "health_searches", :force => true do |t|
@@ -56,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20130317112358) do
     t.integer  "mobile_number"
     t.string   "address",       :limit => 250
     t.string   "company_name",  :limit => 20
+    t.string   "plan",          :limit => 20
     t.integer  "final_premium"
     t.datetime "created_at",                   :null => false
   end
@@ -84,10 +111,18 @@ ActiveRecord::Schema.define(:version => 20130317112358) do
   create_table "motor_discounts", :force => true do |t|
     t.integer  "idv_chart_id"
     t.integer  "company_id",   :limit => 2
-    t.integer  "rto_id"
-    t.float    "amount"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.float    "dis_year_0",                :default => 0.0, :null => false
+    t.float    "dis_year_1",                :default => 0.0, :null => false
+    t.float    "dis_year_2",                :default => 0.0, :null => false
+    t.float    "dis_year_3",                :default => 0.0, :null => false
+    t.float    "dis_year_4",                :default => 0.0, :null => false
+    t.float    "dis_year_5",                :default => 0.0, :null => false
+    t.float    "dis_year_6",                :default => 0.0, :null => false
+    t.float    "dis_year_7",                :default => 0.0, :null => false
+    t.float    "dis_year_8",                :default => 0.0, :null => false
+    t.integer  "rto_id",       :limit => 3, :default => 0,   :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "motor_searches", :force => true do |t|
@@ -117,6 +152,17 @@ ActiveRecord::Schema.define(:version => 20130317112358) do
     t.datetime "created_at",                           :null => false
   end
 
+  create_table "orders", :force => true do |t|
+    t.integer  "reward_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "mobile"
+    t.string   "address"
+    t.string   "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "points", :force => true do |t|
     t.integer  "user_id"
     t.string   "ref_type",   :limit => 10, :null => false
@@ -132,8 +178,8 @@ ActiveRecord::Schema.define(:version => 20130317112358) do
     t.string   "policy_type", :limit => 20, :null => false
     t.integer  "user_id"
     t.integer  "company_id",  :limit => 2
-    t.date     "start_date"
-    t.date     "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.integer  "premium"
     t.integer  "discount"
     t.string   "policy_path"
@@ -231,6 +277,7 @@ ActiveRecord::Schema.define(:version => 20130317112358) do
     t.integer  "mobile_number"
     t.string   "address"
     t.string   "company_name",      :limit => 20
+    t.string   "plan",              :limit => 20
     t.integer  "final_premium"
     t.datetime "created_at",                                     :null => false
   end

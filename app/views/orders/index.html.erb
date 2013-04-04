@@ -1,0 +1,29 @@
+<h2>Customer Orders</h2>
+<p><%= link_to 'Add Order', new_order_path, :class => "btn"  %></p>
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Reward</th>
+    <th>Cutomer Id</th>
+    <th>Cutomer Name</th>
+    <th>Mobile</th>
+    <th>Customer Address</th>
+    <th>Order Status</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @orders.each do |order| %>
+  <tr>
+    <td><%= order.reward.name %></td>
+    <td><%= order.user_id %></td>
+    <td><%= order.name %></td>
+    <td ><%= order.mobile %></td>
+    <td style="white-space: pre-wrap;"><%= order.address %></td>
+    <td><%= order.status %></td>
+    <td><%= link_to 'Show', order %></td>
+    <td><%= link_to 'Edit', edit_order_path(order) %></td>
+  </tr>
+<% end %>
+</table>
+<p><%= link_to 'Add Order', new_order_path, :class => "btn"  %></p>
+<br />

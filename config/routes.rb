@@ -74,7 +74,8 @@ Nikrik::Application.routes.draw do
   resources :policies
   resources :rewards 
   resources :admin_users
- resources :policy_attributes
+  resources :policy_attributes
+  resources :orders
  
   match "/delayed_job" => DelayedJobWeb, :anchor => false
 
