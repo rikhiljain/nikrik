@@ -458,7 +458,7 @@ a:link, a:visited, a:active {
         padding: $baseFontSize / 2;
         margin-bottom: $baseLineHeight;
         border-radius: none;
-        @include gradient-radial(lighten($isHeaderBg,20%), $isHeaderBg);
+        @include gradient-radial(lighten($isHeaderBg,10%), $isHeaderBg);
       }
 
       .is_static_content_header2.is_alert-heading{
