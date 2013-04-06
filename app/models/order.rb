@@ -7,4 +7,8 @@ class Order < ActiveRecord::Base
   	validates :address, :mobile, :name, :presence => true
   	validates :mobile, :numericality => true
 
+  	def self.find_by_user( user_id)
+  		where( "user_id = ?" , user_id).order( " created_at desc" )
+  	end
+
 end

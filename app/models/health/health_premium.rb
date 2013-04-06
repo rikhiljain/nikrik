@@ -6,12 +6,36 @@ def initialize( search)
 
   def  calculate_premium
   	results = Array.new
-    if(@input.policy_for == 2)
-      health_charts = Health::Chart.find_by_coverage_age(@input.health_cover, @input.father_age)
-    else
-      health_charts = Health::Chart.find_by_coverage_age(@input.health_cover, @input.adult_age)
-    end
-  
+   
+    case @input.policy_for
+     when 1 #self
+        adults =1
+        childs =0
+        age =@input.adult_age
+     when 2 #Parents
+        adults =2
+        childs =0
+        if ( @input.father_age > @input.mother_age)
+          age =@input.father_age
+        else
+          age =@input.mother_age
+        end
+     when 3 #Self Plus Spouse Plus Childrens
+         adults =2
+         childs = @input.no_of_childs
+         age =@input.adult_age
+     when 4 #Self Plus Childrens
+         adults =1
+         childs = @input.no_of_childs
+         age =@input.adult_age
+     else
+        adults =1
+        childs =0
+        age = -1
+   end
+
+    health_charts = Health::Chart.find_by_coverage_age(@input.health_cover, age, adults, childs)
+   
     company_hash = {}
     Company.all.each do |company|
       company_hash[company.id] = company.name

@@ -80,4 +80,19 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def user_orders
+    user_id = 0
+    if (user_signed_in? && (current_user.has_role? :user) )
+      user_id = current_user.id
+    end
+    
+    @orders = Order.find_by_user(user_id)
+    
+    respond_to do |format|
+      format.json { render json: @orders }
+    end
+
+  end
+
 end

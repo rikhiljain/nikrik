@@ -5,6 +5,6 @@
 	  <li><%= link_to '<i class="icon-group"></i> My Referrals'.html_safe, {:controller => "/loyalty", :action => "user_referrals", :id => current_user.id }, :id => "myReferrals" %></li>
 	  <li><%= link_to '<i class="icon-magic"></i> My Points'.html_safe, {:controller => "/loyalty", :action => "points", :id => current_user.id }, :id => "myPoints" %></li>
 	  <li><%= link_to '<i class="icon-gift"></i> My Rewards'.html_safe, {:controller => "/loyalty", :action => "rewards" }, :id => "myRewards" %></li>
-
+	  <li><%= link_to '<i class="icon-gift"></i> My Orders'.html_safe, {:controller => "/orders", :action => "user_orders" }, :id => "myOrders" %></li>
 	</ul>
 </div>
