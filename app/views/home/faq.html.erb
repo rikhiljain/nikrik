@@ -1,6 +1,14 @@
-<div id="deviseDiv" class="is_right-hand-div">
- FAQ
+<div id="deviseDiv" class="is_main_content_div">
+<div class="alert alert-block is_alert-heading is_main_content_header">
+   <strong>Privacy Policy</strong>
 </div>
+<div class="is_main_content_body">
+	<p>Insuranceshopee.com - A Rahini Insurance Advisors Pvt. Ltd., - website, is dedicated to fair information practices. We respect the privacy and information security of our clients, as your privacy is important to us, and we go to great lengths to protect it. In order to provide you a personalized experience, we collect some information during your visits to understand your usage and requirements with regards to our other users. We will not disclose it to any person or organization outside Rahini Insurance Advisors  Pvt. Ltd., except as described in this Privacy Policy. This policy applies only to Insuranceshopee.com</p>
+</div>
+</div>
+<% content_for :insuranceContent do %>
+  <%= render :partial => "welcome/index", :locals => { :display => "none" } %>
+<% end %>
 <% content_for :insuranceContent do %>
   <%= render :partial => "welcome/index", :locals => { :display => "none" } %>
 <% end %>
