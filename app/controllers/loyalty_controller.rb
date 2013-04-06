@@ -1,11 +1,20 @@
 class LoyaltyController < ApplicationController
   
   def points
-    @points = Loyalty::Point.find_by_user(params[:id])
+    result = Hash.new 
+    user_id = 0
+    if (user_signed_in? && (current_user.has_role? :user) )
+      user_id = current_user.id
+    end
+
+    @points = Loyalty::Point.find_by_user(user_id)
     @total_points = m_total_points(@points)
+    result[:total_points] = @total_points
+    result[:points] = @points
+
     respond_to do |format|
       format.html { render :template => '/loyalty/points'}
-      format.json { render json: @points }
+      format.json { render json: result, :except=>  [:id, :user_id]}
     end
 
   end
@@ -90,11 +99,15 @@ class LoyaltyController < ApplicationController
 
 
   def user_referrals
-  	@referrals = Loyalty::Referral.find_by_user(params[:id])
+    user_id = 0
+    if (user_signed_in? && (current_user.has_role? :user) )
+      user_id = current_user.id
+    end
+  	@referrals = Loyalty::Referral.find_by_user(user_id)
   	
   	respond_to do |format|
       format.html { render :template => '/loyalty/referrals'}
-      format.json { render json: @referrals }
+      format.json { render json: @referrals, :except=>  [:id, :user_id] }
     end 
 
   end

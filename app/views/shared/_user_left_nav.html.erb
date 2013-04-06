@@ -1,10 +1,10 @@
 <div style="margin-bottom:20px;" id="userMenuDiv">
 	<ul class="nav nav-list bs-docs-sidenav">
 	  <li><%= link_to '<i class="icon-edit"></i> Edit Profile'.html_safe, edit_user_registration_path, :id => "editProfile"  %></li>
-	  <li><%= link_to '<i class="icon-book"></i> My Policies'.html_safe, {:controller => "/policies", :action => "policies", :id => current_user.id }, :id => "myPolicies" %></li>
-	  <li><%= link_to '<i class="icon-group"></i> My Referrals'.html_safe, {:controller => "/loyalty", :action => "user_referrals", :id => current_user.id }, :id => "myReferrals" %></li>
-	  <li><%= link_to '<i class="icon-magic"></i> My Points'.html_safe, {:controller => "/loyalty", :action => "points", :id => current_user.id }, :id => "myPoints" %></li>
-	  <li><%= link_to '<i class="icon-gift"></i> My Rewards'.html_safe, {:controller => "/loyalty", :action => "rewards" }, :id => "myRewards" %></li>
-	  <li><%= link_to '<i class="icon-gift"></i> My Orders'.html_safe, {:controller => "/orders", :action => "user_orders" }, :id => "myOrders" %></li>
+	  <li><a id="myPolicies" href="#"><i class="icon-book"></i>My Policies</a></li>
+	  <li><a id="myReferrals" href="#"><i class="icon-group"></i>My Referrals</a></li>
+	  <li><a id="myPoints" href="#"><i class="icon-magic"></i>My Points</a></li>
+	  <li><a id="myRewards" href="#"><i class="icon-gift"></i>My Rewards</a></li>
+	  <li><a id="myOrders" href="#"><i class="icon-gift"></i>My Orders</a></li>
 	</ul>
 </div>

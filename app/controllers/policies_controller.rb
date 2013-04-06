@@ -102,8 +102,12 @@ class PoliciesController < ApplicationController
   end
 
   def download
-    policy = Policy.find(params[:id])
+    user_id = 0
+    unless user_signed_in? 
+      user_id = current_user.id
+    end
 
+    policy = Policy.find(params[:id])
     begin
       file_ext = File.extname(policy.policy_path)
 
@@ -139,7 +143,11 @@ class PoliciesController < ApplicationController
   end
 
   def policies
-    @policies = Policy.where("user_id=?", params[:id]).order("start_date DESC")
+    user_id = 0
+    if (user_signed_in? && (current_user.has_role? :user) )
+      user_id = current_user.id
+    end
+    @policies = Policy.where("user_id=?", user_id).order("start_date DESC")
     
     respond_to do |format|
       format.html { render :template => "/policies/user_list" }

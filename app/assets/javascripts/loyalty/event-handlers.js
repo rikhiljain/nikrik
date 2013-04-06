@@ -21,31 +21,37 @@ function __loyalty__myLinksClickHandlers(id, href){
 		window.$userMenuContentDiv.show();
 
 		window.currentSelection = "XXX";
-
-		if(id == "myPolicies"){
-			__loyalty__populatePolicies(href);
-		}else if(id == "myReferrals"){
-			__loyalty__populateReferrals(href);
-		}else if(id == "myPoints"){
-			__loyalty__populatePoints(href);
-		}else if(id == "myRewards"){
-			__loyalty__populateRewards(href);
-		}else if(id == "myOrders"){
-			__loyalty__populateOrders(href);
-		}else if(id == "editProfile"){
-			return true;
+		try
+		{
+			if(id == "myPolicies"){
+				__loyalty__populatePolicies();
+			}else if(id == "myReferrals"){
+				__loyalty__populateReferrals(href);
+			}else if(id == "myPoints"){
+				__loyalty__populatePoints();
+			}else if(id == "myRewards"){
+				__loyalty__populateRewards();
+			}else if(id == "myOrders"){
+				__loyalty__populateOrders(href);
+			}else if(id == "editProfile"){
+				return true;
+			}
+		}
+		catch( err)
+		{
+			alert(err.message);
 		}
 		return false;	
 }
 
-function __loyalty__populateOrders(address){
-	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Ordare Date:created_at","Order Status:status","Shipped Address:address","Reward Id:reward_id"], "My Orders",["id"],
+function __loyalty__populateOrders(){
+	__loyalty__getJsonAndPopulateTable("/orders/user_orders.json", ["Id:id","Ordare Date:created_at","Order Status:status","Shipped Address:address","Reward Id:reward_id"], "My Orders",["id"],
 		function (data) {
 	});		
 }
 
-function __loyalty__populatePolicies(address){
-	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Policy Path:policy_path","Policy Type:policy_type","Company Name:company_name","Policy Id:policy_id", "Premium:premium", "Start Date:start_date", "End Date:end_date"," :download"], "My Policies",["id","policy_path"],
+function __loyalty__populatePolicies(){
+	__loyalty__getJsonAndPopulateTable("/policies/policies.json", ["Id:id","Policy Path:policy_path","Policy Type:policy_type","Company Name:company_name","Policy Id:policy_id", "Premium:premium", "Start Date:start_date", "End Date:end_date"," :download"], "My Policies",["id","policy_path"],
 		function (data) {
 			$("[id=userMenuContentDiv] > [id=userMenuContentDivTable] tbody tr").each(function(index, value){
 				var downloadUrl = "/policies/download/"+$(this).children(":nth-child(1)").text();
@@ -56,7 +62,7 @@ function __loyalty__populatePolicies(address){
 }
 
 function __loyalty__populateReferrals(address, referralId){
-	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Name:ref_name", "Mobile Number:ref_mobile", "Description:ref_desc", "Status:status", "Created At:created_at", "Updated At:updated_at"], "My Referrals",["id"],
+	__loyalty__getJsonAndPopulateTable("/loyalty/user_referrals.json", ["Id:id","Name:ref_name", "Mobile Number:ref_mobile", "Description:ref_desc", "Status:status", "Created At:created_at", "Updated At:updated_at"], "My Referrals",["id"],
 		function (data) {
 			if(referralId == null){
 				//if referaal id is null, we don't need to anything
@@ -71,21 +77,36 @@ function __loyalty__populateReferrals(address, referralId){
 	});
 }
 
-function __loyalty__populatePoints(address){
-	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Reference Type:ref_type", "Reference Id:ref_id", "Value:value", "Status:status", "Created At:created_at", "Expiry Date At:exp_dt"], "My Points",["id"], 
-		function (data) {
-			//This will be the third column as the first it column is hidden
-		$("[id=userMenuContentDiv] > [id=userMenuContentDivTable] tbody tr").each(function(index, value){
-			 var  referralId = $(this).children(":nth-child(3)").text();
-			 if(referralId != ""){
-			 	var user_id = data[0]["user_id"];
-			 	$(this).children(":nth-child(3)").html("<a class=\"is_hand-cursor\" onclick=\"__loyalty__populateReferrals('/loyalty/user_referrals/"+user_id+"',"+referralId+");\">"+referralId+"</a>");
-			 }
-		 });		
-	});
+function __loyalty__populatePoints(){
+	window.$userMenuContentDivAlert[0].innerHTML = "<h3>My Points</h3>";
+	var html = [], h = -1;
+	$.getJSON("/loyalty/points.json",function(data){
+		html[++h] = "<p>Total Available Points = " + data.total_points + "</p>";
+		html[++h] = "<table class='table table-striped'>";
+		html[++h] = "<thead><tr><th style='text-align:center;vertical-align:middle;'>Reference Type</th>";
+		html[++h] = "<th style='text-align:center;vertical-align:middle;'>Points</th>";
+		html[++h] = "<th style='text-align:center;vertical-align:middle;'>Status</th>";
+		html[++h] = "<th style='text-align:center;vertical-align:middle;'>Created On</th>";
+		html[++h] = "</tr></thead><tbody>";
+		for(var result, i = -1; result = data.points[++i];){
+			html[++h] = "<tr><td style='text-align:center;vertical-align:middle;'>";
+			html[++h] = result.ref_type
+			html[++h] = "</td><td style='text-align:center;vertical-align:middle;'>";
+			html[++h] = result.value;
+			html[++h] = "</td><td style='text-align:center;vertical-align:middle;' >";
+			html[++h] = result.status
+			html[++h] = "</td><td style='text-align:center;vertical-align:middle;'>";
+			html[++h] = result.created_at;
+			html[++h] = "</td></tr>";
+		}
+		html[++h] = "</tbody></table>";
+		window.$userMenuContentDivTable.html(html.join(''));
+
+	});		
+
 }
 
-function __loyalty__populateRewards(address){
+function __loyalty__populateRewards(){
 
 	var itemsInRow = 2;
 	var formHeading = "Rewards Program";
@@ -95,7 +116,7 @@ function __loyalty__populateRewards(address){
 	window.$userMenuContentDivAlert[0].innerHTML = "<h3>"+formHeading+"</h3>";
 	var html = [], h = -1;
 	html[++h] = "<table class='table is_rewards'><tbody><tr>";
-	$.getJSON(address+".json",function(data){
+	$.getJSON("/loyalty/rewards.json",function(data){
 		rewardResults = data;
 		for(var result, i = -1; result = data[++i];){
 			if(i != 0 && i % itemsInRow == 0){

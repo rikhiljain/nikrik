@@ -31,12 +31,12 @@ Nikrik::Application.routes.draw do
   post "travel/searches/buy" => "travel/searches#buy"
 
   post "loyalty/referral" => "loyalty#create_referral"
-  get  "loyalty/user_referrals/:id" => "loyalty#user_referrals"
+  get  "loyalty/user_referrals" => "loyalty#user_referrals"
   get  "loyalty/find_referrals" => "loyalty#find_referrals"
   get  "loyalty/referral/:id" => "loyalty#referral"
   put "loyalty/update_referral/:id" => "loyalty#update_referral"
 
-  get "loyalty/points/:id" => "loyalty#points"
+  get "loyalty/points" => "loyalty#points"
   get "loyalty/rewards" => "loyalty#rewards"
   get "loyalty/purchase/:id" => "loyalty#purchase"
   post "loyalty/confirm/" => "loyalty#confirm"
@@ -52,7 +52,7 @@ Nikrik::Application.routes.draw do
   #get "loyalty/activeRewards" => "loyalty#rewards" #user
 
   get "policies/display/:id"  =>    "policies#display"
-  get "policies/policies/:id"  =>    "policies#policies"
+  get "policies/policies"  =>    "policies#policies"
   get "policies/download/:id"  => "policies#download"
 
   get "orders/user_orders"  => "orders#user_orders"
