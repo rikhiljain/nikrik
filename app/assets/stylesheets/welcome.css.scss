@@ -251,6 +251,7 @@ a:link, a:visited, a:active {
   background-color: $isHeaderBg;
   //border-color: #4284D3;
   color: $white;
+  @include gradient-radial(lighten($isHeaderBg,20%), $isHeaderBg);
 }
 
 .is_center.navbar .nav,
@@ -440,24 +441,24 @@ a:link, a:visited, a:active {
     overflow-x: hidden;
   }
 
-.is_static_content_div
+.is_main_content_div
 {
       line-height:1.5em;
       text-align:justify;
       padding:0px;
-      border: 1px solid lighten(#4284D3, 20%);
+      border: 1px solid lighten($isHeaderBg, 20%);
 
-      .is_static_content_header.alert{
+      .is_main_content_header.alert{
         border-radius: 0px 0px 0px 0px;
       }
 
-      .is_static_content_header.is_alert-heading{
+      .is_main_content_header.is_alert-heading{
         border-width: 0px;
         border-radius: none;
-        padding: 5px;
-        margin-bottom: 13px;
+        padding: $baseFontSize / 2;
+        margin-bottom: $baseLineHeight;
         border-radius: none;
-        @include gradient-radial(lighten(#4284D3,20%), #4284D3);
+        @include gradient-radial(lighten($isHeaderBg,20%), $isHeaderBg);
       }
 
       .is_static_content_header2.is_alert-heading{
@@ -466,7 +467,7 @@ a:link, a:visited, a:active {
         padding: 5px;
         margin-bottom: 13px;
         border-radius: none;
-        @include gradient-striped(#4284D3, 45deg);
+        @include gradient-striped($isHeaderBg, 45deg);
       }
 
       .is_static_content_header3.is_alert-heading{
@@ -475,7 +476,7 @@ a:link, a:visited, a:active {
         padding: 5px;
         margin-bottom: 13px;
         border-radius: none;
-        @include gradient-vertical(#4284D3, lighten(#4284D3,20%));
+        @include gradient-vertical($isHeaderBg, lighten($isHeaderBg,20%));
       }
 
       .is_static_content_header4.is_alert-heading{
@@ -496,7 +497,7 @@ a:link, a:visited, a:active {
         @include gradient-vertical-three-colors(#4284D3, darken(#4284D3,20%), lighten(#4284D3,20%), lighten(#4284D3,20%))
       }
 
-      .is_static_content_body{
+      .is_main_content_body{
         padding: 5px;
       }
 }
