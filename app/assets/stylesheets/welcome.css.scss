@@ -422,20 +422,6 @@ a:link, a:visited, a:active {
   }
 }
 
-
-
-
-//Element selectors
-//*************************************************************
-legend{
-	margin: 0 0 0 35%;
-	border: 0px;
-	font-weight: bold;
-	font-size: $baseFontSize;	
-	text-align: center;
-	width: 200px;
-}
-
 .table{
   background-color: $white; 
   thead{
@@ -454,7 +440,77 @@ legend{
     overflow-x: hidden;
   }
 
-.content
+.is_static_content_div
 {
-      line-height:1.5em;font-size:12px; font-family:Arial;text-align:justify;padding:5px;
+      line-height:1.5em;
+      text-align:justify;
+      padding:0px;
+      border: 1px solid lighten(#4284D3, 20%);
+
+      .is_static_content_header.alert{
+        border-radius: 0px 0px 0px 0px;
+      }
+
+      .is_static_content_header.is_alert-heading{
+        border-width: 0px;
+        border-radius: none;
+        padding: 5px;
+        margin-bottom: 13px;
+        border-radius: none;
+        @include gradient-radial(lighten(#4284D3,20%), #4284D3);
+      }
+
+      .is_static_content_header2.is_alert-heading{
+        border-width: 0px;
+        border-radius: none;
+        padding: 5px;
+        margin-bottom: 13px;
+        border-radius: none;
+        @include gradient-striped(#4284D3, 45deg);
+      }
+
+      .is_static_content_header3.is_alert-heading{
+        border-width: 0px;
+        border-radius: none;
+        padding: 5px;
+        margin-bottom: 13px;
+        border-radius: none;
+        @include gradient-vertical(#4284D3, lighten(#4284D3,20%));
+      }
+
+      .is_static_content_header4.is_alert-heading{
+        border-width: 0px;
+        border-radius: none;
+        padding: 5px;
+        margin-bottom: 13px;
+        border-radius: none;
+         @include gradient-horizontal(#4284D3, lighten(#4284D3,20%));
+      }
+
+      .is_static_content_header5.is_alert-heading{
+        border-width: 0px;
+        border-radius: none;
+        padding: 5px;
+        margin-bottom: 13px;
+        border-radius: none;
+        @include gradient-vertical-three-colors(#4284D3, darken(#4284D3,20%), lighten(#4284D3,20%), lighten(#4284D3,20%))
+      }
+
+      .is_static_content_body{
+        padding: 5px;
+      }
 }
+
+
+//Element selectors
+//*************************************************************
+legend{
+	margin: 0 0 0 35%;
+	border: 0px;
+	font-weight: bold;
+	font-size: $baseFontSize;	
+	text-align: center;
+	width: 200px;
+}
+
+
