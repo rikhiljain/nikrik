@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  reward_id: 1
+  user_id: 1
+  name: MyString
+  mobile: MyString
+  address: MyString
+  status: MyString
+
+two:
+  reward_id: 1
+  user_id: 1
+  name: MyString
+  mobile: MyString
+  address: MyString
+  status: MyString

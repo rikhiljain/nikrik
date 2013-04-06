@@ -30,11 +30,18 @@ function __loyalty__myLinksClickHandlers(id, href){
 			__loyalty__populatePoints(href);
 		}else if(id == "myRewards"){
 			__loyalty__populateRewards(href);
+		}else if(id == "myOrders"){
+			__loyalty__populateOrders(href);
 		}else if(id == "editProfile"){
 			return true;
 		}
-
 		return false;	
+}
+
+function __loyalty__populateOrders(address){
+	__loyalty__getJsonAndPopulateTable(address+".json", ["Id:id","Ordare Date:created_at","Order Status:status","Shipped Address:address","Reward Id:reward_id"], "My Orders",["id"],
+		function (data) {
+	});		
 }
 
 function __loyalty__populatePolicies(address){

@@ -56,6 +56,8 @@ rake jobs:workoff
 
 rails g scaffold travelChart  company_id:integer coverage:integer age_start:integer age_end:integer plan:string days:integer has_usa:boolean  premium:integer 
 
-company_id,coverage,age_start,age_end,plan,days,has_usa,premium 
-
 git config --global http.sslVerify false
+
+rails g scaffold order  reward_id:integer user_id:integer name:string mobile:string address:string status:string
+
+

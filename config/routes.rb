@@ -55,6 +55,8 @@ Nikrik::Application.routes.draw do
   get "policies/policies/:id"  =>    "policies#policies"
   get "policies/download/:id"  => "policies#download"
 
+  get "orders/user_orders"  => "orders#user_orders"
+
   namespace :motor do
     resources :rtos
     resources :discounts
@@ -74,7 +76,8 @@ Nikrik::Application.routes.draw do
   resources :policies
   resources :rewards 
   resources :admin_users
- resources :policy_attributes
+  resources :policy_attributes
+  resources :orders
  
   match "/delayed_job" => DelayedJobWeb, :anchor => false
 

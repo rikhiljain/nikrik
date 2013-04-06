@@ -1,0 +1,16 @@
+<%= simple_form_for(@order) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :reward, :label_method => :name, :value_method => :id,  :prompt => "Select Reward", :required => true %>
+    <%= f.input :user_id , label:'Customer ID', :required => true %>
+    <%= f.input :name , label:'Customer Name', :required => true %>
+    <%= f.input :mobile , label:'Customer Mobile'%>
+    <%= f.input :address , label:'Customer Address',:as => :text , :input_html => { :cols => 20, :rows => 5 } , :required => true %>
+    <%= f.input :status , label:'Order Status', :required => true, :prompt => "Select Status", :collection => [ "IN PPROGRESS", "SHIPPED", "DELIVERED"] %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

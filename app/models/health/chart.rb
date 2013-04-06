@@ -3,11 +3,11 @@ class Health::Chart < ActiveRecord::Base
   attr_accessible :company_id,:plan, :age_end, :age_start,:adults, :childs, :coverage, :premium
 
   def to_s
-    "HealthChart: #{@comapny_id}--#{@age_end} (#{@coverage})"
+    "HealthChart: #{@comapny_id}--#{@age_end} (#{@coverage} adults=#{@adults} childs=#{@childs}"
   end
 
-  def self.find_by_coverage_age(heath_cover, age)
-    where("coverage = ? AND age_start <= ? and age_end >= ? ", heath_cover, age, age)
+  def self.find_by_coverage_age(heath_cover, age, adults, childs)
+    where("coverage = ? AND age_start <= ? and age_end >= ? and adults=? and childs=? ", heath_cover, age, age , adults, childs)
   end
 
   def self.find_by_company(company_id)
