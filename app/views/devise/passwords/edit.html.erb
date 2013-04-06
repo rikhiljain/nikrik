@@ -9,15 +9,14 @@
       <%= f.input :reset_password_token, :as => :hidden %>
       <%= f.full_error :reset_password_token %>
 
-      <div class="form-inputs">
+      <div class="form-inputs form-horizontal">
         <%= f.input :password, :label => "New password", :required => true %>
         <%= f.input :password_confirmation, :label => "Confirm your new password", :required => true %>
+        <div class="controls">
+          <%= f.button :submit, "Change my password", :class => "is_btn-custom" %>
+          <%= render "devise/shared/links" %>
+        </div>
       </div>
-
-      <div>
-        <%= f.button :submit, "Change my password", :class => "is_btn-custom" %>
-      </div>
-      <%= render "devise/shared/links" %>
     <% end %>
   </div>
 </div>

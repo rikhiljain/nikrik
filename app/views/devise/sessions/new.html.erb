@@ -4,16 +4,17 @@
   </div>
   <div class="is_main_content_body">
 	<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-	  <div class="form-inputs">
+	  <div class="form-inputs form-horizontal">
 	    <%= f.input :login, :placeholder => 'Email OR Mobile Number' ,:hint => 'Please enter Email OR Mobile Number', :required => false, :autofocus => true %>
 	    <%= f.input :password, :required => false %>
 	    <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
-	  </div>
-
-	  <div>
-	    <%= f.button :submit, "Sign in", :class => "is_btn-custom"  %>
-	  </div>
-	  <%= render "devise/shared/links" %>
+	    <div class="control-group">
+	    	<div class="controls">
+		    	<%= f.button :submit, "Sign in", :class => "is_btn-custom"  %>
+		  		<%= render "devise/shared/links" %>
+		  	</div>
+		</div>
+	  </div>	  
 	<% end %>
   </div>
 </div>
