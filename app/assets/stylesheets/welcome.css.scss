@@ -509,6 +509,21 @@ a:link, a:visited, a:active {
   }
 }
 
+.userReferralTable{
+  margin-bottom: 10px;
+  width: 100%;
+  td{
+     width: 50%;
+     vertical-align:middle;
+     white-space: pre-wrap;
+  }
+}
+
+#userMenuContentDivTable{
+  > .userReferralTable:nth-child(even){
+      background-color: $tableBackgroundAccent;
+    }
+}
 
 //Element selectors
 //*************************************************************

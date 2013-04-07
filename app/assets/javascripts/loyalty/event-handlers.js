@@ -72,17 +72,17 @@ function __loyalty__populateReferrals(address, referralId){
 	var html = [], h = -1;
 	$.getJSON("/loyalty/user_referrals.json",function(data){
 		for(var result, i = -1; result = data[++i];){
-			html[++h] = "<table class='userReferralTable' style='margin-bottom: 10px;' width='100%'><tbody><tr><td width='50%'><strong> Status : </strong>";
+			html[++h] = "<table class='userReferralTable' ><tbody><tr><td><strong>Status : </strong>";
 			html[++h] = result.status
-			html[++h] = "</td><td width='50%' ><strong> Referral Date : </strong>";
+			html[++h] = "</td><td ><strong>Referral Date : </strong>";
 			html[++h] = result.created_at;
-			html[++h] = "</td></tr><tr><td  width='50%' ><strong> Referral Name : </strong>";
+			html[++h] = "</td></tr><tr><td ><strong>Referral Name : </strong>";
 			html[++h] = result.ref_name
-			html[++h] = "</td><td width='50%'><strong>Referral Mobile : </strong>";
+			html[++h] = "</td><td><strong>Referral Mobile : </strong>";
 			html[++h] = result.ref_mobile;
-			html[++h] = "</td></tr><tr><td colspan='2' width='50%'  style='white-space: pre-wrap;' ><strong> Description : </strong><span>";
+			html[++h] = "</td></tr><tr><td colspan='2' ><strong>Description : </strong><div>";
 			html[++h] = result.ref_desc;
-			html[++h] = "</span></td></tr></tbody></table>";
+			html[++h] = "</div></td></tr></tbody></table>";
 			
 		}
 		window.$userMenuContentDivTable.html(html.join(''));
@@ -97,20 +97,23 @@ function __loyalty__populatePoints(){
 	$.getJSON("/loyalty/points.json",function(data){
 		html[++h] = "<p>Total Available Points = " + data.total_points + "</p>";
 		html[++h] = "<table class='table table-striped table-centered'>";
-		html[++h] = "<thead><tr><th>Reference Type</th>";
+		html[++h] = "<thead><tr><th>Transaction Date</th>";
+		html[++h] = "<th>Description</th>";
 		html[++h] = "<th>Points</th>";
-		html[++h] = "<th>Status</th>";
-		html[++h] = "<th>Created On</th>";
+		html[++h] = "<th>Transaction Type</th>";
+		html[++h] = "<th>Expiry Date</th>";
 		html[++h] = "</tr></thead><tbody>";
 		for(var result, i = -1; result = data.points[++i];){
 			html[++h] = "<tr><td>";
-			html[++h] = result.ref_type
+			html[++h] = result.created_at
 			html[++h] = "</td><td>";
-			html[++h] = result.value;
+			html[++h] = result.ref_type;
 			html[++h] = "</td><td>";
-			html[++h] = result.status
+			html[++h] = result.value
 			html[++h] = "</td><td>";
-			html[++h] = result.created_at;
+			html[++h] = result.status;
+			html[++h] = "</td><td>";
+			html[++h] = result.exp_at;
 			html[++h] = "</td></tr>";
 		}
 		html[++h] = "</tbody></table>";
