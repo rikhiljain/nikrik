@@ -1,4 +1,4 @@
-function __travel__initialize(){
+function __travel__initialize(reason){
 
 	window.$travelQuoteForm.unblock(); 
 
@@ -6,9 +6,11 @@ function __travel__initialize(){
 	$("[id=accordion1Health]").hide();
 	$("[id=accordion1Travel]").show();
 
-	window.$travelQuoteForm.each (function(){
-  			this.reset();
- 	});
+	if(reason == "initialize"){
+		window.$travelQuoteForm.each (function(){
+	  			this.reset();
+	 	});
+	 }
 
 	window.$maxTripDurationCG.hide(); 	
 	window.$travelTotalDays.text('');

@@ -143,5 +143,5 @@ function __motor__fillPremiumBreakupTable(id){
 }
 
 function __motor__recomputeQuoteForm(){
-		initialize();
+		initialize("recompute");
 }

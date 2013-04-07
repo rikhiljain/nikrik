@@ -1,11 +1,13 @@
-function initialize(){
+function initialize(reason){
+
+	reason = typeof reason !== 'undefined' ? reason : "initialize";
 	
 	if(window.currentSelection == "Motor"){
-		__motor__initialize();
+		__motor__initialize(reason);
 	}else if(window.currentSelection == "Health"){
-		__health__initialize();
+		__health__initialize(reason);
 	}else if(window.currentSelection == "Travel"){
-		__travel__initialize();
+		__travel__initialize(reason);
 	}
 
 	__common__initialize();

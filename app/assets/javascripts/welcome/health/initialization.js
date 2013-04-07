@@ -1,4 +1,4 @@
-function __health__initialize(){
+function __health__initialize(reason){
 
 	__health__enableForm();
 
@@ -6,9 +6,12 @@ function __health__initialize(){
 	$("[id=accordion1Health]").show();
 	$("[id=accordion1Travel]").hide();
 
-	window.$healthQuoteForm.each (function(){
-  			this.reset();
-	});
+	if(reason == "initialize"){
+		window.$healthQuoteForm.each (function(){
+	  			this.reset();
+		});
+	}
+
 	window.$motherAgeGrp.hide();
 	window.$fatherAgeGrp.hide();
 	window.$adultAgeGrp.show();
