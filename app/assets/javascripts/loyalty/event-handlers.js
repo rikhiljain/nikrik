@@ -54,19 +54,28 @@ function __loyalty__populatePolicies(){
 }
 
 function __loyalty__populateReferrals(address, referralId){
-	__loyalty__getJsonAndPopulateTable("/loyalty/user_referrals.json", ["Id:id","Name:ref_name", "Mobile Number:ref_mobile", "Description:ref_desc", "Status:status", "Created At:created_at", "Updated At:updated_at"], "My Referrals",["id"],
-		function (data) {
-			if(referralId == null){
-				//if referaal id is null, we don't need to anything
-				//else we will have to find that row and highlight that
-			}else{
-				$("[id=userMenuContentDiv] > [id=userMenuContentDivTable] tbody tr").each(function(index, value){
-					if($(this).children(":nth-child(1)").text() == referralId){
-						$(this).children().addClass("is_redBorderAndBg");
-					}
-		 		});
-			}
-	});
+
+	window.$userMenuContentDivAlert[0].innerHTML = "<h3>My Referrals</h3>";
+	var html = [], h = -1;
+	$.getJSON("/loyalty/user_referrals.json",function(data){
+		for(var result, i = -1; result = data[++i];){
+			html[++h] = "<table class='userReferralTable' style='margin-bottom: 10px;' width='100%'><tbody><tr><td width='50%'><strong> Status : </strong>";
+			html[++h] = result.status
+			html[++h] = "</td><td width='50%' ><strong> Referral Date : </strong>";
+			html[++h] = result.created_at;
+			html[++h] = "</td></tr><tr><td  width='50%' ><strong> Referral Name : </strong>";
+			html[++h] = result.ref_name
+			html[++h] = "</td><td width='50%'><strong>Referral Mobile : </strong>";
+			html[++h] = result.ref_mobile;
+			html[++h] = "</td></tr><tr><td colspan='2' width='50%'  style='white-space: pre-wrap;' ><strong> Description : </strong><span>";
+			html[++h] = result.ref_desc;
+			html[++h] = "</span></td></tr></tbody></table>";
+			
+		}
+		window.$userMenuContentDivTable.html(html.join(''));
+
+	});		
+
 }
 
 function __loyalty__populatePoints(){
