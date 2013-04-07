@@ -1,4 +1,4 @@
-function initialize(reason){
+function __insurance__accordion__initialize(reason){
 
 	reason = typeof reason !== 'undefined' ? reason : "initialize";
 	
@@ -38,7 +38,7 @@ function __common__initialize(){
 	//reinitialize the array
 	window.allowedAccordionIndexes = new Array();
 	//we will create three indexes for three accordion
-	window.allowedAccordionIndexes[0] = 0;
+	window.allowedAccordionIndexes[0] = 0; //This is the combined status
 	window.allowedAccordionIndexes[1] = 1; //only first will be on
 	window.allowedAccordionIndexes[2] = 0;
 	window.allowedAccordionIndexes[3] = 0;
