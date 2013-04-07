@@ -69,6 +69,6 @@ function __motor__bindQuoteFormEvents(){
 	 });
 
 	$("[id=motorQuoteFormResetLink]").bind("click",function(e){
-		initialize();
+		__insurance__accordion__initialize();
 	});
 }

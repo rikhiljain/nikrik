@@ -23,7 +23,7 @@ function __health__bindQuoteFormEvents(){
 	});
 
 	$("[id=healthQuoteFormResetLink]").bind("click",function(e){
-		initialize();
+		__insurance__accordion__initialize();
 	});
 
 }
