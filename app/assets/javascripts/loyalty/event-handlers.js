@@ -43,13 +43,26 @@ function __loyalty__populateOrders(){
 }
 
 function __loyalty__populatePolicies(){
-	__loyalty__getJsonAndPopulateTable("/policies/policies.json", ["Id:id","Policy Path:policy_path","Policy Type:policy_type","Company Name:company_name","Policy Id:policy_id", "Premium:premium", "Start Date:start_date", "End Date:end_date"," :download"], "My Policies",["id","policy_path"],
-		function (data) {
-			$("[id=userMenuContentDiv] > [id=userMenuContentDivTable] tbody tr").each(function(index, value){
-				var downloadUrl = "/policies/download/"+$(this).children(":nth-child(1)").text();
-				var downloadLink = "<a href='"+downloadUrl+"'>Download</a>";
-				$(this).children(":nth-child(9)").html(downloadLink);
-	 		});
+	window.$userMenuContentDivAlert.html("<h3>My Policies</h3>");
+	var motorHtml = [], m = -1;
+	var healthHtml = [], h = -1;
+	var travelHtml = [], t = -1;
+	$.getJSON("/policies/policies.json",function(result){
+		for(var data, i = -1; data = result[++i];){
+			if(data.policy_type.toUpperCase() == "MOTOR"){
+				motorHtml[++m] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
+			}else if(data.policy_type.toUpperCase() == "HEALTH"){
+				healthHtml[++h] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
+			}else if(data.policy_type.toUpperCase() == "TRAVEL"){
+				travelHtml[++t] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
+			}
+		}
+		$("[id=userPoliciesMotorTabTbody]").html(motorHtml.join(''));
+		$("[id=userPoliciesHealthTabTbody]").html(healthHtml.join(''));
+		$("[id=userPoliciesTravelTabTbody]").html(travelHtml.join(''));
+		window.$userMenuContentDivTable.html("");
+		window.$userMenuContentDivTable.html($("[id=userPoliciesDiv]").html());
+		$('#userPoliciesTab a').click(function(e){e.preventDefault(); $(this).tab('show');});
 	});		
 }
 
@@ -74,20 +87,20 @@ function __loyalty__populatePoints(){
 	var html = [], h = -1;
 	$.getJSON("/loyalty/points.json",function(data){
 		html[++h] = "<p>Total Available Points = " + data.total_points + "</p>";
-		html[++h] = "<table class='table table-striped'>";
-		html[++h] = "<thead><tr><th style='text-align:center;vertical-align:middle;'>Reference Type</th>";
-		html[++h] = "<th style='text-align:center;vertical-align:middle;'>Points</th>";
-		html[++h] = "<th style='text-align:center;vertical-align:middle;'>Status</th>";
-		html[++h] = "<th style='text-align:center;vertical-align:middle;'>Created On</th>";
+		html[++h] = "<table class='table table-striped table-centered'>";
+		html[++h] = "<thead><tr><th>Reference Type</th>";
+		html[++h] = "<th>Points</th>";
+		html[++h] = "<th>Status</th>";
+		html[++h] = "<th>Created On</th>";
 		html[++h] = "</tr></thead><tbody>";
 		for(var result, i = -1; result = data.points[++i];){
-			html[++h] = "<tr><td style='text-align:center;vertical-align:middle;'>";
+			html[++h] = "<tr><td>";
 			html[++h] = result.ref_type
-			html[++h] = "</td><td style='text-align:center;vertical-align:middle;'>";
+			html[++h] = "</td><td>";
 			html[++h] = result.value;
-			html[++h] = "</td><td style='text-align:center;vertical-align:middle;' >";
+			html[++h] = "</td><td>";
 			html[++h] = result.status
-			html[++h] = "</td><td style='text-align:center;vertical-align:middle;'>";
+			html[++h] = "</td><td>";
 			html[++h] = result.created_at;
 			html[++h] = "</td></tr>";
 		}

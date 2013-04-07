@@ -1,0 +1,68 @@
+<script type="text/javascript">
+function userPoliciesTabEnabled(){
+      $('#userPoliciesTab a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+}
+// (function($){
+//   $(document).ready(function(){
+
+//   });
+// })(jQuery);
+</script>
+<div id="userPoliciesDiv" style="display:none">
+  <ul class="nav nav-tabs" id="userPoliciesTab">
+    <li class="active"><a href="#userPoliciesMotorTab">Motor</a></li>
+    <li><a href="#userPoliciesHealthTab">Health</a></li>
+    <li><a href="#userPoliciesTravelTab">Travel</a></li>
+  </ul>
+   
+  <div class="tab-content">
+    <div class="tab-pane active" id="userPoliciesMotorTab">
+      <table class='table table-striped table-centered'>
+        <thead>
+          <tr>
+            <th>Policy Id</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Premium Amount</th>            
+            <th>Company Name</th> 
+          </tr>
+        </thead>
+        <tbody id="userPoliciesMotorTabTbody">
+        </tbody>
+      </table>           
+    </div>
+    <div class="tab-pane" id="userPoliciesHealthTab">
+      <table class='table table-striped table-centered'>
+        <thead>
+          <tr>
+            <th>Policy Id</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Premium Amount</th>            
+            <th>Company Name</th> 
+          </tr>
+        </thead>
+        <tbody id="userPoliciesHealthTabTbody">
+        </tbody>
+      </table>        
+    </div>
+    <div class="tab-pane" id="userPoliciesTravelTab">
+      <table class='table table-striped table-centered'>
+        <thead>
+          <tr>
+            <th>Policy Id</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Premium Amount</th>            
+            <th>Company Name</th> 
+          </tr>
+        </thead>
+        <tbody id="userPoliciesTravelTabTbody">
+        </tbody>
+      </table>        
+    </div>
+  </div>
+</div>

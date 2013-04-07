@@ -502,6 +502,13 @@ a:link, a:visited, a:active {
       }
 }
 
+.table.table-centered{
+  th,td{
+    text-align:center;
+    vertical-align:middle;
+  }
+}
+
 
 //Element selectors
 //*************************************************************
