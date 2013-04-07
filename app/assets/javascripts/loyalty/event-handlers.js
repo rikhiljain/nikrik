@@ -3,14 +3,6 @@ function __loyalty__bindAllEventHandlers() {
 	$("[id=userMenuDiv] a").bind("click", function(){
 		return __loyalty__myLinksClickHandlers($(this).attr("id"), $(this).attr("href"));
 	});
-
-	// window.$rewardsDetailsModel.on('shown', function () {
- //  		window.$rewardsDetailsModel.find(".status").val("shown");
-	// });
-
-	// window.$rewardsDetailsModel.on('.hidden', function () {
- //  		window.$rewardsDetailsModel.find(".status").val("hidden");
-	// });
 }
 
 function __loyalty__myLinksClickHandlers(id, href){

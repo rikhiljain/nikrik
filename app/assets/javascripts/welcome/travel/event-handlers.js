@@ -74,3 +74,7 @@ function __travel__bindAllEventHandlers(){
 	});
 
 }
+
+	$("[id=travelQuoteFormResetLink]").bind("click",function(e){
+		__insurance__accordion__initialize();
+	});

@@ -45,6 +45,6 @@ $("[id=quoteHealthResultsTable] img").tooltip();
 }
 
 function __health__recomputeQuoteForm(){
-	initialize("recompute");
+	__insurance__accordion__initialize("recompute");
 }
 
