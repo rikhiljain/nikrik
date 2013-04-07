@@ -1,7 +1,9 @@
 function __root__initialize(){
+	__root__affixAll();
 	__root__loadCurrentUser();
 	__root__cusomValidationMethods();
-	__root__postInitialization();
+	__root__configureBlockUIPlugin();
+	__root__createAutoClosingAlert();	
 }
 
 function __root__loadCurrentUser(){
@@ -41,7 +43,7 @@ function __root__cusomValidationMethods(){
 		}, "Please specify a valid phone number");
 }
 
-function __root__postInitialization(){
+function __root__configureBlockUIPlugin(){
   $.blockUI.defaults.css = {cursor:'default'};
   $.blockUI.defaults.overlayCSS = {backgroundColor: '#00f', opacity: 0.6, cursor: 'default', borderRadius:'6px 6px 6px 6px'};
 
@@ -51,6 +53,35 @@ function __root__postInitialization(){
 function __root__showAdsBanner(){
   window.$adsBannerDiv.show();
   window.$referFriendFormDiv.hide();
-  window.$requestCallUsFormDiv.hide();
- 
+  window.$requestCallUsFormDiv.hide(); 
+}
+
+function __root__createAutoClosingAlert() {
+    window.setTimeout(function(){
+    	$("[id=mainMessagesDiv]").alert('close');
+     }
+     , 2000);
+}
+
+function __root__affixAll(){
+	var positions = new Array();
+	var widths = new Array();
+	var elements = new Array();
+	$(".is_affix").each(function( index, elem ) {
+		var position = $(elem).position();
+		if(position.left != 0 && position.top != 0){
+			positions.push($(elem).position());
+			widths.push($(elem).width());
+			elements.push($(elem));
+		}
+	});
+
+	$.each(elements, function( index, elem ) {
+		$(elem).css({
+		    "position":"fixed", 
+		    "top": positions[index].top + "px",
+		    "left": positions[index].left + "px",
+		    "width": widths[index] + "px"
+		});
+	});		
 }

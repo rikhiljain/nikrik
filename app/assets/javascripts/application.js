@@ -101,6 +101,13 @@ window.allowedAccordionIndexes;
 		// Make sure that every Ajax request sends the CSRF token
 		$.ajaxPrefilter(function(options, originalOptions, xhr) { CSRFProtection(xhr); });
 
+		__insurance__initialize();
+		__loyalty__initialize();
+		__referral__initialize();
+		__callus__initialize();
+		__root__initialize();
+
+
 		if(window.content == "devise"){
 			//this will happen only when the devise forms are being displayed.
 			//we really want to clear out the selection, so that when we click
@@ -121,18 +128,15 @@ window.allowedAccordionIndexes;
 			//This might already be displayed, but calling again will not hurt us.
 			displayInsuranceShopeeDiv();
 			//we also want to intilize every thing. Every evnet binding for mainContentDiv.
-			welcome();
+			__insurance__accordion__initialize();
+
+			//now we should make the "Motor" as selected
+			$("[id=secondLevelNavBar] [id=1]").addClass("active");
 		}
+
 		//Setting the event handlers for 'Motor', 'Health' and 'Travel' links.
 		//This is needed no matter what is being displayed.
 		secondLevelNavBarEventHandlers();	
-		//We need to fix the affix no matter what is being displayed.
-		affixAll();
-		__loyalty__initialize();
-		__referral__initialize();
-		__callus__initialize();
-		__root__initialize();
-		createAutoClosingAlert();
 	});
 })(jQuery);
 
@@ -147,7 +151,7 @@ function secondLevelNavBarEventHandlers(){
 			$("[id=secondLevelNavBar] li").removeClass("active");
 			$(e.currentTarget).addClass("active");
 			window.currentSelection = "Motor";
-			initialize();
+			__insurance__accordion__initialize();
 		}
 		return false;
 	});
@@ -161,7 +165,7 @@ function secondLevelNavBarEventHandlers(){
 			$("[id=secondLevelNavBar] li").removeClass("active");
 			$(e.currentTarget).addClass("active");
 			window.currentSelection = "Health";
-			initialize();
+			__insurance__accordion__initialize();
 		}
 		return false;
 	});
@@ -175,7 +179,7 @@ function secondLevelNavBarEventHandlers(){
 			$("[id=secondLevelNavBar] li").removeClass("active");
 			$(e.currentTarget).addClass("active");
 			window.currentSelection = "Travel";
-			initialize();
+			__insurance__accordion__initialize();
 		}
 		return false;
 	});
@@ -197,40 +201,6 @@ function displayInsuranceShopeeDiv(){
 		//we need to show the insurance div and hide the devise div
 		$("[id=insuranceShopeeDiv]").show();
 		$("[id=deviseDiv]").hide();
-		//This is most important, we want to bind all the events and initialize.
-		//We might put a check to run this only when the window.content == "devise", but I am not sure about it??
-		if(window.content == "devise"){
-			//If we want to display the insuranceShopeeDiv, then we will also activate all the events.
-			//If those have already been not run. That will be the case when we click on devise forms
-			//and then click on 'Motor' etc links or on MyRewards etc links
-			welcome();
-			//Once we have initialized it, we do not want to do it again.
-			window.content == "insuranceShopee";
-		}
-}
-
-
-function affixAll(){
-	var positions = new Array();
-	var widths = new Array();
-	var elements = new Array();
-	$(".is_affix").each(function( index, elem ) {
-		var position = $(elem).position();
-		if(position.left != 0 && position.top != 0){
-			positions.push($(elem).position());
-			widths.push($(elem).width());
-			elements.push($(elem));
-		}
-	});
-
-	$.each(elements, function( index, elem ) {
-		$(elem).css({
-		    "position":"fixed", 
-		    "top": positions[index].top + "px",
-		    "left": positions[index].left + "px",
-		    "width": widths[index] + "px"
-		});
-	});		
 }			
 
 
@@ -238,11 +208,4 @@ function affixAll(){
 function CSRFProtection(xhr) {
  var token = $('meta[name="csrf-token"]').attr('content');
  if (token) xhr.setRequestHeader('X-CSRF-Token', token);
-}
-
-function createAutoClosingAlert() {
-    window.setTimeout(function(){
-    	$("[id=mainMessagesDiv]").alert('close');
-     }
-     , 2000);
 }
