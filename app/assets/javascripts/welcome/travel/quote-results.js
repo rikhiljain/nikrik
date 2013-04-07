@@ -39,6 +39,6 @@ window.$quoteResultsAccordionTable[0].innerHTML = html.join('');
 }
 
 function __travel__recomputeQuoteForm(){
-	initialize();
+	initialize("recompute");
 }
 

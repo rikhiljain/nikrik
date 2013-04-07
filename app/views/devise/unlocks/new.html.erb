@@ -1,19 +1,18 @@
-<div id="deviseDiv" class="is_right-hand-div">
-  <div class="alert alert-block is_alert-heading">
-    <h3>Resend unlock instructions</h3>
+<div id="deviseDiv" class="is_main_content_div">
+  <div class="alert alert-block is_alert-heading is_main_content_header">
+    <strong>Resend unlock instructions</strong>
   </div>
-  <div>
+  <div class="is_main_content_body">
 	<%= simple_form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f| %>
 	  <%= f.error_notification %>
 
-	  <div class="form-inputs">
+	  <div class="form-inputs form-horizontal">
 	    <%= f.input :email, :required => true %>
+	    <div class="controls">
+	    	<%= f.button :submit, "Resend unlock instructions", :class => "is_btn-custom" %>
+	    	<%= render "devise/shared/links" %>
+	  	</div>
 	  </div>
-
-	  <div>
-	    <%= f.button :submit, "Resend unlock instructions", :class => "is_btn-custom" %>
-	  </div>
-	  <%= render "devise/shared/links" %>
 	<% end %>
   </div>
 </div>

@@ -132,6 +132,7 @@ window.allowedAccordionIndexes;
 		__referral__initialize();
 		__callus__initialize();
 		__root__initialize();
+		createAutoClosingAlert();
 	});
 })(jQuery);
 
@@ -239,3 +240,9 @@ function CSRFProtection(xhr) {
  if (token) xhr.setRequestHeader('X-CSRF-Token', token);
 }
 
+function createAutoClosingAlert() {
+    window.setTimeout(function(){
+    	$("[id=mainMessagesDiv]").alert('close');
+     }
+     , 2000);
+}
