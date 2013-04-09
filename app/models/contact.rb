@@ -1,5 +1,4 @@
 class Contact
-  attr_accessor :mobile_number , :email_address
-
+  attr_accessor :mobile , :email
 
 end

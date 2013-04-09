@@ -1,14 +1,39 @@
-Customer details  who provided the Referral
-===============================================
+<html>
+<head>
+	<style type="text/css">
+	</style>
+</head>
+<body style="font-size:1.2em; letter-spacing:1px;padding: 4px;" >
+Dear Friend,<br/><br/>
+Greetings from InsuranceShopee.com! <br/> <br/>
+A very sincere thanks for your interest. We will contact you very shortly. <br/>
+Please find below your referral details.<br/><br/><br/>
 
-Email  -----  <%= @referral.email %>
-
-Mobile       ------  <%= @referral.mobile %>
-
-Referral details  
-===============================
-
-Referral Name   ---- <%= @referral.ref_name %>
-Referral Mobile   ---- <%= @referral.ref_mobile %>
-Referral Details   ---- <%= @referral.ref_desc %>
-
+<table border="1" cellpadding="5" cellspacing="1" >
+<tr>
+	<td style="background: #def5e5;font-weight:bold;">Your Email</td>
+	<td><%=@referral.email %></td>
+</tr>
+<tr>
+	<td style="background: #def5e5;font-weight:bold;">Your Mobile</td>
+	<td><%=@referral.mobile %></td>
+</tr>
+<tr>
+	<td style="background: #def5e5;font-weight:bold;">Referral Name</td>
+	<td><%=@referral.ref_name %></td>
+</tr>
+<tr>
+	<td style="background: #def5e5;font-weight:bold;">Referral Mobile</td>
+	<td><%=@referral.ref_mobile %></td>
+</tr>
+<tr>
+	<td style="background: #def5e5;font-weight:bold;">Referral Details</td>
+	<td style="white-space: pre-wrap;"  ><%=@referral.ref_desc %></td>
+</tr>
+</table>
+<br>
+<br>
+Regards,<br>
+The InsuranceShopee Team<br>
+</body>
+</html>
