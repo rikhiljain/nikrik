@@ -95,7 +95,7 @@ function __loyalty__populatePoints(){
 	window.$userMenuContentDivAlert[0].innerHTML = "<h3>My Points</h3>";
 	var html = [], h = -1;
 	$.getJSON("/loyalty/points.json",function(data){
-		html[++h] = "<p>Total Available Points = " + data.total_points + "</p>";
+		html[++h] = "<p><strong>Total Available Points = " + data.total_points + "</strong></p>";
 		html[++h] = "<table class='table table-striped table-centered'>";
 		html[++h] = "<thead><tr><th>Transaction Date</th>";
 		html[++h] = "<th>Description</th>";
@@ -107,13 +107,24 @@ function __loyalty__populatePoints(){
 			html[++h] = "<tr><td>";
 			html[++h] = result.created_at
 			html[++h] = "</td><td>";
-			html[++h] = result.ref_type;
+			html[++h] = result.desc;
 			html[++h] = "</td><td>";
 			html[++h] = result.value
 			html[++h] = "</td><td>";
-			html[++h] = result.status;
+			if( result.status == 'EARNED')
+			{
+				html[++h] = 'CREDIT';	
+			}
+			else if (result.status == 'USED') 
+			{
+				html[++h] = 'DEBIT';
+			}
+			else if (result.status == 'EXPIRED') {
+				html[++h] = 'CANCEL';
+			}
+			
 			html[++h] = "</td><td>";
-			html[++h] = result.exp_at;
+			html[++h] = result.exp_dt;
 			html[++h] = "</td></tr>";
 		}
 		html[++h] = "</tbody></table>";

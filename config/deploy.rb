@@ -18,6 +18,7 @@ default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
+after "deploy", "delayed_job:restart"
 
 namespace :deploy do
   %w[start stop restart].each do |command|
@@ -53,6 +54,7 @@ namespace :deploy do
     end
   end
   before "deploy", "deploy:check_revision"
+
 end
 
 namespace :delayed_job do
@@ -74,7 +76,7 @@ namespace :delayed_job do
 
     desc "Stop the delayed_job process"
     task :stop, :roles => lambda { roles } do
-      
+      run "chmod 755 #{current_path}/#{delayed_job_command}"
       run "cd #{current_path};#{rails_env} #{delayed_job_command} stop"
     end
 

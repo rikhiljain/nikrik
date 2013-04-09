@@ -83,6 +83,8 @@ class LoyaltyController < ApplicationController
       point.ref_type =  'REFERRAL'
       point.exp_dt = Time.now + 1.year
       point.ref_id = @referral.id
+      point.desc = "Referral given for - <br>" + @referral.ref_name
+      new_referral[:points] = points
       point.save
 
     end
@@ -156,6 +158,7 @@ class LoyaltyController < ApplicationController
           point.status = 'USED'
           point.ref_type =  'REWARD'
           point.ref_id = reward.id
+          point.desc = 'Purchased item - <br>' + reward.name
           point.save
           result[:result] = true
           result[:resultDesc] = ""
@@ -171,28 +174,19 @@ class LoyaltyController < ApplicationController
       end
   end
 
-  def details
-    reward =  Loyalty::Point.find(params[:id])
-    if params[:type] = 'REWARD'
-
-    else
-    
-    end
-
-  end
-
-def m_total_points(points)
   
-  total_points = 0
-  points.each do |point|
-    if point.status == 'EARNED'
-      total_points += point.value
+  def m_total_points(points)
+    
+    total_points = 0
+    points.each do |point|
+      if point.status == 'EARNED'
+        total_points += point.value
+      end
+      if point.status == 'USED'
+        total_points -= point.value
+      end
     end
-    if point.status == 'USED'
-      total_points -= point.value
-    end
+    return total_points
   end
-  return total_points
-end
 
 end
