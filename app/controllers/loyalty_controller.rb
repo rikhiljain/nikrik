@@ -5,6 +5,9 @@ class LoyaltyController < ApplicationController
     user_id = 0
     if (user_signed_in? && (current_user.has_role? :user) )
       user_id = current_user.id
+    else
+      render :json => { :status => :redirect, :to => "/login" }.to_json
+      return
     end
 
     @points = Loyalty::Point.find_by_user(user_id)
@@ -131,6 +134,8 @@ class LoyaltyController < ApplicationController
       @total_points = m_total_points(points)
       result[:operationResult] = true
       result[:total_points] = @total_points
+      result[:address] = current_user.address
+      result[:mobile] = current_user.mobile
     else
       result[:operationResult] = false
     end

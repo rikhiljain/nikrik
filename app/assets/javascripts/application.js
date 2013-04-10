@@ -101,6 +101,30 @@ window.allowedAccordionIndexes;
 		// Make sure that every Ajax request sends the CSRF token
 		$.ajaxPrefilter(function(options, originalOptions, xhr) { CSRFProtection(xhr); });
 
+		$.jsonRequest = function(options){
+	
+		    var validResponseCB = options.success || function(jsonResponse){
+		      console.log("Valid response returned");
+		      console.log(jsonResponse);
+		    };
+		    options.dataType = "json";// expected format for response
+        	options.contentType = "application/json"; // send as JSON
+        	options.timeout = 100000;//3 second timeout
+		    
+		    options.success = function(jsonResponse){
+		      if(jsonResponse.status == "redirect"){
+		        window.location = jsonResponse.to;
+		      }
+		      else{
+		        validResponseCB(jsonResponse);
+		      }
+		    };
+	
+		    // The real action takes place here.
+		    $.ajax(options);
+		  };
+
+
 		__insurance__initialize();
 		__loyalty__initialize();
 		__referral__initialize();

@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `referrals` (
   `ref_mobile` varchar(10) DEFAULT NULL,
   `ref_desc` varchar(1000) DEFAULT NULL,
   `amount` int(11) DEFAULT NULL,
+  `points` mediumint(6) DEFAULT NULL,
   `status` varchar(20) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,

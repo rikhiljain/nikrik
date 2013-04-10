@@ -94,7 +94,10 @@ function __loyalty__populateReferrals(address, referralId){
 function __loyalty__populatePoints(){
 	window.$userMenuContentDivAlert[0].innerHTML = "<h3>My Points</h3>";
 	var html = [], h = -1;
-	$.getJSON("/loyalty/points.json",function(data){
+	$.jsonRequest({
+        url: "/loyalty/points",
+        type: "GET",
+        success:  function(data){
 		html[++h] = "<p><strong>Total Available Points = " + data.total_points + "</strong></p>";
 		html[++h] = "<table class='table table-striped table-centered'>";
 		html[++h] = "<thead><tr><th>Transaction Date</th>";
@@ -130,6 +133,8 @@ function __loyalty__populatePoints(){
 		html[++h] = "</tbody></table>";
 		window.$userMenuContentDivTable.html(html.join(''));
 
+	}
+
 	});		
 
 }
@@ -155,7 +160,7 @@ function __loyalty__populateRewards(){
 			html[++h] = "<img src='/assets/rewards/"+ result.image_name +"''></img>";
 			html[++h] = "<p><span class='label label-info'>"+result.name + ", " + result.points + " Points" +"</span></p>";
 			html[++h] = "<p><button class='btn btn-link' type='button' onClick='__loyalty__rewardsDescription("+JSON.stringify(result)+")'>"+result.details+"</button></p>";
-			html[++h] = "<p><button class='btn btn-danger' type='button' onClick='__loyalty__confirmUserPoints("+JSON.stringify(result)+")'>Qty 1 -  Select</button></p>";
+			html[++h] = "<p><button class='btn btn-danger' type='button' onClick='__loyalty__confirmUserPoints("+JSON.stringify(result)+")'>Select</button></p>";
 		}
 		html[++h] = "</tr></tbody></table>";
 		window.$userMenuContentDivTable.html(html.join(''));
@@ -181,10 +186,10 @@ function __loyalty__confirmUserPoints(result){
 			__loyalty__buildErrorMessageForSignin();
 		}else{
 			if(data.total_points < result.points){
-				__loyalty__buildErrorMessageForPoints(result, data.total_points);
+				__loyalty__buildErrorMessageForPoints(result, data);
 			}
 			else{
-				__loyalty__buildSuccessMessageForPoints(result, data.total_points);
+				__loyalty__buildSuccessMessageForPoints(result, data);
 			}
 		}
 	});	
@@ -204,10 +209,7 @@ function __loyalty__confirmPurchase(id){
         timeout: 100000, //3 second timeout
         data: serializedJSON,
 
-          complete: function() {
-            //called when complete
-          },
-
+        
           success: function( data) {
             //called when successful
             if(data.result == true)
@@ -242,7 +244,7 @@ function __loyalty__rewardsDescription(result){
 	window.$rewardDetailsModal.find(".third").html("Reward points: " + result.points);
 	window.$rewardDetailsModal.find(".fourth").html(result.description);
 	//window.$rewardDetailsModal.find(".fifth").attr("reward", JSON.stringify(result));
-	window.$rewardDetailsModal.find(".fifth").text("Qty 1 - Select");	
+	window.$rewardDetailsModal.find(".fifth").text("Select");	
 	window.$rewardDetailsModal.find(".fifth").unbind('click');
 	window.$rewardDetailsModal.find(".fifth").click(function(){__loyalty__confirmUserPoints(result)});
 	window.$rewardDetailsModal.show();
@@ -250,9 +252,9 @@ function __loyalty__rewardsDescription(result){
 }
 
 
-function __loyalty__buildErrorMessageForPoints(result, userPoints){
+function __loyalty__buildErrorMessageForPoints(result, data){
 	var message = "<p>You don't seem to have the sufficient reward points to proceed with the purchase. Please check your reward points balance.</p>";
-	message +=  "<p><strong>Current balance: "+userPoints+"</p>";
+	message +=  "<p><strong>Current balance: "+data.total_points+"</p>";
 	message +=  "<p><strong>Points required: " + result.points+"</p>";
 	window.$errorModal.find(".first").html(message);
 	window.$rewardDetailsModal.hide();
@@ -261,9 +263,9 @@ function __loyalty__buildErrorMessageForPoints(result, userPoints){
 	window.$rewardDeatilsOrErrorModal.modal();
 }
 
-function __loyalty__buildSuccessMessageForPoints(result, userPoints){
-	var message = "<p>You have sufficient reward points to proceed with the purchase. Please confirm your purchase.</p>";
-	message +=  "<p><strong>Current balance: "+userPoints+"</p>";
+function __loyalty__buildSuccessMessageForPoints(result, data){
+	var message = "<p>You have sufficient reward points to proceed with the purchase.</p>";
+	message +=  "<p><strong>Current balance: "+data.total_points+"</p>";
 	message +=  "<p><strong>Points required: " + result.points+"</p>";
 	window.$rewardDetailsModal.find(".notification").html(message);
 	window.$rewardDetailsModal.find(".notification").show();
@@ -273,11 +275,33 @@ function __loyalty__buildSuccessMessageForPoints(result, userPoints){
 	window.$rewardDetailsModal.find(".third").html("Reward points: " + result.points);
 	window.$rewardDetailsModal.find(".fourth").html(result.description);
 	//window.$rewardDetailsModal.find(".fifth").attr("reward", JSON.stringify(result));
-	window.$rewardDetailsModal.find(".fifth").text("Qty 1 - Confirm");	
+	window.$rewardDetailsModal.find(".fifth").text("Purchase");	
+	window.$rewardDetailsModal.find(".fifth").unbind('click');
+	window.$rewardDetailsModal.find(".fifth").click(function(){__loyalty__purchase(result, data)});	
+	window.$errorModal.hide();
+	window.$successModal.hide();
+	window.$rewardDetailsModal.show();
+	window.$rewardDeatilsOrErrorModal.modal();
+}
+
+function __loyalty__purchase(result, data){
+	var message = "<p>Pease verify your address and confirm your purchase.</p>";
+	message +=  "<p><strong>Current balance: "+data.total_points+"</p>";
+	message +=  "<p><strong>Points required: " + result.points+"</p>";
+	window.$rewardDetailsModal.find(".notification").html(message);
+	window.$rewardDetailsModal.find(".notification").show();
+
+	window.$rewardDetailsModal.find(".first").html(result.details);
+	window.$rewardDetailsModal.find(".second").attr("src", "/assets/rewards/"+ result.image_name);
+	window.$rewardDetailsModal.find(".third").html("Reward points: " + result.points);
+	window.$rewardDetailsModal.find(".fourth").html(data.address);
+	//window.$rewardDetailsModal.find(".fifth").attr("reward", JSON.stringify(result));
+	window.$rewardDetailsModal.find(".fifth").text("Purchase");	
 	window.$rewardDetailsModal.find(".fifth").unbind('click');
 	window.$rewardDetailsModal.find(".fifth").click(function(){__loyalty__confirmPurchase(result.id)});	
 	window.$errorModal.hide();
-	window.$successModal.hide();
+	window.$
+	.hide();
 	window.$rewardDetailsModal.show();
 	window.$rewardDeatilsOrErrorModal.modal();
 }
