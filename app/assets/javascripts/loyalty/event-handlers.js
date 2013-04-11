@@ -37,9 +37,39 @@ function __loyalty__myLinksClickHandlers(id, href){
 }
 
 function __loyalty__populateOrders(){
-	__loyalty__getJsonAndPopulateTable("/orders/user_orders.json", ["Id:id","Ordare Date:created_at","Order Status:status","Shipped Address:address","Reward Id:reward_id"], "My Orders",["id"],
-		function (data) {
+	window.$userMenuContentDivAlert.html("<h3>My Orders</h3>");
+	var html = [], h = -1;
+	$.jsonRequest({
+        url: "/orders/user_orders",
+        type: "GET",
+        success:  function(data){
+		html[++h] = "<table class='table table-striped table-centered'>";
+		html[++h] = "<thead><tr><th>Order Date</th>";
+		html[++h] = "<th>Order Number</th>";
+		html[++h] = "<th>Order Status</th>";
+		html[++h] = "<th>Points</th>";
+		html[++h] = "<th>Order Details</th>";
+		html[++h] = "</tr></thead><tbody>";
+		for(var result, i = -1; result = data[++i];){
+			html[++h] = "<tr><td>";
+			html[++h] = result.created_at
+			html[++h] = "</td><td>";
+			html[++h] = "";
+			html[++h] = "</td><td>";
+			html[++h] = result.status;
+			html[++h] = "</td><td>";
+			html[++h] = result.points;
+			html[++h] = "</td><td style='white-space: pre-wrap;' >";
+			html[++h] =  "<strong>Purchased item - </strong><br>" + result.desc + "<br><strong>Shipping Address:</strong><br>" + result.address;
+			html[++h] = "</td></tr>";
+		}
+		html[++h] = "</tbody></table>";
+		window.$userMenuContentDivTable.html(html.join(''));
+
+	}
+
 	});		
+		
 }
 
 function __loyalty__populatePolicies(){
@@ -47,22 +77,27 @@ function __loyalty__populatePolicies(){
 	var motorHtml = [], m = -1;
 	var healthHtml = [], h = -1;
 	var travelHtml = [], t = -1;
-	$.getJSON("/policies/policies.json",function(result){
-		for(var data, i = -1; data = result[++i];){
-			if(data.policy_type.toUpperCase() == "MOTOR"){
-				motorHtml[++m] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
-			}else if(data.policy_type.toUpperCase() == "HEALTH"){
-				healthHtml[++h] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
-			}else if(data.policy_type.toUpperCase() == "TRAVEL"){
-				travelHtml[++t] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
+
+	$.jsonRequest({
+        url: "/policies/policies",
+        type: "GET",
+        success: function(result){
+			for(var data, i = -1; data = result[++i];){
+				if(data.policy_type.toUpperCase() == "MOTOR"){
+					motorHtml[++m] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
+				}else if(data.policy_type.toUpperCase() == "HEALTH"){
+					healthHtml[++h] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
+				}else if(data.policy_type.toUpperCase() == "TRAVEL"){
+					travelHtml[++t] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
+				}
 			}
+			$("[id=userPoliciesMotorTabTbody]").html(motorHtml.join(''));
+			$("[id=userPoliciesHealthTabTbody]").html(healthHtml.join(''));
+			$("[id=userPoliciesTravelTabTbody]").html(travelHtml.join(''));
+			window.$userMenuContentDivTable.html("");
+			window.$userMenuContentDivTable.html($("[id=userPoliciesDiv]").html());
+			$('#userPoliciesTab a').click(function(e){e.preventDefault(); $(this).tab('show');});
 		}
-		$("[id=userPoliciesMotorTabTbody]").html(motorHtml.join(''));
-		$("[id=userPoliciesHealthTabTbody]").html(healthHtml.join(''));
-		$("[id=userPoliciesTravelTabTbody]").html(travelHtml.join(''));
-		window.$userMenuContentDivTable.html("");
-		window.$userMenuContentDivTable.html($("[id=userPoliciesDiv]").html());
-		$('#userPoliciesTab a').click(function(e){e.preventDefault(); $(this).tab('show');});
 	});		
 }
 
@@ -70,7 +105,11 @@ function __loyalty__populateReferrals(address, referralId){
 
 	window.$userMenuContentDivAlert[0].innerHTML = "<h3>My Referrals</h3>";
 	var html = [], h = -1;
-	$.getJSON("/loyalty/user_referrals.json",function(data){
+
+	$.jsonRequest({
+        url: "/loyalty/user_referrals",
+        type: "GET",
+        success: function(data){
 		for(var result, i = -1; result = data[++i];){
 			html[++h] = "<table class='userReferralTable' ><tbody><tr><td><strong>Status : </strong>";
 			html[++h] = result.status
@@ -84,8 +123,9 @@ function __loyalty__populateReferrals(address, referralId){
 			html[++h] = result.ref_desc;
 			html[++h] = "</div></td></tr></tbody></table>";
 			
+			}
+			window.$userMenuContentDivTable.html(html.join(''));
 		}
-		window.$userMenuContentDivTable.html(html.join(''));
 
 	});		
 

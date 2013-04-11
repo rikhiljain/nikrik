@@ -6,7 +6,8 @@ class LoyaltyController < ApplicationController
     if (user_signed_in? && (current_user.has_role? :user) )
       user_id = current_user.id
     else
-      render :json => { :status => :redirect, :to => "/login" }.to_json
+      render :json => { :status => :redirect, :to => "/login"
+       }.to_json
       return
     end
 
@@ -107,6 +108,9 @@ class LoyaltyController < ApplicationController
     user_id = 0
     if (user_signed_in? && (current_user.has_role? :user) )
       user_id = current_user.id
+    else
+      render :json => { :status => :redirect, :to => "/login"  }.to_json
+      return
     end
   	@referrals = Loyalty::Referral.find_by_user(user_id)
   	
@@ -165,6 +169,18 @@ class LoyaltyController < ApplicationController
           point.ref_id = reward.id
           point.desc = 'Purchased item - <br>' + reward.name
           point.save
+
+          order = Order.new
+          order.reward_id = reward.id;
+          order.user_id = current_user.id
+          order.points = reward.points
+          order.status = 'In Progress'
+          order.desc =  reward.name
+          order.address = params[:address]
+          order.mobile = params[:mobile]
+          order.name = current_user.name
+          order.save
+          
           result[:result] = true
           result[:resultDesc] = ""
         end
