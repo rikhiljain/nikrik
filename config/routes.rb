@@ -80,6 +80,9 @@ Nikrik::Application.routes.draw do
   resources :orders
  
   match "/delayed_job" => DelayedJobWeb, :anchor => false
+  match 'auth/facebook/callback', to: 'omniauth_callbacks#facebook'
+  match 'auth/failure', to: redirect('/')
+  match 'signout', to: 'sessions#destroy', as: 'signout'
 
   root :to => "welcome#index"
 

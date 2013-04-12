@@ -34,13 +34,15 @@ end
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
+#gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
+#gem 'capistrano'
 
 # To use debugger
 gem 'debugger'
-gem 'daemons', "~> 1.1.9"
+#gem 'daemons', "~> 1.1.9"
 gem 'delayed_job_active_record', '~> 0.4.1'
 gem "delayed_job_web" , "~> 1.1.2"
+#gem 'omniauth'
+gem 'omniauth-facebook'
