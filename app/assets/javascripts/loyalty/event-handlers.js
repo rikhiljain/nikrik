@@ -37,9 +37,39 @@ function __loyalty__myLinksClickHandlers(id, href){
 }
 
 function __loyalty__populateOrders(){
-	__loyalty__getJsonAndPopulateTable("/orders/user_orders.json", ["Id:id","Ordare Date:created_at","Order Status:status","Shipped Address:address","Reward Id:reward_id"], "My Orders",["id"],
-		function (data) {
+	window.$userMenuContentDivAlert.html("<h3>My Orders</h3>");
+	var html = [], h = -1;
+	$.jsonRequest({
+        url: "/orders/user_orders",
+        type: "GET",
+        success:  function(data){
+		html[++h] = "<table class='table table-striped table-centered'>";
+		html[++h] = "<thead><tr><th>Order Date</th>";
+		html[++h] = "<th>Order Number</th>";
+		html[++h] = "<th>Order Status</th>";
+		html[++h] = "<th>Points</th>";
+		html[++h] = "<th>Order Details</th>";
+		html[++h] = "</tr></thead><tbody>";
+		for(var result, i = -1; result = data[++i];){
+			html[++h] = "<tr><td>";
+			html[++h] = result.created_at
+			html[++h] = "</td><td>";
+			html[++h] = result.order_num;
+			html[++h] = "</td><td>";
+			html[++h] = result.status;
+			html[++h] = "</td><td>";
+			html[++h] = result.points;
+			html[++h] = "</td><td style='white-space: pre-wrap;' >";
+			html[++h] =  "<strong>Purchased item - </strong><br>" + result.desc + "<br><strong>Shipping Address:</strong><br>" + result.address;
+			html[++h] = "</td></tr>";
+		}
+		html[++h] = "</tbody></table>";
+		window.$userMenuContentDivTable.html(html.join(''));
+
+	}
+
 	});		
+		
 }
 
 function __loyalty__populatePolicies(){
@@ -47,22 +77,27 @@ function __loyalty__populatePolicies(){
 	var motorHtml = [], m = -1;
 	var healthHtml = [], h = -1;
 	var travelHtml = [], t = -1;
-	$.getJSON("/policies/policies.json",function(result){
-		for(var data, i = -1; data = result[++i];){
-			if(data.policy_type.toUpperCase() == "MOTOR"){
-				motorHtml[++m] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
-			}else if(data.policy_type.toUpperCase() == "HEALTH"){
-				healthHtml[++h] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
-			}else if(data.policy_type.toUpperCase() == "TRAVEL"){
-				travelHtml[++t] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
+
+	$.jsonRequest({
+        url: "/policies/policies",
+        type: "GET",
+        success: function(result){
+			for(var data, i = -1; data = result[++i];){
+				if(data.policy_type.toUpperCase() == "MOTOR"){
+					motorHtml[++m] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
+				}else if(data.policy_type.toUpperCase() == "HEALTH"){
+					healthHtml[++h] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
+				}else if(data.policy_type.toUpperCase() == "TRAVEL"){
+					travelHtml[++t] = "<tr>"+"<td>"+data.policy_id+"</td>"+"<td>"+data.start_date+"</td>"+"<td>"+data.end_date+"</td>"+"<td>"+data.premium+"</td>"+"<td>"+data.company_name+"</td>"+"</tr>";
+				}
 			}
+			$("[id=userPoliciesMotorTabTbody]").html(motorHtml.join(''));
+			$("[id=userPoliciesHealthTabTbody]").html(healthHtml.join(''));
+			$("[id=userPoliciesTravelTabTbody]").html(travelHtml.join(''));
+			window.$userMenuContentDivTable.html("");
+			window.$userMenuContentDivTable.html($("[id=userPoliciesDiv]").html());
+			$('#userPoliciesTab a').click(function(e){e.preventDefault(); $(this).tab('show');});
 		}
-		$("[id=userPoliciesMotorTabTbody]").html(motorHtml.join(''));
-		$("[id=userPoliciesHealthTabTbody]").html(healthHtml.join(''));
-		$("[id=userPoliciesTravelTabTbody]").html(travelHtml.join(''));
-		window.$userMenuContentDivTable.html("");
-		window.$userMenuContentDivTable.html($("[id=userPoliciesDiv]").html());
-		$('#userPoliciesTab a').click(function(e){e.preventDefault(); $(this).tab('show');});
 	});		
 }
 
@@ -70,7 +105,11 @@ function __loyalty__populateReferrals(address, referralId){
 
 	window.$userMenuContentDivAlert[0].innerHTML = "<h3>My Referrals</h3>";
 	var html = [], h = -1;
-	$.getJSON("/loyalty/user_referrals.json",function(data){
+
+	$.jsonRequest({
+        url: "/loyalty/user_referrals",
+        type: "GET",
+        success: function(data){
 		for(var result, i = -1; result = data[++i];){
 			html[++h] = "<table class='userReferralTable' ><tbody><tr><td><strong>Status : </strong>";
 			html[++h] = result.status
@@ -84,8 +123,9 @@ function __loyalty__populateReferrals(address, referralId){
 			html[++h] = result.ref_desc;
 			html[++h] = "</div></td></tr></tbody></table>";
 			
+			}
+			window.$userMenuContentDivTable.html(html.join(''));
 		}
-		window.$userMenuContentDivTable.html(html.join(''));
 
 	});		
 
@@ -94,8 +134,11 @@ function __loyalty__populateReferrals(address, referralId){
 function __loyalty__populatePoints(){
 	window.$userMenuContentDivAlert[0].innerHTML = "<h3>My Points</h3>";
 	var html = [], h = -1;
-	$.getJSON("/loyalty/points.json",function(data){
-		html[++h] = "<p>Total Available Points = " + data.total_points + "</p>";
+	$.jsonRequest({
+        url: "/loyalty/points",
+        type: "GET",
+        success:  function(data){
+		html[++h] = "<p><strong>Total Available Points = " + data.total_points + "</strong></p>";
 		html[++h] = "<table class='table table-striped table-centered'>";
 		html[++h] = "<thead><tr><th>Transaction Date</th>";
 		html[++h] = "<th>Description</th>";
@@ -107,17 +150,30 @@ function __loyalty__populatePoints(){
 			html[++h] = "<tr><td>";
 			html[++h] = result.created_at
 			html[++h] = "</td><td>";
-			html[++h] = result.ref_type;
+			html[++h] = result.desc;
 			html[++h] = "</td><td>";
 			html[++h] = result.value
 			html[++h] = "</td><td>";
-			html[++h] = result.status;
+			if( result.status == 'EARNED')
+			{
+				html[++h] = 'CREDIT';	
+			}
+			else if (result.status == 'USED') 
+			{
+				html[++h] = 'DEBIT';
+			}
+			else if (result.status == 'EXPIRED') {
+				html[++h] = 'CANCEL';
+			}
+			
 			html[++h] = "</td><td>";
-			html[++h] = result.exp_at;
+			html[++h] = result.exp_dt;
 			html[++h] = "</td></tr>";
 		}
 		html[++h] = "</tbody></table>";
 		window.$userMenuContentDivTable.html(html.join(''));
+
+	}
 
 	});		
 
@@ -144,7 +200,7 @@ function __loyalty__populateRewards(){
 			html[++h] = "<img src='/assets/rewards/"+ result.image_name +"''></img>";
 			html[++h] = "<p><span class='label label-info'>"+result.name + ", " + result.points + " Points" +"</span></p>";
 			html[++h] = "<p><button class='btn btn-link' type='button' onClick='__loyalty__rewardsDescription("+JSON.stringify(result)+")'>"+result.details+"</button></p>";
-			html[++h] = "<p><button class='btn btn-danger' type='button' onClick='__loyalty__confirmUserPoints("+JSON.stringify(result)+")'>Qty 1 -  Select</button></p>";
+			html[++h] = "<p><button class='btn btn-danger' type='button' onClick='__loyalty__confirmUserPoints("+JSON.stringify(result)+")'>Select</button></p>";
 		}
 		html[++h] = "</tr></tbody></table>";
 		window.$userMenuContentDivTable.html(html.join(''));
@@ -170,10 +226,10 @@ function __loyalty__confirmUserPoints(result){
 			__loyalty__buildErrorMessageForSignin();
 		}else{
 			if(data.total_points < result.points){
-				__loyalty__buildErrorMessageForPoints(result, data.total_points);
+				__loyalty__buildErrorMessageForPoints(result, data);
 			}
 			else{
-				__loyalty__buildSuccessMessageForPoints(result, data.total_points);
+				__loyalty__buildSuccessMessageForPoints(result, data);
 			}
 		}
 	});	
@@ -193,10 +249,7 @@ function __loyalty__confirmPurchase(id){
         timeout: 100000, //3 second timeout
         data: serializedJSON,
 
-          complete: function() {
-            //called when complete
-          },
-
+        
           success: function( data) {
             //called when successful
             if(data.result == true)
@@ -231,7 +284,7 @@ function __loyalty__rewardsDescription(result){
 	window.$rewardDetailsModal.find(".third").html("Reward points: " + result.points);
 	window.$rewardDetailsModal.find(".fourth").html(result.description);
 	//window.$rewardDetailsModal.find(".fifth").attr("reward", JSON.stringify(result));
-	window.$rewardDetailsModal.find(".fifth").text("Qty 1 - Select");	
+	window.$rewardDetailsModal.find(".fifth").text("Select");	
 	window.$rewardDetailsModal.find(".fifth").unbind('click');
 	window.$rewardDetailsModal.find(".fifth").click(function(){__loyalty__confirmUserPoints(result)});
 	window.$rewardDetailsModal.show();
@@ -239,9 +292,9 @@ function __loyalty__rewardsDescription(result){
 }
 
 
-function __loyalty__buildErrorMessageForPoints(result, userPoints){
+function __loyalty__buildErrorMessageForPoints(result, data){
 	var message = "<p>You don't seem to have the sufficient reward points to proceed with the purchase. Please check your reward points balance.</p>";
-	message +=  "<p><strong>Current balance: "+userPoints+"</p>";
+	message +=  "<p><strong>Current balance: "+data.total_points+"</p>";
 	message +=  "<p><strong>Points required: " + result.points+"</p>";
 	window.$errorModal.find(".first").html(message);
 	window.$rewardDetailsModal.hide();
@@ -250,9 +303,9 @@ function __loyalty__buildErrorMessageForPoints(result, userPoints){
 	window.$rewardDeatilsOrErrorModal.modal();
 }
 
-function __loyalty__buildSuccessMessageForPoints(result, userPoints){
-	var message = "<p>You have sufficient reward points to proceed with the purchase. Please confirm your purchase.</p>";
-	message +=  "<p><strong>Current balance: "+userPoints+"</p>";
+function __loyalty__buildSuccessMessageForPoints(result, data){
+	var message = "<p>You have sufficient reward points to proceed with the purchase.</p>";
+	message +=  "<p><strong>Current balance: "+data.total_points+"</p>";
 	message +=  "<p><strong>Points required: " + result.points+"</p>";
 	window.$rewardDetailsModal.find(".notification").html(message);
 	window.$rewardDetailsModal.find(".notification").show();
@@ -262,11 +315,33 @@ function __loyalty__buildSuccessMessageForPoints(result, userPoints){
 	window.$rewardDetailsModal.find(".third").html("Reward points: " + result.points);
 	window.$rewardDetailsModal.find(".fourth").html(result.description);
 	//window.$rewardDetailsModal.find(".fifth").attr("reward", JSON.stringify(result));
-	window.$rewardDetailsModal.find(".fifth").text("Qty 1 - Confirm");	
+	window.$rewardDetailsModal.find(".fifth").text("Purchase");	
+	window.$rewardDetailsModal.find(".fifth").unbind('click');
+	window.$rewardDetailsModal.find(".fifth").click(function(){__loyalty__purchase(result, data)});	
+	window.$errorModal.hide();
+	window.$successModal.hide();
+	window.$rewardDetailsModal.show();
+	window.$rewardDeatilsOrErrorModal.modal();
+}
+
+function __loyalty__purchase(result, data){
+	var message = "<p>Pease verify your address and confirm your purchase.</p>";
+	message +=  "<p><strong>Current balance: "+data.total_points+"</p>";
+	message +=  "<p><strong>Points required: " + result.points+"</p>";
+	window.$rewardDetailsModal.find(".notification").html(message);
+	window.$rewardDetailsModal.find(".notification").show();
+
+	window.$rewardDetailsModal.find(".first").html(result.details);
+	window.$rewardDetailsModal.find(".second").attr("src", "/assets/rewards/"+ result.image_name);
+	window.$rewardDetailsModal.find(".third").html("Reward points: " + result.points);
+	window.$rewardDetailsModal.find(".fourth").html(data.address);
+	//window.$rewardDetailsModal.find(".fifth").attr("reward", JSON.stringify(result));
+	window.$rewardDetailsModal.find(".fifth").text("Purchase");	
 	window.$rewardDetailsModal.find(".fifth").unbind('click');
 	window.$rewardDetailsModal.find(".fifth").click(function(){__loyalty__confirmPurchase(result.id)});	
 	window.$errorModal.hide();
-	window.$successModal.hide();
+	window.$
+	.hide();
 	window.$rewardDetailsModal.show();
 	window.$rewardDeatilsOrErrorModal.modal();
 }

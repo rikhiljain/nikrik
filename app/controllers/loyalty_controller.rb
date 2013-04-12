@@ -5,6 +5,10 @@ class LoyaltyController < ApplicationController
     user_id = 0
     if (user_signed_in? && (current_user.has_role? :user) )
       user_id = current_user.id
+    else
+      render :json => { :status => :redirect, :to => "/login"
+       }.to_json
+      return
     end
 
     @points = Loyalty::Point.find_by_user(user_id)
@@ -83,6 +87,8 @@ class LoyaltyController < ApplicationController
       point.ref_type =  'REFERRAL'
       point.exp_dt = Time.now + 1.year
       point.ref_id = @referral.id
+      point.desc = "Referral given for - <br>" + @referral.ref_name
+      new_referral[:points] = points
       point.save
 
     end
@@ -102,6 +108,9 @@ class LoyaltyController < ApplicationController
     user_id = 0
     if (user_signed_in? && (current_user.has_role? :user) )
       user_id = current_user.id
+    else
+      render :json => { :status => :redirect, :to => "/login"  }.to_json
+      return
     end
   	@referrals = Loyalty::Referral.find_by_user(user_id)
   	
@@ -129,9 +138,12 @@ class LoyaltyController < ApplicationController
       @total_points = m_total_points(points)
       result[:operationResult] = true
       result[:total_points] = @total_points
+      result[:address] = current_user.address
+      result[:mobile] = current_user.mobile
     else
       result[:operationResult] = false
     end
+   
     respond_to do |format|
       format.html { render :template => '/loyalty/purchase' }
       format.json { render json: result }
@@ -156,10 +168,25 @@ class LoyaltyController < ApplicationController
           point.status = 'USED'
           point.ref_type =  'REWARD'
           point.ref_id = reward.id
+          point.desc = 'Purchased item - <br>' + reward.name
           point.save
+
+          order = Order.new
+          order.reward_id = reward.id;
+          order.user_id = current_user.id
+          order.points = reward.points
+          order.status = 'In Progress'
+          order.desc =  reward.name
+          order.address = params[:address]
+          order.mobile = params[:mobile]
+          order.name = current_user.name
+          order.order_num = "OD" + current_user.id.to_s + reward.id.to_s + Order.maximum("id").to_s
+          order.save
+
           result[:result] = true
           result[:resultDesc] = ""
         end
+        
       else
         result[:result] = false
         result[:resultCode] = "NOT_LOGGED_IN"
@@ -171,28 +198,19 @@ class LoyaltyController < ApplicationController
       end
   end
 
-  def details
-    reward =  Loyalty::Point.find(params[:id])
-    if params[:type] = 'REWARD'
-
-    else
-    
-    end
-
-  end
-
-def m_total_points(points)
   
-  total_points = 0
-  points.each do |point|
-    if point.status == 'EARNED'
-      total_points += point.value
+  def m_total_points(points)
+    
+    total_points = 0
+    points.each do |point|
+      if point.status == 'EARNED'
+        total_points += point.value
+      end
+      if point.status == 'USED'
+        total_points -= point.value
+      end
     end
-    if point.status == 'USED'
-      total_points -= point.value
-    end
+    return total_points
   end
-  return total_points
-end
 
 end

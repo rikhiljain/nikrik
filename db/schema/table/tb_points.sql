@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `points` (
   `ref_type` varchar(10) DEFAULT NULL,
   `ref_id` int(11) DEFAULT NULL,
   `value` int(11) DEFAULT NULL,
+  `desc` varchar(250) DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL,
   `exp_dt` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL,

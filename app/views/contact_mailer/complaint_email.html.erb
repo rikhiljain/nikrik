@@ -6,8 +6,8 @@
 <body style="font-size:1.2em; letter-spacing:1px;padding: 4px;" >
 Dear <%=@contact.name%>,<br/><br/>
 Greetings from InsuranceShopee.com! <br/> <br/>
-A very sincere thanks for your interest. We will contact you very shortly. <br/>
-Please find below your request details.<br/><br/><br/>
+Sorry for Inconvenience, Your complaint has been registered with us. We will work on your complaint and contact you very soon.<br/>
+Please find below your complaint details.<br/><br/><br/>
 
 <table border="1" cellpadding="5" cellspacing="1" >
 <tr>
@@ -23,11 +23,11 @@ Please find below your request details.<br/><br/><br/>
 	<td><%=@contact.product %></td>
 </tr>
 <tr>
-	<td style="background: #def5e5;font-weight:bold;">Your Address</td>
-	<td style="white-space: pre-wrap;"><%=@contact.address %></td>
+	<td style="background: #def5e5;font-weight:bold;">Subject</td>
+	<td><%=@contact.subject %></td>
 </tr>
 <tr>
-	<td style="background: #def5e5;font-weight:bold;">Request Details</td>
+	<td style="background: #def5e5;font-weight:bold;">Complaint Details</td>
 	<td style="white-space: pre-wrap;"  ><%=@contact.message%></td>
 </tr>
 </table>
