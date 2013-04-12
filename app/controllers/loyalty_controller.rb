@@ -143,6 +143,7 @@ class LoyaltyController < ApplicationController
     else
       result[:operationResult] = false
     end
+   
     respond_to do |format|
       format.html { render :template => '/loyalty/purchase' }
       format.json { render json: result }
@@ -179,11 +180,13 @@ class LoyaltyController < ApplicationController
           order.address = params[:address]
           order.mobile = params[:mobile]
           order.name = current_user.name
+          order.order_num = "OD" + current_user.id.to_s + reward.id.to_s + Order.maximum("id").to_s
           order.save
-          
+
           result[:result] = true
           result[:resultDesc] = ""
         end
+        
       else
         result[:result] = false
         result[:resultCode] = "NOT_LOGGED_IN"

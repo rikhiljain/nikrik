@@ -54,7 +54,7 @@ function __loyalty__populateOrders(){
 			html[++h] = "<tr><td>";
 			html[++h] = result.created_at
 			html[++h] = "</td><td>";
-			html[++h] = "";
+			html[++h] = result.order_num;
 			html[++h] = "</td><td>";
 			html[++h] = result.status;
 			html[++h] = "</td><td>";
