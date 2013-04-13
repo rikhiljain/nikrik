@@ -205,7 +205,11 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
- 
+ #GOOGLE_API_ID: "817304078239.apps.googleusercontent.com"
+#GOOGLE_SECRET: "oUk3oDLb2Z-BNICnRNtPJtAK"
+#FACEBOOK_APP_ID: "124210724437097"
+#FACEBOOK_SECRET: "dc72c56a60e358038faa43c389c8b09a"
+
   require "omniauth-facebook"
   config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'], {:client_options => {:ssl => {:verify => false}}}
 

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.9'
 gem 'devise', ">= 2.1.2"
+gem 'devise-encryptable'
 gem 'mysql2'
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
@@ -12,7 +13,6 @@ gem "simple_form", ">= 2.0.3"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-#gem 'sqlite3'
 
 
 # Gems used only for assets and not required
@@ -34,15 +34,17 @@ end
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-#gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
-#gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 gem 'debugger'
-#gem 'daemons', "~> 1.1.9"
+gem 'daemons', "~> 1.1.9"
 gem 'delayed_job_active_record', '~> 0.4.1'
 gem "delayed_job_web" , "~> 1.1.2"
-#gem 'omniauth'
-gem 'omniauth-facebook'
+
+gem 'omniauth'
+gem 'omniauth-facebook', '1.4.0'
+gem 'omniauth-google-oauth2'

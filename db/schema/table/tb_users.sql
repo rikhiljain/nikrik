@@ -15,6 +15,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` varchar(50) DEFAULT NULL,
   `mobile` varchar(11) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
+  `provider` varchar(20) DEFAULT NULL,
+  `uid` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_email` (`email`),
   UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`)
