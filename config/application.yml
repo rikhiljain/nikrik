@@ -9,3 +9,8 @@ test:
   host: "test.local"
 production:
   host: "insuranceshopee.com"
+
+GOOGLE_API_ID: "817304078239.apps.googleusercontent.com"
+GOOGLE_SECRET: "oUk3oDLb2Z-BNICnRNtPJtAK"
+FACEBOOK_APP_ID: "124210724437097"
+FACEBOOK_SECRET: "dc72c56a60e358038faa43c389c8b09a"
