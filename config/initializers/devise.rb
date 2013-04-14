@@ -4,7 +4,7 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+  config.mailer_sender = "admin@insuranceshopee.com"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -205,16 +205,12 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
- #GOOGLE_API_ID: "817304078239.apps.googleusercontent.com"
-#GOOGLE_SECRET: "oUk3oDLb2Z-BNICnRNtPJtAK"
-#FACEBOOK_APP_ID: "124210724437097"
-#FACEBOOK_SECRET: "dc72c56a60e358038faa43c389c8b09a"
 
   require "omniauth-facebook"
-  config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'], {:client_options => {:ssl => {:verify => false}}}
+  config.omniauth :facebook, CONFIG[:facebook_api_id], CONFIG[:facebook_secret], {:client_options => {:ssl => {:verify => false}}}
 
   require "omniauth-google-oauth2"
-  config.omniauth :google_oauth2, ENV['GOOGLE_APP_ID'], ENV['GOOGLE_SECRET'], { access_type: "offline", approval_prompt: "" , :client_options => {:ssl => {:verify => false}} }
+  config.omniauth :google_oauth2, CONFIG[:google_api_id], CONFIG[:google_secret], { access_type: "offline", approval_prompt: "" , :client_options => {:ssl => {:verify => false}} }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

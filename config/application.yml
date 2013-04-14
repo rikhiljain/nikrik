@@ -5,12 +5,16 @@ mail_username: "admin@insuranceshopee.com"
 mail_password: "rugudwalyimigmfd"
 development:
   host: "localhost:3000"
+  google_api_id: "817304078239.apps.googleusercontent.com"
+  google_secret: "oUk3oDLb2Z-BNICnRNtPJtAK"
+  facebook_api_id: "124210724437097"
+  facebook_secret: "dc72c56a60e358038faa43c389c8b09a"
 test:
   host: "test.local"
 production:
   host: "insuranceshopee.com"
+  google_api_id: "817304078239.apps.googleusercontent.com"
+  google_secret: "oUk3oDLb2Z-BNICnRNtPJtAK"
+  facebook_api_id: "124210724437097"
+  facebook_secret: "dc72c56a60e358038faa43c389c8b09a"
 
-GOOGLE_API_ID: "817304078239.apps.googleusercontent.com"
-GOOGLE_SECRET: "oUk3oDLb2Z-BNICnRNtPJtAK"
-FACEBOOK_APP_ID: "124210724437097"
-FACEBOOK_SECRET: "dc72c56a60e358038faa43c389c8b09a"

@@ -60,4 +60,9 @@ git config --global http.sslVerify false
 
 rails g scaffold order  reward_id:integer user_id:integer name:string mobile:string address:string status:string
 
+You are right that the gem is not loaded, even though I had run bundle install and restarted unicorn. The problem is with unicorn that requires to be restarted with:
 
+  /etc/init.d/unicorn_nikrik stop
+  /etc/init.d/unicorn_nikrik start
+
+ Doing this forces unicorn to load the gem; the standard capistrano restart does not do it...

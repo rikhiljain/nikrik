@@ -51,19 +51,19 @@ private
   end
 
 def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-  user = User.where(:provider => auth.provider, :uid => auth.uid).first
+  user = User.where("email = ? ", auth.info.email).first
+  #user = User.where(:provider => auth.provider, :uid => auth.uid).first
   unless user
-    user = User.where("email = ? ", auth.info.email).first
-    if user.nil?
-      user = User.create(name:auth.info.name,
+    user = User.create(name:auth.info.name,
                          provider:auth.provider,
                          uid:auth.uid,
                          email:auth.info.email,
                          address:auth.info.location,
                          password:Devise.friendly_token[0,20]
                          )
-      return user
-    end
+    return user
+  end
+  if (user.provider.blank? ||  user.provider != auth.provider)
     #Update provider details in the database
     user.update_attributes( :provider => auth.provider, :uid => auth.uid )
   end
@@ -71,18 +71,18 @@ def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
 end 
 
 def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
-  user = User.where(:provider => access_token.provider, :uid => access_token.uid).first
+  #user = User.where(:provider => access_token.provider, :uid => access_token.uid).first
+  user = User.where("email = ? ", access_token.info.email).first
   unless user
-    user = User.where("email = ? ", access_token.info.email).first
-    if user.nil?
-      user = User.create(name:access_token.info.name,
+    user = User.create(name:access_token.info.name,
                          provider:access_token.provider,
                          uid:access_token.uid,
                          email:access_token.info.email,
                          password:Devise.friendly_token[0,20]
                          )
-      return user
-    end
+    return user
+  end
+  if (user.provider.blank? ||  user.provider != access_token.provider)
     #Update provider details in the database
     user.update_attributes( :provider => access_token.provider, :uid => access_token.uid )
   end
