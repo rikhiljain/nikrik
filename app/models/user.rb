@@ -17,8 +17,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :login
 
-  validates_uniqueness_of :mobile
-  validates_presence_of :mobile, :name
+  validates_presence_of :name
 
   def self.search(term)
   if(term.nil?)
@@ -93,6 +92,11 @@ def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         user.email = data["email"] if user.email.blank?
+        user.name = data["name"] if user.name.blank?
+      end
+      if data = session["devise.google_data"] && session["devise.google_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+        user.name = data["name"] if user.name.blank?
       end
     end
 end
