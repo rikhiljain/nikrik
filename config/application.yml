@@ -5,8 +5,8 @@ mail_username: "admin@insuranceshopee.com"
 mail_password: "rugudwalyimigmfd"
 development:
   host: "localhost:3000"
-  google_api_id: "817304078239.apps.googleusercontent.com"
-  google_secret: "oUk3oDLb2Z-BNICnRNtPJtAK"
+  google_api_id: "817304078239-hncrsi9lt890j4binn1meeqnut9en3uc.apps.googleusercontent.com"
+  google_secret: "9n8npiu1MhWraOmZKWz5vhnT"
   facebook_api_id: "124210724437097"
   facebook_secret: "dc72c56a60e358038faa43c389c8b09a"
 test:
