@@ -179,6 +179,31 @@
  }
 }
 
+#signinForm{
+
+  height: 200px;
+
+  .divider-or {
+  width: 42px;
+  height: 42px;
+  //background: url("/assets/rewards/tupperware_best_lunch.png") no-repeat scroll -54px -39px transparent;
+  position: relative;
+  top: 65px;
+  right: -21px;
+  float:left;
+  }
+
+.social-connect {
+  padding-left: 55px;
+  border-left: 1px dotted #CCC;
+  border-bottom: 0;
+  border-top: 0;
+  padding-bottom: 100px;
+  margin-bottom: -2000px;
+  float:left;
+  }
+}
+
 //Class selectors
 //*************************************************************
 .is_border{
