@@ -138,7 +138,7 @@ function __loyalty__populatePoints(){
         url: "/loyalty/points",
         type: "GET",
         success:  function(data){
-		html[++h] = "<p><strong>Total Available Points = " + data.total_points + "</strong></p>";
+		html[++h] = "<p class='lead text-success'><strong>Total Available Points = " + data.total_points + "</strong></p>";
 		html[++h] = "<table class='table table-striped table-centered'>";
 		html[++h] = "<thead><tr><th>Transaction Date</th>";
 		html[++h] = "<th>Description</th>";
@@ -147,25 +147,41 @@ function __loyalty__populatePoints(){
 		html[++h] = "<th>Expiry Date</th>";
 		html[++h] = "</tr></thead><tbody>";
 		for(var result, i = -1; result = data.points[++i];){
-			html[++h] = "<tr><td>";
-			html[++h] = result.created_at
-			html[++h] = "</td><td>";
-			html[++h] = result.desc;
-			html[++h] = "</td><td>";
-			html[++h] = result.value
-			html[++h] = "</td><td>";
 			if( result.status == 'EARNED')
 			{
+				html[++h] = "<tr><td>";
+				html[++h] = result.created_at
+				html[++h] = "</td><td>";
+				html[++h] = result.desc;
+				html[++h] = "</td><td>";
+				html[++h] = '(<i class="icon-plus"></i>)';
+				html[++h] = result.value
+				html[++h] = "</td><td>";
 				html[++h] = 'CREDIT';	
+
 			}
 			else if (result.status == 'USED') 
 			{
-				html[++h] = 'DEBIT';
+				html[++h] = "<tr><td>";
+				html[++h] = result.created_at
+				html[++h] = "</td><td>";
+				html[++h] = result.desc;
+				html[++h] = "</td><td>";				
+				html[++h] = '(<i class="icon-minus"></i>)';
+				html[++h] = result.value
+				html[++h] = "</td><td>";	
+				html[++h] = 'DEBIT';			
 			}
 			else if (result.status == 'EXPIRED') {
-				html[++h] = 'CANCEL';
+				html[++h] = "<tr><td><strike>";
+				html[++h] = result.created_at
+				html[++h] = "</strike></td><td><strike>";
+				html[++h] = result.desc;
+				html[++h] = "</strike></td><td><strike>";
+				html[++h] = result.value
+				html[++h] = "</strike></td><td>";	
+				html[++h] = 'EXPIRED';							
 			}
-			
 			html[++h] = "</td><td>";
 			html[++h] = result.exp_dt;
 			html[++h] = "</td></tr>";
@@ -325,23 +341,33 @@ function __loyalty__buildSuccessMessageForPoints(result, data){
 }
 
 function __loyalty__purchase(result, data){
-	var message = "<p>Pease verify your address and confirm your purchase.</p>";
-	message +=  "<p><strong>Current balance: "+data.total_points+"</p>";
-	message +=  "<p><strong>Points required: " + result.points+"</p>";
+	var message = "<p><strong>Pease verify your address and make changes if any.<br/> Once done, please confirm your purchase.</strong></p>";
+	message +=  "<p>Current balance: "+data.total_points+"</p>";
+	message +=  "<p>Points required: " + result.points+"</p>";
+
+	message+="			   <hr/>";
+	message+="				<form>";
+	message+="				  <fieldset>";
+	message+="				    <label>Shipping Address</label>";
+	message+="				    <textarea rows='3' name='address'>"+data.address+"</textarea>";
+	message+="				    <label>Mobile Number</label>";
+	message+="				    <input type='text' value='"+data.mobile+"' name='mobile'></input>";
+	message+="				  </fieldset>";
+	message+="				</form>";
+
 	window.$rewardDetailsModal.find(".notification").html(message);
 	window.$rewardDetailsModal.find(".notification").show();
 
 	window.$rewardDetailsModal.find(".first").html(result.details);
 	window.$rewardDetailsModal.find(".second").attr("src", "/assets/rewards/"+ result.image_name);
 	window.$rewardDetailsModal.find(".third").html("Reward points: " + result.points);
-	window.$rewardDetailsModal.find(".fourth").html(data.address);
+	window.$rewardDetailsModal.find(".fourth").html(result.details);
 	//window.$rewardDetailsModal.find(".fifth").attr("reward", JSON.stringify(result));
-	window.$rewardDetailsModal.find(".fifth").text("Purchase");	
+	window.$rewardDetailsModal.find(".fifth").text("Confirm");	
 	window.$rewardDetailsModal.find(".fifth").unbind('click');
 	window.$rewardDetailsModal.find(".fifth").click(function(){__loyalty__confirmPurchase(result.id)});	
 	window.$errorModal.hide();
-	window.$
-	.hide();
+	window.$successModal.hide();
 	window.$rewardDetailsModal.show();
 	window.$rewardDeatilsOrErrorModal.modal();
 }
