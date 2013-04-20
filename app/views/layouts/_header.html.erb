@@ -3,9 +3,11 @@
     <div class="navbar-inner" id="firstLevelNavBar">
       <div class="container" style="height: 80px;">
         <a href="/welcome/index"><img src="/assets/ads/ScaledCompleteLogowithoutShadow.jpg" style="height: 104px;"/></a>
-        <span class="label label-info" id="missedCallSpan">
-             <abbr title="As soon as you call us. Your call will be disconnected and you will receive a SMS. Our executive will contact you as soon as possible."><i class="icon-phone"></i></abbr>Give a Miss Call At<br>+91-954041000
-        </span>
+         <% if (!user_signed_in?) || (!current_user.has_role? :admin) %>
+          <span class="label label-info" id="missedCallSpan">
+               <abbr title="As soon as you call us. Your call will be disconnected and you will receive a SMS. Our executive will contact you as soon as possible."><i class="icon-phone"></i></abbr>Give a Miss Call At<br>+91-954041000
+          </span>
+          <% end %>
         <ul class="nav second">
           <% if user_signed_in? %>
             <li>
