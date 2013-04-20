@@ -6,5 +6,8 @@ class Order < ActiveRecord::Base
   		where( "user_id = ?" , user_id).order( " created_at desc" )
   	end
 
- 
+ 	def get_reward
+ 		Reward.find(reward_id)
+ 	end
+
 end
