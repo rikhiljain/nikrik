@@ -1,6 +1,9 @@
 Nikrik::Application.routes.draw do
 
  
+  resources :reminders
+
+
   devise_for :users,:path => '', path_names:{sign_in: "login", sign_out: "logout"}, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   devise_scope :user do

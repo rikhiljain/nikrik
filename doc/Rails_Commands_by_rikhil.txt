@@ -66,3 +66,5 @@ You are right that the gem is not loaded, even though I had run bundle install a
   /etc/init.d/unicorn_nikrik start
 
  Doing this forces unicorn to load the gem; the standard capistrano restart does not do it...
+
+ rails g scaffold reminder name:string email:string mobile:string policy_type:string insurer_name:string day:integer month:string remarks:string user_id:integer
