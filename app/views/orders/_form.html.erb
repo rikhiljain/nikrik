@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :reward, :label_method => :name, :value_method => :id,  :prompt => "Select Reward", :required => true %>
+    <br/><strong>Reward Name : <%= @order.get_reward.name %></strong><br/>
     <%= f.input :user_id , label:'Customer ID', :required => true %>
     <%= f.input :name , label:'Customer Name', :required => true %>
     <%= f.input :mobile , label:'Customer Mobile'%>

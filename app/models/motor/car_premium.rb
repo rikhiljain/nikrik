@@ -250,7 +250,7 @@ class Motor::CarPremium < Motor::Premium
  end
 
   def m_ncb_amount(final_od)
-     if @input.has_claim
+     if (@input.has_claim || @input.new_policy )
        return 0
      end
      new_ncb = 0

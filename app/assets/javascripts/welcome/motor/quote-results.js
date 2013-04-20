@@ -107,7 +107,7 @@ function __motor__fillPremiumBreakupTable(id){
 	html[++h] = motorquote.aai_dis;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
-	html[++h] = "<tr><td>Deduct 0% for NCB</td><td>";
+	html[++h] = "<tr><td>Deduct NCB</td><td>";
 	html[++h] = motorquote.ncb_dis;
 	html[++h] = "</td><td colspan='2'></td></tr>";
 
