@@ -209,6 +209,17 @@
   }
 }
 
+#missedCallSpan{
+
+  text-align: center; 
+  margin-left: 20px; 
+  float:auto;
+  i{
+    font-size: 3*$baseFontSize;
+    float: left;
+  }
+}
+
 //Class selectors
 //*************************************************************
 .is_border{
