@@ -549,10 +549,16 @@ a:link, a:visited, a:active {
   }
 }
 
+
+
 #userMenuContentDivTable{
   > .userReferralTable:nth-child(even){
       background-color: $tableBackgroundAccent;
     }
+
+  .table thead th {
+    background-color: cyan;
+  }
 }
 
 //Element selectors
