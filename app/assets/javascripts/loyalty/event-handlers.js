@@ -256,6 +256,9 @@ function __loyalty__confirmUserPoints(result){
 function __loyalty__confirmPurchase(id){
 	var json = {};
 	json["id"] = id;
+	 $.map($("[id=orderDetailsForm]").serializeArray(), function(el, i){
+        json[el.name] = el.value;
+    });
 	serializedJSON = JSON.stringify(json);
   	$.ajax({
         url: "/loyalty/confirm/",
@@ -346,7 +349,7 @@ function __loyalty__purchase(result, data){
 	message +=  "<p>Points required: " + result.points+"</p>";
 
 	message+="			   <hr/>";
-	message+="				<form>";
+	message+="				<form id='orderDetailsForm' >";
 	message+="				  <fieldset>";
 	message+="				    <label>Shipping Address</label>";
 	message+="				    <textarea rows='3' name='address'>"+data.address+"</textarea>";
