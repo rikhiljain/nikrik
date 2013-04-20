@@ -111,18 +111,19 @@ function __loyalty__populateReferrals(address, referralId){
         type: "GET",
         success: function(data){
 		for(var result, i = -1; result = data[++i];){
-			html[++h] = "<table class='userReferralTable' ><tbody><tr><td><strong>Status : </strong>";
-			html[++h] = result.status
-			html[++h] = "</td><td ><strong>Referral Date : </strong>";
-			html[++h] = result.created_at;
-			html[++h] = "</td></tr><tr><td ><strong>Referral Name : </strong>";
-			html[++h] = result.ref_name
-			html[++h] = "</td><td><strong>Referral Mobile : </strong>";
-			html[++h] = result.ref_mobile;
-			html[++h] = "</td></tr><tr><td colspan='2' ><strong>Description : </strong><div>";
-			html[++h] = result.ref_desc;
-			html[++h] = "</div></td></tr></tbody></table>";
-			
+			html[++h] = "<dl class='dl-horizontal'>";
+			html[++h] = "  <dt>Status</dt>";
+			html[++h] = "  <dd>"+result.status+"</dd>";
+			html[++h] = "  <dt>Referral Date</dt>"
+			html[++h] = "  <dd>"+result.created_at+"</dd>";
+			html[++h] = "  <dt>Referral Name</dt>";
+			html[++h] = "  <dd>"+result.ref_name+"</dd>";
+			html[++h] = "  <dt>Referral Mobile</dt>";
+			html[++h] = "  <dd>"+result.ref_mobile+"</dd>";
+			html[++h] = "  <dt>Description </dt>";
+			html[++h] = "  <dd>"+result.ref_desc+"</dd>";
+			html[++h] = "</dl>";
+			html[++h] = "<hr/>";
 			}
 			window.$userMenuContentDivTable.html(html.join(''));
 		}
