@@ -220,6 +220,22 @@
   }
 }
 
+#myReferralLegend{
+  dl{
+  background-color: $infoBackground; 
+  color: $infoText; 
+  padding: 5px; 
+  border-right-width: 5px;
+  }
+  dt{
+  width: $horizontalComponentOffset/2 - 20px; 
+  text-align: left;
+  }
+  dd{
+  margin-left: $horizontalComponentOffset/2;
+  }
+}
+
 //Class selectors
 //*************************************************************
 .is_border{

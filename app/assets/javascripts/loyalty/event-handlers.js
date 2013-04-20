@@ -110,10 +110,23 @@ function __loyalty__populateReferrals(address, referralId){
         url: "/loyalty/user_referrals",
         type: "GET",
         success: function(data){
+			html[++h] = "	<div id='myReferralLegend'>";
+			html[++h] = "	<p class='info'><strong>LEGEND</strong></p>";
+			html[++h] = "	<dl class='dl-horizontal'>";
+			html[++h] = "	  <dt>OPEN</dt>";
+			html[++h] = "	  <dd>Either we have yet to establish the contact with the your friend or the discussions are in progress. Please confirm the status after some time.</dd>";
+			html[++h] = "	<br>";
+			html[++h] = "	  <dt>CLOSED</dt>";
+			html[++h] = "	  <dd>Your friend has dicided to purchase his/her next policy from us. Please verfiy that you have received the appropriate point by clicking on 'My Points' link.</dd>";
+			html[++h] = "	<br>";
+			html[++h] = "	  <dt>REJECTED</dt>";
+			html[++h] = "	  <dd>For now your friend has dicided not to change his/her insurance agent. You can refer him/her again if he/she is interested in future.</dd>";
+			html[++h] = "	</dl>";
+			html[++h] = "	</div> ";      	
 		for(var result, i = -1; result = data[++i];){
 			html[++h] = "<dl class='dl-horizontal'>";
 			html[++h] = "  <dt>Status</dt>";
-			html[++h] = "  <dd>"+result.status+"</dd>";
+			html[++h] = "  <dd>"+result.status+"*</dd>";
 			html[++h] = "  <dt>Referral Date</dt>"
 			html[++h] = "  <dd>"+result.created_at+"</dd>";
 			html[++h] = "  <dt>Referral Name</dt>";
