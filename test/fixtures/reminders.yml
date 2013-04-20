@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  email: MyString
+  mobile: MyString
+  policy_type: MyString
+  insurer_name: MyString
+  day: 1
+  month: MyString
+  remarks: MyString
+  user_id: 1
+
+two:
+  name: MyString
+  email: MyString
+  mobile: MyString
+  policy_type: MyString
+  insurer_name: MyString
+  day: 1
+  month: MyString
+  remarks: MyString
+  user_id: 1

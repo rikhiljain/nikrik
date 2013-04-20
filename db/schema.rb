@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404041519) do
+ActiveRecord::Schema.define(:version => 20130418135828) do
 
   create_table "companies", :force => true do |t|
     t.string   "name",       :limit => 20
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20130404041519) do
 
   create_table "health_charts", :force => true do |t|
     t.integer  "company_id",               :null => false
-    t.string   "plan",       :limit => 20
+    t.string   "plan",       :limit => 30
     t.integer  "coverage"
     t.integer  "age_start"
     t.integer  "age_end"
@@ -155,22 +155,26 @@ ActiveRecord::Schema.define(:version => 20130404041519) do
   create_table "orders", :force => true do |t|
     t.integer  "reward_id"
     t.integer  "user_id"
-    t.string   "name"
-    t.string   "mobile"
+    t.string   "name",       :limit => 50
+    t.string   "mobile",     :limit => 11
     t.string   "address"
-    t.string   "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "points",     :limit => 3
+    t.string   "desc",       :limit => 100
+    t.string   "status",     :limit => 20
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.string   "order_num",  :limit => 20,  :null => false
   end
 
   create_table "points", :force => true do |t|
     t.integer  "user_id"
-    t.string   "ref_type",   :limit => 10, :null => false
+    t.string   "ref_type",   :limit => 10,  :null => false
     t.integer  "ref_id"
     t.integer  "value"
+    t.string   "desc",       :limit => 250
     t.string   "status",     :limit => 10
     t.datetime "exp_dt"
-    t.datetime "created_at",               :null => false
+    t.datetime "created_at",                :null => false
   end
 
   create_table "policies", :force => true do |t|
@@ -211,20 +215,36 @@ ActiveRecord::Schema.define(:version => 20130404041519) do
     t.string   "ref_mobile", :limit => 10
     t.string   "ref_desc",   :limit => 200
     t.integer  "amount"
+    t.integer  "points",     :limit => 3
     t.string   "status",     :limit => 10,  :null => false
     t.datetime "created_at",                :null => false
   end
 
-  create_table "rewards", :force => true do |t|
+  create_table "reminders", :force => true do |t|
     t.string   "name"
-    t.string   "details"
+    t.string   "email"
+    t.string   "mobile"
+    t.string   "policy_type"
+    t.string   "insurer_name"
+    t.integer  "day"
+    t.string   "month"
+    t.string   "remarks"
+    t.integer  "user_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "rewards", :force => true do |t|
+    t.string   "name",        :limit => 50
+    t.string   "details",     :limit => 50
+    t.string   "description", :limit => 4000, :null => false
     t.integer  "points"
-    t.string   "image_name"
-    t.string   "status"
+    t.string   "image_name",  :limit => 50
+    t.string   "status",      :limit => 20
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -283,21 +303,23 @@ ActiveRecord::Schema.define(:version => 20130404041519) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :limit => 50, :default => "", :null => false
-    t.string   "encrypted_password",                   :default => "", :null => false
+    t.string   "email",                  :limit => 50,   :default => "", :null => false
+    t.string   "encrypted_password",                     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                        :default => 0
+    t.integer  "sign_in_count",                          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     :limit => 30
     t.string   "last_sign_in_ip",        :limit => 30
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
     t.string   "name",                   :limit => 50
     t.string   "mobile",                 :limit => 11
     t.string   "address"
+    t.string   "provider",               :limit => 1000
+    t.string   "uid",                    :limit => 100
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

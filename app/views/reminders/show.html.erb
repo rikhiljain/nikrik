@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @reminder.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @reminder.email %>
+</p>
+
+<p>
+  <b>Mobile:</b>
+  <%= @reminder.mobile %>
+</p>
+
+<p>
+  <b>Policy type:</b>
+  <%= @reminder.policy_type %>
+</p>
+
+<p>
+  <b>Insurer name:</b>
+  <%= @reminder.insurer_name %>
+</p>
+
+<p>
+  <b>Day:</b>
+  <%= @reminder.day %>
+</p>
+
+<p>
+  <b>Month:</b>
+  <%= @reminder.month %>
+</p>
+
+<p>
+  <b>Remarks:</b>
+  <%= @reminder.remarks %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @reminder.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_reminder_path(@reminder) %> |
+<%= link_to 'Back', reminders_path %>
