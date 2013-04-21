@@ -82,49 +82,36 @@ class Motor::IdvChartsController < ApplicationController
   end
   
   def distinctMakers
-	@results_distinctMakers = Motor::IdvChart.get_makers
-	#@options = Array.new
-
-	#@results.each do |val|
-	#	@options.push(SelectOption.new(val.maker,val.maker))
-  #end
-
-  options = @results_distinctMakers.map do |result|
-    {
-        optionDisplay: result.maker,
-        optionValue: result.maker
-    }
-  end
-	
-    respond_to do |format|
+  	results_distinctMakers = Motor::IdvChart.get_makers
+  	options = results_distinctMakers.map do |result|
+      {
+          optionDisplay: result.maker,
+          optionValue: result.maker
+      }
+    end
+	  respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => options}
       format.json { render :json => options}
-	end
+	  end
   end
   
   def models
-
-	 @results = Motor::IdvChart.get_models(params[:manufacturer])
-	 @options = Array.new
-
-	@results.each do |val|
-		@options.push(Motor::SelectOption.new(val.id,val.model+"-"+val.subtype))
-	end
+    results = Motor::IdvChart.get_models(params[:manufacturer])
+	  options = Array.new
+   	results.each do |val|
+  		options.push(Motor::SelectOption.new(val.id,val.model+"-"+val.subtype))
+  	end
 	
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @options}
-      format.json { render :json => @options}
-	end
-    end
+      format.xml  { render :xml =>  options}
+      format.json { render :json => options}
+	  end
+  end
 
   def motorValue
-
-    #mdate = DateTime.parse(params[:mdate])
-    mdate = Date.today
-    #mdate.year = params[:mdate]
-
+    mdate = DateTime.parse(params[:mdate])
     value = Motor::IdvChart.motor_value(params[:id], mdate)
     respond_to do |format|
       format.json { render :json => value}

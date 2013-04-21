@@ -136,7 +136,7 @@ class Motor::CarPremium < Motor::Premium
     now = Date.today
     age_in_years =  now.year - @input.register_date.year
      #Need to check boundary condition
-    if  now.year.month < @input.register_date.month
+    if  (now.month+2) < @input.register_date.month
        age_in_years -= 1
     end
     return age_in_years
@@ -178,27 +178,26 @@ class Motor::CarPremium < Motor::Premium
  end
 
  def m_motor_value
-   now = Date.today
-   age_in_months =  12 * (now.year -  @input.register_date.year) + now.month - @input.register_date.month
-
-   case age_in_months
-     when 0..6
+  now = Date.today
+  age_in_months =  12 * (now.year -  @input.register_date.year) + now.month - @input.register_date.month
+  case age_in_months
+     when 0..5
        @idv_chart.age_0_6
-     when 7..12
+     when 6..11
        @idv_chart.age_6_12
-     when 13..24
+     when 12..23
        @idv_chart.age_12_24
-     when 25..36
+     when 24..35
        @idv_chart.age_24_36
-     when 37..48
+     when 36..47
        @idv_chart.age_36_48
-     when 49..60
+     when 48..59
        @idv_chart.age_48_60
-     when 61..72
+     when 60..71
        @idv_chart.age_60_72
-     when 73..84
+     when 72..83
        @idv_chart.age_72_84
-     when 85..96
+     when 84..95
        @idv_chart.age_84_96
      else
        @idv_chart.age_96
