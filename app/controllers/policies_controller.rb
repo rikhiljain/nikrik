@@ -64,11 +64,12 @@ class PoliciesController < ApplicationController
     @policy = Policy.find(params[:id])
     new_policy = Policy.new(params[:policy])
     uploaded_io = params[:policy][:policy_path]
+    policy_type = params[:policy][:policy_type]
     unless uploaded_io.nil?
 
       file_name =   new_policy.policy_id.to_s + "_" +  new_policy.user_id.to_s  + File.extname(uploaded_io.original_filename)
 
-      file_upload_path = Rails.root.join('uploads', 'motor', new_policy.start_date.year.to_s, new_policy.start_date.month.to_s, @policy.company.name, file_name )
+      file_upload_path = Rails.root.join('uploads', policy_type, new_policy.start_date.year.to_s, new_policy.start_date.month.to_s, @policy.company.name, file_name )
       FileUtils.mkdir_p(File.dirname(file_upload_path))
       new_policy.policy_path =  file_upload_path.to_s
       File.open(file_upload_path, 'wb') do |file|
@@ -103,8 +104,11 @@ class PoliciesController < ApplicationController
 
   def download
     user_id = 0
-    unless user_signed_in? 
+    if user_signed_in? 
       user_id = current_user.id
+    else
+      render :json => { :status => :redirect, :to => "/login"  }.to_json
+      return
     end
 
     policy = Policy.find(params[:id])
@@ -126,11 +130,12 @@ class PoliciesController < ApplicationController
 
   def upload
     uploaded_io = params[:policy][:policy_path]
+    policy_type = params[:policy][:policy_type]
     unless uploaded_io.nil?
 
       file_name =   @policy.policy_id.to_s + "_" +  @policy.user_id.to_s  + File.extname(uploaded_io.original_filename)
 
-      file_upload_path = Rails.root.join('uploads', 'motor', @policy.start_date.year.to_s, @policy.start_date.month.to_s,@policy.company.name, file_name )
+      file_upload_path = Rails.root.join('uploads', policy_type, @policy.start_date.year.to_s, @policy.start_date.month.to_s,@policy.company.name, file_name )
 
       FileUtils.mkdir_p(File.dirname(file_upload_path))
       

@@ -1,0 +1,27 @@
+<html>
+<head>
+	<style type="text/css">
+	</style>
+</head>
+<body style="font-size:1.2em; letter-spacing:1px;padding: 4px;" >
+Dear <%=@policy.user.name %>,<br/><br/>
+Greetings from InsuranceShopee.com! <br/> <br/>
+A very sincere thanks for purchasing insurance policy with us. <br/>
+Please find below your contact details.<br/><br/><br/>
+
+<table border="1" cellpadding="5" cellspacing="1" >
+<tr>
+	<td style="background: #def5e5;font-weight:bold;">Your Mobile</td>
+	<td><%=@contact.mobile %></td>
+</tr>
+<tr>
+	<td style="background: #def5e5;font-weight:bold;">Your Email</td>
+	<td><%=@contact.email %></td>
+</tr>
+</table>
+<br>
+<br>
+Regards,<br>
+The InsuranceShopee Team<br>
+</body>
+</html>

@@ -8,6 +8,8 @@
       <th>Mobile</th>
       <th>Address</th>
       <th>Register Date</th>
+      <th></th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
@@ -37,7 +39,6 @@
               <% end %>
             </div>
           </td>
-          <td><%= link_to("Delete user", {:controller => "admin_users", :id => user.id } , :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %></td>     
         </tr>
     <% end %>
     </tbody>

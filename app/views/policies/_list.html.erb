@@ -1,9 +1,10 @@
-<fieldset style="width:800px">
+<fieldset>
 <legend>Policies List</legend>
 
 <table class="table table-bordered table-striped">
   <tr>
     <th>Policy</th>
+    <th>Policy Type</th>
     <th>User</th>
     <th>Company</th>
     <th>Start date</th>
@@ -12,17 +13,23 @@
     <th>Discount</th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
   <% @policies.each do |policy| %>
       <tr>
         <td><%= policy.policy_id %></td>
+        <td><%= policy.policy_type %></td>
         <td><%= policy.user.name %></td>
         <td><%= policy.company.name %></td>
         <td><%= policy.start_date %></td>
         <td><%= policy.end_date %></td>
         <td><%= policy.premium %></td>
         <td><%= policy.discount %></td>
+        <td><% unless  policy.policy_path.nil?%>
+            <%= link_to 'Download',  {:controller => "/policies", :action => "download", :id => policy.id } %>
+         <% end %>
+       </td>
         <td><%= link_to 'Show', {:controller => "/policies", :action => "show", :id => policy.id},  { :method => :get } %></td>
         <td><%= link_to 'Edit', {:controller => "/policies", :action => "edit", :id => policy.id}  %></td>
       </tr>
