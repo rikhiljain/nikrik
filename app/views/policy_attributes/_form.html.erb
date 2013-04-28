@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.association :company, :label_method => :name, :value_method => :id,  :prompt => "Select Company", :required => true %>
-    <%= f.input :policy_type ,:required => true, :prompt => "Select Type", :collection => [ "MOTOR", "HEALTH", "TRAVEL"] %>
+    <%= f.input :policy_type ,:required => true, :prompt => "Select Type", :collection => [ "Motor", "Health", "Travel"] %>
     <%= f.input :plan %>
     <%= f.input :attrib_name , :required => true %>
     <%= f.input :attrib_value , :required => true %>

@@ -7,7 +7,7 @@
     <%= f.error_notification %>
 
     <div class="form-inputs form-horizontal" >
-      <%= f.input :product, :required => true, :autofocus => true, :prompt => "Select Product Type",     :collection => [ "MOTOR", "HEALTH", "TRAVEL"] %>
+      <%= f.input :product, :required => true, :autofocus => true, :prompt => "Select Product Type",     :collection => [ "Motor", "Health", "Travel"] %>
        <%= f.input :name, :required => true %>
       <%= f.input :address, :required => true, :as => :text , :input_html => { :cols => 20, :rows => 5 } %>
        <%= f.input :email, :required => true %>

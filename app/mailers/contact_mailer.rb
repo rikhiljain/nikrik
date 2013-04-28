@@ -40,10 +40,10 @@ class ContactMailer < ActionMailer::Base
     mail(to: contact.email,  bcc: COMPANY_ADMIN_EMAIL, subject: 'Send advisor request to InsuranceShopee.com').deliver
   end
 
-  def upload_policy_email(poilcy)
-    @policy = policy
-    subject = policy.policy_type + " policy has been uploaded on InsuranceShopee.com"
-    mail(to: policy.user.email,  bcc: COMPANY_ADMIN_EMAIL, subject: subject).deliver
+  def upload_policy_email(policy)
+    @policy_hash = policy
+    subject = policy[:policy_type] + " policy has been uploaded on InsuranceShopee.com"
+    mail(to: policy[:user_email],  bcc: COMPANY_ADMIN_EMAIL, subject: subject).deliver
   end
 
 end

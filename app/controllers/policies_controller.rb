@@ -42,12 +42,20 @@ class PoliciesController < ApplicationController
   # POST /motor_policies.json
   def create
     @policy = Policy.new(params[:policy])
-     @is_edit = false
+    @is_edit = false
     upload
 
     respond_to do |format|
       if @policy.save
-        format.html { redirect_to "/admin_users/#{@policy.user_id}" , notice: 'Motor policy was successfully created.' }
+        unless @policy.policy_path.nil?
+          policy_hash = Policy.to_hash(@policy)
+          policy_hash[:user_email] =  @policy.user.email
+          policy_hash[:user_name] =  @policy.user.name
+          policy_hash[:company_name] =  @policy.company.name
+          policy_hash[:id] =  @policy.id
+          ContactMailer.delay.upload_policy_email(policy_hash)
+        end
+        format.html { redirect_to "/admin_users/#{@policy.user_id}" , notice: 'Policy was successfully created.' }
         format.json { render json: @policy, status: :created, location: @policy }
       else
         @user =  @policy.user
@@ -75,10 +83,18 @@ class PoliciesController < ApplicationController
       File.open(file_upload_path, 'wb') do |file|
         file.write(uploaded_io.read)
       end
+      
+      policy_hash = Policy.to_hash(new_policy)
+      policy_hash[:user_email] =  new_policy.user.email
+      policy_hash[:user_name] =  new_policy.user.name
+      policy_hash[:company_name] =  new_policy.company.name
+      policy_hash[:id] =  @policy.id
+      ContactMailer.delay.upload_policy_email(policy_hash)
+
     end
     respond_to do |format|
       if @policy.update_attributes(Policy.to_hash(new_policy))
-        format.html { redirect_to "/admin_users/#{@policy.user_id}" , notice: 'Motor policy was successfully created.' }
+        format.html { redirect_to "/admin_users/#{@policy.user_id}" , notice: 'Policy was successfully created.' }
         format.json { head :no_content }
       else
         @user =  @policy.user
@@ -143,6 +159,7 @@ class PoliciesController < ApplicationController
       File.open(file_upload_path, 'wb') do |file|
         file.write(uploaded_io.read)
       end
+     
     end
 
   end

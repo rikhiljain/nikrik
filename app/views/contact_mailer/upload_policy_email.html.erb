@@ -4,19 +4,37 @@
 	</style>
 </head>
 <body style="font-size:1.2em; letter-spacing:1px;padding: 4px;" >
-Dear <%=@policy.user.name %>,<br/><br/>
+Dear <%=@policy_hash[:user_name] %> ,<br/><br/>
 Greetings from InsuranceShopee.com! <br/> <br/>
 A very sincere thanks for purchasing insurance policy with us. <br/>
-Please find below your contact details.<br/><br/><br/>
 
+You can login using your email on  <a href="http://www.insuranceshopee.com/login">InsuranceShopee</a> and download your policy from our website.<br/> <br/>
+Please note that if you don't know your password then click <a href="http://www.insuranceshopee.com/password/new">Forgot your password?</a> link to reset your password.<br/><br/>
+Please find below your policy details.<br/><br/>
 <table border="1" cellpadding="5" cellspacing="1" >
 <tr>
-	<td style="background: #def5e5;font-weight:bold;">Your Mobile</td>
-	<td><%=@contact.mobile %></td>
+	<td style="background: #def5e5;font-weight:bold;">Policy Type</td>
+	<td><%=@policy_hash[:policy_type] %></td>
 </tr>
 <tr>
-	<td style="background: #def5e5;font-weight:bold;">Your Email</td>
-	<td><%=@contact.email %></td>
+	<td style="background: #def5e5;font-weight:bold;">Insurer Name</td>
+	<td><%=@policy_hash[:company_name] %></td>
+</tr>
+<tr>
+	<td style="background: #def5e5;font-weight:bold;">Policy Id</td>
+	<td><%=@policy_hash[:policy_id] %></td>
+</tr>
+<tr>
+	<td style="background: #def5e5;font-weight:bold;">Policy Start Date</td>
+	<td><%=@policy_hash[:start_date] %></td>
+</tr>
+<tr>
+	<td style="background: #def5e5;font-weight:bold;">Policy End Date</td>
+	<td><%=@policy_hash[:end_date] %></td>
+</tr>
+<tr>
+	<td style="background: #def5e5;font-weight:bold;">Final Premium</td>
+	<td><%=@policy_hash[:premium] %></td>
 </tr>
 </table>
 <br>

@@ -27,15 +27,18 @@ class Policy < ActiveRecord::Base
   end
 
   def self.to_hash(policy)
-    hash = { :company_id => policy.company_id,
+    hash = { :company_id => policy.company_id ,
              :discount => policy.discount,
              :end_date => policy.end_date,
              :policy_id => policy.policy_id,
-             :policy_path => policy.policy_path,
              :premium => policy.premium,
              :start_date => policy.start_date,
-             :user_id => policy.user_id
+             :user_id => policy.user_id,
+             :policy_type => policy.policy_type
             }
+    hash[:policy_path] = policy.policy_path unless policy.policy_path.nil?
+
+    return hash
   end
 
   def company_name
