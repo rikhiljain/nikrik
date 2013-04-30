@@ -51,7 +51,7 @@ function bindDatePickers(){
 	//$("[id=previousPolicyDetails] [id=date]").val(policyEndDate.getDate()+"-"+policyEndDate.getMonth()+1+"-"+policyEndDate.getFullYear());
 
 	var registrationDate = new Date();	
-	registrationDate.setYear(registrationDate.getFullYear()-5);
+	registrationDate.setYear(registrationDate.getFullYear());
 	window.$registerDate.datepicker({ dateFormat: "dd-mm-yy", constrainInput: "true", changeMonth: "true", changeYear: "true",defaultDate: registrationDate });
 	//$("[id=registrationDetails] [id=registerDate]").val(registrationDate.getDate()+"-"+registrationDate.getMonth()+1+"-"+registrationDate.getFullYear());
 }
