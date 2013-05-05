@@ -189,7 +189,7 @@ function __common__policyCompareActual(policyAttributes,map){
 	$("[id=policy_compare_model] [id=policy_compare_body]")[0].innerHTML = html.join('');
 
 	$('.datatable').dataTable({"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>", "sPaginationType": "bootstrap", "bPaginate": false,
-		    "aoColumnDefs": [{"bSortable":false,"aTargets":columnIndexes}]
+		    "aoColumnDefs": [{"bSortable":false,"aTargets":columnIndexes}], "aaSorting": []
 	});
 
 	$('#policy_compare_model').modal();
