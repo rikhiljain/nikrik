@@ -1,5 +1,6 @@
 <h2>Listing Policy Attributes</h2>
 
+<p><%= link_to 'Add Policy attribute', new_policy_attribute_path, :class => "btn" %></p>
 <table class="table table-bordered table-striped">
   <tr>
     <th>Company</th>
@@ -7,7 +8,6 @@
     <th>Plan</th>
     <th>Attribute name</th>
     <th>Attribute value</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -21,11 +21,8 @@
     <td><%= policy_attribute.attrib_value %></td>
     <td><%= link_to 'Show', policy_attribute %></td>
     <td><%= link_to 'Edit', edit_policy_attribute_path(policy_attribute) %></td>
-    <td><%= link_to 'Destroy', policy_attribute, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
-
+<p><%= link_to 'Add Policy attribute', new_policy_attribute_path, :class => "btn" %></p>
 <br />
-
-<%= link_to 'New Policy attribute', new_policy_attribute_path %>

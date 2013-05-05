@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS `policy_attributes` (
   `company_id` smallint(2) NOT NULL,
   `policy_type` varchar(20) NOT NULL,
   `plan` varchar(20) DEFAULT NULL,
+  `order_num` smallint(2) NOT NULL,
   `attrib_name` varchar(255) NOT NULL,
   `attrib_value` varchar(100) NOT NULL,
   `created_at` datetime NOT NULL,

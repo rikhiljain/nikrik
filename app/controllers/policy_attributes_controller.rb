@@ -4,7 +4,7 @@ class PolicyAttributesController < ApplicationController
   def index
      policy_type = params[:type]
      if ( policy_type.blank?)
-       @policy_attributes = PolicyAttribute.order("attrib_name asc, company_id asc").all
+       @policy_attributes = PolicyAttribute.order("order_num asc, company_id asc").all
      else
         @policy_attributes = PolicyAttribute.find_By_policy_type(policy_type)
      end
