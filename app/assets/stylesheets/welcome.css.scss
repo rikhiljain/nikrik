@@ -132,23 +132,28 @@
 #footerLevelNavBar{
   background-image: none;
   box-shadow: none;
-  background-color: $white;
-  background-image: linear-gradient(to bottom, $white, $white);
-  border-bottom: 4px solid $isHeaderBg;
-  min-height: $baseFontSize * 2;
+  border-top: 1px solid #CCC;
+  background-color: #fcfcfc;
+  margin-top: 23px;
+  padding-top: 0;
+  color: #848484;
+  background-image: linear-gradient(to bottom, #fcfcfc, #fcfcfc);
+  min-height: $baseFontSize * 5;
+  .container{
+    margin-top: 5px;
+  }
   li > a{
-    border-radius: 5px 5px 0 0;
-    background-color: $isHeaderBg;
-    color: $white;
     padding: 5px 20px;
     text-shadow: none;
   }
   .active > a, .active > a:focus{
     background-color: green;
   }
-  a:focus{
+  li > a:focus, li > a:hover{
     //font-size: $baseFontSize;
-    background-color: $isHeaderLinkHoverBg;
+    background-color: $white;
+    color: blue;
+    text-decoration:underline;
   }
 }
 
