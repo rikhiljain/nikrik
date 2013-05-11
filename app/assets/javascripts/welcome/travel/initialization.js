@@ -10,9 +10,11 @@ function __travel__initialize(reason){
 		window.$travelQuoteForm.each (function(){
 	  			this.reset();
 	 	});
+
+	 	window.$maxTripDurationCG.hide(); 	
+		window.$travelTotalDays.text('');
+		window.$travelEndDate.removeAttr('disabled');
 	 }
 
-	window.$maxTripDurationCG.hide(); 	
-	window.$travelTotalDays.text('');
-	window.$travelEndDate.removeAttr('disabled');			
+				
 }

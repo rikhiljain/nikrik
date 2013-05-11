@@ -1,7 +1,7 @@
 function __travel__bindAllEventHandlers(){
 	
 	$("[id=travelQuoteFormResetLink]").bind("click",function(e){
-		__travel__initialize();
+		__insurance__accordion__initialize();
 	});
 
 	window.$tripType.bind("change",function(){
@@ -74,7 +74,3 @@ function __travel__bindAllEventHandlers(){
 	});
 
 }
-
-	$("[id=travelQuoteFormResetLink]").bind("click",function(e){
-		__insurance__accordion__initialize();
-	});
