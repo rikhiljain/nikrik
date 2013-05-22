@@ -19,6 +19,7 @@
 //= require bootstrap
 //= require dataTables/jquery.dataTables
 //= require lonelytype/cluster
+//= require carouFredSel/jquery.carouFredSel-6.2.1
 
 //= require welcome/jquery-selectors
 //= require welcome/motor/jquery-selectors
@@ -160,7 +161,27 @@ window.allowedAccordionIndexes;
 
 		//Setting the event handlers for 'Motor', 'Health' and 'Travel' links.
 		//This is needed no matter what is being displayed.
-		secondLevelNavBarEventHandlers();	
+		secondLevelNavBarEventHandlers();
+		
+		$('#logoCarou').carouFredSel({
+			width: '100%',
+			items: {
+				visible: 'odd+2'
+			},
+			scroll: {
+				pauseOnHover: true,
+				onBefore: function() {
+					$(this).children().removeClass( 'hover' );
+				}
+			},
+			auto: {
+				items: 1,
+				easing: 'linear',
+				duration: 1250,
+				timeoutDuration: 0
+			}
+		});
+
 	});
 })(jQuery);
 

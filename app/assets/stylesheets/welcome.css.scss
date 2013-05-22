@@ -143,8 +143,9 @@
     margin-top: 5px;
   }
   li > a{
-    padding: 5px 20px;
+    padding: 5px 0px;
     text-shadow: none;
+    border-bottom: 1px solid #e4e4e4; 
   }
   .active > a, .active > a:focus{
     background-color: green;
@@ -238,6 +239,16 @@
   }
   dd{
   margin-left: $horizontalComponentOffset/2;
+  }
+}
+
+#logoCarou{
+  img{
+    padding-right: 20px;
+    width: 130px;
+    height: 35px;
+    display: block;
+    float: left;    
   }
 }
 
@@ -591,6 +602,12 @@ a:link, a:visited, a:active {
   .table thead th {
     background-color: cyan;
   }
+}
+
+.caroufredsel_wrapper[style]{
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  margin-left: 0px !important;
 }
 
 //Element selectors
