@@ -80,6 +80,8 @@
 
 //= require root/initialization
 
+//= require faqs/initialization
+
 //= require json-to-table
 
 //= require_self
@@ -234,8 +236,8 @@ function secondLevelNavBarEventHandlers(){
 		//This check is important so that if some one clicks on already active link. Nothing should happen.
 		if(window.currentSelection != "Rewards"){
 			$("[id=secondLevelNavBar] li").removeClass("active");
-			$(e.currentTarget).addClass("active");
 			__loyalty__myLinksClickHandlers($(this).attr("userMenuId"), $(this).attr("userMenuHref"));
+			$(e.currentTarget).addClass("active");
 		}
 		return false;
 	});	
@@ -246,7 +248,8 @@ function displayInsuranceShopeeDiv(){
 		//we need to show the insurance div and hide the devise div
 		$("[id=insuranceShopeeDiv]").show();
 		$("[id=deviseDiv]").hide();
-}			
+		$("[id=secondLevelNavBar] li").removeClass("active");
+	}			
 
 
 // Make sure that every Ajax request sends the CSRF token

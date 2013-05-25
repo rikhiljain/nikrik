@@ -1,0 +1,52 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+faqs {
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	faq {
+		display:block; 
+		pading-bottom: 5px;
+		margin-bottom: 5px;
+		border-bottom: 1px $grayLighter;
+		question {
+			clear: left;
+			symbol {
+				display: block;
+				float: left;
+				width: 20px;
+				overflow: hidden;
+				text-align: left;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				color: #289DEB;
+				font-weight: bold;
+			}
+			text {
+				display: block;
+				margin-left: 30px;
+				color: #289DEB;
+				font-weight: bold;
+			}
+
+		}
+		answer {
+			clear: left;
+			symbol {
+				display: block;
+				float: left;
+				width: 20px;
+				overflow: hidden;
+				text-align: left;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			text {
+				display: block;
+				margin-left: 30px;
+			}
+		}
+	}
+}
