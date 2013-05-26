@@ -60,6 +60,7 @@
       color: $white;
       padding: 5px 15px;
       text-shadow: none;
+      border-top: 2px $isHeaderBg solid;
     }
     li:first-child > a{
       border-radius: 10px 0px 0px 10px;
@@ -69,10 +70,10 @@
     }
     .active > a, .active > a:focus{
       background-color: green;
+
     } 
-    li > a:focus{
-      //font-size: $baseFontSize * 4;
-      background-color: $isHeaderLinkHoverBg;
+    li > a:focus, li > a:hover{
+      background-color: $isTooltipBackground;
     }
   }
   ul.first{
@@ -92,9 +93,9 @@
     .active > a, .active > a:focus{
       background-color: green;
     } 
-    a:hover{
+    li > a:focus, li > a:hover{
       //font-size: $baseFontSize;
-      background-color: $isHeaderLinkHoverBg;
+      background-color: $isTooltipBackground;
     }
    
   }
@@ -123,9 +124,9 @@
   .active > a, .active > a:focus{
     background-color: green;
   }
-  a:focus{
+  li > a:focus, li > a:hover{
     //font-size: $baseFontSize;
-    background-color: $isHeaderLinkHoverBg;
+    background-color: $isTooltipBackground;
   }
 }
 
