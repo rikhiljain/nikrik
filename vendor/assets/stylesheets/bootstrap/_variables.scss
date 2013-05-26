@@ -12,6 +12,7 @@ $isBarWarning:  		#FF9E00;
 $isHeaderBg:			#4284D3;
 $isBrand:				#04346C;
 $isHeaderLinkHoverBg:	#6899D3;
+$isTooltipBackground:	#153c8a;
 
 
 // Global values
@@ -261,7 +262,7 @@ $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
 // Tooltips and popovers
 // -------------------------
 $tooltipColor:            white !default;
-$tooltipBackground:       green !default;
+$tooltipBackground:       $isTooltipBackground !default;
 $tooltipArrowWidth:       5px !default;
 $tooltipArrowColor:       $tooltipBackground !default;
 

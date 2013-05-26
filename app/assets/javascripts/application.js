@@ -80,7 +80,7 @@
 
 //= require root/initialization
 
-//= require faqs/initialization
+//= require faqs
 
 //= require json-to-table
 
