@@ -1,10 +1,22 @@
 <h2>Listing Policy Attributes</h2>
+<div>
+<form method="get" action="/policy_attributes" class="form-horizontal" >
+  <select type="text" name="type" >
+   <option value="MOTOR" >MOTOR</option>
+   <option value="HEALTH" >HEALTH</option>
+   <option value="TRAVEL" >TRAVEL</option>
+ </select>
+ <input type="submit" name="search" value="Search" />
+</form>
+</div>
+
 
 <p><%= link_to 'Add Policy attribute', new_policy_attribute_path, :class => "btn" %></p>
 <table class="table table-bordered table-striped">
   <tr>
-    <th>Company</th>
     <th>Policy type</th>
+    <th>Order Number</th>
+    <th>Company</th>
     <th>Plan</th>
     <th>Attribute name</th>
     <th>Attribute value</th>
@@ -14,8 +26,9 @@
 
 <% @policy_attributes.each do |policy_attribute| %>
   <tr>
-    <td><%= policy_attribute.company_id %></td>
     <td><%= policy_attribute.policy_type %></td>
+    <td><%= policy_attribute.order_num %></td>
+    <td><%= policy_attribute.company.name %></td>
     <td><%= policy_attribute.plan %></td>
     <td><%= policy_attribute.attrib_name %></td>
     <td><%= policy_attribute.attrib_value %></td>

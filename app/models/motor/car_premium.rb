@@ -47,9 +47,9 @@ class Motor::CarPremium < Motor::Premium
       results.push( motor_quote )
 
     end
+    results = results.sort{|p1,p2| p1.final_premium <=> p2.final_premium} 
 
     return results
-
   end
 
   def m_get_discount( motor_discount)

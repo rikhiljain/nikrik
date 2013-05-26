@@ -58,6 +58,7 @@ def initialize( search)
      	Rails.logger.info "Final Premium= #{chart.premium}"
       results.push( health_quote )
     end
+    results = results.sort{|p1,p2| p1.final_premium <=> p2.final_premium}
     return results
   end
 
