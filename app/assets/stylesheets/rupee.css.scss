@@ -1,0 +1,19 @@
+@import "bootstrap/variables";
+
+
+@mixin rupee($fontSize, $color, $fontWeight) {
+    color: $color;
+    font-family: "Rupee Foradian";
+    font-size: $fontSize;
+    font-style: normal;
+    font-weight: $fontWeight;
+    text-decoration: none;
+}
+
+.rupeeLargeRed {
+	@include rupee($fontSizeLarge, $red, bold);
+}
+
+.rupee {
+	@include rupee($baseFontSize, $textColor, normal);
+}

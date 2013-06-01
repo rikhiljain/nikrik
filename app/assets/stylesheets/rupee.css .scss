@@ -1,0 +1,11 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+.rupee {
+    color: red;
+    font-family: "Rupee Foradian";
+    font-size: $fontSizeLarge;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+}
