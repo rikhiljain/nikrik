@@ -2,7 +2,6 @@ function __motor__populateStaticData(){
 	__motor__pouplateManufactureYear($("[id=vehicleDetails] [id=year_of_manufacture]"));	
 	__motor__populateNCB($ncb);
 	__motor__populateKit($kit);
-	__motor__populateKitPrice($kitPrice);
 }
 
 
@@ -47,11 +46,4 @@ var options = [
 	selectElement.html(options);	
 }
 
-function __motor__populateKitPrice(selectElement){
-	var options;
-	for (var i=10000; i <= 100000;i+=10000) { 
-		options += '<option value="' + i + '">' + i + '</option>';
-	 }
 
-	 selectElement.html(options);	
-}

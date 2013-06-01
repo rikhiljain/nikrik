@@ -30,12 +30,12 @@ function __motor__bindToolTips(){
 	$("[id=previousPolicyDetails] [id=claimsMade_icon]").tooltip({"title":"Please select yes if you have made any claims in previous policy, else please select no.", "placement":"right"});
 
 	$("[id=previousPolicyDetails] [id=ncb_icon]").tooltip({"title":"No claim bonus is a reward for not making claims during previous policy year. It allows you significant savings on the premium. To know your NCB please refer your current policy document.", "placement":"right"});
+	$("[id=previousPolicyDetails] [id=ncb]").tooltip({"title":"Incase of any incorrect information benefits of the policy shall stand forfeited.", "placement":"right"});
 
 	$("[id=protectionForAccessories] [id=elecAccessories_icon]").tooltip({"title":"Provides cover for electrical accessories that are not factory fitted with the vehicle.", "placement":"right"});
 	$("[id=protectionForAccessories] [id=nonElecAccessories_icon]").tooltip({"title":"Provides cover for Non-electrical/Non-electronic equipments that are not factory fitted with the vehicle.", "placement":"right"});
 	$("[id=protectionForAccessories] [id=kit_icon]").tooltip({"title":"Provides cover for CNG/LPG kit that is not factory fitted with the vehicle.", "placement":"right"});
-	$("[id=protectionForAccessories] [id=kitPrice_icon]").tooltip({"title":"???", "placement":"right"});
-
+	
 	$("[id=additionalDiscount] [id=antiTheft_icon]").tooltip({"title":"You could get a discount if you have installed an ARAI approved anti-theft device in your vehicle.", "placement":"right"});
 	$("[id=additionalDiscount] [id=automobileAssoc_icon]").tooltip({"title":"You could get a discount if you are a memeber of any automobile association e.g. Western India Automobile Association.", "placement":"right"});
 }
