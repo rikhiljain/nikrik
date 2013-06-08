@@ -19,13 +19,13 @@ function __common__bindBreadcrumbEvents(){
 		}
 		var index = $("[id=breadcrumb] > a").index($(e.target)) + 1;
 		if(index == 3){//"Enter details and Review"
-			$(".accordion-group:nth-child(3) a").click();
+			$(".accordion-group:nth-child(3) .accordion-heading a").click();
 		}
 		else if(index == 2){//"Results/"
-			$(".accordion-group:nth-child(2) a").click();
+			$(".accordion-group:nth-child(2) .accordion-heading a").click();
 		}
 		else if(index == 1){//"Calculate Premium/"
-			$(".accordion-group:nth-child(1) a").click();
+			$(".accordion-group:nth-child(1) .accordion-heading a").click();
 		}
 	});
 }
@@ -52,14 +52,14 @@ function __common__bindAccordionEvents(){
 			}
 			//if it is "Results" accordion
 			if(index == 2){
-				alert(message);
+				bootbox.alert(message);
 			}else if(index == 3){
 				//if it is "Eneter details and Review" accordion and user has not even genrated a quote
 				if(window.allowedAccordionIndexes[2] == 0){
-					alert(message);
+					bootbox.alert(message);
 				}else {
 					//it is a "Eneter details and Review" accordion and the user has not click on the buy link in "Results" accordion
-					alert("Please click on buy link");
+					bootbox.alert("Please click on one of the buy link in Results panel");
 				}
 			}
 			

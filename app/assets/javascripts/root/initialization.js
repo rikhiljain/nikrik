@@ -1,4 +1,25 @@
 function __root__initialize(){
+	//initilize the company listing carouse;
+	$('#logoCarou').carouFredSel({
+		width: '100%',
+		items: {
+			visible: 'odd+2'
+		},
+		scroll: {
+			pauseOnHover: true,
+			onBefore: function() {
+				$(this).children().removeClass( 'hover' );
+			}
+		},
+		auto: {
+			items: 1,
+			easing: 'linear',
+			duration: 1250,
+			timeoutDuration: 0
+		}
+	});
+	//we don't want animation on bootbox alerts
+	bootbox.animate(false);
 	__root__affixAll();
 	__root__loadCurrentUser();
 	__root__cusomValidationMethods();
