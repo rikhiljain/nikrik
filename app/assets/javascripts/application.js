@@ -192,6 +192,7 @@ function secondLevelNavBarEventHandlers(){
 	$("[id=secondLevelNavBar] [id=1]").bind("click", function(e){
 		//We need to display the insurance shopee div.
 		displayInsuranceShopeeDiv();
+		__root__showAdsBanner();
 		//Motor
 		//This check is important so that if some one clicks on already active link. Nothing should happen.
 		if(window.currentSelection != "Motor"){
@@ -206,6 +207,7 @@ function secondLevelNavBarEventHandlers(){
 	$("[id=secondLevelNavBar] [id=2]").bind("click", function(e){
 		//We need to display the insurance shopee div.
 		displayInsuranceShopeeDiv();
+		__root__showAdsBanner();
 		//Health
 		//This check is important so that if some one clicks on already active link. Nothing should happen.
 		if(window.currentSelection != "Health"){
@@ -220,6 +222,7 @@ function secondLevelNavBarEventHandlers(){
 	$("[id=secondLevelNavBar] [id=3]").bind("click", function(e){
 		//We need to display the insurance shopee div.
 		displayInsuranceShopeeDiv();
+		__root__showAdsBanner();
 		//Travel
 		//This check is important so that if some one clicks on already active link. Nothing should happen.
 		if(window.currentSelection != "Travel"){
@@ -232,6 +235,7 @@ function secondLevelNavBarEventHandlers(){
 	});
 
 	$("[id=secondLevelNavBar] [id=4]").bind("click", function(e){
+		__root__showAdsBanner();
 		//Rewards
 		//This check is important so that if some one clicks on already active link. Nothing should happen.
 		if(window.currentSelection != "Rewards"){
