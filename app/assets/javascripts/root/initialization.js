@@ -20,6 +20,11 @@ function __root__initialize(){
 	});
 	//we don't want animation on bootbox alerts
 	bootbox.animate(false);
+	
+	$('#myCarousel').carousel({
+          interval: 10000
+        });	
+
 	__root__affixAll();
 	__root__loadCurrentUser();
 	__root__cusomValidationMethods();
@@ -67,8 +72,6 @@ function __root__cusomValidationMethods(){
 function __root__configureBlockUIPlugin(){
   $.blockUI.defaults.css = {cursor:'default'};
   $.blockUI.defaults.overlayCSS = {backgroundColor: '#00f', opacity: 0.6, cursor: 'default', borderRadius:'6px 6px 6px 6px'};
-
-  $('.carousel').carousel('cycle');
 }
 
 function __root__showAdsBanner(){
