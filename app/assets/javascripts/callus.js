@@ -84,8 +84,8 @@ var Callus = (function($){
 
             success: function() {
               //called when successful
-              console.log("Success" );
-              that.buildNotificationsForCallUsForm();
+              //console.log("Success" );
+              that.buildNotificationsForForm();
           },
           error: function(textStatus, errorThrown) {
             //called when there is an error
@@ -94,7 +94,7 @@ var Callus = (function($){
         })
   };
 
-  that.buildNotificationsForCallUsForm = function(){
+  that.buildNotificationsForForm = function(){
     var message = "A very sincere thanks for your interest. We will contact you very shortly.";
     $callUsForm.block(
       { 
@@ -110,7 +110,7 @@ var Callus = (function($){
     );
   };
 
-  that.showCallUsForm = function (){
+  that.showForm = function (){
     $callUsForm.each (function(){this.reset();});
     $callUsForm.find(".error").removeClass("error");
     $adsBannerDiv.hide();
