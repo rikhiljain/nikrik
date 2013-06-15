@@ -73,7 +73,6 @@
 //= require loyalty/post-initialization
 //= require loyalty/initialization
 
-//= require callus/initialization
 //= require callus/callus
 
 //= require referral/initialization
@@ -97,6 +96,8 @@ window.selectedQuote;
 window.currentSelection;
 window.currentAccordionIndex;
 window.allowedAccordionIndexes;
+
+var INSURANCESHOPEE = {};
 
 
 (function($){
@@ -132,7 +133,8 @@ window.allowedAccordionIndexes;
 		__insurance__initialize();
 		__loyalty__initialize();
 		__referral__initialize();
-		__callus__initialize();
+		//__callus__initialize();
+		Callus.init();
 		__root__initialize();
 
 
