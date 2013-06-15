@@ -73,7 +73,7 @@
 //= require loyalty/post-initialization
 //= require loyalty/initialization
 
-//= require callus/callus
+//= require callus
 
 //= require referral/initialization
 //= require referral/referral
