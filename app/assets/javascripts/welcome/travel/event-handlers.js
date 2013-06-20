@@ -44,7 +44,7 @@ function __travel__bindAllEventHandlers(){
 	});
 
 	window.$travelPolicyFor.bind("change",function(){
-		 if($(this).val() == 'S')
+		 if($(this).val() == 'S' || $(this).val() == 'F')
 		 {
 		 	$tripType.each (function(){
 		 		if( $(this).val() == 'S')
