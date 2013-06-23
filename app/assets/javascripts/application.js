@@ -77,7 +77,7 @@
 //= require call-us
 //= require refer-friend
 
-//= require root/initialization
+//= require root
 //= require user
 
 //= require faqs
@@ -132,7 +132,7 @@ var INSURANCESHOPEE = {};
 
 		__insurance__initialize();
 		__loyalty__initialize();
-		__root__initialize();
+		Root.init();
 		User.load();
 
 		if(window.content == "devise"){
