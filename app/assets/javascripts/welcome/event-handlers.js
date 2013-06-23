@@ -8,7 +8,6 @@ function bindAllEventHandlers(){
 
 function __common__bindAllEventHandlers(){
 	__common__bindBreadcrumbEvents();
-	__common__bindQuoteBuyFormEvents();
 	__common__bindAccordionEvents();
 }
 
@@ -28,11 +27,6 @@ function __common__bindBreadcrumbEvents(){
 			$(".accordion-group:nth-child(1) .accordion-heading a").click();
 		}
 	});
-}
-
-function __common__bindQuoteBuyFormEvents(){
-	//Binding the form validation
-	__common__validateQuoteBuyForm();
 }
 
 function __common__bindAccordionEvents(){

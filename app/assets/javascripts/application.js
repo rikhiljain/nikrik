@@ -79,6 +79,7 @@
 //= require referral/referral
 
 //= require root/initialization
+//= require user
 
 //= require faqs
 
@@ -133,10 +134,9 @@ var INSURANCESHOPEE = {};
 		__insurance__initialize();
 		__loyalty__initialize();
 		__referral__initialize();
-		//__callus__initialize();
 		Callus.init();
 		__root__initialize();
-
+		User.load();
 
 		if(window.content == "devise"){
 			//this will happen only when the devise forms are being displayed.

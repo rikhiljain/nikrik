@@ -22,7 +22,7 @@ function __health__submitQuoteRequest(serializedJSON){
           success: function(data) {
             //called when successful
             __health__disableForm();
-            __health__fillResultTable(data);
+            HealthQuoteResult.fillResults(data);
             window.$quoteFormAccordionLink.click();
             window.allowedAccordionIndexes[2] = 1;
             window.$quoteResultsAccordionLink.css('cursor','pointer');

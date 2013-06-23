@@ -118,6 +118,18 @@ var Callus = (function($){
     $requestCallUsFormDiv.show();
   };
 
+  that.getAdsBannerDiv = function(){
+    return $adsBannerDiv;
+  };
+
+  that.getReferFriendFormDiv = function(){
+    return $referFriendFormDiv;
+  };
+
+  that.getRequestCallUsFormDiv = function(){
+    return $requestCallUsFormDiv;
+  };
+
   return that;
 
 })(jQuery);

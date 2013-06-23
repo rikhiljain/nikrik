@@ -26,18 +26,11 @@ function __root__initialize(){
         });	
 
 	__root__affixAll();
-	__root__loadCurrentUser();
 	__root__cusomValidationMethods();
 	__root__configureBlockUIPlugin();
 	__root__createAutoClosingAlert();	
 }
 
-function __root__loadCurrentUser(){
-	var address = "/motor/searches/currentUser.json";
-	$.getJSON(address,function(currentUser){
-		window.user = currentUser;
-	});
-}
 
 function __root__cusomValidationMethods(){
 	$.validator.addMethod("register_city_val", function() {
@@ -75,9 +68,9 @@ function __root__configureBlockUIPlugin(){
 }
 
 function __root__showAdsBanner(){
-  window.$adsBannerDiv.show();
-  window.$referFriendFormDiv.hide();
-  window.$requestCallUsFormDiv.hide(); 
+  Callus.getAdsBannerDiv().show();
+  Callus.getReferFriendFormDiv().hide();
+  Callus.getRequestCallUsFormDiv().hide(); 
 }
 
 function __root__createAutoClosingAlert() {

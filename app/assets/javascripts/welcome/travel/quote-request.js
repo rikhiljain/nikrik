@@ -22,7 +22,7 @@ function __travel__submitQuoteRequest(serializedJSON){
           success: function(data) {
             //called when successful
             __travel__disableForm();
-            __travel__fillResultTable(data);
+            TravelQuoteResult.fillResults(data);
             window.$quoteFormAccordionLink.click();
             window.allowedAccordionIndexes[2] = 1;
             window.$quoteResultsAccordionLink.css('cursor','pointer');

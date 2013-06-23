@@ -40,7 +40,7 @@ function __motor__submitQuoteRequest(serializedJSON){
   				success: function(data) {
     				//called when successful
             __motor__disableForm();
-    				__motor__fillResultTable(data);
+    				MotorQuoteResult.fillResults(data);
     				window.$quoteFormAccordionLink.click();
             window.allowedAccordionIndexes[2] = 1;
             window.$quoteResultsAccordionLink.css('cursor','pointer');

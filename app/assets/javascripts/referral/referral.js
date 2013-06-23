@@ -88,9 +88,9 @@ function buildNotificationsForReferralForm(){
       timeout: 5000,
       onUnblock: function(){
         $referralForm.each (function(){this.reset();});
-        window.$adsBannerDiv.show();
-        window.$referFriendFormDiv.hide();
-        window.$requestCallUsFormDiv.hide(); 
+        Callus.getAdsBannerDiv().show();
+        Callus.getReferFriendFormDiv().hide();
+        Callus.getRequestCallUsFormDiv().hide(); 
       }      
     }
   );
@@ -102,7 +102,7 @@ function showReferFriendForm(){
   //remove all the previous error
   $referralForm.find(".error").removeClass("error");
   window.$referralFormValidator.resetForm();
-  window.$adsBannerDiv.hide();
-  window.$requestCallUsFormDiv.hide();
-  window.$referFriendFormDiv.show();
+  Callus.getAdsBannerDiv().hide();
+  Callus.getRequestCallUsFormDiv().hide();
+  Callus.getReferFriendFormDiv().show();
 }

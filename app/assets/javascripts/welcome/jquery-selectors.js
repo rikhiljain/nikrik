@@ -27,4 +27,5 @@ function __common__cacheAllJquerySelector(){
 	window.$mobileNumber = $("[id=quoteBuyForm] [id=mobileNumber]");
 	window.$emailAddress = $("[id=quoteBuyForm] [id=emailAddress]");
 	window.$address = $("[id=quoteBuyForm] [id=address]");
+	window.$name = $("[id=quoteBuyForm] [id=name]");
 }
