@@ -73,10 +73,9 @@
 //= require loyalty/post-initialization
 //= require loyalty/initialization
 
-//= require callus
-
-//= require referral/initialization
-//= require referral/referral
+//= require ads-banner
+//= require call-us
+//= require refer-friend
 
 //= require root/initialization
 //= require user
@@ -133,8 +132,6 @@ var INSURANCESHOPEE = {};
 
 		__insurance__initialize();
 		__loyalty__initialize();
-		__referral__initialize();
-		Callus.init();
 		__root__initialize();
 		User.load();
 
@@ -178,7 +175,7 @@ function secondLevelNavBarEventHandlers(){
 	$("[id=secondLevelNavBar] [id=1]").bind("click", function(e){
 		//We need to display the insurance shopee div.
 		displayInsuranceShopeeDiv();
-		__root__showAdsBanner();
+		AdsBanner.show();
 		//Motor
 		//This check is important so that if some one clicks on already active link. Nothing should happen.
 		if(window.currentSelection != "Motor"){
@@ -193,7 +190,7 @@ function secondLevelNavBarEventHandlers(){
 	$("[id=secondLevelNavBar] [id=2]").bind("click", function(e){
 		//We need to display the insurance shopee div.
 		displayInsuranceShopeeDiv();
-		__root__showAdsBanner();
+		AdsBanner.show();
 		//Health
 		//This check is important so that if some one clicks on already active link. Nothing should happen.
 		if(window.currentSelection != "Health"){
@@ -208,7 +205,7 @@ function secondLevelNavBarEventHandlers(){
 	$("[id=secondLevelNavBar] [id=3]").bind("click", function(e){
 		//We need to display the insurance shopee div.
 		displayInsuranceShopeeDiv();
-		__root__showAdsBanner();
+		AdsBanner.show();
 		//Travel
 		//This check is important so that if some one clicks on already active link. Nothing should happen.
 		if(window.currentSelection != "Travel"){
@@ -221,7 +218,7 @@ function secondLevelNavBarEventHandlers(){
 	});
 
 	$("[id=secondLevelNavBar] [id=4]").bind("click", function(e){
-		__root__showAdsBanner();
+		AdsBanner.show();
 		//Rewards
 		//This check is important so that if some one clicks on already active link. Nothing should happen.
 		if(window.currentSelection != "Rewards"){

@@ -1,22 +1,40 @@
-var Callus = (function($){
+var CallUs = (function($){
 
   var that = {};
+  var _internal = {};
 
-  var $callUsForm, $callUsFormNotificationDiv, $callUsFormNotificationDivCloseLink, $adsBannerDiv, $requestCallUsFormDiv, referFriendFormDiv;
 
-  that.init = function(){
-    $callUsForm = $("[id=callUsForm]");
-    $callUsFormNotificationDiv = $("[id=callUsFormNotificationDiv]");
-    $callUsFormNotificationDivCloseLink = $("[id=callUsFormNotificationDiv] a");  
-    $adsBannerDiv = $("[id=adsBannerDiv]");
-    $requestCallUsFormDiv = $("[id=requestCallBackFormDiv]");
-    $referFriendFormDiv = $("[id=referFriendFormDiv]");
+  var $callUsForm, $callUsFormNotificationDiv, $callUsFormNotificationDivCloseLink, $requestCallUsFormDiv, initialized = false;
 
-    that.validateForm();
-    $callUsForm.each (function(){this.reset();});
+  that.show = function (){
+    init();
+    AdsBanner.hide();
+    ReferFriend.hide();
+    reset();
+   $requestCallUsFormDiv.show();
   };
 
-  that.validateForm = function(){
+  that.hide = function(){
+    init();
+    reset();
+    $requestCallUsFormDiv.hide();
+  }; 
+
+  //private API 
+
+  var init = function(){
+    if(!initialized){
+      $callUsForm = $("[id=callUsForm]");
+      $callUsFormNotificationDiv = $("[id=callUsFormNotificationDiv]");
+      $callUsFormNotificationDivCloseLink = $("[id=callUsFormNotificationDiv] a");  
+      $requestCallUsFormDiv = $("[id=requestCallBackFormDiv]");
+      validateForm();
+      reset();
+      initialized = true;
+    }
+  };
+
+  var validateForm = function(){
     // Validation
     $callUsForm.validate({
       rules:{
@@ -39,23 +57,23 @@ var Callus = (function($){
         //$(element).parents('.control-group').addClass('success');
       },
       invalidHandler: function (form, validator){
-        that.toggleNotificationDiv();
+        _internal.toggleNotificationDiv();
       },
       submitHandler: function(form){
-          that.toggleNotificationDiv();
-          var serializedJSON = that.createRequest();
+          toggleNotificationDiv();
+          var serializedJSON = createRequest();
           console.log(serializedJSON);
-          that.submitForm(serializedJSON);
+          submitForm(serializedJSON);
           return false;
       }
     });
   };
 
-  that.toggleNotificationDiv = function(){
+  var toggleNotificationDiv = function(){
     $callUsFormNotificationDivCloseLink.click();
   };
 
-  that.createRequest = function(){
+  var createRequest = function(){
       var json = {};
       $.map($callUsForm.serializeArray(), function(el, i){
         if(el.value == ""){
@@ -69,7 +87,7 @@ var Callus = (function($){
       return JSON.stringify(json);
   };
 
-  that.submitForm = function(serializedJSON){
+  var submitForm = function(serializedJSON){
     $.ajax({
           url: "/home/callus",
           type: "POST",
@@ -85,7 +103,7 @@ var Callus = (function($){
             success: function() {
               //called when successful
               //console.log("Success" );
-              that.buildNotificationsForForm();
+              buildNotificationsForForm();
           },
           error: function(textStatus, errorThrown) {
             //called when there is an error
@@ -94,40 +112,23 @@ var Callus = (function($){
         })
   };
 
-  that.buildNotificationsForForm = function(){
+  var buildNotificationsForForm = function(){
     var message = "A very sincere thanks for your interest. We will contact you very shortly.";
     $callUsForm.block(
       { 
         message: "<div class='alert alert-success'><a class='close' data-dismiss='alert' onClick='$callUsForm.unblock(); return true;'>&#215;</a>"+message+"</div>", 
         timeout: 5000,
         onUnblock: function(){
-          $callUsForm.each (function(){this.reset();}); 
-          $adsBannerDiv.show();
-          $referFriendFormDiv.hide();
-          $requestCallUsFormDiv.hide();         
+          reset();
+          AdsBanner.show();        
         }
       }
     );
   };
 
-  that.showForm = function (){
+  var reset = function(){
     $callUsForm.each (function(){this.reset();});
-    $callUsForm.find(".error").removeClass("error");
-    $adsBannerDiv.hide();
-    $referFriendFormDiv.hide();
-    $requestCallUsFormDiv.show();
-  };
-
-  that.getAdsBannerDiv = function(){
-    return $adsBannerDiv;
-  };
-
-  that.getReferFriendFormDiv = function(){
-    return $referFriendFormDiv;
-  };
-
-  that.getRequestCallUsFormDiv = function(){
-    return $requestCallUsFormDiv;
+    $callUsForm.find(".error").removeClass("error"); 
   };
 
   return that;
