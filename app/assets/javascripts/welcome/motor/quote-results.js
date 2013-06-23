@@ -44,7 +44,7 @@ var MotorQuoteResult = (function($){
 			html[++h] = "<a class='is_hand-cursor' onclick='MotorQuoteResult.makeSelection("+result.company_id+");MotorQuoteResult.displayPremiumBreakupModal();' >Premium Break-up</a>";
 			html[++h] = "</td><td style='text-align:center;vertical-align:middle;'>";
 			if(User.isAdmin() || User.isOperator()){
-				html[++h] = "<button class='btn is_btn-custom' type='button' onclick='MotorQuoteResult.makeSelection("+result.company_id+");QuoteBuy.openForm();'>Send Quote</a>";
+				html[++h] = "<button class='btn is_btn-custom' type='button' onclick='MotorQuoteResult.makeSelection("+result.company_id+");QuoteBuy.openForm();'>Quote</a>";
 			}
 			else{
 				html[++h] = "<button class='btn is_btn-custom' type='button' onclick='MotorQuoteResult.makeSelection("+result.company_id+");QuoteBuy.openForm();'>Buy</a>";

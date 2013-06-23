@@ -40,7 +40,7 @@ var TravelQuoteResult = (function($){
 			html[++h] = result.points;
 			html[++h] = "</td><td style='text-align:center;vertical-align:middle;'>";
 			if(User.isAdmin() || User.isOperator()){
-				html[++h] = "<button class='btn is_btn-custom' type='button' onclick='TravelQuoteResult.makeSelection("+result.company_id+");QuoteBuy.openForm();'>Send Quote</a>";
+				html[++h] = "<button class='btn is_btn-custom' type='button' onclick='TravelQuoteResult.makeSelection("+result.company_id+");QuoteBuy.openForm();'>Quote</a>";
 			}
 			else {
 				html[++h] = "<button class='btn is_btn-custom' type='button' onclick='TravrlQuoteResult.makeSelection("+result.company_id+");QuoteBuy.openForm();'>Buy</a>";
