@@ -38,7 +38,9 @@ Please find below the travel insurance details.<br/><br/><br/>
 	case @search.policy_for
      when 'I'
        policy_for_text = 'Individual'
-      else
+     when 'F'
+       policy_for_text = 'Family Floater'
+     else
        policy_for_text = 'Student'
    end
     %>

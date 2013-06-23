@@ -28,6 +28,13 @@ class Motor::IdvChart < ActiveRecord::Base
     where("maker = ?", maker).all
   end
 
+  def self.find_by_maker_model_subtype(maker, model,subtype)
+    model = '0' unless model.nil?
+    subtype = '0' unless subtype.nil?
+    
+    where("maker = ? and IFNULL(model, '0') and IFNULL(subtype, '0') ", maker,model, subtype).all
+  end
+
   def self.motor_value(idv_chart_id, year_of_manufacture)
     idv_chart = where("id = ?", idv_chart_id).first
     now = Date.today

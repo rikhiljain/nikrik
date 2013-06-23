@@ -17,7 +17,7 @@ class AdminUsersController < ApplicationController
   end
 
   def create
-
+    authorize! :create, @user, :message => 'Not authorized'
     @user = User.new(params[:user])
     @user.password = 'test123'
     @user.password_confirmation = 'test123'
