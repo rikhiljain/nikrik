@@ -1,10 +1,27 @@
 function __travel__createQuoteRequest(){
     var json = {};
+    var member = {};
     console.log($travelQuoteForm.serializeArray());
     $.map($travelQuoteForm.serializeArray(), function(el, i){
-        json[el.name] = el.value;
+      if( el.name == 'relationship')
+      {
+        member = {};
+        member["relationship"] = el.value;
+      }
+      else if ( el.name == 'traveller_age' )
+      {
+        member["age"] = el.value;
+       // json["members"].push(member);
+      }
+      else
+      {
+        member[el.name] = el.value;
+      }
+
     });
-    return JSON.stringify(json);
+    //return JSON.stringify(json);
+    return '{"policy_for":"F","trip_type":"S","age":"34","location":"W","travel_cover":"200000","start_date":"19-06-2013","end_date":"24-09-2013","members_attributes":[{"age":"60","relationship":"Father"},{"age":"30","relationship":"MOther"}]}';
+
 }
 
 function __travel__submitQuoteRequest(serializedJSON){
