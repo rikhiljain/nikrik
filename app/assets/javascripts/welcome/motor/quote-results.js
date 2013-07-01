@@ -5,16 +5,34 @@ var MotorQuoteResult = (function($){
 
 	var that = {};
 
+	var initialized = false;
+
 	var $premiumBreakUPModal;
 	var $premiumBreakUPModalLabel;
 	var $premiumBreakUPModalTable;
+	var $specialDiscountCell;
+	var $serviceTaxCell;
+	var $finalPremiumCell;
 
 	var allQuotes;
 	var lastClickedQuote;
 	var lastClickedCompanyId;
 	var premiumBreakUpHtml;
 
+	var init = function(){
+		if(!initialized){
+			$premiumBreakUPModal = $("[id=motor_breakup_model]");
+			$premiumBreakUPModalTable = $("[id=motor_breakup_model] [id=breakup_table]")[0];
+			$premiumBreakUPModalLabel = $("[id=motor_breakup_model] [id=myModalLabel]")[0];
+			$specialDiscountCell = $("[id='specialDiscountCell']");
+			$serviceTaxCell = $("[id='serviceTaxCell']");
+			$finalPremiumCell = $("[id='finalPremiumCell']");
+			initialized = true;
+		}
+	};
+
 	that.fillResults = function(data){
+		init();
 		allQuotes = data;
 		//pretty bad code, remove this
 		quotes = allQuotes;
@@ -60,9 +78,7 @@ var MotorQuoteResult = (function($){
 	};
 
 	that.makeSelection = function(id){
-		$premiumBreakUPModal = $("[id=motor_breakup_model]");
-		$premiumBreakUPModalTable = $("[id=motor_breakup_model] [id=breakup_table]")[0];
-		$premiumBreakUPModalLabel = $("[id=motor_breakup_model] [id=myModalLabel]")[0];
+		init();
 		for(var result, i = -1; result = allQuotes[++i];){
 			if (result.company_id == id)
 			{
@@ -74,11 +90,13 @@ var MotorQuoteResult = (function($){
 	};
 
 	that.displayPremiumBreakupModal = function(){
+		init();
 		that.getPremiumBreakUp({"modal": true}).modal();
 		return false;
 	};
 
 	that.getPremiumBreakUp = function(options){
+		init();
 		var modal = options.modal;
 		var html = [], h = -1;
 		if(!modal){
@@ -156,11 +174,17 @@ var MotorQuoteResult = (function($){
 		html[++h] = lastClickedQuote.total_premium ;
 		html[++h] = "</td><td colspan='2'></td></tr>";
 
-		html[++h] = "<tr style='font-weight:bold;' class='success'><td>Service Tax (F)</td><td>";
+		if(User.isAdmin() || User.isOperator()){
+			html[++h] = "<tr style='font-weight:bold;' class='error'><td>Special Discount</td><td id='specialDiscountCell' contentEditable='true' >";
+			html[++h] = "0" ;
+			html[++h] = "</td><td colspan='2'></td></tr>";
+		}		
+
+		html[++h] = "<tr style='font-weight:bold;' class='success'><td>Service Tax (F)</td><td id='serviceTaxCell'>";
 		html[++h] = lastClickedQuote.service_tax;
 		html[++h] = "</td><td colspan='2'></td></tr>";
 
-		html[++h] = "<tr style='font-weight:bold;' class='success'><td>Total Premium Payable (E+F)</td><td>";
+		html[++h] = "<tr style='font-weight:bold;' class='success'><td>Total Premium Payable (E+F)</td><td id='finalPremiumCell'>";
 		html[++h] = lastClickedQuote.final_premium;
 		html[++h] = "</td><td colspan='2'></td></tr>";
 
@@ -176,6 +200,27 @@ var MotorQuoteResult = (function($){
 			$premiumBreakUPModalLabel.innerHTML = "Car Insurance Premium Break-Up for - " + lastClickedQuote.company_name;
 			return $premiumBreakUPModal;
 		}
+	};
+
+	that.specialDiscountHandler = function(){
+		init();
+		var oldDiscount;
+   		$("[id='specialDiscountCell']").bind('focus', function() {
+                oldDiscount = $(this).html()
+            }
+        );
+
+   		$("[id='specialDiscountCell']").bind('blur', function() {
+                var newDiscount = $(this).html();
+               	if(newDiscount !== oldDiscount){
+               		lastClickedQuote.service_tax = Math.round((lastClickedQuote.total_premium - newDiscount) * 0.1236);
+               		lastClickedQuote.final_od = lastClickedQuote.total_premium - newDiscount + lastClickedQuote.service_tax;
+               		$("[id='serviceTaxCell']").html(lastClickedQuote.service_tax);
+               		$("[id='finalPremiumCell']").html(lastClickedQuote.final_od);
+               	}
+            }
+        );        
+
 	};
 
 	that.recomputeQuote = function(){

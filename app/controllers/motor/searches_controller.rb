@@ -129,5 +129,10 @@ class Motor::SearchesController < ApplicationController
     render :json => existing_motor_search
 
   end
+
+  def quoteEmail
+    Rails.logger.info "Email quote object= #{params}"
+    render nothing: true 
+  end
   
 end

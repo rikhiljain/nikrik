@@ -11,6 +11,7 @@ var QuoteBuy = (function($){
   var $quote;
   var $premiumBreakUpDiv;
   var $formDocumentationAlert;
+
   var selectedQuote;
 
   that.init = function(){
@@ -24,7 +25,7 @@ var QuoteBuy = (function($){
       $quote = $("[id=quoteBuyForm] > [id=buyQuote]")[0];
       $premiumBreakUpDiv = $("[id=quoteBuyFormPremiumBreakUpDiv]");
       $formDocumentationAlert = $("[id=quoteBuyForm] .formDocumentationAlert")
-      that.validateForm();
+      validateForm();
       initialized = true;
     }
   };
@@ -47,7 +48,7 @@ var QuoteBuy = (function($){
       $emailAddress.val(user.email);
       $address.val(user.address);
       $name.val(user.name);
-      that.preFillForm();
+      preFillForm();
     }
     else if(User.isAdmin() || User.isOperator()){
       //need to hide the documentation required alert
@@ -56,10 +57,13 @@ var QuoteBuy = (function($){
       //need to display the premium breakup form as well
       if(window.currentSelection == "Motor"){
         $premiumBreakUpDiv.html(MotorQuoteResult.getPremiumBreakUp({"modal": false}));
+        MotorQuoteResult.specialDiscountHandler();
       }else if(window.currentSelection == "Health"){
         $premiumBreakUpDiv.html(HealthQuoteResult.getPremiumBreakUp({"modal": false}));
+        HealthQuoteResult.specialDiscountHandler();
       }else if(window.currentSelection == "Travel"){
         $premiumBreakUpDiv.html(TravelQuoteResult.getPremiumBreakUp({"modal": false}));
+        TravelQuoteResult.specialDiscountHandler();
       }
     }
     window.allowedAccordionIndexes[3] = 1;
@@ -69,7 +73,7 @@ var QuoteBuy = (function($){
   };
 
   //ideally we should not be exposing this method. This method should be part of closure.
-  that.preFillForm = function(){
+  var preFillForm = function(){
     var html = [], h = -1;
     html[++h] = "<table id='quoteHealthResultsTable' class='table'";
     html[++h] = "<thead><tr><th style='text-align:center;vertical-align:middle;'>Company</th>";
@@ -98,14 +102,29 @@ var QuoteBuy = (function($){
   };
 
   //ideally we should not be exposing this method. This method should be part of closure.
-  that.submitRequest = function(serializedJSON){
+  var submitRequest = function(serializedJSON){
     var postUrl;
     if(window.currentSelection == "Motor"){
-      postUrl = "/motor/searches/buy";
+      if(User.isNormalUser()){
+        postUrl = "/motor/searches/buy";        
+      }
+      else if(User.isAdmin() || User.isOperator()){
+        postUrl = "/motor/searches/quoteEmail";   
+      }
     }else if(window.currentSelection == "Health"){
-      postUrl = "/health/searches/buy";
+      if(User.isNormalUser()){
+        postUrl = "/health/searches/buy";        
+      }
+      else if(User.isAdmin() || User.isOperator()){
+        postUrl = "/health/searches/quoteEmail";   
+      }      
     }else if(window.currentSelection == "Travel"){
-      postUrl = "/travel/searches/buy";
+      if(User.isNormalUser()){
+        postUrl = "/travel/searches/buy";        
+      }
+      else if(User.isAdmin() || User.isOperator()){
+        postUrl = "/travel/searches/quoteEmail";   
+      }      
     }
     $.ajax({
             url: postUrl,
@@ -120,8 +139,8 @@ var QuoteBuy = (function($){
 
             success: function() {
               //called when successful
-              that.buildNotifications();
-              that.makeProgressBarGreen();
+              buildNotifications();
+              makeProgressBarGreen();
           },
 
             error: function(textStatus, errorThrown) {
@@ -131,8 +150,7 @@ var QuoteBuy = (function($){
         })
   };
 
-  //ideally we should not be exposing this method. This method should be part of closure.
-  that.buildNotifications = function(){
+  var buildNotifications = function(){
     var message = "A very sincere thanks for your interest. We will contact you very shortly. You should also receive one email with the quote details.";
     $form.block(
       { 
@@ -146,16 +164,14 @@ var QuoteBuy = (function($){
     );  
   };
 
-  //ideally we should not be exposing this method. This method should be part of closure.
-  that.makeProgressBarGreen = function(){
+  var makeProgressBarGreen = function(){
     $("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
     $("[id=breadcrumb] > [id=2]").removeClass().addClass("bar bar-success");
     $("[id=breadcrumb] > [id=3]").removeClass().addClass("bar bar-success");
     window.allowedAccordionIndexes[0] = 1;
   };
 
-  //ideally we should not be exposing this method. This method should be part of closure.
-  that.validateForm = function(){
+  var validateForm = function(){
     // Validation
     $form.validate({
       rules:{
@@ -186,40 +202,61 @@ var QuoteBuy = (function($){
       },
       submitHandler: function(form){
           $notificationDiv.click();
-          var serializedJSON = that.createRequest();
+          var serializedJSON = createRequest();
           //console.log(serializedJSON);
-          that.submitRequest(serializedJSON);
+          submitRequest(serializedJSON);
           return false;
       }
     });
   };
 
   //ideally we should not be exposing this method. This method should be part of closure.
-  that.createRequest = function(){
+  var createRequest = function(){
       var json = {};
-      $.map($form.serializeArray(), function(el, i){
-        if(el.value == ""){
-          //ignore
-        }
-        else{
-          json[el.name] = el.value;
-        }
-
-      });
-
-      json["company_name"] = selectedQuote.company_name;
-      if(window.currentSelection == "Motor"){
-        json["id"] = selectedQuote.motor_search_id;
-      }else if(window.currentSelection == "Health"){
-        json["id"] = selectedQuote.health_search_id;
-      }else if(window.currentSelection == "Travel"){
-        json["id"] = selectedQuote.travel_search_id;
+      if(User.isNormalUser()){
+        createRequestForNormalUser(json);
       }
-      json["final_premium"] = selectedQuote.final_premium;
-      json["plan"] = selectedQuote.plan;
-
+      else if(User.isAdmin() || User.isOperator()){
+        createRequestForAdminOrOperatorUser(json);
+      }
       return JSON.stringify(json);
   }; 
+
+  var createRequestForNormalUser = function(json){
+    $.map($form.serializeArray(), function(el, i){
+      if(el.value == ""){
+        //ignore
+      }
+      else{
+        json[el.name] = el.value;
+      }
+
+    });
+
+    json["company_name"] = selectedQuote.company_name;
+    if(window.currentSelection == "Motor"){
+      json["id"] = selectedQuote.motor_search_id;
+    }else if(window.currentSelection == "Health"){
+      json["id"] = selectedQuote.health_search_id;
+    }else if(window.currentSelection == "Travel"){
+      json["id"] = selectedQuote.travel_search_id;
+    }
+    json["final_premium"] = selectedQuote.final_premium;
+    json["plan"] = selectedQuote.plan;  
+  };
+
+  var createRequestForAdminOrOperatorUser = function(json){
+    $.map($form.serializeArray(), function(el, i){
+      if(el.value == ""){
+        //ignore
+      }
+      else{
+        json[el.name] = el.value;
+      }
+    });
+    json.mail = $premiumBreakUpDiv.html();
+  }; 
+
 
   return that;
 

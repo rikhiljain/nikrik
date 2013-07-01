@@ -30,12 +30,15 @@ Nikrik::Application.routes.draw do
   get  "motor/searches/currentUser" => "motor/searches#currentUser"
   post "motor/searches/quote" => "motor/searches#quote"
   post "motor/searches/buy" => "motor/searches#buy"
+  post "motor/searches/quoteEmail" => "motor/searches#quoteEmail"  
   
   post "health/searches/quote" => "health/searches#quote"
   post "health/searches/buy" => "health/searches#buy"
+  post "health/searches/quoteEmail" => "health/searches#quoteEmail"  
 
   post "travel/searches/quote" => "travel/searches#quote"
   post "travel/searches/buy" => "travel/searches#buy"
+  post "travel/searches/quoteEmail" => "travel/searches#quoteEmail"
 
   post "loyalty/referral" => "loyalty#create_referral"
   get  "loyalty/user_referrals" => "loyalty#user_referrals"
