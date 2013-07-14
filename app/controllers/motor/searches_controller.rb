@@ -4,7 +4,7 @@ class Motor::SearchesController < ApplicationController
   # GET /motor_searches
   # GET /motor_searches.json
   def index
-    @motor_searches = Motor::Search.all
+    motor_searches = Motor::Search.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,11 +15,11 @@ class Motor::SearchesController < ApplicationController
   # GET /motor_searches/1
   # GET /motor_searches/1.json
   def show
-    @motor_search = Motor::Search.find(params[:id])
+    motor_search = Motor::Search.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @motor_search }
+      format.json { render json: motor_search }
     end
   end
 
@@ -85,7 +85,21 @@ class Motor::SearchesController < ApplicationController
 
   def currentUser
     respond_to do |format|
-      format.json { render json: current_user }
+      userJson = nil
+      if(!current_user.nil?)
+          userJson = {}
+          current_user.attributes.each do |attr_name, attr_value| 
+            if(!attr_name.nil?)   
+              userJson[attr_name] = attr_value
+            end
+          end
+          roles = []
+          current_user.roles.each do |role|
+            roles.push(role.name) 
+          end
+          userJson["roles"] = roles.uniq
+      end
+      format.json { render json: userJson }
     end
   end
 

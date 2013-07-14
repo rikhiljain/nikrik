@@ -23,13 +23,12 @@ var User = (function($){
 
   that.isAdmin = function(){
     //logged in and admin
-    return that.isLoggedIn() && user.role === 'admin';
+    return that.isLoggedIn() && (user.roles.indexOf('admin') != -1);
   };
 
   that.isOperator = function(){
     //logged in and operator
-    return true;
-    //return that.isLoggedIn() && user.role === 'operator';
+    return that.isLoggedIn() && (user.roles.indexOf('operator') != -1);
   };
 
   that.isNormalUser = function(){
@@ -38,7 +37,7 @@ var User = (function($){
   };
 
   that.getRole = function(){
-    return that.isLoggedIn() ? user.role : "";
+    return that.isLoggedIn() ? user.roles : [];
   };  
 
   return that;
