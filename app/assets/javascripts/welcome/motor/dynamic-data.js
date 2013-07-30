@@ -31,7 +31,13 @@ function  __motor__populateModel(manufacturer){
 
 function  __motor__populatePrice(){
 	var mdate = $registerDate.val();
-	if(mdate == "" || $model.val() == "" || $make.val() == ""){
+	if ( mdate == "" )
+	{
+		alert("Please provide registration date.");
+		return;
+	}
+
+	if( $model.val() == "" || $make.val() == ""){
 		return;
 	}
 	var idvChartId = $model.val();
