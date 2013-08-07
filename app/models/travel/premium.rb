@@ -17,6 +17,8 @@ def initialize( search)
     if (@input.trip_type == 'S')
       days = (@input.end_date - @input.start_date).to_i
       travel_charts = Travel::Chart.find_premium_for_single_trip(@input, days, has_usa)
+    elsif (@input.trip_type == 'F')
+       return m_travel_family
     else
       travel_charts = Travel::Chart.find_premium_for_multiple_trip(@input)
     end
@@ -47,5 +49,182 @@ def initialize( search)
     results = results.sort{|p1,p2| p1.final_premium <=> p2.final_premium}
     return results
   end
+
+end
+
+
+def m_travel_family
+
+  has_usa = 0
+  if (@input.location == 'W')
+    has_usa = 1
+  end
+  days = (@input.end_date - @input.start_date).to_i
+  company_hash = Array.new
+
+  m_travel_family_TATA( company_hash ,days, has_usa)
+  m_travel_family_BAJAJ( company_hash, days, has_usa)
+  m_travel_family_ICICI( company_hash, days, has_usa)
+  m_travel_family_RELIANCE( company_hash, days, has_usa)
+  
+  company_hash = company_hash.sort{|p1,p2| p1.final_premium <=> p2.final_premium}
+  return company_hash
+end
+
+def m_travel_family_ICICI( company_hash,days, has_usa )
+  
+  results = Hash.new
+  @input.members.each do |member|
+    travel_charts = Travel::Chart.find_premium_for_single_trip_company(@input, member.age, days, has_usa,1)
+    travel_charts.each do |chart|
+      if results.has_key?(chart.plan)
+        results[chart.plan] = results[chart.plan] +  chart.premium
+      else
+        results[chart.plan] =  chart.premium
+      end
+    end
+  end
+
+  results.each do |plan|
+    travel_quote = Travel::Quote.new
+    travel_quote.company_id = 1
+    travel_quote.company_name = 'ICICI'
+    travel_quote.total_premium = results[plan] 
+    travel_quote.final_premium = results[plan] 
+    travel_quote.plan = plan
+    travel_quote.points = travel_quote.final_premium * 0.05
+    Travel::Quote.format_fields(travel_quote)
+    company_hash.push( travel_quote )
+  end
+
+end
+
+def m_travel_family_BAJAJ( company_hash, days, has_usa)
+  if has_usa == 1
+    return
+  end
+  premium = 0
+
+  case days
+    when 1..15
+      premium = 1400
+    when 16..30
+      premium = 2160
+    when 31..60
+      premium = 2969
+    else
+      return
+  end
+
+  travel_quote = Travel::Quote.new
+  travel_quote.company_id = 2
+  travel_quote.company_name = 'BAJAJ'
+  travel_quote.total_premium = premium
+  travel_quote.final_premium = premium
+  travel_quote.plan = 'Travel Family'
+  travel_quote.points = travel_quote.final_premium * 0.05
+  Travel::Quote.format_fields(travel_quote)
+  company_hash.push( travel_quote )
+  
+end
+
+def m_travel_family_RELIANCE( company_hash ,days, has_usa )
+  adults = 0
+  childs = 0
+  age = 0
+  @input.members.each do |member|
+    if (member.age > 20)
+      adults += 1
+    else
+      childs +=1
+    end
+    if ( member.age > age)
+      age = member.age
+    end
+  end
+
+  travel_charts = Travel::Chart.find_premium_for_single_trip_company_members(@input, age, days, has_usa,4,adults,childs)
+
+  travel_charts.each do |chart|
+    travel_quote = Travel::Quote.new
+    travel_quote.company_id = 4
+    travel_quote.company_name = 'RELIANCE'
+    travel_quote.total_premium = chart.premium
+    travel_quote.final_premium = chart.premium
+    travel_quote.plan = chart.plan
+    travel_quote.points = travel_quote.final_premium * 0.05
+    Travel::Quote.format_fields(travel_quote)
+    company_hash.push( travel_quote )
+  end
+
+end
+
+def m_travel_family_TATA( company_hash ,days, has_usa)
+  results = Hash.new
+  @input.members.each do |member|
+    travel_charts = Travel::Chart.find_premium_for_single_trip_TATA(@input, member.age, days, has_usa)
+    travel_charts.each do |chart|
+      if results.has_key?(chart.plan)
+        results[chart.plan] = results[chart.plan] +  chart.premium
+      else
+        results[chart.plan] =  chart.premium
+      end
+    end
+  end
+  no_of_members = @input.members.length
+  discount = 0
+  case age_in_years
+    when 0
+      discount = 0
+    when 1
+      discount = 0
+    when 2
+      discount = 0.05
+    when 3
+      discount = 0.1
+    when 4
+      discount = 0.15
+    when 5
+      discount = 0.175
+    else
+      discount = 0.20
+   end
+
+  results.each do |plan|
+    travel_quote = Travel::Quote.new
+    travel_quote.company_id = 3
+    travel_quote.company_name = 'TATA'
+    travel_quote.total_premium = results[plan] * (1 - discount)
+    travel_quote.final_premium = results[plan] * (1 - discount)
+    travel_quote.plan = plan
+    travel_quote.points = travel_quote.final_premium * 0.05
+    Travel::Quote.format_fields(travel_quote)
+    company_hash.push( travel_quote )
+  end
+
+end
+
+def  m_add_result(travel_charts, company_hash)
+
+  travel_charts.each do |chart|
+
+    travel_quote = Travel::Quote.new
+    travel_quote.company_id = chart.company_id
+    travel_quote.company_name = company_hash[chart.company_id]
+    travel_quote.total_premium = chart.premium
+
+    travel_quote.final_premium = chart.premium
+    travel_quote.plan = chart.plan
+    travel_quote.points = travel_quote.final_premium * 0.05
+      
+    Travel::Quote.format_fields(travel_quote)
+    Rails.logger.info "Final Premium= #{chart.premium}"
+    results.push( travel_quote )
+  end
+
+end
+
+
+
 
 end
