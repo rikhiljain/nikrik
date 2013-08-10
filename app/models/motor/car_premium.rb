@@ -306,10 +306,10 @@ class Motor::CarPremium < Motor::Premium
   end
 
   def m_bi_fuel_tp
-   if @input.cng_type != ''
-     return 60
-   else
+   if @input.cng_type.nil? or @input.cng_type.empty?
      return 0
+   else
+     return 60
    end
   end
 
