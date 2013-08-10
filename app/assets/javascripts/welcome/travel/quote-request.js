@@ -20,7 +20,7 @@ function __travel__createQuoteRequest(){
 
     });
     //return JSON.stringify(json);
-    return '{"policy_for":"F","trip_type":"S","age":"34","location":"W","travel_cover":"200000","start_date":"19-06-2013","end_date":"24-09-2013","members_attributes":[{"age":"60","relationship":"Father"},{"age":"30","relationship":"MOther"}]}';
+    return '{"policy_for":"F","trip_type":"S","age":"34","location":"W","travel_cover":"50000","start_date":"19-06-2013","end_date":"24-09-2013","members_attributes":[{"age":"60","relationship":"Father"},{"age":"30","relationship":"Mother"}]}';
 
 }
 
