@@ -65,7 +65,7 @@ def quote
   def quoteEmail
     Rails.logger.info "Email quote object= #{params}"
     ContactMailer.delay.quote_travel_email(params[:name], params[:email_id], params[:mail])
-    render nothing: true 
+    render :json => params
   end   
 
 end
