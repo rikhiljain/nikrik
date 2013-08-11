@@ -139,7 +139,7 @@ var MotorQuoteResult = (function($){
 		html[++h] =	lastClickedQuote.owner_pa;
 		html[++h] = "</td></tr><tr><td>Fiber Glass Tank Premium</td><td>";
 		html[++h] =  "0";	
-		html[++h] = "</td><td> 	Legal Liability to Paid Employee </td><td>";
+		html[++h] = "</td><td>Legal Liability to Paid Employee </td><td>";
 		html[++h] = "0";	
 		html[++h] = "</td></tr>";
 

@@ -30,6 +30,24 @@ class ContactMailer < ActionMailer::Base
     mail(to: search.email_id , bcc: COMPANY_ADMIN_EMAIL , subject: 'Travel Insuarance details from InsuranceShopee.com').deliver
   end
 
+  def quote_motor_email(name,email,quote)
+    @name = name
+    @quote = quote
+    mail(to: email , bcc: COMPANY_ADMIN_EMAIL , subject: 'Motor Insuarance quote from InsuranceShopee.com').deliver
+  end
+
+  def quote_health_email(name,email,quote)
+    @name = name
+    @quote = quote
+    mail(to: email , bcc: COMPANY_ADMIN_EMAIL , subject: 'Health Insuarance quote from InsuranceShopee.com').deliver
+  end
+
+  def quote_travel_email(name,email,quote)
+    @name = name
+    @quote = quote
+    mail(to: email , bcc: COMPANY_ADMIN_EMAIL , subject: 'Travel Insuarance quote from InsuranceShopee.com').deliver
+  end  
+
   def complaint_email(contact)
     @contact = contact
     mail(to: contact.email, bcc: COMPANY_ADMIN_EMAIL, subject: 'Your complaint has been registered with InsuranceShopee.com').deliver

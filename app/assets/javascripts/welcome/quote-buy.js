@@ -60,10 +60,10 @@ var QuoteBuy = (function($){
         MotorQuoteResult.specialDiscountHandler();
       }else if(window.currentSelection == "Health"){
         $premiumBreakUpDiv.html(HealthQuoteResult.getPremiumBreakUp({"modal": false}));
-        HealthQuoteResult.specialDiscountHandler();
+        //HealthQuoteResult.specialDiscountHandler();
       }else if(window.currentSelection == "Travel"){
         $premiumBreakUpDiv.html(TravelQuoteResult.getPremiumBreakUp({"modal": false}));
-        TravelQuoteResult.specialDiscountHandler();
+        //TravelQuoteResult.specialDiscountHandler();
       }
     }
     window.allowedAccordionIndexes[3] = 1;
@@ -246,15 +246,7 @@ var QuoteBuy = (function($){
   };
 
   var createRequestForAdminOrOperatorUser = function(json){
-    $.map($form.serializeArray(), function(el, i){
-      if(el.value == ""){
-        //ignore
-      }
-      else{
-        json[el.name] = el.value;
-      }
-    });
-    json.mail = $premiumBreakUpDiv.html();
+    json.mail = $premiumBreakUpDiv.html().replace(new RegExp('"', 'g'),"'");
   }; 
 
 

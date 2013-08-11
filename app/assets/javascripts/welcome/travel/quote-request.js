@@ -1,26 +1,30 @@
 function __travel__createQuoteRequest(){
     var json = {};
-    var member = {};
-    console.log($travelQuoteForm.serializeArray());
+    var memberAttributes = new Array();
+    //console.log($travelQuoteForm.serializeArray());
     $.map($travelQuoteForm.serializeArray(), function(el, i){
-      if( el.name == 'relationship')
+      if( el.name == 'relationship' && el.value)
       {
-        member = {};
-        member["relationship"] = el.value;
+        var memberAttribute = {};
+        memberAttribute[el.name] = el.value;
+        memberAttributes.push(memberAttribute);
       }
-      else if ( el.name == 'traveller_age' )
+      else if ( el.name == 'traveller_age' && el.value)
       {
-        member["age"] = el.value;
-       // json["members"].push(member);
+        var memberAttribute = memberAttributes.pop();
+        memberAttribute["age"] = el.value;
+        memberAttributes.push(memberAttribute);
       }
       else
       {
-        member[el.name] = el.value;
+        json[el.name] = el.value;
       }
 
     });
-    //return JSON.stringify(json);
-    return '{"policy_for":"F","trip_type":"S","age":"34","location":"W","travel_cover":"50000","start_date":"19-06-2013","end_date":"24-09-2013","members_attributes":[{"age":"60","relationship":"Father"},{"age":"30","relationship":"Mother"}]}';
+    json["members_attributes"] = memberAttributes;
+    return JSON.stringify(json);
+    //console.log(JSON.stringify(json));
+    //return '{"policy_for":"F","trip_type":"S","age":"34","location":"W","travel_cover":"50000","start_date":"19-06-2013","end_date":"24-09-2013","members_attributes":[{"age":"60","relationship":"Father"},{"age":"30","relationship":"Mother"}]}';
 
 }
 

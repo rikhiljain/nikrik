@@ -146,6 +146,7 @@ class Motor::SearchesController < ApplicationController
 
   def quoteEmail
     Rails.logger.info "Email quote object= #{params}"
+    ContactMailer.delay.quote_motor_email(params[:name], params[:email], params[:mail])
     render nothing: true 
   end
   
