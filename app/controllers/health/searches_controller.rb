@@ -79,7 +79,7 @@ def quote
 
   def quoteEmail
     Rails.logger.info "Email quote object= #{params}"
-    ContactMailer.delay.quote_health_email(params[:name], params[:email], params[:mail])
+    ContactMailer.delay.quote_health_email(params[:name], params[:email_id], params[:mail])
     render nothing: true 
   end  
 

@@ -246,6 +246,14 @@ var QuoteBuy = (function($){
   };
 
   var createRequestForAdminOrOperatorUser = function(json){
+    $.map($form.serializeArray(), function(el, i){
+      if(el.value == ""){
+        //ignore
+      }
+      else{
+        json[el.name] = el.value;
+      }
+    });    
     json.mail = $premiumBreakUpDiv.html().replace(new RegExp('"', 'g'),"'");
   }; 
 
