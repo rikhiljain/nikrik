@@ -226,24 +226,6 @@ def m_travel_family_TATA( company_hash ,days, has_usa)
 
 end
 
-  def  m_add_result(travel_charts, company_hash)
-
-    travel_charts.each do |chart|
-
-      travel_quote = Travel::Quote.new
-      travel_quote.company_id = chart.company_id
-      travel_quote.company_name = company_hash[chart.company_id]
-      travel_quote.total_premium = chart.premium
-
-      travel_quote.final_premium = chart.premium
-      travel_quote.plan = chart.plan
-      travel_quote.points = travel_quote.final_premium * 0.05
-        
-      Travel::Quote.format_fields(travel_quote)
-      Rails.logger.info "Final Premium= #{chart.premium}"
-      results.push( travel_quote )
-    end
-
-  end
+ 
 
 end
