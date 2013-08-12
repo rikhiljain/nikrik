@@ -34,10 +34,10 @@ end
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
+#gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
+#gem 'capistrano'
 
 # To use debugger
 gem 'debugger'
@@ -48,3 +48,5 @@ gem "delayed_job_web" , "~> 1.1.2"
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
 gem 'omniauth-google-oauth2'
+
+gem "actionmailer_inline_css"

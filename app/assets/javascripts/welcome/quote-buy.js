@@ -139,7 +139,11 @@ var QuoteBuy = (function($){
 
             success: function() {
               //called when successful
-              buildNotifications();
+              if(User.isAdmin() || User.isOperator()){
+                buildNotificationsForAdminOrOperator();
+              }else {
+                buildNotifications();
+              }
               makeProgressBarGreen();
           },
 
@@ -163,6 +167,19 @@ var QuoteBuy = (function($){
       }
     );  
   };
+
+  var buildNotificationsForAdminOrOperator = function(){
+    var message = "The quote request has been queued and will be send to the customer.";
+    $form.block(
+      { 
+        message: "<div class='alert alert-success'><a class='close' data-dismiss='alert' onClick='$quoteBuyForm.unblock(); return true;'>&#215;</a>"+message+"</div>", 
+        timeout: 5000,
+        onUnblock: function(){
+          $form.each (function(){this.reset();}); 
+        }
+      }
+    );  
+  };  
 
   var makeProgressBarGreen = function(){
     $("[id=breadcrumb] > [id=1]").removeClass().addClass("bar bar-success");
@@ -246,6 +263,14 @@ var QuoteBuy = (function($){
   };
 
   var createRequestForAdminOrOperatorUser = function(json){
+    $.map($form.serializeArray(), function(el, i){
+      if(el.value == ""){
+        //ignore
+      }
+      else{
+        json[el.name] = el.value;
+      }
+    });    
     json.mail = $premiumBreakUpDiv.html().replace(new RegExp('"', 'g'),"'");
   }; 
 
