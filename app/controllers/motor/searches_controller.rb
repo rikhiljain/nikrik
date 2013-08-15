@@ -145,6 +145,17 @@ class Motor::SearchesController < ApplicationController
   end
 
   def quoteEmail
+
+    existing_motor_search = Motor::Search.find(params[:id])
+    existing_motor_search.company_name = params[:company_name]
+    existing_motor_search.final_premium = params[:final_premium]
+    existing_motor_search.name = params[:name]
+    existing_motor_search.email_id = params[:email_id]
+    existing_motor_search.mobile_number = params[:mobile_number]
+    existing_motor_search.address = params[:address]     
+
+    existing_motor_search.save
+
     Rails.logger.info "Email quote object= #{params}"
     ContactMailer.delay.quote_motor_email(params[:name], params[:email_id], params[:mail])
     render :json => params 

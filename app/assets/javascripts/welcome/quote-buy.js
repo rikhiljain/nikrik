@@ -271,6 +271,16 @@ var QuoteBuy = (function($){
         json[el.name] = el.value;
       }
     });    
+    json["company_name"] = selectedQuote.company_name;
+    if(window.currentSelection == "Motor"){
+      json["id"] = selectedQuote.motor_search_id;
+    }else if(window.currentSelection == "Health"){
+      json["id"] = selectedQuote.health_search_id;
+    }else if(window.currentSelection == "Travel"){
+      json["id"] = selectedQuote.travel_search_id;
+    }
+    json["final_premium"] = selectedQuote.final_premium;
+    json["plan"] = selectedQuote.plan;
     json.mail = $premiumBreakUpDiv.html().replace(new RegExp('"', 'g'),"'");
   }; 
 
