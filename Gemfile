@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.14'
 gem 'devise', ">= 2.1.2"
 gem 'devise-encryptable'
 gem 'mysql2', '0.3.11'
