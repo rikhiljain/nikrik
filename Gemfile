@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.11'
 gem 'devise', ">= 2.1.2"
 gem 'devise-encryptable'
-gem 'mysql2'
+gem 'mysql2', '0.3.11'
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "nifty-generators", :group => :development
